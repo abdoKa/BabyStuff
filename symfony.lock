@@ -487,6 +487,12 @@
     "symfony/yaml": {
         "version": "v4.2.5"
     },
+    "thomaspark/bootswatch": {
+        "version": "v4.3.1"
+    },
+    "twbs/bootstrap": {
+        "version": "v4.3.1"
+    },
     "twig/twig": {
         "version": "v2.7.4"
     },

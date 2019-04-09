@@ -1,0 +1,23 @@
+{
+  "name": "public",
+  "description": "",
+  "main": "",
+  "authors": [
+    "Abdelali"
+  ],
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "^4.3.1",
+    "jquery": "^3.3.1",
+    "font-awesome": "^5.8.1",
+    "slick-carousel": "^1.8.1"
+  }
+}
