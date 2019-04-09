@@ -6,6 +6,10 @@
 /public/bundles/
 /var/
 /vendor/
+/public/bower_components
+.bower-cache
+.bower-registry
+.bower-tmp
 ###< symfony/framework-bundle ###
 
 ###> symfony/phpunit-bridge ###
