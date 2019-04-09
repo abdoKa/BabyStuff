@@ -1,3 +1,12 @@
-#carouselExampleControls {
-    height: 300px;
-}
+
+@media only screen and (min-width: 992px) {
+    #carouselExampleControls{
+        height: 400px;
+    }
+    #carouselExampleControls .carousel-inner {
+        height: 400px;
+    }
+    #carouselExampleControls .carousel-inner img{
+       height: 400px;
+    }
+  }
