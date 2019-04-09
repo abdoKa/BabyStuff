@@ -1,60 +1,95 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-       <link rel="stylesheet" href="{{ asset('bower_components/bootstrap/dist/css/bootstrap.min.css') }}">
-       <link rel="stylesheet" href="{{ asset('bower_components/font-awesome/css/all.min.css') }}">
-       <link rel="stylesheet" href="{{ asset('bower_components/bootswatch/dist/Minty/bootstrap.min.css') }}">
-       <link rel="stylesheet" href="{{ asset('bower_components/jquery/dist/jquery.min.js') }}">
 
-        
-        {% block stylesheets %}{% endblock %}
-    </head>
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Welcome!{% endblock %}</title>
+    <link rel="stylesheet" href="{{ asset('bower_components/bootstrap/dist/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('bower_components/font-awesome/css/all.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('bower_components/bootswatch/dist/Minty/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/main.css') }}">
+    <link rel="stylesheet" href="{{ asset('JS/main.js') }}">
 
-    <body>
+
+    {% block stylesheets %}{% endblock %}
+</head>
+
+<body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
         <a class="navbar-brand" href="{{ path('home') }}">
-        <i class="fas fa-baby-carriage">
-        </i> BabyStuff.Com</a>
+            <i class="fas fa-baby-carriage">
+            </i>BabyStuff</a>
 
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" 
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01"
             aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
 
-            </button>
+        </button>
 
         <div class="collapse navbar-collapse" id="navbarColor01">
             <ul class="navbar-nav mr-auto">
 
-            <li class="nav-item active">
-                <a class="nav-link" href="{{ path('home') }}">Home <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Features</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Pricing</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{{ path('about') }}">About</a>
-            </li>
+               
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Marques</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"
+                        aria-haspopup="true" aria-expanded="false">Nos Produits</a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="#one">Categorie 1</a>
+                        <a class="dropdown-item" href="#two">Categorie 2</a>
+                        <div role="separator" class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#three">tous les catégories</a>
+                    </div>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('about') }}">À propos de nous</a>
+                </li>
+
+
+            </ul>
+
+
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+
+                    <a class="nav-link" href="#}"> Panier
+                        <i class="fas fa-shopping-basket"> 0£ </i>
+                    </a>
+
+
+            </ul>
+
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="#}"> Se connecter </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="#}"> S'inscrire </a>
+                </li>
+
 
             </ul>
 
             <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="text" placeholder="Search">
-            <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+                <input class="form-control mr-sm-2" type="text" placeholder="mots clé...">
+                <button class="btn btn-secondary my-2 my-sm-0" type="submit">Recherche</button>
 
             </form>
 
         </div>
-</nav>
+    </nav>
 
-        {% block body %}{% endblock %}
-        <script src="bower_components/jquery/dist/jquery.min.js" >
-        
-        </script>
-        {% block javascripts %}{% endblock %}
-    </body>
+    {% block body %}{% endblock %}
+
+    <script src="{{ asset('bower_components/jquery/dist/jquery.min.js') }}"></script>
+    <script src="{{ asset('bower_components/bootstrap/dist/js/bootstrap.min.js') }}"></script>
+
+
+    {% block javascripts %}{% endblock %}
+</body>
+
 </html>
