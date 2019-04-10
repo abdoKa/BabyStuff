@@ -32,4 +32,7 @@ class BabyProductsController extends AbstractController
     {
         return $this->render('baby_products/about.html.twig');
     }
+
+    
+
 }
