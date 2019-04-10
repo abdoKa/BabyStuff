@@ -52,7 +52,7 @@ class Produit
     private $stock;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="string", length=255)
      */
     private $slug;
 
@@ -157,12 +157,12 @@ class Produit
         return $this;
     }
 
-    public function getSlug(): ?int
+    public function getSlug(): ?string
     {
         return $this->slug;
     }
 
-    public function setSlug(int $slug): self
+    public function setSlug(string $slug): self
     {
         $this->slug = $slug;
 
