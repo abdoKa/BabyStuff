@@ -33,13 +33,13 @@
             <span class="navbar-toggler-icon"></span>
 
         </button>
-
+        
         <div class="collapse navbar-collapse" id="navbarColor01">
             <ul class="navbar-nav mr-auto">
 
 
                 <li class="nav-item">
-                    <a class=" nav-link scroll" href="#marques-product ">Marques</a>
+                    <a class=" nav-link scroll" href="{{ path('marques')}}">Marques</a>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"
@@ -91,7 +91,7 @@
         </div>
     </nav>
 
-    {% block body %}{% endblock %}
+    {% block body %} {% endblock %}
 
     <script src="{{ asset('bower_components/jquery/dist/jquery.min.js') }}"></script>
     <script src="{{ asset('bower_components/bootstrap/dist/js/bootstrap.min.js') }}"></script>
@@ -101,5 +101,15 @@
 
     {% block javascripts %}{% endblock %}
 </body>
+<footer class="footer">
 
+    <div class="footer-copyright text-center py-3">
+        <i class="fas fa-baby-carriage"></i>
+        <h5>BabyStuff ©</h6>
+            <script type="text/JavaScript">
+                document.write(new Date().getFullYear());
+</script>
+
+    </div>
+</footer>
 </html>

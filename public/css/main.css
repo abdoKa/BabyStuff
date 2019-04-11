@@ -96,3 +96,16 @@ h4 {
     height: 100px;
     background-color: #d7f7f5;
 }
+
+.card-deck {
+    padding-top: 20px
+}
+
+.row,
+.col-sm-3 {
+    margin: 40px;
+}
+
+.card-text {
+    text-align: center;
+}
