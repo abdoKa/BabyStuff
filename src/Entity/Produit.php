@@ -52,7 +52,7 @@ class Produit
     private $stock;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", length=255)
      */
     private $slug;
 
