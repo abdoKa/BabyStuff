@@ -3,18 +3,24 @@
 
 <h1> {{ fournisseur.nom }} </h1>
 <div class="containner">
-<div class="row">
+<div class="row" <div class="row new-products">
+            <!--useing slick-->
+            {% for produit in produits %}
             <div class="col-sm-3 card single-product ">
                 <div class="card-body">
-                    <div class="product-image">
-                        <img src="{{ fournisseur.image }}" alt="">
-                        <p class="card-text">{{fournisseur.nom }}</p>
+                    <div class="product-image ">
+                        <img src="{{ produit.image }}" alt="">
+
+                        <a href="#" class="add-to-favourite"><i class="far fa-heart icon-change"></i></a>
                     </div>
-                    <div class="card-title product-title"> </div>
-                    <a href="#" class="btn btn-primary add-to-cart"> Check out!!</a>
+                    <div class="card-title product-title"> {{ produit.nom }} </div>
+                    <div class="product-price"> {{ produit.nom }} </div>
+                    <a href="#" class="btn btn-primary add-to-cart"><i class="fas fa-cart-plus"></i> Ajouter au
+                        panier</a>
                 </div>
             </div>
+            {% endfor %}
             <!--END SINGLE PRODUCTS-->
-        </div>
+</div>
 </div>
 {% endblock body %}

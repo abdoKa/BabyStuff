@@ -10,14 +10,14 @@
 <div class="containner">
 <div class="row">
             {% for fournisseur  in fournissueurs %}
-            <div class="col-sm-3 card single-product ">
+            <div class="col-sm-3 card marque-products">
                 <div class="card-body">
                     <div class="product-image">
                         <img src="{{ fournisseur.image }}" alt="">
-                        <p class="card-text">{{fournisseur.nom }}</p>
+                        <p class="card-text">{{ fournisseur.nom }}</p>
                         <a href="#" class="add-to-favourite"></a>
                     </div>
-                    <div class="card-title product-title"> </div>
+                    <div class="card-title product-title"></div>
                     <a href="{{ path('show_marque', {'slug': fournisseur.slug}) }}" class="btn btn-primary add-to-cart"> Check out!!</a>
                 </div>      
             </div>

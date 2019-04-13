@@ -6,12 +6,12 @@ $(document).ready(function() {
         centerPadding: '60px',
         slidesToShow: 4,
         responsive: [{
-                breakpoint: 768,
+                breakpoint: 770,
                 settings: {
                     arrows: true,
                     centerMode: true,
                     centerPadding: '40px',
-                    slidesToShow: 1
+                    slidesToShow: 2
                 }
             },
             {

@@ -1,7 +1,18 @@
-{% extends 'base.html.twig' %} 
+{% extends 'base.html.twig' %}
 
 {% block body %}
 <h1>This is Home we are working...</h1>
-<img src="about_us_-100_2x.jpg" ; alt="image">
+<div class="iamge-containner-left">
+
+    <img class="about-image-left" src="{{ asset('baby-cot-cradle-64263.jpg') }}" alt="about" />
+</div>
+<div class="iamge-containner-right">
+
+    <img class="about-image-right" src="{{ asset('adorable-boy-child-1705234.jpg') }}" alt="about" />
+</div>
+<div class="iamge-containner-centre">
+
+    <img class="about-image-centre" src="{{ asset('baby-boys-brothers-50692.jpg') }}" alt="about" />
+</div>
 
 {% endblock %}
