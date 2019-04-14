@@ -1,18 +1,36 @@
-{% extends 'base.html.twig' %}
+    {% extends 'base.html.twig' %}
 
-{% block body %}
-<h1>This is Home we are working...</h1>
-<div class="iamge-containner-left">
+    {% block body %}
+    <div class="header">
+        <h1>A propos de Babystuff</h1>
+    </div>
 
-    <img class="about-image-left" src="{{ asset('baby-cot-cradle-64263.jpg') }}" alt="about" />
-</div>
-<div class="iamge-containner-right">
+    <div class="img-header">
 
-    <img class="about-image-right" src="{{ asset('adorable-boy-child-1705234.jpg') }}" alt="about" />
-</div>
-<div class="iamge-containner-centre">
+        <img class="about-image-left rounded float-left" src="{{ asset('adorable-affection-baby-2015884.jpg') }}"
+            alt="about" />
+        </div>
 
-    <img class="about-image-centre" src="{{ asset('baby-boys-brothers-50692.jpg') }}" alt="about" />
-</div>
 
-{% endblock %}
+    <div class="row">
+
+         <div class="img-center-one">
+            <img class="img-one" src="{{ asset('adorable-baby-child-356192.jpg  ') }}" alt="about" />
+        </div>
+
+        <div class="img-center-three">
+            <img class="img-three" src="{{ asset('baby-child-hand-1776137.jpg') }}" alt="about" />
+        </div>
+    </div>
+
+    <div class="img-center-tow">
+        <img class="img-tow" src="{{ asset('adorable-boy-child-1705234.jpg') }}" alt="about" />
+
+    </div>
+
+    <div class="img-bottom">
+
+        <img class="img-for" src="{{ asset('accessories-adorable-baby-325867.jpg') }}" alt="about" />
+    </div>
+
+    {% endblock %}

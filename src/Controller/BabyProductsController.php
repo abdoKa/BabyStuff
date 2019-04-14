@@ -48,7 +48,7 @@ class BabyProductsController extends AbstractController
     }
 
     /**
-     * @Route("/about-us", name="about")
+     * @Route("/a-propos", name="about")
      */
     public function about()
     {

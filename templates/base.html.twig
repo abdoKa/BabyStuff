@@ -43,22 +43,22 @@
                 <li class="nav-item">
                     <a class=" nav-link scroll" href="{{ path('marques')}}"> Marques </a>
                 </li>
-                
+
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"
                         aria-haspopup="true" aria-expanded="false">Nos Produits</a>
                     <div class="dropdown-menu">
 
-                     {# {% for categorie in categories %}  #}
+                        {# {% for categorie in categories %}  #}
                         <a class="dropdown-item" href="#"> categorie </a>
                         <div role="separator" class="dropdown-divider"></div>
-                     {# {% endfor %}  #}
+                        {# {% endfor %}  #}
                         <a class="dropdown-item" href="#three">tous les catégories</a>
                     </div>
                 </li>
 
                 <li class="nav-item ">
-                    <a class="nav-link" href="{{ path('about') }}">À propos de nous</a>
+                    <a class="nav-link" href="{{ path('about') }}">A propos </a>
                 </li>
 
 
@@ -96,6 +96,7 @@
         </div>
     </nav>
 
+      
     {% block body %} {% endblock %}
 
     <script src="{{ asset('bower_components/jquery/dist/jquery.min.js') }}"></script>
@@ -103,19 +104,14 @@
     <script src="{{ asset('bower_components/slick-carousel/slick/slick.min.js') }}"></script>
     <script src="{{ asset('js/main.js') }}"></script>
 
-
-    {% block javascripts %}{% endblock %}
+ {% block javascripts %}{% endblock %}
+   <footer class="footer">
+            <i class="fas fa-baby-carriage"></i>
+            <h5> BabyStuff © </h6>
+                <script type="text/JavaScript">
+                    document.write(new Date().getFullYear());
+                </script>
+     </footer>
 </body>
-<footer class="">
-
-    <div class="footer-copyright text-center py-3">
-        <i class="fas fa-baby-carriage"></i>
-        <h5> abyStuff © </h6>
-            <script type="text/JavaScript">
-                document.write(new Date().getFullYear());
-</script>
-
-    </div>
-</footer>
 
 </html>
