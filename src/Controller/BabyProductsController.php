@@ -12,39 +12,39 @@ use App\Entity\Categorie;
 
 class BabyProductsController extends AbstractController
 {
-   
+
 
     /**
      * @Route("/", name="home")
      */
     public function home()
-    
+
     {
         $em =$this->getDoctrine()->getManager();
         $repoP =$em->getRepository(Produit::class);
         $produits =$repoP->findBy( $criteria= [],  $orderBy=null ,  $limit = 10,  $offset = null);
 
-      
+
         $repoF =$em->getRepository(Fourniseur::class);
         $fournisseurs =$repoF->findBy( $criteria= [],  $orderBy=null ,  $limit = 5,  $offset = null);
 
         $repoF =$em->getRepository(Produit::class);
         $features =$repoF->findBy(['features' => 1]);
-        
-        
-        
+
+
+
         // $repoF =$em->getRepository(Categorie::class);
         // $categories =$repoF->findBy( $criteria= [],  $orderBy=null ,  $limit =10,  $offset = null);
-        
+
         return $this->render('baby_products/home.html.twig',[
             'produits' => $produits,
             'fournissueurs' =>$fournisseurs,
             'features' => $features,
             // 'categories' =>$categories
             ]);
-            
 
-           
+
+
     }
 
     /**
@@ -68,7 +68,7 @@ class BabyProductsController extends AbstractController
             'fournissueurs' =>$fournisseurs
         ]);
     }
-    
+
     /**
      * @Route("/marques/{slug}", name="show_marque")
      */
@@ -78,10 +78,10 @@ class BabyProductsController extends AbstractController
         $repoF =$em->getRepository(Fourniseur::class);
         $fournisseur =$repoF->findOneBy(array('slug'=> $slug));
         $produits= $fournisseur->getProduits();
-        
+
 
         return $this->render('baby_products/show.html.twig',[
-            'fournisseur' =>$fournisseur, 
+            'fournisseur' =>$fournisseur,
             'produits' => $produits
         ]);
     }

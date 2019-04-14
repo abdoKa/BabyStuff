@@ -1,14 +1,15 @@
 {% extends 'base.html.twig' %}
 {% block stylesheets %}
-    <link rel="stylesheet" href="{{ asset('bower_components/font-awesome/css/all.css') }}">
+<link rel="stylesheet" href="{{ asset('bower_components/font-awesome/css/all.css') }}">
 {% endblock %}
 
 {% block body %}
 
 <h1 class="marque-title">Nos partenaires</h1>
 
-<div class="containner">
-<div class="row">
+<section class="marques">
+    <div class="containner" >
+        <div class="row">
             {% for fournisseur  in fournissueurs %}
             <div class="col-sm-3 card marque-products">
                 <div class="card-body">
@@ -18,11 +19,15 @@
                         <a href="#" class="add-to-favourite"></a>
                     </div>
                     <div class="card-title product-title"></div>
-                    <a href="{{ path('show_marque', {'slug': fournisseur.slug}) }}" class="btn btn-primary add-to-cart"> Check out!!</a>
-                </div>      
+                    <a href="{{ path('show_marque', {'slug': fournisseur.slug }) }}"
+                        class="btn btn-primary add-to-cart">
+                        Check out!!</a>
+                </div>
             </div>
             <!--END SINGLE PRODUCTS-->
             {% endfor %}
         </div>
-</div>
+    </div>
+</section>
+
 {% endblock %}
