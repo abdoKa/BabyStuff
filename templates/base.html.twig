@@ -8,7 +8,8 @@
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
     <link rel="manifest" href="{{ asset('/site.webmanifest') }}">
-    <link rel="mask-icon" href="{{ asset('/safari-pinned-tab.svg') }} color="#5bbad5">
+    <link rel="mask-icon" href="{{ asset('/safari-pinned-tab.svg') }} color=" #5bbad5">
+
     <meta name="msapplication-TileColor" content="#da532c">
     <meta name="theme-color" content="#ffffff">
     <link rel="stylesheet" href="{{ asset('bower_components/bootstrap/dist/css/bootstrap.min.css') }}">
@@ -23,7 +24,8 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
         <a class="navbar-brand" href="{{ path('home') }}">
             <i class="fas fa-baby-carriage">
             </i>BabyStuff</a>
@@ -39,21 +41,25 @@
 
 
                 <li class="nav-item">
-                    <a class=" nav-link scroll" href="#marques-product ">Marques</a>
+                    <a class=" nav-link scroll" href="{{ path('marques')}}"> Marques </a>
                 </li>
+
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"
                         aria-haspopup="true" aria-expanded="false">Nos Produits</a>
                     <div class="dropdown-menu">
-                        <a class="dropdown-item" href="#">Categorie 1</a>
-                        <a class="dropdown-item" href="#two">Categorie 2</a>
+
+                        {# {% for categorie in categories %} #}
+                        <a class="dropdown-item" href="#"> categorie </a>
                         <div role="separator" class="dropdown-divider"></div>
+                        {# {% endfor %} #}
                         <a class="dropdown-item" href="#three">tous les catégories</a>
+
                     </div>
                 </li>
 
                 <li class="nav-item ">
-                    <a class="nav-link" href="{{ path('about') }}">À propos de nous</a>
+                    <a class="nav-link" href="{{ path('about') }}">A propos </a>
                 </li>
 
 
@@ -80,6 +86,8 @@
                 </li>
 
 
+
+
             </ul>
 
             <form class="form-inline my-2 my-lg-0">
@@ -91,15 +99,29 @@
         </div>
     </nav>
 
-    {% block body %}{% endblock %}
+
+    {% block body %} {% endblock %}
 
     <script src="{{ asset('bower_components/jquery/dist/jquery.min.js') }}"></script>
     <script src="{{ asset('bower_components/bootstrap/dist/js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('bower_components/slick-carousel/slick/slick.min.js') }}"></script>
     <script src="{{ asset('js/main.js') }}"></script>
 
-
     {% block javascripts %}{% endblock %}
+
+
+
+    <div id="container">
+
+        <div id="footer">
+            <i class="fas fa-baby-carriage"></i>
+            <h5> BabyStuff © </h6>
+                <script type="text/JavaScript">
+                    document.write(new Date().getFullYear());
+                </script>
+        </div>
+    </div>
+
 </body>
 
 </html>

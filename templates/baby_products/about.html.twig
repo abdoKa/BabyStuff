@@ -1,7 +1,37 @@
-{% extends 'base.html.twig' %} 
+    {% extends 'base.html.twig' %}
 
-{% block body %}
-<h1>This is Home we are working...</h1>
-<img src="about_us_-100_2x.jpg" ; alt="image">
+    {% block body %}
+    <div class="header">
+        <h1>A propos de Babystuff</h1>
+    </div>
+    <section class="about">
+    
+        <div class="img-header">
 
-{% endblock %}
+            <img class="about-image-left rounded float-left" src="{{ asset('adorable-affection-baby-2015884.jpg') }}"
+                alt="about" />
+        </div>
+
+
+        <div class="row">
+
+            <div class="img-center-one">
+                <img class="img-one" src="{{ asset('adorable-baby-child-356192.jpg  ') }}" alt="about" />
+            </div>
+
+            <div class="img-center-three">
+                <img class="img-three" src="{{ asset('baby-child-hand-1776137.jpg') }}" alt="about" />
+            </div>
+        </div>
+
+        <div class="img-center-tow">
+            <img class="img-tow" src="{{ asset('adorable-boy-child-1705234.jpg') }}" alt="about" />
+
+        </div>
+
+        <div class="img-bottom">
+
+            <img class="img-for" src="{{ asset('accessories-adorable-baby-325867.jpg') }}" alt="about" />
+        </div>
+    </section>
+    {% endblock %}

@@ -1,0 +1,44 @@
+{% extends 'base-admin.html.twig' %}
+{% block stylesheets %}
+<link rel="stylesheet" href="{{ asset('bower_components/font-awesome/css/all.css') }}">
+{% endblock %}
+{% block body %}
+<div class="row">
+    <div class="col-md-6 pull-left">
+        <a href="#">
+            <spane>➕</spane>Nouvelle Produit
+        </a>
+    </div>
+</div>
+<h3>List Produits</h3>
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th scope="col">Nom </th>
+            <th scope="col">Categorie</th>
+            <th scope="col">Fournisseure</th>
+            <th scope="col">Referance</th>
+            <th scope="col">Description</th>
+            <th scope="col">Image</th>
+            <th scope="col">Prix</th>
+            <th scope="col">Feautures</th>
+            <th scope="col">Stock</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr class="table-active">
+            <td scope="col"> </td>
+            <td scope="col"></td>
+            <td scope="col"></td>
+            <td scope="col"></td>
+            <td scope="col"></td>
+            <td scope="col"></td>
+            <td scope="col"></td>
+            <td scope="col"></td>
+            <td scope="col"></td>
+        </tr>
+
+    </tbody>
+    
+</table>
+{% endblock %}
