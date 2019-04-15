@@ -30,42 +30,9 @@ class FourniseurRepository extends ServiceEntityRepository
         return $stmt->fetchAll();
     }
 
-    /**
-     * @return Query
-     */
-        public function getAllmarquesQuery() :Query
-        {
-        return $this->getAllmarques()
-                    ->getQuery();
-        }
-
-
-    // /**
-    //  * @return Fourniseur[] Returns an array of Fourniseur objects
-    //  */
-    /*
-    public function findByExampleField($value)
-    {
-        return $this->createQueryBuilder('f')
-            ->andWhere('f.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('f.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
+  
+    public function getAllmarquesQuery(){
+        return $this->findAll();          
     }
-    */
 
-    /*
-    public function findOneBySomeField($value): ?Fourniseur
-    {
-        return $this->createQueryBuilder('f')
-            ->andWhere('f.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
-    */
 }

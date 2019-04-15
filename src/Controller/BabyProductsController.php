@@ -7,10 +7,10 @@ use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Produit;
 use Symfony\Component\HttpFoundation\Response;
 use App\Entity\Fourniseur;
-use Symfony\Component\BrowserKit\Request;
 use App\Entity\Categorie;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 use Knp\Component\Pager\PaginatorInterface;
+use Symfony\Component\HttpFoundation\Request;
 
 class BabyProductsController extends AbstractController
 {
@@ -32,8 +32,6 @@ class BabyProductsController extends AbstractController
 
         $repoFea =$em->getRepository(Produit::class);
         $features =$repoFea->getFeatures();
-
-
 
         // $repoF =$em->getRepository(Categorie::class);
         // $categories =$repoF->findBy( $criteria= [],  $orderBy=null ,  $limit =10,  $offset = null);
@@ -60,12 +58,12 @@ class BabyProductsController extends AbstractController
 /**
  * @Route("/marques", name="marques")
  */
-    public function marques(PaginatorInterface $paginator,Request $request):Response
+    public function marques(PaginatorInterface $paginator, Request $request)
     {
         $em =$this->getDoctrine()->getManager();
         $repoF =$em->getRepository(Fourniseur::class);
         $fournisseurs =$paginator->paginate(
-            $this->repoF->getAllmarquesQuery(),
+            $repoF->getAllmarquesQuery(),
             $request->query->getInt('page', 1) ,12
         );
 
