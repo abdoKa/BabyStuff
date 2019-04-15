@@ -20,7 +20,6 @@ class BabyProductsController extends AbstractController
      * @Route("/", name="home")
      */
     public function home()
-
     {
         $em =$this->getDoctrine()->getManager();
         $repoP =$em->getRepository(Produit::class);
@@ -44,8 +43,6 @@ class BabyProductsController extends AbstractController
             'features' => $features,
             'categoriesMenu' =>$categoriesMenu
             ]);
-
-
 
     }
 
@@ -133,13 +130,13 @@ class BabyProductsController extends AbstractController
         ]);
     }
 
-    
-    /**
+     /**
      * @Route("/categorie/{slug}", name="show_categorie")
      */
     public function show_cat($slug,PaginatorInterface $paginator)
     {
         $em =$this->getDoctrine()->getManager();
+
         $repoC =$em->getRepository(Categorie::class);
         $categorie =$repoC->findOneBy(array('slug'=> $slug));
        
@@ -151,7 +148,6 @@ class BabyProductsController extends AbstractController
             $request->query->getInt('page', 1) ,12
         );
 
-        dump($categorie);
         return $this->render('baby_products/show-cat.html.twig',[
             'categorie' =>$categorie,  
             'categoriesMenu' =>$categoriesMenu,
@@ -159,16 +155,6 @@ class BabyProductsController extends AbstractController
 
 
         ]);
-
-     /**
-      * @Route("/produit" name="show_produit")
-      */      
-      public function show_produit()
-      {
-          
-      }
-
     }
-
 
 }
