@@ -33,6 +33,8 @@ class BabyProductsController extends AbstractController
         $repoFea =$em->getRepository(Produit::class);
         $features =$repoFea->getFeatures();
 
+
+
         // $repoF =$em->getRepository(Categorie::class);
         // $categories =$repoF->findBy( $criteria= [],  $orderBy=null ,  $limit =10,  $offset = null);
 
@@ -58,17 +60,18 @@ class BabyProductsController extends AbstractController
 /**
  * @Route("/marques", name="marques")
  */
-    public function marques(PaginatorInterface $paginator, Request $request)
+    public function marques(PaginatorInterface $paginator,Request $request):Response
     {
         $em =$this->getDoctrine()->getManager();
         $repoF =$em->getRepository(Fourniseur::class);
-        $fournisseurs =$paginator->paginate(
+        
+        $pagination =$paginator->paginate(
             $repoF->getAllmarquesQuery(),
             $request->query->getInt('page', 1) ,12
         );
 
         return $this->render('baby_products/marques.html.twig',[
-            'fournissueurs' =>$fournisseurs
+            'pagination' =>$pagination
         ]);
     }
 

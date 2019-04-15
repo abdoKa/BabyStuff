@@ -10,7 +10,7 @@
 <section class="marques">
     <div class="containner" >
         <div class="row">
-            {% for fournisseur in fournissueurs %}
+            {% for fournisseur in pagination %}
             <div class="col-sm-3 card marque-products">
                 <div class="card-body">
                     <div class="product-image">
@@ -26,6 +26,9 @@
             </div>
             <!--END SINGLE PRODUCTS-->
             {% endfor %}
+            <div class="navigation">
+            {{ knp_pagination_render(pagination) }}
+            <div>
         </div>
     </div>
 </section>
