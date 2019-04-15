@@ -43,6 +43,16 @@ class Categorie
      */
     private $produits;
 
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $dateAjout;
+
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $dateModif;
+
     public function __construct()
     {
         $this->produits = new ArrayCollection();
@@ -128,6 +138,30 @@ class Categorie
                 $produit->setCategorie(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getDateAjout(): ?\DateTimeInterface
+    {
+        return $this->dateAjout;
+    }
+
+    public function setDateAjout(\DateTimeInterface $dateAjout): self
+    {
+        $this->dateAjout = $dateAjout;
+
+        return $this;
+    }
+
+    public function getDateModif(): ?\DateTimeInterface
+    {
+        return $this->dateModif;
+    }
+
+    public function setDateModif(\DateTimeInterface $dateModif): self
+    {
+        $this->dateModif = $dateModif;
 
         return $this;
     }

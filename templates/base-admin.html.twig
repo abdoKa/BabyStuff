@@ -49,37 +49,35 @@
         <h1> Bonjour, choisissez une catégorie! </h1>
     </div>
     {# / part backend client settings #}
-
-    <ul class="list-group">
-        <li class="list-group-item d-flex justify-content-between align-items-center">
-            Commande
-            <span class="badge badge-primary badge-pill">14</span>
-        </li>
-        <li class="list-group-item d-flex justify-content-between align-items-center">
-            liste d'utilisateurs
-            <span class="badge badge-primary badge-pill">2</span>
-        </li>
-    </ul>
-    {# / part backend settings #}
-    <div class="list-group id="test-active">
-        <a href="{{ path('admin_produit') }}" class="list-group-item list-group-item-action active ">
-            Produits
-        </a>
-        <a href="#" class="list-group-item list-group-item-action">Catégories
-        </a>
-        <a href="#" class="list-group-item list-group-item-action ">Fabrication
-        </a>
-         <a href="#" class="list-group-item list-group-item-action ">produits présentés
-        </a>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-3">
+                <ul class="list-group">
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        Commande
+                        <span class="badge badge-primary badge-pill">14</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        liste d'utilisateurs
+                        <span class="badge badge-primary badge-pill">2</span>
+                    </li>
+                </ul>
+                {# / part backend settings #}
+                <div class="list-group">
+                    <a href="#" class="list-group-item list-group-item-action active">
+                        Produit
+                    </a>
+                    <a href="#" class="list-group-item list-group-item-action">Categories
+                    </a>
+                    <a href="#" class="list-group-item list-group-item-action disabled">Fournisseur
+                    </a>
+                </div>
+            </div>
+        </div>
     </div>
     {% block body %} {% endblock %}
 
-    <script src="{{ asset('bower_components/jquery/dist/jquery.min.js') }}"></script>
-    <script src="{{ asset('bower_components/bootstrap/dist/js/bootstrap.min.js') }}"></script>
-    <script src="{{ asset('bower_components/slick-carousel/slick/slick.min.js') }}"></script>
-    <script src="{{ asset('js/main.js') }}"></script>
 
-    {% block javascripts %}{% endblock %}
 
 
 
@@ -93,7 +91,12 @@
                 </script>
         </div>
     </div>
+    <script src="{{ asset('bower_components/jquery/dist/jquery.min.js') }}"></script>
+    <script src="{{ asset('bower_components/bootstrap/dist/js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('bower_components/slick-carousel/slick/slick.min.js') }}"></script>
+    <script src="{{ asset('js/main.js') }}"></script>
 
+    {% block javascripts %}{% endblock %}
 </body>
 
 </html>

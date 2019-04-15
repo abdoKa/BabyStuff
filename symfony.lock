@@ -1,4 +1,7 @@
 {
+    "behat/transliterator": {
+        "version": "v1.2.0"
+    },
     "cocur/slugify": {
         "version": "v3.2"
     },
@@ -122,6 +125,15 @@
     },
     "jdorn/sql-formatter": {
         "version": "v1.2.17"
+    },
+    "knplabs/doctrine-behaviors": {
+        "version": "1.6.0"
+    },
+    "knplabs/knp-components": {
+        "version": "v1.3.10"
+    },
+    "knplabs/knp-paginator-bundle": {
+        "version": "v3.0.0"
     },
     "monolog/monolog": {
         "version": "1.24.0"

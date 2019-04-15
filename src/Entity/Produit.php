@@ -68,6 +68,16 @@ class Produit
      */
     private $categorie;
 
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $dateAjout;
+
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $dateModif;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -189,6 +199,30 @@ class Produit
     public function setCategorie(?Categorie $categorie): self
     {
         $this->categorie = $categorie;
+
+        return $this;
+    }
+
+    public function getDateAjout(): ?\DateTimeInterface
+    {
+        return $this->dateAjout;
+    }
+
+    public function setDateAjout(\DateTimeInterface $dateAjout): self
+    {
+        $this->dateAjout = $dateAjout;
+
+        return $this;
+    }
+
+    public function getDateModif(): ?\DateTimeInterface
+    {
+        return $this->dateModif;
+    }
+
+    public function setDateModif(\DateTimeInterface $dateModif): self
+    {
+        $this->dateModif = $dateModif;
 
         return $this;
     }

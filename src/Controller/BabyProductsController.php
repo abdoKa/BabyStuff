@@ -9,6 +9,7 @@ use Symfony\Component\HttpFoundation\Response;
 use App\Entity\Fourniseur;
 use Symfony\Component\BrowserKit\Request;
 use App\Entity\Categorie;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 
 class BabyProductsController extends AbstractController
 {
@@ -22,14 +23,14 @@ class BabyProductsController extends AbstractController
     {
         $em =$this->getDoctrine()->getManager();
         $repoP =$em->getRepository(Produit::class);
-        $produits =$repoP->findBy( $criteria= [],  $orderBy=null ,  $limit = 10,  $offset = null);
+        $produits =$repoP->getLastProducts();
 
 
         $repoF =$em->getRepository(Fourniseur::class);
-        $fournisseurs =$repoF->findBy( $criteria= [],  $orderBy=null ,  $limit = 5,  $offset = null);
+        $fournisseurs =$repoF->getMarques();    
 
-        $repoF =$em->getRepository(Produit::class);
-        $features =$repoF->findBy(['features' => 1]);
+        $repoFea =$em->getRepository(Produit::class);
+        $features =$repoFea->getFeatures();
 
 
 
@@ -72,7 +73,7 @@ class BabyProductsController extends AbstractController
     /**
      * @Route("/marques/{slug}", name="show_marque")
      */
-    public function show($slug)
+    public function show($slug ) 
     {
         $em =$this->getDoctrine()->getManager();
         $repoF =$em->getRepository(Fourniseur::class);
@@ -85,4 +86,6 @@ class BabyProductsController extends AbstractController
             'produits' => $produits
         ]);
     }
+
+
 }

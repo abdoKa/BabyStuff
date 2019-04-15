@@ -105,26 +105,14 @@
     .feartures,
     .mailleure-produits,
     .marques-product {
-        padding-top: 90px;
-    }
-    
-    #container {
-        min-height: 1%;
-        position: relative;
+        padding-bottom: 40px
     }
     
     #footer {
-        position: absolute;
-        bottom: 0;
-        width: 100%;
         height: 90px;
         /* Height of the footer */
         background: #d7f7f5;
         text-align: center;
-    }
-    
-    #container {
-        height: 80%;
     }
     
     .card-deck {
@@ -152,7 +140,6 @@
     .containner {
         margin: 0 auto;
         text-align: center;
-        float: left;
         width: 100%;
         padding: 0 10px
     }
@@ -222,10 +209,4 @@
     
     .img-center-three {
         margin: 0 0 1% 1%;
-    }
-    
-    .list-group {
-        margin-left: 3%;
-        margin-bottom: 3%;
-        width: 20%;
     }

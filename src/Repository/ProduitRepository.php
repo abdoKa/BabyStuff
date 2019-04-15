@@ -18,9 +18,35 @@ class ProduitRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Produit::class);
     }
-
     
 
+    public function getLastProducts(): array
+    {
+        $conn = $this->getEntityManager()->getConnection();
+        $sql = '
+        SELECT * FROM produit 
+        ORDER By date_modif
+        DESC
+        LIMIT 10
+        ';
+        $stmt = $conn->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetchAll();
+    }
+    public function getFeatures(): array
+    {
+        $conn = $this->getEntityManager()->getConnection();
+        $sql = '
+        SELECT * FROM produit
+        WHERE features =1
+        LIMIT 10
+        ';
+        $stmt = $conn->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetchAll();
+    }
+
+   
 
 
 
