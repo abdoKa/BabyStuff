@@ -48,11 +48,10 @@
                     <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"
                         aria-haspopup="true" aria-expanded="false">Nos Produits</a>
                     <div class="dropdown-menu">
-
-                        {# {% for categorie in categories %} #}
-                        <a class="dropdown-item" href="#"> categorie </a>
+                    {% for categorie in categoriesMenu %}
+                        <a class="dropdown-item" href="{{ path('show_categorie',{'slug': categorie.slug }) }}"> {{ categorie.nom }} </a>
                         <div role="separator" class="dropdown-divider"></div>
-                        {# {% endfor %} #}
+                    {% endfor %}
                         <a class="dropdown-item" href="#three">tous les catégories</a>
 
                     </div>

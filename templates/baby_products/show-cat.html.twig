@@ -3,35 +3,33 @@
 <link rel="stylesheet" href="{{ asset('bower_components/font-awesome/css/all.css') }}">
 {% endblock %}
 
+{% block title %}Hello BabyProductsController!{% endblock %}
+
 {% block body %}
 
-<h1 class="marque-title">Nos partenaires</h1>
+ <h1 class="marque-title">{{ categorie.nom }} </h1>
 
 <section class="marques">
     <div class="containner" >
         <div class="row">
-            {% for fournisseur in pagination %}
+             {% for produit in pagination %}
             <div class="col-sm-3 card marque-products">
                 <div class="card-body">
                     <div class="product-image">
-                        <img src="{{ fournisseur.image }}" alt="">
-                        <p class="card-text">{{ fournisseur.nom }}</p>
+                        <img src="{{ produit.image }}" alt="">
+                        <p class="card-text">{{ produit.nom }}</p>
                         <a href="#" class="add-to-favourite"></a>
                     </div>
                     <div class="card-title product-title"></div>
-                    <a href="{{ path('show_marque', {'slug': fournisseur.slug }) }}"
+                    <a href="{{ path('"show_categorie', {'slug': produit.slug }) }}"
                         class="btn btn-primary add-to-cart">
                         Check out!!</a>
                 </div>
             </div>
             <!--END SINGLE PRODUCTS-->
             {% endfor %}
-
+           
         </div>
-            <div class="navigation">
-            {{ knp_pagination_render(pagination) }}
-            <div>
     </div>
 </section>
-
 {% endblock %}
