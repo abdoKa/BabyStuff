@@ -10,6 +10,7 @@ use App\Entity\Fourniseur;
 use Symfony\Component\BrowserKit\Request;
 use App\Entity\Categorie;
 use Doctrine\ORM\Tools\Pagination\Paginator;
+use Knp\Component\Pager\PaginatorInterface;
 
 class BabyProductsController extends AbstractController
 {
@@ -59,11 +60,14 @@ class BabyProductsController extends AbstractController
 /**
  * @Route("/marques", name="marques")
  */
-    public function marques()
+    public function marques(PaginatorInterface $paginator,Request $request):Response
     {
         $em =$this->getDoctrine()->getManager();
         $repoF =$em->getRepository(Fourniseur::class);
-        $fournisseurs =$repoF->findBy( $criteria= [],  $orderBy=null ,  $limit = null,  $offset = null);
+        $fournisseurs =$paginator->paginate(
+            $this->repoF->getAllmarquesQuery(),
+            $request->query->getInt('page', 1) ,12
+        );
 
         return $this->render('baby_products/marques.html.twig',[
             'fournissueurs' =>$fournisseurs
@@ -73,7 +77,7 @@ class BabyProductsController extends AbstractController
     /**
      * @Route("/marques/{slug}", name="show_marque")
      */
-    public function show($slug ) 
+    public function show($slug) 
     {
         $em =$this->getDoctrine()->getManager();
         $repoF =$em->getRepository(Fourniseur::class);

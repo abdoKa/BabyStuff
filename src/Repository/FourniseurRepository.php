@@ -25,7 +25,7 @@ class FourniseurRepository extends ServiceEntityRepository
         $sql = '
         SELECT * FROM fourniseur LIMIT 10
         ';
-        $stmt = $conn->prepare($sql);
+        $stmt = $conn->prepare($sql); 
         $stmt->execute();
         return $stmt->fetchAll();
     }
