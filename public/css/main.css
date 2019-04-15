@@ -30,7 +30,8 @@
     }
     
     h1,
-    h4 {
+    h4,
+    h3 {
         font-size: 2em;
         margin-block-start: 0.67em;
         margin-block-end: 0.67em;
@@ -221,4 +222,10 @@
     
     .img-center-three {
         margin: 0 0 1% 1%;
+    }
+    
+    .list-group {
+        margin-left: 3%;
+        margin-bottom: 3%;
+        width: 20%;
     }
