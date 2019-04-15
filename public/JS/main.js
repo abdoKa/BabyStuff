@@ -41,3 +41,9 @@ $(document).ready(function() {
         $(this).find('.icon-change').toggleClass('fas');
     });
 });
+
+
+$('.list-group-item-action').click(function(e) {
+    e.preventDefault();
+    $(this).toggleClass('active');
+});

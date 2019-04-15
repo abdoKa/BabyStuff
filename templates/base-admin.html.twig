@@ -61,15 +61,15 @@
         </li>
     </ul>
     {# / part backend settings #}
-    <div class="list-group">
-        <a href="{{path('admin_produit')}}" class="list-group-item list-group-item-action active">
+    <div class="list-group id="test-active">
+        <a href="{{ path('admin_produit') }}" class="list-group-item list-group-item-action active ">
             Produits
         </a>
         <a href="#" class="list-group-item list-group-item-action">Catégories
         </a>
-        <a href="#" class="list-group-item list-group-item-action disabled">Fabrication
+        <a href="#" class="list-group-item list-group-item-action ">Fabrication
         </a>
-         <a href="#" class="list-group-item list-group-item-action disabled">produits présentés
+         <a href="#" class="list-group-item list-group-item-action ">produits présentés
         </a>
     </div>
     {% block body %} {% endblock %}
