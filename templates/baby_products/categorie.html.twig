@@ -10,16 +10,16 @@
 <section class="marques">
     <div class="containner">
         <div class="row">
-            {% for categorie in pagination %}
+            {% for categories in pagination %}
             <div class="col-sm-3 card marque-products">
                 <div class="card-body">
                     <div class="product-image">
-                        <img src="{{ categorie.image }}" alt="">
-                        <p class="card-text">{{ categorie.nom }}</p>
+                        <img src="{{ pagination.image }}" alt="">
+                        <p class="card-text">{{ pagination.nom }}</p>
                         <a href="#" class="add-to-favourite"></a>
                     </div>
                     <div class="card-title product-title"></div>
-                    <a href="{{ path('categorie', {'slug': categorie.slug }) }}" class="btn btn-primary add-to-cart">
+                    <a href="{{ path('categorie', {'slug': pagination.slug }) }}" class="btn btn-primary add-to-cart">
                         Check out!!</a>
                 </div>
             </div>

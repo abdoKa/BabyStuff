@@ -133,7 +133,7 @@ class BabyProductsController extends AbstractController
      /**
      * @Route("/categorie/{slug}", name="show_categorie")
      */
-    public function show_cat($slug,PaginatorInterface $paginator)
+    public function show_cat($slug,PaginatorInterface $paginator,Request $request)
     {
         $em =$this->getDoctrine()->getManager();
 
@@ -142,16 +142,18 @@ class BabyProductsController extends AbstractController
        
 
         $categoriesMenu =$repoC->getCategories();
+        $produits= $categorie->getProduits();
 
         $pagination =$paginator->paginate(
-            $categorie->getProduits(),
-            $request->query->getInt('page', 1) ,12
+            $repoC->findAll(),
+            $request->query->getInt('page', 1) ,6
         );
-
         return $this->render('baby_products/show-cat.html.twig',[
             'categorie' =>$categorie,  
             'categoriesMenu' =>$categoriesMenu,
-            'pagination' =>$pagination
+            'produits'=>$produits, 
+            'pagination' =>$pagination,
+
 
 
         ]);
