@@ -61,6 +61,7 @@ class AppFixtures extends Fixture
             
             
         }
+        
         for($i =1; $i <=500; $i++){
         
             $produit = new Produit();

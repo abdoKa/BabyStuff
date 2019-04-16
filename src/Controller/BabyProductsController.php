@@ -146,7 +146,7 @@ class BabyProductsController extends AbstractController
 
         $pagination =$paginator->paginate(
             $repoC->findAll(),
-            $request->query->getInt('page', 1) ,6
+            $request->query->getInt('page', 1) ,4
         );
         return $this->render('baby_products/show-cat.html.twig',[
             'categorie' =>$categorie,  
