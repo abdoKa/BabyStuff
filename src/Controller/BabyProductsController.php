@@ -62,13 +62,18 @@ class BabyProductsController extends AbstractController
     {
         $em =$this->getDoctrine()->getManager();
         $repoF =$em->getRepository(Fourniseur::class);
-        $fournisseurs =$paginator->paginate(
-            $repoF->getAllmarquesQuery(),
-            $request->query->getInt('page', 1) ,12
+
+        $pagination = $paginator->paginate(
+            $repoF->getAllmarquesQuery(), /* query NOT result */
+            $request->query->getInt('page', 1), /*page number*/
+            12 /*limit per page*/
         );
 
+       
+
         return $this->render('baby_products/marques.html.twig',[
-            'fournissueurs' =>$fournisseurs
+            'pagination' => $pagination,
+            
         ]);
     }
 
