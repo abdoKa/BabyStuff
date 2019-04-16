@@ -109,6 +109,28 @@ class BabyProductsController extends AbstractController
     }
 
     
+     /**
+     * @Route("/tous-categorie", name="show-all-categories")
+     */
+    public function show_all_cat(PaginatorInterface $paginator,Request $request)
+    {
+        $em =$this->getDoctrine()->getManager();
+        $repoC =$em->getRepository(Categorie::class);
+        $categoriesMenu =$repoC->getCategories();
+
+
+        $pagination =$paginator->paginate(
+            $repoC->getAllCategories(),
+            $request->query->getInt('page', 1) ,12
+        );
+            dump($repoC);
+
+        return $this->render('baby_products/allcategorie.html.twig',[
+            'categoriesMenu' =>$categoriesMenu,
+            'pagination' =>$pagination,
+        ]);
+    }
+
 
      /**
      * @Route("/categorie/{slug}", name="show_categorie")
@@ -116,12 +138,9 @@ class BabyProductsController extends AbstractController
     public function show_cat($slug,PaginatorInterface $paginator,Request $request)
     {
         $em =$this->getDoctrine()->getManager();
-
         $repoC =$em->getRepository(Categorie::class);
-        $categorie =$repoC->findOneBy(array('slug'=> $slug));
-       
-
         $categoriesMenu =$repoC->getCategories();
+        $categorie =$repoC->findOneBy(array('slug'=> $slug));
         $produits= $categorie->getProduits();
 
         $pagination =$paginator->paginate(

@@ -35,4 +35,15 @@ class CategorieRepository extends ServiceEntityRepository
         return $stmt->fetchAll();
     }
 
+
+    public function getAllCategories(): array
+    {
+        $conn = $this->getEntityManager()->getConnection();
+        $sql = '
+        SELECT * FROM categorie ';
+        $stmt = $conn->prepare($sql); 
+        $stmt->execute();
+        return $stmt->fetchAll();
+    }
+
 }

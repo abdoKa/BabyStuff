@@ -24,7 +24,7 @@
 </head>
 
 <body>
-
+    <div class="container">
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
         <a class="navbar-brand" href="{{ path('home') }}">
             <i class="fas fa-baby-carriage">
@@ -52,7 +52,7 @@
                         <a class="dropdown-item" href="{{ path('show_categorie',{'slug': categorie.slug }) }}"> {{ categorie.nom }} </a>
                         <div role="separator" class="dropdown-divider"></div>
                     {% endfor %}
-                        <a class="dropdown-item" href="#three">tous les catégories</a>
+                        <a class="dropdown-item" href="{{ path('show-all-categories') }}">tous les catégories</a>
 
                     </div>
                 </li>
@@ -98,7 +98,7 @@
         </div>
     </nav>
 
-
+</div>
     {% block body %} {% endblock %}
 
 
