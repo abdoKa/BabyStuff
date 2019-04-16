@@ -98,7 +98,7 @@ class BabyProductsController extends AbstractController
         $repoC =$em->getRepository(Categorie::class);
         $categoriesMenu =$repoC->getCategories();
 
-        return $this->render('baby_products/show.html.twig',[
+        return $this->render('baby_products/show-marques.html.twig',[
             'fournisseur' =>$fournisseur,
             'produits' => $produits,
             'categoriesMenu' =>$categoriesMenu
@@ -106,29 +106,7 @@ class BabyProductsController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/categorie", name="categorie")
-     */
-    public function categorie(PaginatorInterface $paginator,Request $request):Response
-    {
-        $em =$this->getDoctrine()->getManager();
-
-        $repoC =$em->getRepository(Categorie::class);
-        $categoriesMenu =$repoC->getCategories();
-
-        $pagination =$paginator->paginate(
-            $repoC->findAll(),
-            $request->query->getInt('page', 1) ,12
-        );
-
-        return $this->render('baby_products/categorie.html.twig',[
-            'pagination' =>$pagination,
-            'categoriesMenu' =>$categoriesMenu
-
-
-
-        ]);
-    }
+    
 
      /**
      * @Route("/categorie/{slug}", name="show_categorie")
@@ -148,6 +126,7 @@ class BabyProductsController extends AbstractController
             $produits,
             $request->query->getInt('page', 1) ,12
         );
+        dump($produits);
         return $this->render('baby_products/show-cat.html.twig',[
             'categorie' =>$categorie,  
             'categoriesMenu' =>$categoriesMenu,
@@ -158,7 +137,6 @@ class BabyProductsController extends AbstractController
 
         ]);
     }
-
     /**
      * @Route("/produit/{slug}", name="single_product")
      */
@@ -168,14 +146,15 @@ class BabyProductsController extends AbstractController
         $em =$this->getDoctrine()->getManager();
         $repoF =$em->getRepository(Produit::class);
         $single_p =$repoF->findOneBy(array('slug'=> $slug));
+
+        
         
         $repoC =$em->getRepository(Categorie::class);
         $categoriesMenu =$repoC->getCategories();
-
+        
         return $this->render('baby_products/show-product.html.twig',[
-            'categoriesMenu' =>$categoriesMenu,
-            'single_p' =>$single_p
-
+            'single_p' =>$single_p,
+            'categoriesMenu' =>$categoriesMenu
         ]);
     }
 }
