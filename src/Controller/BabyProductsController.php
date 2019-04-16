@@ -145,8 +145,8 @@ class BabyProductsController extends AbstractController
         $produits= $categorie->getProduits();
 
         $pagination =$paginator->paginate(
-            $repoC->findAll(),
-            $request->query->getInt('page', 1) ,4
+            $produits,
+            $request->query->getInt('page', 1) ,9
         );
         return $this->render('baby_products/show-cat.html.twig',[
             'categorie' =>$categorie,  
