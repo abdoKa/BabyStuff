@@ -40,7 +40,7 @@ class CategorieRepository extends ServiceEntityRepository
     {
         $conn = $this->getEntityManager()->getConnection();
         $sql = '
-        SELECT * FROM categorie ';
+            SELECT * FROM categorie ';
         $stmt = $conn->prepare($sql); 
         $stmt->execute();
         return $stmt->fetchAll();

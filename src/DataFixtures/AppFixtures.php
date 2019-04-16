@@ -36,7 +36,7 @@ class AppFixtures extends Fixture
             $categorie=new Categorie();
             $categorie->setNom('Categorie ' . $i);
             $categorie->setDescription('Lorem, ipsum dolor sit amet consectetur adipisicing elit. Delectus consectetur, laudantium maxime eaque a repellendus?');
-            $categorie->setImage('http://palcehold.it/400x200');
+            $categorie->setImage('http://placehold.it/480x270');
             $slug = $slugify->slugify($categorie->getNom());
             $categorie->setSlug($slug);
             $categorie->setDateAjout($this->faker->dateTimeBetween('-10 days', 'now'));
