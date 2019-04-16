@@ -2,7 +2,7 @@
 {% block body %}
 
 <h1> {{ fournisseur.nom }} </h1>
-<div class="containner">
+<div class="container">
     <div class="row" <div class="row new-products">
         <!--useing slick-->
         {% for produit in produits %}
@@ -20,10 +20,7 @@
             </div>
         </div>
         {% endfor %}
-        <!--END SINGLE PRODUCTS-->
-        {# <div class="navigation">
-            {{ knp_pagination_render(fournisseur) }}
-        </div> #}
+       
     </div>
 </div>
 {% endblock body %}

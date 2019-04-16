@@ -20,7 +20,6 @@ class BabyProductsController extends AbstractController
      * @Route("/", name="home")
      */
     public function home()
-
     {
         $em =$this->getDoctrine()->getManager();
         $repoP =$em->getRepository(Produit::class);
@@ -33,17 +32,17 @@ class BabyProductsController extends AbstractController
         $repoFea =$em->getRepository(Produit::class);
         $features =$repoFea->getFeatures();
 
-        // $repoF =$em->getRepository(Categorie::class);
-        // $categories =$repoF->findBy( $criteria= [],  $orderBy=null ,  $limit =10,  $offset = null);
+
+
+        $repoC =$em->getRepository(Categorie::class);
+        $categoriesMenu =$repoC->getCategories();
 
         return $this->render('baby_products/home.html.twig',[
             'produits' => $produits,
             'fournissueurs' =>$fournisseurs,
             'features' => $features,
-            // 'categories' =>$categories
+            'categoriesMenu' =>$categoriesMenu
             ]);
-
-
 
     }
 
@@ -52,28 +51,51 @@ class BabyProductsController extends AbstractController
      */
     public function about()
     {
-        return $this->render('baby_products/about.html.twig');
+        $em =$this->getDoctrine()->getManager();
+
+        $repoC =$em->getRepository(Categorie::class);
+        $categoriesMenu =$repoC->getCategories();
+
+        return $this->render('baby_products/about.html.twig' ,[
+            'categoriesMenu' =>$categoriesMenu
+
+        ]);
     }
 
 /**
  * @Route("/marques", name="marques")
  */
-    public function marques(PaginatorInterface $paginator, Request $request)
+    public function marques(PaginatorInterface $paginator,Request $request):Response
     {
         $em =$this->getDoctrine()->getManager();
         $repoF =$em->getRepository(Fourniseur::class);
 
+<<<<<<< HEAD
         $pagination = $paginator->paginate(
             $repoF->getAllmarquesQuery(), /* query NOT result */
             $request->query->getInt('page', 1), /*page number*/
             12 /*limit per page*/
+=======
+        $repoC =$em->getRepository(Categorie::class);
+        $categoriesMenu =$repoC->getCategories();
+
+        $pagination =$paginator->paginate(
+            $repoF->getAllmarquesQuery(),
+            $request->query->getInt('page', 1) ,12
+>>>>>>> f256c5e09347d568c0d5f7d03a83800ab960fe2f
         );
 
        
 
         return $this->render('baby_products/marques.html.twig',[
+<<<<<<< HEAD
             'pagination' => $pagination,
             
+=======
+            'pagination' =>$pagination,
+            'categoriesMenu' =>$categoriesMenu
+
+>>>>>>> f256c5e09347d568c0d5f7d03a83800ab960fe2f
         ]);
     }
 
@@ -87,12 +109,66 @@ class BabyProductsController extends AbstractController
         $fournisseur =$repoF->findOneBy(array('slug'=> $slug));
         $produits= $fournisseur->getProduits();
 
+        $repoC =$em->getRepository(Categorie::class);
+        $categoriesMenu =$repoC->getCategories();
 
-        return $this->render('baby_products/show.html.twig',[
+        return $this->render('baby_products/show-marques.html.twig',[
             'fournisseur' =>$fournisseur,
-            'produits' => $produits
+            'produits' => $produits,
+            'categoriesMenu' =>$categoriesMenu
+
         ]);
     }
 
+    
 
+     /**
+     * @Route("/categorie/{slug}", name="show_categorie")
+     */
+    public function show_cat($slug,PaginatorInterface $paginator,Request $request)
+    {
+        $em =$this->getDoctrine()->getManager();
+
+        $repoC =$em->getRepository(Categorie::class);
+        $categorie =$repoC->findOneBy(array('slug'=> $slug));
+       
+
+        $categoriesMenu =$repoC->getCategories();
+        $produits= $categorie->getProduits();
+
+        $pagination =$paginator->paginate(
+            $produits,
+            $request->query->getInt('page', 1) ,12
+        );
+        dump($produits);
+        return $this->render('baby_products/show-cat.html.twig',[
+            'categorie' =>$categorie,  
+            'categoriesMenu' =>$categoriesMenu,
+            'produits'=>$produits, 
+            'pagination' =>$pagination,
+
+
+
+        ]);
+    }
+    /**
+     * @Route("/produit/{slug}", name="single_product")
+     */
+    public function show_product($slug)
+    {
+        
+        $em =$this->getDoctrine()->getManager();
+        $repoF =$em->getRepository(Produit::class);
+        $single_p =$repoF->findOneBy(array('slug'=> $slug));
+
+        
+        
+        $repoC =$em->getRepository(Categorie::class);
+        $categoriesMenu =$repoC->getCategories();
+        
+        return $this->render('baby_products/show-product.html.twig',[
+            'single_p' =>$single_p,
+            'categoriesMenu' =>$categoriesMenu
+        ]);
+    }
 }

@@ -32,7 +32,7 @@ class AppFixtures extends Fixture
        
        
 
-        for($i =1; $i <=30; $i++){
+        for($i =1; $i <=20; $i++){
             $categorie=new Categorie();
             $categorie->setNom('Categorie ' . $i);
             $categorie->setDescription('Lorem, ipsum dolor sit amet consectetur adipisicing elit. Delectus consectetur, laudantium maxime eaque a repellendus?');
@@ -61,7 +61,8 @@ class AppFixtures extends Fixture
             
             
         }
-        for($i =1; $i <=30; $i++){
+        
+        for($i =1; $i <=500; $i++){
         
             $produit = new Produit();
             $produit->setReferance('Ref' .$i);
@@ -73,8 +74,8 @@ class AppFixtures extends Fixture
             $produit->setFeatures((bool)\rand(0,1));
             $slug = $slugify->slugify($produit->getNom());
             $produit->setSlug($slug);
-            $produit->setFourniseur($fournisseurs[mt_rand(0,29)]);
-            $produit->setCategorie($categories[mt_rand(0,29)]);
+            $produit->setFourniseur($fournisseurs[mt_rand(0,19)]);
+            $produit->setCategorie($categories[mt_rand(0,19)]);
             $produit->setDateAjout($this->faker->dateTimeBetween('-10 days', 'now'));
             $produit->setDateModif($this->faker->dateTimeBetween('-10 days', 'now'));
 

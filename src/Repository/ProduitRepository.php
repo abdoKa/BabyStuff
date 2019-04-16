@@ -46,8 +46,7 @@ class ProduitRepository extends ServiceEntityRepository
         return $stmt->fetchAll();
     }
 
-   
-
+  
 
 
     // /**
