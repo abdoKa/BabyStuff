@@ -146,7 +146,7 @@ class BabyProductsController extends AbstractController
 
         $pagination =$paginator->paginate(
             $produits,
-            $request->query->getInt('page', 1) ,9
+            $request->query->getInt('page', 1) ,12
         );
         return $this->render('baby_products/show-cat.html.twig',[
             'categorie' =>$categorie,  
@@ -159,4 +159,23 @@ class BabyProductsController extends AbstractController
         ]);
     }
 
+    /**
+     * @Route("/produit/{slug}", name="single_product")
+     */
+    public function show_product($slug)
+    {
+        
+        $em =$this->getDoctrine()->getManager();
+        $repoF =$em->getRepository(Produit::class);
+        $single_p =$repoF->findOneBy(array('slug'=> $slug));
+        
+        $repoC =$em->getRepository(Categorie::class);
+        $categoriesMenu =$repoC->getCategories();
+
+        return $this->render('baby_products/show-product.html.twig',[
+            'categoriesMenu' =>$categoriesMenu,
+            'single_p' =>$single_p
+
+        ]);
+    }
 }

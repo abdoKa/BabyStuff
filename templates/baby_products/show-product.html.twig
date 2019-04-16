@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+{% block stylesheets %}
+<link rel="stylesheet" href="{{ asset('bower_components/font-awesome/css/all.css') }}">
+{% endblock %}
+
+
+{% block body %}
+<section class="single-product">
+    <div class="title-single-product">
+    <h1>{{ single_p.nom }}</h1>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="card" style="width: 18rem;">
+                <img src="{{ single_p.image }}" class="card-img-top" alt="image produit">
+                <div class="card-body">
+                    <p class="card-text">{{ single_p.description }}</p>
+                    <a href="#" class="btn btn-primary">Ajouter au panier</a>
+                </div>
+            </div>
+
+            <!--END SINGLE PRODUCTS-->
+        </div>
+
+</section>
+{% endblock %}

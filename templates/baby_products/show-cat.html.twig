@@ -3,7 +3,6 @@
 <link rel="stylesheet" href="{{ asset('bower_components/font-awesome/css/all.css') }}">
 {% endblock %}
 
-{% block title %}Hello BabyProductsController!{% endblock %}
 
 {% block body %}
 
@@ -21,7 +20,7 @@
                         <a href="#" class="add-to-favourite"></a>
                     </div>
                     <div class="card-title product-title"></div>
-                    <a href="{{ path('show_categorie', {'slug': produit.slug }) }}"
+                    <a href="{{ path('single_product',{'slug': single_p.slug }) }}"
                         class="btn btn-primary add-to-cart">
                         Check out!!</a>
                 </div>
