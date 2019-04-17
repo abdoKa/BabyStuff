@@ -210,3 +210,18 @@ img {
     padding-left: 20px;
     top: -50px;
 }
+
+.title-css {
+    font-family: inherit;
+    font-weight: 800;
+    color: #282828;
+}
+
+.price-css {
+    padding-top: 5px;
+    font-size: 2.5rem;
+    line-height: 3.125rem;
+    font-weight: 700;
+    color: #01bcb5;
+    letter-spacing: 0;
+}

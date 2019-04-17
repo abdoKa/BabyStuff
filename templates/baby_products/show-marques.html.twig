@@ -5,13 +5,17 @@
 <div class="container">
     <div class="row" <div class="row new-products">
         <!--useing slick-->
-        {% for fournisseur in pagination %}
+        {% for produit in produits %}
         <div class="col-sm-3 card single-product ">
             <div class="card-body">
                 <div class="product-image ">
-                    <img src="{{ fournisseur.image }}" alt="">
+                    <a href="{{ path('single_product', {'slug': produit.slug }) }}"><img src="{{ produit.image }}" alt=""><a/>
+                        <a href="#" class="add-to-favourite"><i class="far fa-heart icon-change"></i></a>
                 </div>
-                <div class="card-title product-title"> {{ fournisseur.nom }} </div>
+                <a href="{{ path('single_product', {'slug': produit.slug }) }}">
+                <div class="card-title product-title"> {{ produit.nom }} </div></a>
+                <div class="product-price">{{ produit.prix }} MAD </div>
+                
             </div>
         </div>
         {% endfor %}
