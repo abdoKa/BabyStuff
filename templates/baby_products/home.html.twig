@@ -36,8 +36,9 @@
             {% for produit in produits %}
             <div class="col-sm-3 card single-product ">
                 <div class="card-body">
+                <a href="{{ path('single_product', {'slug': produit.slug }) }}" >
                     <div class="product-image ">
-                        <img src="{{ produit.image }}" alt="">
+                        <img src="{{ produit.image }}" alt=""><a/>
 
                         <a href="#" class="add-to-favourite"><i class="far fa-heart icon-change"></i></a>
                     </div>
@@ -63,7 +64,9 @@
             <div class="col-sm-3 card single-product ">
                 <div class="card-body">
                     <div class="product-image ">
+                     <a href="{{ path('single_product', {'slug': produit.slug }) }}" >
                         <img src="{{ produit.image }}" alt="">
+                        <a/>
                         <a href="#" class="add-to-favourite"><i class="far fa-heart icon-change"></i></a>
                     </div>
                     <div class="card-title product-title"> 🌟{{ produit.nom }} </div>
@@ -93,7 +96,9 @@
             <div class="col-sm-3 card single-product ">
                 <div class="card-body">
                     <div class="product-image ">
-                        <img src="{{ fournisseur.image }}" alt="">
+                     <a href="{{ path('show_marque', {'slug': fournisseur.slug }) }}" >
+                        <img src="{{ fournisseur.image }}" alt=""></a>
+                        <div class="card-title product-title"> {{ fournisseur.nom }} </div>
                         <a href="#" class="add-to-favourite"></a>
                     </div>
 

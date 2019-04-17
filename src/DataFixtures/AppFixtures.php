@@ -36,7 +36,7 @@ class AppFixtures extends Fixture
             $categorie=new Categorie();
             $categorie->setNom('Categorie ' . $i);
             $categorie->setDescription('Lorem, ipsum dolor sit amet consectetur adipisicing elit. Delectus consectetur, laudantium maxime eaque a repellendus?');
-            $categorie->setImage('http://placehold.it/480x270');
+            $categorie->setImage('http://placehold.it/600x600');
             $slug = $slugify->slugify($categorie->getNom());
             $categorie->setSlug($slug);
             $categorie->setDateAjout($this->faker->dateTimeBetween('-10 days', 'now'));
@@ -67,7 +67,7 @@ class AppFixtures extends Fixture
             $produit = new Produit();
             $produit->setReferance('Ref' .$i);
             $produit->setNom('Produit ' .$i);
-            $produit->setImage('http://placehold.it/400x150');
+            $produit->setImage('http://placehold.it/600x600');
             $produit->setDescription('Lorem, ipsum dolor sit amet consectetur adipisicing elit');
             $produit->setPrix('50');
             $produit->setStock(50);

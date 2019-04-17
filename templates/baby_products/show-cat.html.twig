@@ -6,12 +6,12 @@
 
 {% block body %}
 
- <h1 class="marque-title">{{ categorie.nom }} </h1>
+<h1 class="marque-title">{{ categorie.nom }} </h1>
 
 <section class="marques">
-    <div class="containner" >
+    <div class="containner">
         <div class="row">
-             {% for produit in pagination %}
+            {% for produit in pagination %}
             <div class="col-sm-3 card marque-products">
                 <div class="card-body">
                     <div class="product-image">
@@ -20,17 +20,16 @@
                         <a href="#" class="add-to-favourite"></a>
                     </div>
                     <div class="card-title product-title"></div>
-                    <a href="{{ path('single_product', {'slug': produit.slug}) }}"
-                        class="btn btn-primary add-to-cart">
+                    <a href="{{ path('single_product', {'slug': produit.slug}) }}" class="btn btn-primary add-to-cart">
                         Check out!!</a>
                 </div>
             </div>
             <!--END SINGLE PRODUCTS-->
             {% endfor %}
         </div>
-         <div class="navigation">
+        <div class="navigation">
             {{ knp_pagination_render(pagination) }}
             <div>
-    </div>
+            </div>
 </section>
 {% endblock %}

@@ -46,7 +46,14 @@ class ProduitRepository extends ServiceEntityRepository
         return $stmt->fetchAll();
     }
 
-  
+    public function getFournisseurById($id)
+    {
+    $conn = $this->getEntityManager()->getConnection();
+    $statement = $conn->prepare("SELECT * FROM fourniseur WHERE id = :id");
+    $statement->bindValue('id', $id);
+    $statement->execute();
+    return $statement->fetchAll();
+    }
 
 
     // /**

@@ -8,7 +8,6 @@ use App\Entity\Produit;
 use Symfony\Component\HttpFoundation\Response;
 use App\Entity\Fourniseur;
 use App\Entity\Categorie;
-use Doctrine\ORM\Tools\Pagination\Paginator;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -41,7 +40,7 @@ class BabyProductsController extends AbstractController
             'produits' => $produits,
             'fournissueurs' =>$fournisseurs,
             'features' => $features,
-            'categoriesMenu' =>$categoriesMenu
+            'categoriesMenu' =>$categoriesMenu,
             ]);
 
     }
@@ -75,7 +74,7 @@ class BabyProductsController extends AbstractController
 
         $pagination =$paginator->paginate(
             $repoF->getAllmarquesQuery(),
-            $request->query->getInt('page', 1) ,12
+            $request->query->getInt('page', 1) ,9
         );
 
        
@@ -90,20 +89,28 @@ class BabyProductsController extends AbstractController
     /**
      * @Route("/marques/{slug}", name="show_marque")
      */
-    public function show($slug) 
+    public function show($slug, PaginatorInterface $paginator, Request $request)
     {
         $em =$this->getDoctrine()->getManager();
         $repoF =$em->getRepository(Fourniseur::class);
         $fournisseur =$repoF->findOneBy(array('slug'=> $slug));
         $produits= $fournisseur->getProduits();
 
+        
         $repoC =$em->getRepository(Categorie::class);
         $categoriesMenu =$repoC->getCategories();
+        
+        $pagination =$paginator->paginate(
+            $repoF->getAllmarquesQuery(),
+            $request->query->getInt('page',1),9
+        );
 
+        dump($pagination);
         return $this->render('baby_products/show-marques.html.twig',[
             'fournisseur' =>$fournisseur,
             'produits' => $produits,
-            'categoriesMenu' =>$categoriesMenu
+            'categoriesMenu' =>$categoriesMenu,
+            'pagination' =>$pagination
 
         ]);
     }
@@ -121,7 +128,7 @@ class BabyProductsController extends AbstractController
 
         $pagination =$paginator->paginate(
             $repoC->getAllCategories(),
-            $request->query->getInt('page', 1) ,12
+            $request->query->getInt('page', 1) ,9
         );
             dump($repoC);
 
@@ -145,9 +152,8 @@ class BabyProductsController extends AbstractController
 
         $pagination =$paginator->paginate(
             $produits,
-            $request->query->getInt('page', 1) ,12
+            $request->query->getInt('page', 1) ,9
         );
-        dump($produits);
         return $this->render('baby_products/show-cat.html.twig',[
             'categorie' =>$categorie,  
             'categoriesMenu' =>$categoriesMenu,
@@ -167,15 +173,14 @@ class BabyProductsController extends AbstractController
         $em =$this->getDoctrine()->getManager();
         $repoF =$em->getRepository(Produit::class);
         $single_p =$repoF->findOneBy(array('slug'=> $slug));
+        $fournisseur=$single_p->getFourniseur();
 
-        
-        
         $repoC =$em->getRepository(Categorie::class);
         $categoriesMenu =$repoC->getCategories();
-        
         return $this->render('baby_products/show-product.html.twig',[
             'single_p' =>$single_p,
-            'categoriesMenu' =>$categoriesMenu
+            'categoriesMenu' =>$categoriesMenu,
+            'fournisseur'=>$fournisseur
         ]);
     }
 }

@@ -5,21 +5,20 @@
 <div class="container">
     <div class="row" <div class="row new-products">
         <!--useing slick-->
-        {% for produit in produits %}
+        {% for fournisseur in pagination %}
         <div class="col-sm-3 card single-product ">
             <div class="card-body">
                 <div class="product-image ">
-                    <img src="{{ produit.image }}" alt="">
-
-                    <a href="#" class="add-to-favourite"><i class="far fa-heart icon-change"></i></a>
+                    <img src="{{ fournisseur.image }}" alt="">
                 </div>
-                <div class="card-title product-title"> {{ produit.nom }} </div>
-                <div class="product-price"> {{ produit.prix }} $ </div>
-                <a href="#" class="btn btn-primary add-to-cart"><i class="fas fa-cart-plus"></i> Ajouter au
-                    panier</a>
+                <div class="card-title product-title"> {{ fournisseur.nom }} </div>
             </div>
         </div>
         {% endfor %}
+        </div>
+                <div class="navigation">
+                {{ knp_pagination_render(pagination) }}
+                <div>
        
     </div>
 </div>
