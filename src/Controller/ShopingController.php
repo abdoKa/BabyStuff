@@ -17,11 +17,10 @@ class ShopingController extends AbstractController
     public function bag_shoping(Request $request)
     {
         $session = new Session();
-        
 
         $cart = array();
-        $total = 0;
-        $listProducts = array();
+        $cart['listproducts'] = array();
+        $cart['total'] = 0;
 
         if ($session->get('my_cart') == null) {
             $session->set('my_cart', $cart);
@@ -42,22 +41,17 @@ class ShopingController extends AbstractController
             $prix = $product0->getPrix();
             $total_product = $prix * $quantity;
 
-            $product = array(
-                'product_name' => $product0->getNom(),
-                'product_id' => $product_id,
-                'quantity' => $quantity,
-                'prix' => $prix,
-                'total' => $total_product,
-            );
+            $product = array($product0, 'qte' => $product_id, 'total' => $total_product);
+                
 
-            array_push($listProducts, $product);
+            array_push($cart['listproducts'], $product);
 
-            foreach ($listProducts as $product) {
-                $total += $product['total'];
+            foreach ($cart['listproducts'] as $product) {
+                $cart['total'] += $product['total'];
             }
             $cart = array(
-                'listproducts' => $listProducts,
-                'total' => $total,
+                'listproducts' => $cart['listproducts'],
+                'total' => $cart['total'],
             );
             $session->set('my_cart', $cart);
 
@@ -66,7 +60,6 @@ class ShopingController extends AbstractController
         $em = $this->getDoctrine()->getManager();
         $repoC = $em->getRepository(Categorie::class);
         $categoriesMenu = $repoC->getCategories();
-        $session->invalidate();
 
         return $this->render('shopping/bag-shoping.html.twig', [
             'categoriesMenu' => $categoriesMenu,
