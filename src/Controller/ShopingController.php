@@ -16,53 +16,69 @@ class ShopingController extends AbstractController
      */
     public function bag_shoping(Request $request)
     {
+        $em = $this->getDoctrine()->getManager();
+        $repoP = $em->getRepository(Produit::class);
+    
         $session = new Session();
 
-        $cart = array();
-        $cart['listproducts'] = array();
-        $cart['total'] = 0;
+        $productsArray = [];
+        $cart = [];
+        $totalSum = 0;
 
-        if ($session->get('my_cart') == null) {
+        $session = new Session();
+
+        if($session->get('my_cart') == null){
             $session->set('my_cart', $cart);
-        } else {
+        }else{
             $cart = $session->get('my_cart');
         }
 
         if ($request->isMethod('post')) {
+            $productQuantity = $request->request->get('qte');
+            $productId = $request->request->get('product_id');
 
-            $quantity = $request->request->get('qte');
-            $product_id = $request->request->get('product_id');
+            $item[$productId] = (int)$productQuantity;
 
-            $repository = $this->getDoctrine()->getRepository(Produit::class);
-            $product0 = $repository->findOneBy([
-                'id' => $product_id,
+            if(array_key_exists($productId, $cart)){
+                $cart[$productId] += $productQuantity;
+            }else{
+                $cart += $item;
+            }
+        
+            $session->set('my_cart', $cart);   
+        }
+        
+        
+
+        foreach ($cart as $productId => $productQuantity) {
+            $product = $repoP->findOneBy([
+                'id' => $productId,
             ]);
 
-            $prix = $product0->getPrix();
-            $total_product = $prix * $quantity;
-
-            $product = array($product0, 'qte' => $quantity, 'total' => $total_product);
-                
-
-            array_push($cart['listproducts'], $product);
-
-            foreach ($cart['listproducts'] as $product) {
-                $cart['total'] += $product['total'];
+            if (is_object($product)) {
+                $productPosition = [];
+                $quantity = abs((int)$productQuantity);
+                $price = $product->getPrix();
+                $sum = $price * $quantity;
+                $productPosition['product'] = $product;
+                $productPosition['quantity'] = $quantity;
+                $productPosition['price'] = $price;
+                $productPosition['sum'] = $sum;
+                $totalSum += $sum;
+                $productsArray[] = $productPosition;
             }
-            $cart = array(
-                'listproducts' => $cart['listproducts'],
-                'total' => $cart['total'],
-            );
-            $session->set('my_cart', $cart);
-
         }
 
-        $em = $this->getDoctrine()->getManager();
+        $cartDetails = ['products' => $productsArray, 'totalsum' => $totalSum ];
+
         $repoC = $em->getRepository(Categorie::class);
         $categoriesMenu = $repoC->getCategories();
 
+        //$session->invalidate();
+
         return $this->render('shopping/bag-shoping.html.twig', [
             'categoriesMenu' => $categoriesMenu,
+            'cartDetails' => $cartDetails
         ]);
 
     }

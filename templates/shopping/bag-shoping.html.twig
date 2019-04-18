@@ -16,7 +16,7 @@ body{
 
 <h1>votre panier</h1>
 
-{% for product in app.session.get('my_cart').listproducts %}
-        <li>{{ product[0].nom }}</li>
-    {% endfor %}
+{{dump(app.session.get('my_cart'))}}
+{{dump(cartDetails)}}
+
 {% endblock %}
