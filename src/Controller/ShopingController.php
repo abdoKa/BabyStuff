@@ -19,9 +19,7 @@ class ShopingController extends AbstractController
         $session = new Session();
         
 
-        $cart = array();
-        $total = 0;
-        $listProducts = array();
+        // $cart = array();
 
         if ($session->get('my_cart') == null) {
             $session->set('my_cart', $cart);
@@ -47,6 +45,7 @@ class ShopingController extends AbstractController
                 'product_id' => $product_id,
                 'quantity' => $quantity,
                 'prix' => $prix,
+                'image'=>$product0->getImage(),
                 'total' => $total_product,
             );
 
@@ -66,7 +65,6 @@ class ShopingController extends AbstractController
         $em = $this->getDoctrine()->getManager();
         $repoC = $em->getRepository(Categorie::class);
         $categoriesMenu = $repoC->getCategories();
-        $session->invalidate();
 
         return $this->render('shopping/bag-shoping.html.twig', [
             'categoriesMenu' => $categoriesMenu,
