@@ -28,26 +28,29 @@
             <div>
                 <p class="text-left lead" style="font-weight:80" ;>{{ single_p.description }}</p>
             </div>
-            <div class="col-lg-3">
-                <label for="Qté" class=" text-left">Quantité</label>
-                <input type="number" class="form-control" name="Qté" value="1" min="1">
 
-            </div>
-            <div class="col-lg-3">
-                <button type="button" class="btn btn-primary btn-sm" style="margin-top:40px;">
-                    <i class="fas fa-cart-plus"></i>
-                    <spane>ACHETER</spane>
-
-                </button>
-                {% if single_p.stock > 0 %}
-                <spane><i class="fas fa-check"></i> en stock </spane>
-                {% else %}
-                <spane><i class="fas fa-times"></i></i> Épuisé!!
-                </spane>
-                {% endif %}
-            </div>
+            <form action="{{ path('shoping') }}" method="post">
+                <div class="col-lg-3">
+                    <label for="qte" class=" text-left">Quantité</label>
+                    <input type="number" class="form-control" name="qte" value="1" min="1">
+                    <input type="hidden" name="product_id" value="{{ single_p.id }}">
+                </div>
+                <div class="col-lg-3">
+                    <button type="submit" name="submit" class="btn btn-primary btn-sm" style="margin-top:40px;">
+                        <i class="fas fa-cart-plus"></i>
+                        <spane>ACHETER</spane>
+                    </button>
+            </form>
+            
+            {% if single_p.stock > 0 %}
+            <spane><i class="fas fa-check"></i> en stock </spane>
+            {% else %}
+            <spane><i class="fas fa-times"></i></i> Épuisé!!
+            </spane>
+            {% endif %}
         </div>
     </div>
+</div>
 </div>
 
 
