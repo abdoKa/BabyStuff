@@ -41,7 +41,7 @@ class ShopingController extends AbstractController
             $prix = $product0->getPrix();
             $total_product = $prix * $quantity;
 
-            $product = array($product0, 'qte' => $product_id, 'total' => $total_product);
+            $product = array($product0, 'qte' => $quantity, 'total' => $total_product);
                 
 
             array_push($cart['listproducts'], $product);
