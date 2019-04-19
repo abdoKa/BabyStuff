@@ -10,6 +10,7 @@ use App\Entity\Fourniseur;
 use App\Entity\Categorie;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Session\Session;
 
 class BabyProductsController extends AbstractController
 {
@@ -44,6 +45,52 @@ class BabyProductsController extends AbstractController
             ]);
 
     }
+
+    public function menuNav()
+    {
+        $em =$this->getDoctrine()->getManager();
+
+        $repoC =$em->getRepository(Categorie::class);
+        $repoP = $em->getRepository(Produit::class);
+
+        $categoriesMenu =$repoC->getCategories();
+
+        $session = new Session();
+        $productsArray = [];
+        $cart = [];
+        $totalSum = 0;
+
+        $cart = $session->get('my_cart');
+
+        foreach ($cart as $productId => $productQuantity) {
+            $product = $repoP->findOneBy([
+                'id' => $productId,
+            ]);
+
+            if (is_object($product)) {
+                $productPosition = [];
+                $quantity = abs((int)$productQuantity);
+                $price = $product->getPrix();
+                $sum = $price * $quantity;
+                $productPosition['product'] = $product;
+                $productPosition['quantity'] = $quantity;
+                $productPosition['price'] = $price;
+                $productPosition['sum'] = $sum;
+                $totalSum += $sum;
+                $productsArray[] = $productPosition;
+            }
+        }
+
+        $cartDetails = ['products' => $productsArray, 'totalsum' => $totalSum ];
+
+      
+        return $this->render(
+            'menu.html.twig',['categoriesMenu' =>$categoriesMenu,
+             'cartDetails' => $cartDetails]
+        );
+    }
+
+
 
     /**
      * @Route("/a-propos", name="about")
@@ -81,7 +128,7 @@ class BabyProductsController extends AbstractController
 
         return $this->render('baby_products/marques.html.twig',[
             'pagination' =>$pagination,
-            'categoriesMenu' =>$categoriesMenu
+            
 
         ]);
     }
