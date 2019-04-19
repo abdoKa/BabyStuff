@@ -62,9 +62,12 @@ class ShopingController extends AbstractController
         $repoC = $em->getRepository(Categorie::class);
         $categoriesMenu = $repoC->getCategories();
 
+       
+
 
         return $this->render('shopping/bag-shoping.html.twig', [
             'categoriesMenu' => $categoriesMenu,
+            'product0'=>$product0
         ]);
 
     }
