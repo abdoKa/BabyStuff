@@ -44,7 +44,6 @@ class ShopingController extends AbstractController
             }else{
                 $cart += $item;
             }
-        
             $session->set('my_cart', $cart);   
         }
         
