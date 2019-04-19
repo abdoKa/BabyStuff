@@ -45,9 +45,9 @@
                     <a class="nav-link" href="{{ path('shopping') }}"> Panier
                         <i class="fas fa-shopping-basket"> 
                         {% if cartDetails is defined and cartDetails is not null %}
-                            {{cartDetails.totalsum}}$
+                            {{cartDetails.totalsum}} <spane><small>MAD</small></spane>
                         {% else %}
-                        0$
+                         <spane><small>0 MAD</small></spane>
                         {% endif %}
                         
                          </i>

@@ -29,6 +29,7 @@
                 <p class="text-left lead" style="font-weight:80" ;>{{ single_p.description }}</p>
             </div>
 
+            {% if single_p.stock > 0 %}
             <form action="{{ path('shopping') }}" method="post">
                 <div class="col-lg-3">
                     <label for="qte" class=" text-left">Quantité</label>
@@ -40,13 +41,16 @@
                         <i class="fas fa-cart-plus"></i>
                         <spane>ACHETER</spane>
                     </button>
+                    <spane><i class="fas fa-check"></i> en stock </spane>
             </form>
-            
-            {% if single_p.stock > 0 %}
-            <spane><i class="fas fa-check"></i> en stock </spane>
             {% else %}
-            <spane><i class="fas fa-times"></i></i> Épuisé!!
+            <div class="alert alert-info" role="alert">
+            <spane><i class="fas fa-times"></i> ce produit n'est pas disponile pour le moment !!
+            </div>
+
+
             </spane>
+
             {% endif %}
         </div>
     </div>
