@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -35,6 +36,16 @@ class User
      * @ORM\Column(type="string", length=255)
      */
     private $telephone;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Commande", mappedBy="utilisateur")
+     */
+    private $commandes;
+
+    public function __construct()
+    {
+        $this->commandes = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -88,4 +99,5 @@ class User
 
         return $this;
     }
+
 }
