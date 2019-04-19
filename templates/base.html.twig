@@ -69,7 +69,14 @@
                 <li class="nav-item">
 
                     <a class="nav-link" href="{{ path('shopping') }}"> Panier
-                        <i class="fas fa-shopping-basket"> 0$ </i>
+                        <i class="fas fa-shopping-basket"> 
+                        {% if (app.session.get('my_cart').total is defined) and (app.session.get('my_cart').total is not null) %}
+                            {{app.session.get('my_cart').total}}$
+                        {% else %}
+                        0$
+                        {% endif %}
+                        
+                         </i>
                     </a>
 
 
