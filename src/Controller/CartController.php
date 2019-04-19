@@ -73,7 +73,7 @@ class CartController extends AbstractController
         $repoC = $em->getRepository(Categorie::class);
         $categoriesMenu = $repoC->getCategories();
 
-        //$session->invalidate();
+        // $session->invalidate();
 
         return $this->render('shopping/bag-shoping.html.twig', [
             'categoriesMenu' => $categoriesMenu,

@@ -14,9 +14,132 @@
 
 
 {% block body %}
-<h1>votre panier</h1>
+<div class="row">
+    <div class="col-md-10 col-md-offset-1">
+        {% if cartDetails.products is not empty and cartDetails.products is defined %}
+        <div class="row">
+            <div>
+                <h2>your cart</h2>
+            </div>
+        </div>
+        <table class="table">
+            <thead>
+                <tr>
 
-{{ dump(app.session.get('my_cart'))}}
-{{ dump(cartDetails) }}
+                    <th>produit</th>
+                    <th>Quantité</th>
+                    <th></th>
+                    <th>prix</th>
+                    <th style="text-align:right;"> total</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for product in cartDetails.products %}
+                <tr class="product-position">
+
+
+                    <td class="col-md-3">
+                        <a href="#" class="pull-left" style="margin-right:15px;">
+                            <img src="http://placehold.it/200x100" alt="">
+                        </a>
+                        <div>
+                            <a href="{{ path('single_product', {'slug': product.product.slug }) }}">
+                                <strong>{{ product.product.nom }}</strong>
+                            </a>
+                            <ul class="list-unstyled">
+                            </ul>
+                        </div>
+                    </td>
+
+                    <td class="col-md-2">
+                        <div class="form-group">
+                            <div>
+                                <input type="number" name="quantity" required="required" min="1" data-id=""
+                                    class="form-control quantity" value="{{ product.quantity }}">
+                            </div>
+                        </div>
+                    </td>
+                    <td class="col-md-1">
+                        <a href="#" class="btn btn-danger glyphicon glyphicon-remove product-remove"
+                            data-toggle="confirmation" data-popout="true" data-placement="left">
+                            <i class="fas fa-times"></i>
+
+                        </a>
+                    </td>
+                    <td class="col-md-1 price">
+                        <span>{{ product.product.prix }}</span>
+                    </td>
+                    <td class="col-md-1 sum" style="text-align: right">
+                        {{ product.sum }}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="6" style="text-align: right;">
+                        <strong>total sum:</strong>
+                        <span class="totalsum">{{ cartDetails.totalsum }}</span>
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
+
+
+        <div class="row">
+            <div>
+                <div>
+                    <a href="#" class="btn btn-success glyphicon glyphicon-ok" id="">
+                        checkout !!
+                    </a>
+                    <a href="#" class="btn btn-danger glyphicon glyphicon-trash clear-cart" data-toggle="confirmation"
+                        data-popout="true" data-placement="left">
+                        Clear <i class="fas fa-trash-alt"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+                <p><a href="#" class="btn btn-warning"><i class="fas fa-chevron-left"></i>
+                        <spane>Continue</spane>
+                    </a></p>
+
+
+        <!-- ******************************************if cart is empty****************************************** -->
+
+        {% else %}
+        <div class="row">
+            <div>
+                <h2>votre cart est vide !!</h2>
+            </div>
+        </div>
+    </div>
+</div>
+        {% endif %}
+<!-- Modal -->
+<div class="modal fade" id="authSuggest" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Register</h4>
+            </div>
+            <div class="modal-body">
+
+            </div>
+            <div class="modal-footer">
+                <a href="#" class="btn btn-success">
+
+                </a>
+                <a href="#" class="btn btn-success">
+
+                </a>
+                <a href="#" class="btn btn-primary">
+
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
 
 {% endblock %}
