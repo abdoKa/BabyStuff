@@ -9,7 +9,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Routing\Annotation\Route;
 
-class ShopingController extends AbstractController
+class CartController extends AbstractController
 {
     /**
      * @Route("/panier", name="shopping")
@@ -20,15 +20,6 @@ class ShopingController extends AbstractController
         $repoP = $em->getRepository(Produit::class);
     
         $session = new Session();
-<<<<<<< HEAD
-        
-        // $session->invalidate();
-        $cart = array();
-        $cart['listproducts'] = array();
-        $cart['total'] = 0;
-        
-        if ($session->get('my_cart') == null) {
-=======
 
         $productsArray = [];
         $cart = [];
@@ -37,41 +28,12 @@ class ShopingController extends AbstractController
         $session = new Session();
 
         if($session->get('my_cart') == null){
->>>>>>> 1742a53ce97bddb2bfc6427d33d4cf2ebdebc33c
             $session->set('my_cart', $cart);
         }else{
             $cart = $session->get('my_cart');
         }
         
         if ($request->isMethod('post')) {
-<<<<<<< HEAD
-            
-            $quantity = $request->request->get('qte');
-            $product_id = $request->request->get('product_id');
-            
-            $repository = $this->getDoctrine()->getRepository(Produit::class);
-            $product0 = $repository->findOneBy([
-                'id' => $product_id,
-            ]);
-
-            $prix = $product0->getPrix();
-            $total_product = $prix * $quantity;
-
-            $product = array($product0, 'qte' => $quantity, 'total' => $total_product);
-                
-
-            array_push($cart['listproducts'], $product);
-
-            foreach ($cart['listproducts'] as $product) {
-                $cart['total'] += $product['total'];
-            }
-            $cart = array(
-                'listproducts' => $cart['listproducts'],
-                'total' => $cart['total'],
-            );
-            $session->set('my_cart', $cart);
-
-=======
             $productQuantity = $request->request->get('qte');
             $productId = $request->request->get('product_id');
 
@@ -104,7 +66,6 @@ class ShopingController extends AbstractController
                 $totalSum += $sum;
                 $productsArray[] = $productPosition;
             }
->>>>>>> 1742a53ce97bddb2bfc6427d33d4cf2ebdebc33c
         }
 
         $cartDetails = ['products' => $productsArray, 'totalsum' => $totalSum ];
@@ -112,20 +73,11 @@ class ShopingController extends AbstractController
         $repoC = $em->getRepository(Categorie::class);
         $categoriesMenu = $repoC->getCategories();
 
-<<<<<<< HEAD
-       
-
-
-        return $this->render('shopping/bag-shoping.html.twig', [
-            'categoriesMenu' => $categoriesMenu,
-            'product0'=>$product0
-=======
         //$session->invalidate();
 
         return $this->render('shopping/bag-shoping.html.twig', [
             'categoriesMenu' => $categoriesMenu,
             'cartDetails' => $cartDetails
->>>>>>> 1742a53ce97bddb2bfc6427d33d4cf2ebdebc33c
         ]);
 
     }
