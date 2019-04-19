@@ -60,26 +60,31 @@ class BabyProductsController extends AbstractController
         $cart = [];
         $totalSum = 0;
 
-        $cart = $session->get('my_cart');
+        if($session->get('my_cart') == null){
+            $session->set('my_cart', $cart);
+        }else{
+            $cart = $session->get('my_cart');
 
-        foreach ($cart as $productId => $productQuantity) {
-            $product = $repoP->findOneBy([
-                'id' => $productId,
-            ]);
-
-            if (is_object($product)) {
-                $productPosition = [];
-                $quantity = abs((int)$productQuantity);
-                $price = $product->getPrix();
-                $sum = $price * $quantity;
-                $productPosition['product'] = $product;
-                $productPosition['quantity'] = $quantity;
-                $productPosition['price'] = $price;
-                $productPosition['sum'] = $sum;
-                $totalSum += $sum;
-                $productsArray[] = $productPosition;
-            }
         }
+
+            foreach ($cart as $productId => $productQuantity) {
+                $product = $repoP->findOneBy([
+                    'id' => $productId,
+                ]);
+    
+                if (is_object($product)) {
+                    $productPosition = [];
+                    $quantity = abs((int)$productQuantity);
+                    $price = $product->getPrix();
+                    $sum = $price * $quantity;
+                    $productPosition['product'] = $product;
+                    $productPosition['quantity'] = $quantity;
+                    $productPosition['price'] = $price;
+                    $productPosition['sum'] = $sum;
+                    $totalSum += $sum;
+                    $productsArray[] = $productPosition;
+                }
+            }
 
         $cartDetails = ['products' => $productsArray, 'totalsum' => $totalSum ];
 
