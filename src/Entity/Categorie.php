@@ -2,12 +2,15 @@
 
 namespace App\Entity;
 
+
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\CategorieRepository")
+ * @UniqueEntity("slug")
  */
 class Categorie
 {
@@ -34,7 +37,7 @@ class Categorie
     private $image;
 
     /**
-     * @ORM\Column(type="string", length=255, unique=true)
+     * @ORM\Column(type="string", length=170, unique=true, nullable="false"))
      */
     private $slug;
 

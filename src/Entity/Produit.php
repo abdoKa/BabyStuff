@@ -2,10 +2,13 @@
 
 namespace App\Entity;
 
+
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ProduitRepository")
+ * @UniqueEntity("slug")
  */
 class Produit
 {
@@ -52,7 +55,8 @@ class Produit
     private $stock;
 
     /**
-     * @ORM\Column(type="string", length=255, unique=true)
+     * @ORM\Column(type="string", length=170, unique=true,nullable="false"))
+     * 
      */
     private $slug;
 

@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20190415100044 extends AbstractMigration
+final class Version20190419162520 extends AbstractMigration
 {
     public function getDescription() : string
     {
@@ -22,7 +22,9 @@ final class Version20190415100044 extends AbstractMigration
         // this up() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('ALTER TABLE fourniseur CHANGE date_ajoute date_ajout DATETIME NOT NULL');
+        $this->addSql('CREATE UNIQUE INDEX UNIQ_497DD634989D9B62 ON categorie (slug)');
+        $this->addSql('CREATE UNIQUE INDEX UNIQ_5EE7ECCE989D9B62 ON fourniseur (slug)');
+        $this->addSql('CREATE UNIQUE INDEX UNIQ_29A5EC27989D9B62 ON produit (slug)');
     }
 
     public function down(Schema $schema) : void
@@ -30,6 +32,8 @@ final class Version20190415100044 extends AbstractMigration
         // this down() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('ALTER TABLE fourniseur CHANGE date_ajout date_ajoute DATETIME NOT NULL');
+        $this->addSql('DROP INDEX UNIQ_497DD634989D9B62 ON categorie');
+        $this->addSql('DROP INDEX UNIQ_5EE7ECCE989D9B62 ON fourniseur');
+        $this->addSql('DROP INDEX UNIQ_29A5EC27989D9B62 ON produit');
     }
 }

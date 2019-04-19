@@ -37,16 +37,6 @@ class User
      */
     private $telephone;
 
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Commande", mappedBy="utilisateur")
-     */
-    private $commandes;
-
-    public function __construct()
-    {
-        $this->commandes = new ArrayCollection();
-    }
-
     public function getId(): ?int
     {
         return $this->id;
