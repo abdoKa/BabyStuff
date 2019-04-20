@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20190419162520 extends AbstractMigration
+final class Version20190420133440 extends AbstractMigration
 {
     public function getDescription() : string
     {
@@ -22,9 +22,9 @@ final class Version20190419162520 extends AbstractMigration
         // this up() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('CREATE UNIQUE INDEX UNIQ_497DD634989D9B62 ON categorie (slug)');
-        $this->addSql('CREATE UNIQUE INDEX UNIQ_5EE7ECCE989D9B62 ON fourniseur (slug)');
-        $this->addSql('CREATE UNIQUE INDEX UNIQ_29A5EC27989D9B62 ON produit (slug)');
+        $this->addSql('ALTER TABLE categorie CHANGE slug slug VARCHAR(170) NOT NULL');
+        $this->addSql('ALTER TABLE fourniseur CHANGE slug slug VARCHAR(170) NOT NULL, CHANGE date_ajoute date_ajout DATETIME NOT NULL');
+        $this->addSql('ALTER TABLE produit CHANGE slug slug VARCHAR(170) NOT NULL');
     }
 
     public function down(Schema $schema) : void
@@ -32,8 +32,8 @@ final class Version20190419162520 extends AbstractMigration
         // this down() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('DROP INDEX UNIQ_497DD634989D9B62 ON categorie');
-        $this->addSql('DROP INDEX UNIQ_5EE7ECCE989D9B62 ON fourniseur');
-        $this->addSql('DROP INDEX UNIQ_29A5EC27989D9B62 ON produit');
+        $this->addSql('ALTER TABLE categorie CHANGE slug slug VARCHAR(255) NOT NULL COLLATE utf8mb4_unicode_ci');
+        $this->addSql('ALTER TABLE fourniseur CHANGE slug slug VARCHAR(255) NOT NULL COLLATE utf8mb4_unicode_ci, CHANGE date_ajout date_ajoute DATETIME NOT NULL');
+        $this->addSql('ALTER TABLE produit CHANGE slug slug VARCHAR(255) NOT NULL COLLATE utf8mb4_unicode_ci');
     }
 }
