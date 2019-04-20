@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>{% block title %}BabyStuff{% endblock %}</title>
+    <title>{% block title %}BabyStuff | Back Office{% endblock %}</title>
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
@@ -20,7 +20,15 @@
     <link rel="stylesheet" href="{{ asset('css/main.css') }}">
 
 
-    {% block stylesheets %}{% endblock %}
+    {% block stylesheets %}
+    
+    <style>
+    
+    .Welcom-title{
+        margin: 70px 10px 70px 10px;
+    }
+    </style>
+    {% endblock %}
 </head>
 
 <body>
@@ -48,7 +56,7 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
-                <h1> Bonjour, choisissez une catégorie! </h1>
+                <h1 class="Welcom-title"> Bienvenue Ali ,Voila votre la list des commandes </h1>
             </div>
             {# / part backend client settings #}
 
@@ -65,9 +73,11 @@
                     <thead>
                         <tr>
                             <th scope="col">#</th>
-                            <th scope="col">First</th>
-                            <th scope="col">Last</th>
-                            <th scope="col">Handle</th>
+                            <th scope="col">Nom du client</th>
+                            <th scope="col">Utilisateur</th>
+                            <th scope="col">Somme totale de cette commande</th>
+                            <th scope="col">Date de commande</th>
+                            <th scope="col-md-2">actes</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -75,19 +85,9 @@
                             <th scope="row">1</th>
                             <td>Mark</td>
                             <td>Otto</td>
-                            <td>@mdo</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">2</th>
-                            <td>Jacob</td>
-                            <td>Thornton</td>
-                            <td>@fat</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">3</th>
-                            <td>Larry</td>
-                            <td>the Bird</td>
-                            <td>@twitter</td>
+                            <td>7000 MAD</td>
+                            <td>02/07/2018</td>
+                            <td><a href="">Montrer</a></td>
                         </tr>
                     </tbody>
                 </table>

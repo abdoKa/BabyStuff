@@ -17,5 +17,24 @@ class AdminController extends AbstractController
         ]);
     }
 
+    /**
+     * @Route("/admin/fournisseur", name="admin_fournisseur")
+     */
+    public function admin_Bfournisseur()
+    {
+        return $this->render('admin/B_fournisseurlist.html.twig', [
+           
+        ]);
+    }
+
+    /**
+     * @Route("/admin/commande", name="admin_commande")
+     */
+    public function admin_Bcommande()
+    {
+        return $this->render('admin/B-commande.html.twig', [
+           
+        ]);
+    }
    
 }
