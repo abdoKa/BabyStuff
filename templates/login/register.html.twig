@@ -1,28 +1,81 @@
 {% extends 'base.html.twig' %}
+{% block stylesheets %}
+<style>
+  .form-group {
+    text-align: center;
+    margin: 50px 0 0 100px;
+  }
+
+  .form-title {
+    text-align: center;
+    margin: 10px 0 100px 0;
+  }
+</style>
+
+{% endblock %}
 
 {% block title %}Babystuff | se connecter{% endblock %}
 
 {% block body %}
 <div class="wrapper fadeInDown">
-    <div id="formContentRe">
-        <!-- Tabs Titles -->
-        <h1>Bienvenu sur BabyStuff</h1>
-        <!-- Register Form -->
-        <form>
-      <input type="text" id="login" class="fadeIn second col-5" name="login" placeholder="Adresse  e-mail"><br>
-      <input type="password" id="password" class="fadeIn third col-5" name="login" placeholder="Mot de passe ">
-      <div class="checkbox">
+  <div id="formContentRe">
+    <!-- Tabs Titles -->
+    <h1>Bienvenu sur BabyStuff</h1>
+    <!-- Register Form -->
+    <section class="signup">
+      <!-- <img src="images/signup-bg.jpg" alt=""> -->
+      <div class="container">
+        <div class="signup-content">
+          <form method="POST" id="signup-form" class="signup-form">
+            <h2 class="form-title"> Create account</h2>
 
-        <label>
-          <input name="remember" type="checkbox" value="Remember Me"> Souviens-toi de moi
-        </label>
-      </div>
-      <input type="submit" value="Connexion">
-    </form>
-        <div class="footer">
-            <p>Ne pas avoir un compte! Inscrivez-vous ici <a href="#"> S'inscrire</a></p>
-            <p>Mot de passe <a href="#">Oublié ?</a></p>
+            <div class="form-group col-sm-5 row">
+              <label for="name"> Nom Complet</label>
+              <input type="text" class="form-input" name="name" id="name" placeholder="Votre Nom" />
+            </div>
+
+            <div class="form-group col-sm-9 row">
+              <label for="email" class=" "> Entre votre E-mail</label>
+              <input type="password" class="form-input" name="email" id="email"
+                placeholder="vous.@exemple.com" />
+            </div>
+
+            <div class="form-group col-6 row">
+              <label for="tel"> Telephone</label>
+              <input class="form-control" type="tel" name="tel" placeholder="1-(555)-555-5555">
+            </div>
         </div>
-    </div>
+        <div class="form-group col-sm-6 row">
+          <label for="password"> Mot de passe </label>
+          <input type="text" class="form-input" name="password" id="password" placeholder="Votre mot de passe" />
+        </div>
+
+        <div class="form-group col-sm-6 row">
+          <label for="re_password" class=" "> Confirmer mot de passe</label>
+          <input type="password" class="form-input" name="re_password" id="re_password"
+            placeholder="Confirmer ce mot de passe" />
+        </div>
+
+        <div class="form-group col-sm-9">
+          <input type="checkbox" name="agree-term" id="agree-term" class="agree-term" />
+          <label for="agree-term" class="label-agree-term"><span><span></span></span>I agree all statements in <a
+              href="#" class="term-service">Terms of service</a></label>
+        </div>
+
+        <div>
+          <input type="submit" name="submit" value="Sign up" />
+        </div>
+
+        </form>
+
+        <p class="loginhere">
+          Vous avez déjà un compte ? <a href="#" class="loginhere-link">Connectez-vous ici</a>
+        </p>
+      </div>
+  </div>
+  </section>
+
+</div>
+
 </div>
 {% endblock %}
