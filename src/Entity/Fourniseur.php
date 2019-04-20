@@ -37,7 +37,7 @@ class Fourniseur
     private $image;
 
     /**
-     * @ORM\Column(type="string", length=170, unique=true, nullable="false")
+     * @ORM\Column(type="string", length=170, unique=true, nullable=false)
      * 
      */
     private $slug;
