@@ -70,13 +70,12 @@ class CartController extends AbstractController
 
         $cartDetails = ['products' => $productsArray, 'totalsum' => $totalSum ];
 
-        $repoC = $em->getRepository(Categorie::class);
-        $categoriesMenu = $repoC->getCategories();
+        
 
         // $session->invalidate();
+      
 
         return $this->render('shopping/bag-shoping.html.twig', [
-            'categoriesMenu' => $categoriesMenu,
             'cartDetails' => $cartDetails
         ]);
 

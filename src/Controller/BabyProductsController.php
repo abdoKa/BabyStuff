@@ -119,8 +119,7 @@ class BabyProductsController extends AbstractController
         $em =$this->getDoctrine()->getManager();
         $repoF =$em->getRepository(Fourniseur::class);
 
-        $repoC =$em->getRepository(Categorie::class);
-        $categoriesMenu =$repoC->getCategories();
+        
 
         $pagination =$paginator->paginate(
             $repoF->getAllmarquesQuery(),
@@ -147,8 +146,7 @@ class BabyProductsController extends AbstractController
         $produits= $fournisseur->getProduits();
 
         
-        $repoC =$em->getRepository(Categorie::class);
-        $categoriesMenu =$repoC->getCategories();
+        
         
         $pagination =$paginator->paginate(
             $repoF->getAllmarquesQuery(),
@@ -159,7 +157,6 @@ class BabyProductsController extends AbstractController
         return $this->render('baby_products/show-marques.html.twig',[
             'fournisseur' =>$fournisseur,
             'produits' => $produits,
-            'categoriesMenu' =>$categoriesMenu,
             'pagination' =>$pagination
 
         ]);

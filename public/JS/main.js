@@ -36,6 +36,17 @@ $(document).ready(function() {
         ]
     });
 
+    var scrollLink = $('scroll');
+    scrollLink.click(function(e) {
+        e.preventDefault();
+        $('body', 'html').animate({
+
+            srollTop: $(this.hash).offset().top
+
+        })
+    });
+
+
     $('.add-to-favourite').click(function(e) {
         e.preventDefault();
         $(this).find('.icon-change').toggleClass('fas');
