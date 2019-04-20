@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Babystuff | se connecter{% endblock %}
+
+{% block body %}
+<div class="wrapper fadeInDown">
+    <div id="formContentRe">
+        <!-- Tabs Titles -->
+        <h1>Bienvenu sur BabyStuff</h1>
+        <!-- Register Form -->
+        <form>
+      <input type="text" id="login" class="fadeIn second col-5" name="login" placeholder="Adresse  e-mail"><br>
+      <input type="password" id="password" class="fadeIn third col-5" name="login" placeholder="Mot de passe ">
+      <div class="checkbox">
+
+        <label>
+          <input name="remember" type="checkbox" value="Remember Me"> Souviens-toi de moi
+        </label>
+      </div>
+      <input type="submit" value="Connexion">
+    </form>
+        <div class="footer">
+            <p>Ne pas avoir un compte! Inscrivez-vous ici <a href="#"> S'inscrire</a></p>
+            <p>Mot de passe <a href="#">Oublié ?</a></p>
+        </div>
+    </div>
+</div>
+{% endblock %}

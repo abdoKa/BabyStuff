@@ -1,30 +1,33 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello LoginController!{% endblock %}
+{% block title %}Babystuff | se connecter{% endblock %}
 
 {% block body %}
-	<div class="wrapper fadeInDown">
+<div class="wrapper fadeInDown">
   <div id="formContent">
     <!-- Tabs Titles -->
 
     <!-- Icon -->
-    <div class="fadeIn first">
-      <img src="https://www.b-cube.in/wp-content/uploads/2014/05/aditya-300x177.jpg" id="icon" alt="User Icon" />
-      <h1>Aditya News</h1>
+    <div class="fadeIn first" style="padding-bottom: 0px;">
+      <img src="mstile-310x310.png" id="icon" style="padding-bottom: 0px;" />
+      <h1 style="padding-top: 0px;">BabyStuff</h1>
     </div>
 
     <!-- Login Form -->
     <form>
-      <input type="text" id="login" class="fadeIn second" name="login" placeholder="username">
-      <input type="text" id="password" class="fadeIn third" name="login" placeholder="password">
-      <input type="submit" class="fadeIn fourth" value="Log In">
+      <input type="text" id="login" class="fadeIn second" name="login" placeholder="Adresse  e-mail">
+      <input type="password" id="password" class="fadeIn third" name="login" placeholder="Mot de passe ">
+      <div class="checkbox">
+        <label>
+          <input name="remember" type="checkbox" value="Remember Me"> Souviens-toi de moi
+        </label>
+      </div>
+      <input type="submit" value="Connexion">
     </form>
-
-    <!-- Remind Passowrd -->
-    <div id="formFooter">
-      <a class="underlineHover" href="#">Go to the Site</a>
+    <div class="footer">
+      <p>Ne pas avoir un compte! Inscrivez-vous ici <a href="#"> S'inscrire</a></p>
+      <p>Mot de passe  <a href="#">Oublié ?</a></p>
     </div>
-
   </div>
 </div>
 {% endblock %}

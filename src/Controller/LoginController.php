@@ -13,12 +13,17 @@ class LoginController extends AbstractController
      */
     public function login()
     {
-        $em = $this->getDoctrine()->getManager();
-        $repoC = $em->getRepository(Categorie::class);
-        $categoriesMenu = $repoC->getCategories();
-
         return $this->render('login/login.html.twig', [
-            'categoriesMenu' => $categoriesMenu
+            
+        ]);
+    }
+
+    /**
+     * @Route("/inscrire", name="registre")
+     */
+    public function insrire()
+    {
+        return $this->render('login/register.html.twig', [
             
         ]);
     }
