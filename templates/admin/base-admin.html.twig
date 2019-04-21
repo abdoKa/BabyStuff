@@ -20,20 +20,11 @@
     <link rel="stylesheet" href="{{ asset('css/main.css') }}">
 
 
-    {% block stylesheets %}
-    
-    <style>
-    
-    .Welcom-title{
-        margin: 70px 10px 70px 200px;
-        text-align:center;
-
-    }
-    </style>
-    {% endblock %}
+    {% block stylesheets %}{% endblock %}
 </head>
+
 <body>
- {% block body %} 
+    {% block body %}
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
         <a class="navbar-brand" href="{{ path('home') }}">
             <i class="fas fa-baby-carriage">
@@ -55,26 +46,24 @@
 
         </div>
     </nav>
-   {% endblock %}
+    {% endblock %}
 
-     {% block head %}
+    {% block head %}
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
-                <h1 class="Welcom-title"> Bienvenue Ali ,Voila votre la list des commandes </h1>
+                <h1 class="Welcom-title"> list des Commandes </h1>
             </div>
             {# / part backend client settings #}
-
-
+        </div>
+            {# / part backend client settings #}
         </div>
         <div class="row">
-
             <div class="col-sm-3">
-
-               {% include 'admin/menu.html.twig' %}
+                {% include 'admin/menu.html.twig' %}
             </div>
             <div class="col-sm-9">
-                <table class="table" style="width:1280px; margin:10px 2px 10px -150px;text-align: center;">
+                <table class="table">
                     <thead>
                         <tr>
                             <th scope="col">#</th>
@@ -99,7 +88,7 @@
             </div>
         </div>
     </div>
-{% endblock %}
+    {% endblock %}
 
 
     <script src="{{ asset('bower_components/jquery/dist/jquery.min.js') }}"></script>

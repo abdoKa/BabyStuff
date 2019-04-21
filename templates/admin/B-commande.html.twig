@@ -1,16 +1,23 @@
-  {% extends "admin/base-admin.html.twig" %} 
-  {% block name %}
- <div class="container">
+  {% extends "admin/base-admin.html.twig" %}
+  {% block stylesheets %}{% endblock %}
+
+  {% block head %}
+
+  <div class="container">
         <div class="row">
             <div class="col-lg-12">
-                <h1 class="Welcom-title"> list des commandes </h1>
+                <h1 class="Welcom-title"> list des Commandes </h1>
             </div>
             {# / part backend client settings #}
-
-
+        </div>
+            {# / part backend client settings #}
         </div>
         <div class="row">
 
+            <div class="col-sm-3">
+
+                {% include 'admin/menu.html.twig' %}
+            </div>
             <div class="col-sm-9">
                 <table class="table">
                     <thead>
@@ -29,12 +36,12 @@
                             <td>Mark</td>
                             <td>Otto</td>
                             <td>7000 MAD</td>
-                            <td>02/07/2018</td>
-                            <td><a href="">Montrer</a></td>
+                            <td>04/07/2018 22:07</td>
+                            <td><a href="#"><i class="fas fa-eye btn-light btn-sm"></i></a></td>
                         </tr>
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
-    {% endblock %}
+{% endblock %}

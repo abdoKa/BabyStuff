@@ -3,32 +3,28 @@
   
    <style>
     
-    .Welcom-title{
-        margin: 70px 10px 70px 200px;
-        text-align:center;
-    }
+    
     </style>
   {% endblock %}
 
   {% block head %}
-  <div class="container">
+   <div class="container">
         <div class="row">
             <div class="col-lg-12">
                 <h1 class="Welcom-title"> list des Utilisateur </h1>
             </div>
             {# / part backend client settings #}
-
-
         </div>
-
+            {# / part backend client settings #}
+        </div>
         <div class="row">
 
             <div class="col-sm-3">
-               {% include 'admin/menu.html.twig' %}
 
+                {% include 'admin/menu.html.twig' %}
             </div>
             <div class="col-sm-9">
-                <table class="table" style="width:1280px; margin:10px 2px 10px -150px;text-align: center;">
+                <table class="table">
                     <thead>
                         <tr>
                             <th scope="col">#</th>
@@ -42,11 +38,11 @@
                     <tbody>
                         <tr>
                             <th scope="row">1</th>
-                            <td>user 1</td>
+                            <td>Ali123</td>
                             <td>yxz@exemple.com</td>
-                            <td>2018-04-24 11:48</td>
-                            <td><a href="#">Commandes(n)</a></td>
-                            <td><a href="#">Montrer</a></td>
+                            <td>02/07/2018 17:00:00</td>
+                            <th scope="col"><a href="#">Commandes(*)</a></th>
+                            <td><a href="#"><i class="fas fa-eye btn-light btn-sm"></i></a></td>
                         </tr>
                     </tbody>
                 </table>

@@ -3,48 +3,47 @@
   
    <style>
     
-    .Welcom-title{
-        margin: 70px 10px 70px 200px;
-        text-align:center;
-    }
+    
     </style>
   {% endblock %}
 
   {% block head %}
-  <div class="container">
+    <div class="container">
         <div class="row">
             <div class="col-lg-12">
                 <h1 class="Welcom-title"> list des fournisseur </h1>
             </div>
             {# / part backend client settings #}
-
-
         </div>
-
+            {# / part backend client settings #}
+        </div>
         <div class="row">
 
             <div class="col-sm-3">
-               {% include 'admin/menu.html.twig' %}
 
+                {% include 'admin/menu.html.twig' %}
             </div>
             <div class="col-sm-9">
-                <table class="table" style="width:1280px; margin:10px 2px 10px -150px;text-align: center;">
+                <table class="table">
                     <thead>
                         <tr>
                             <th scope="col">#</th>
                             <th scope="col">Fournisseur</th>
-                            <th scope="col">Description</th>
-                            <th scope="col">Photo</th>
+                            <th scope="col">Descriprtion</th>
+                            <th scope="col">image</th>
                             <th scope="col-md-2">actes</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
                             <th scope="row">1</th>
-                            <td>F1</td>
-                            <td> hahahahhahaha hahahahhahahahah ahahhahahahahahahhahahahah ahahhahahahahahahhahahahahah ahhahahahahahahhahaha</td>
-                            <td><img src="http://placehold.it/200x100" class="w-100"></td>
-                            <td><a href="">Montrer</a></td>
+                            <td>F 1</td>
+                            <td>DescriptionDescriptionDescription DescriptionDescription DescriptionDescription DescriptionDescription DescriptionDescription DescriptionDescription </td>
+                            <td><img src="http://placehold.it/200x100"></td>
+                            <td>
+                             <a href="#"><i class="fas fa-eye btn-light btn-sm"></i></a> <a href="#"><i class="fas fa-pencil-alt btn-light btn-sm"></i></a>
+                            
+                            </td>
                         </tr>
                     </tbody>
                 </table>
