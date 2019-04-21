@@ -22,17 +22,17 @@
         Commande
         <span class="badge badge-primary badge-pill">14</span>
     </a>
-    <a href="#" class="list-group-item "><i class="fas fa-users"></i>
+    <a href="{{ path('admin_user_list') }}" class="list-group-item "><i class="fas fa-users"></i>
         liste d'utilisateurs
         <span class="badge badge-primary badge-pill">2</span>
     </a>
 </div>
 
 <div class="list-group">
-    <a href="#" class="list-group-item"><i class="fab fa-product-hunt"></i>
+    <a href="{{ path('admin_product') }}" class="list-group-item"><i class="fab fa-product-hunt"></i>
         <spane> Produit</spane>
     </a>
-    <a href="#" class="list-group-item"><i class="fas fa-tags"></i>
+    <a href="{{ path('admin_categories') }}" class="list-group-item"><i class="fas fa-tags"></i>
         <spane> Categories<spane>
     </a>
     <a href="{{ path('admin_fournisseur') }}" class="list-group-item  "><i class="far fa-copyright"></i>
@@ -41,7 +41,7 @@
 </div>
 
 <div class="list-group">
-    <a href="#" class="list-group-item  "><i class="fas fa-bookmark"></i>
+    <a href="{{ path('admin_featured') }}" class="list-group-item  "><i class="fas fa-bookmark"></i>
         <spane>Liste de produits en vedette</spane>
     </a>
     <a href="#" class="list-group-item "> <i class="fas fa-sliders-h"></i>

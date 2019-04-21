@@ -25,13 +25,15 @@
     <style>
     
     .Welcom-title{
-        margin: 70px 10px 70px 10px;
+        margin: 70px 10px 70px 200px;
+        text-align:center;
+
     }
     </style>
     {% endblock %}
 </head>
-
 <body>
+ {% block body %} 
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
         <a class="navbar-brand" href="{{ path('home') }}">
             <i class="fas fa-baby-carriage">
@@ -53,6 +55,9 @@
 
         </div>
     </nav>
+   {% endblock %}
+
+     {% block head %}
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
@@ -69,7 +74,7 @@
                {% include 'admin/menu.html.twig' %}
             </div>
             <div class="col-sm-9">
-                <table class="table">
+                <table class="table" style="width:1280px; margin:10px 2px 10px -150px;text-align: center;">
                     <thead>
                         <tr>
                             <th scope="col">#</th>
@@ -94,22 +99,9 @@
             </div>
         </div>
     </div>
-    {% block body %} {% endblock %}
+{% endblock %}
 
 
-
-
-
-    <div id="container">
-
-        <div id="footer">
-            <i class="fas fa-baby-carriage"></i>
-            <h5> BabyStuff © </h6>
-                <script type="text/JavaScript">
-                    document.write(new Date().getFullYear());
-                </script>
-        </div>
-    </div>
     <script src="{{ asset('bower_components/jquery/dist/jquery.min.js') }}"></script>
     <script src="{{ asset('bower_components/bootstrap/dist/js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('bower_components/slick-carousel/slick/slick.min.js') }}"></script>
