@@ -31,10 +31,10 @@ td,th{
       </div>
       <div class="col-sm-9">
       <div>
-     <i class="fas fa-plus"></i> <a href="#"> <spane>Nouvelle Produit</spane></a>
+     <i class="fas fa-plus"></i> <a href="{{ path('new_product') }}"> <spane>Nouvelle Produit</spane></a>
       </div>
 
-          <table class="table">
+          <table class="table" id="product">
               <thead>
                   <tr bgcolor="d7f7f5">
                       <th scope="col">Referance</th>
@@ -61,6 +61,7 @@ td,th{
                       <td><a href="#"><i class="fas fa-eye btn-light btn-sm"></i></a>
                           <a href="#"><i class="fas fa-pencil-alt btn-light btn-sm"></i></a>
                           <a href="#"><i class="far fa-bookmark btn-light btn-sm"></i></a>
+                          <a href="#"><i class="fas fa-trash-alt btn-danger delete-product btn-sm" data-id="{{ product.id }}"></i></a>
                       </td>
                   </tr>
                   {% endfor %}

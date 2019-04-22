@@ -4,15 +4,13 @@ namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
-use Knp\Component\Pager\Pagination\PaginationInterface;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Knp\Component\Pager\PaginatorInterface;
 
 use App\Entity\Produit;
 use App\Entity\Fourniseur;
 use App\Entity\Categorie;
-use Knp\Component\Pager\PaginatorInterface;
 use Cocur\Slugify\Slugify;
 use App\Form\ProduitType;
 
@@ -98,18 +96,16 @@ class AdminController extends AbstractController
                 
                 $product=$form->getData();
                 
-                $image=$product->getImage();
-                $uploads_directory=$this->getParameter('uploads_directory');
-
-                $file_name= md5(uniqid()).'.'.$image->guessExtension();
+                $image=$form->get('image')->getData();
+                $fileName = md5(uniqid()).'.'.$image->guessExtension();
 
                 $image->move(
-                    $uploads_directory,
-                    $file_name
+                    $this->getParameter('uploads_directory'),
+                    $fileName
                 );
                 $slug = $slugify->slugify($product->getNom());
                 $product->setSlug($slug);
-                $product->setImage($file_name);
+                $product->setImage($fileName);
                 $product->setDateAjout(new \DateTime("now"));
                 $product->setDateModif(new \DateTime("now"));
                 $product->setFeatures(0);
@@ -117,6 +113,8 @@ class AdminController extends AbstractController
                 $entityManager =$this->getDoctrine()->getManager();
                 $entityManager->persist($product);
                 $entityManager->flush();
+
+                return $this->redirectToRoute('admin_product');
 
                 }
 

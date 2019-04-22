@@ -6,6 +6,7 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -23,16 +24,24 @@ class Fourniseur
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Length(
+     *      min = 2,
+     *      max = 255,
+     *      minMessage = "Ce Nom doit être au moins 2 caractères.",
+     *      maxMessage = "Ce Nom ne peut pas contenir plus de 255 caractères"
+     * )
      */
     private $nom;
 
     /**
      * @ORM\Column(type="text")
+     * @Assert\NotBlank
      */
     private $description;
 
     /**
      * @ORM\Column(type="string", length=300)
+     *  @Assert\File(mimeTypes={ "image/jpeg","image/png" })
      */
     private $image;
 

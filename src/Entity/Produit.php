@@ -25,15 +25,20 @@ class Produit
      * @Assert\Length(
      *      min = 2,
      *      max = 255,
-     *      minMessage = "Your first name must be at least {{ limit }} characters long",
-     *      maxMessage = "Your first name cannot be longer than {{ limit }} characters"
+     *      minMessage = "Ce champ doit être au moins 2 caractères.",
+     *      maxMessage = "Ce champ ne peut pas contenir plus de 255 caractères"
      * )
      */
     private $referance;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank
+     * @Assert\Length(
+     *      min = 2,
+     *      max = 255,
+     *      minMessage = "Ce Nom doit être au moins 2 caractères.",
+     *      maxMessage = "Ce Nom ne peut pas contenir plus de 255 caractères"
+     * )
      */
     private $nom;
 
@@ -45,6 +50,7 @@ class Produit
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\File(mimeTypes={ "image/jpeg","image/png" })
      */
     private $image;
 

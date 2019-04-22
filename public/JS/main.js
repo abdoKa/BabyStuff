@@ -49,6 +49,7 @@ $(document).ready(function() {
     });
 
 
+
     // tinymce.init({
     //     selector: 'textarea#produit_description',
     //     height: 500,
@@ -61,4 +62,15 @@ $(document).ready(function() {
     //     toolbar: 'undo redo | formatselect | bold italic backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat | help | code',
 
     // });
+
+
+    const products = $('#product');
+
+    if (products) {
+        products.click(function(e) {
+            if (e.target.className === 'btn-danger delete-product') {
+                alert('ok');
+            }
+        });
+    }
 });
