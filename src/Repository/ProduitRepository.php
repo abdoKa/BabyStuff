@@ -45,6 +45,17 @@ class ProduitRepository extends ServiceEntityRepository
         $stmt->execute();
         return $stmt->fetchAll();
     }
+    public function getAllB_Features(): array
+    {
+        $conn = $this->getEntityManager()->getConnection();
+        $sql = '
+        SELECT * FROM produit WHERE features =1
+        ';
+        $stmt = $conn->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetchAll();
+    }
+
 
     public function getFournisseurById($id)
     {
@@ -55,7 +66,21 @@ class ProduitRepository extends ServiceEntityRepository
     return $statement->fetchAll();
     }
 
+ // backend categories
 
+ public  function getCategoriesTable()
+ {
+     $conn = $this->getEntityManager()->getConnection();
+     $sql = '
+     SELECT produit.nom ,categorie.nom ,fourniseur.nom,produit.prix, produit.image,produit.stock 
+     FROM produit,categorie,fourniseur 
+     where categorie.id=categorie_id and 
+     fourniseur.id=fourniseur_id
+     ';
+     $stmt = $conn->prepare($sql); 
+     $stmt->execute();
+     return $stmt->fetchAll();
+ }
     // /**
     //  * @return Produit[] Returns an array of Produit objects
     //  */

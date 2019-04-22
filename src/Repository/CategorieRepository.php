@@ -46,4 +46,7 @@ class CategorieRepository extends ServiceEntityRepository
         return $stmt->fetchAll();
     }
 
+   
+   
+
 }

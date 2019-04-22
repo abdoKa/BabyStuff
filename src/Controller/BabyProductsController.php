@@ -34,14 +34,12 @@ class BabyProductsController extends AbstractController
 
 
 
-        $repoC =$em->getRepository(Categorie::class);
-        $categoriesMenu =$repoC->getCategories();
+        
 
         return $this->render('baby_products/home.html.twig',[
             'produits' => $produits,
             'fournissueurs' =>$fournisseurs,
             'features' => $features,
-            'categoriesMenu' =>$categoriesMenu,
             ]);
 
     }

@@ -1,8 +1,14 @@
   {% extends "admin/base-admin.html.twig" %}
   {% block stylesheets %}
 
-  <style>
-
+    <style>
+.image_B{
+    width:50%;
+    
+}
+td,th{
+    text-align: center;
+}
 
   </style>
   {% endblock %}
@@ -24,10 +30,14 @@
           {% include 'admin/menu.html.twig' %}
       </div>
       <div class="col-sm-9">
+      <div>
+     <i class="fas fa-plus"></i> <a href="#"> <spane>Nouvelle Produit</spane></a>
+      </div>
+
           <table class="table">
               <thead>
-                  <tr>
-                      <th scope="col">#</th>
+                  <tr bgcolor="d7f7f5">
+                      <th scope="col">Referance</th>
                       <th scope="col">Produit</th>
                       <th scope="col">Categorie</th>
                       <th scope="col">Fournisseur</th>
@@ -38,22 +48,28 @@
                   </tr>
               </thead>
               <tbody>
+              {% for product in pagination %}
+
                   <tr>
-                      <th scope="row">1</th>
-                      <td>P 15</td>
-                      <td>C 4</td>
-                      <td>F 4</td>
-                      <td>7000 MAD</td>
-                      <td><img src="http://placehold.it/200x100"></td>
-                      <td>100</td>
+                      <th scope="row">{{ product.referance }}</th>
+                      <td>{{ product.nom }}</td>
+                      <td>{{ product.categorie.nom }}</td>
+                      <td>{{ product.fourniseur.nom }}</td>
+                      <td>{{ product.prix }}</td>
+                      <td><img src="http://placehold.it/200x100" class="image_B"></td>
+                      <td>{{ product.stock }}</td>
                       <td><a href="#"><i class="fas fa-eye btn-light btn-sm"></i></a>
                           <a href="#"><i class="fas fa-pencil-alt btn-light btn-sm"></i></a>
-                          <a href="#"><i class="fas fa-bookmark btn-danger btn-sm"></i></a>
+                          <a href="#"><i class="far fa-bookmark btn-light btn-sm"></i></a>
                       </td>
                   </tr>
+                  {% endfor %}
               </tbody>
           </table>
       </div>
+        <div class="navigation" style="text-align:centre;">
+            {{ knp_pagination_render(pagination) }}
+            <div>
   </div>
   </div>
   {% endblock %}

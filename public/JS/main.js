@@ -36,19 +36,29 @@ $(document).ready(function() {
         ]
     });
 
-    var scrollLink = $('scroll');
-    scrollLink.click(function(e) {
-        e.preventDefault();
-        $('body', 'html').animate({
 
-            srollTop: $(this.hash).offset().top
-
-        })
-    });
 
 
     $('.add-to-favourite').click(function(e) {
         e.preventDefault();
         $(this).find('.icon-change').toggleClass('fas');
     });
+
+    $('.dropdown-toggle').select2({
+        selectOnClose: true
+    });
+
+
+    // tinymce.init({
+    //     selector: 'textarea#produit_description',
+    //     height: 500,
+    //     menubar: true,
+    //     plugins: [
+    //         'advlist autolink lists link image charmap print preview anchor textcolor',
+    //         'searchreplace visualblocks code fullscreen',
+    //         'insertdatetime media table paste code help wordcount code'
+    //     ],
+    //     toolbar: 'undo redo | formatselect | bold italic backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat | help | code',
+
+    // });
 });

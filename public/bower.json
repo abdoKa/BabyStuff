@@ -19,6 +19,8 @@
     "jquery": "^3.3.1",
     "font-awesome": "^5.8.1",
     "slick-carousel": "^1.8.1",
-    "bootswatch": "^4.3.1"
+    "bootswatch": "^4.3.1",
+    "select2": "~4.0",
+    "tinymce": "^5.0.3"
   }
 }

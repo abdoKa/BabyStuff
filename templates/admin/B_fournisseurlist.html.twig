@@ -1,10 +1,16 @@
   {% extends "admin/base-admin.html.twig" %}
   {% block stylesheets %} 
   
-   <style>
+     <style>
+.image_B{
+    width:50%;
     
-    
-    </style>
+}
+td,th{
+    text-align: center;
+}
+
+  </style>
   {% endblock %}
 
   {% block head %}
@@ -26,8 +32,9 @@
             <div class="col-sm-9">
                 <table class="table">
                     <thead>
-                        <tr>
-                            <th scope="col">#</th>
+                    {% for fournisseur in pagination %}
+                        <tr bgcolor="d7f7f5">
+                            <th scope="col">N°</th>
                             <th scope="col">Fournisseur</th>
                             <th scope="col">Descriprtion</th>
                             <th scope="col">image</th>
@@ -36,18 +43,22 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <th scope="row">1</th>
-                            <td>F 1</td>
-                            <td>DescriptionDescriptionDescription DescriptionDescription DescriptionDescription DescriptionDescription DescriptionDescription DescriptionDescription </td>
-                            <td><img src="http://placehold.it/200x100"></td>
+                            <th scope="row">{{ fournisseur.id }}</th>
+                            <td>{{ fournisseur.nom }}</td>
+                            <td>{{ fournisseur.description }}</td>
+                            <td><img src="{{ fournisseur.image }}"></td>
                             <td>
                              <a href="#"><i class="fas fa-eye btn-light btn-sm"></i></a> <a href="#"><i class="fas fa-pencil-alt btn-light btn-sm"></i></a>
                             
                             </td>
                         </tr>
+                        {% endfor %} 
                     </tbody>
                 </table>
             </div>
+             <div class="navigation" style="text-align:centre;">
+            {{ knp_pagination_render(pagination) }}
+            <div>
         </div>
     </div>
 {% endblock %}

@@ -4,6 +4,7 @@ namespace App\Entity;
 
 
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -21,16 +22,24 @@ class Produit
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Length(
+     *      min = 2,
+     *      max = 255,
+     *      minMessage = "Your first name must be at least {{ limit }} characters long",
+     *      maxMessage = "Your first name cannot be longer than {{ limit }} characters"
+     * )
      */
     private $referance;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank
      */
     private $nom;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="text")
+     * @Assert\NotBlank
      */
     private $description;
 
@@ -41,6 +50,7 @@ class Produit
 
     /**
      * @ORM\Column(type="decimal", precision=6, scale=2)
+     * @Assert\NotBlank
      */
     private $prix;
 
@@ -51,6 +61,7 @@ class Produit
 
     /**
      * @ORM\Column(type="integer")
+     * @Assert\NotBlank
      */
     private $stock;
 
