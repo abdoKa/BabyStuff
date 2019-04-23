@@ -9,6 +9,7 @@ use App\Entity\Fourniseur;
 use Cocur\Slugify\Slugify;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
+use symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Validator\Constraints\DateTime;
 
 class AppFixtures extends Fixture
@@ -36,7 +37,7 @@ class AppFixtures extends Fixture
             $categorie=new Categorie();
             $categorie->setNom('Categorie ' . $i);
             $categorie->setDescription('Lorem, ipsum dolor sit amet consectetur adipisicing elit. Delectus consectetur, laudantium maxime eaque a repellendus?');
-            $categorie->setImage('http://placehold.it/600x600');
+            $categorie->setImageFile();
             $slug = $slugify->slugify($categorie->getNom());
             $categorie->setSlug($slug);
             $categorie->setDateAjout($this->faker->dateTimeBetween('-10 days', 'now'));
@@ -47,7 +48,7 @@ class AppFixtures extends Fixture
             $fournisseur = new Fourniseur();
             $fournisseur->setNom('Fourniseur ' .$i);
             $fournisseur->setDescription('Lorem, ipsum dolor sit amet consectetur adipisicing elit. Delectus consectetur, laudantium maxime eaque a repellendus?');
-            $fournisseur->setImage('http://placehold.it/400x200');
+            $fournisseur->setImageFile();
             $slug = $slugify->slugify($fournisseur->getNom());
             $fournisseur->setSlug($slug);
             $fournisseur->setDateAjout($this->faker->dateTimeBetween('-10 days', 'now'));
@@ -67,7 +68,7 @@ class AppFixtures extends Fixture
             $produit = new Produit();
             $produit->setReferance('Ref' .$i);
             $produit->setNom('Produit ' .$i);
-            $produit->setImage('http://placehold.it/600x600');
+            $produit->setImageFile();
             $produit->setDescription('Lorem, ipsum dolor sit amet consectetur adipisicing elit');
             $produit->setPrix('50');
             $produit->setStock(50);

@@ -7,6 +7,8 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -39,11 +41,18 @@ class Fourniseur
      */
     private $description;
 
-    /**
-     * @ORM\Column(type="string", length=300)
-     *  @Assert\File(mimeTypes={ "image/jpeg","image/png" })
+     /**
+     * @var string|null
+     * @ORM\Column(type="string", length=255)
      */
-    private $image;
+    private $filename;
+
+
+    /**
+     * @Vich\UploadableField(mapping="product_image", fileNameProperty="filename")
+     * @var File
+     */
+    private $imageFile;
 
     /**
      * @ORM\Column(type="string", length=170)
@@ -100,17 +109,7 @@ class Fourniseur
         return $this;
     }
 
-    public function getImage(): ?string
-    {
-        return $this->image;
-    }
-
-    public function setImage(string $image): self
-    {
-        $this->image = $image;
-
-        return $this;
-    }
+   
 
     public function getSlug(): ?string
     {
@@ -175,6 +174,56 @@ class Fourniseur
     public function setDateModif(\DateTimeInterface $dateModif): self
     {
         $this->dateModif = $dateModif;
+
+        return $this;
+    }
+
+   
+
+    /**
+     * Get the value of imageFile
+     *
+     * @return  File
+     */ 
+    public function getImageFile()
+    {
+        return $this->imageFile;
+    }
+
+    /**
+     * Set the value of imageFile
+     *
+     * @param  File  $imageFile
+     *
+     * @return  self
+     */ 
+    public function setImageFile(File $imageFile)
+    {
+        $this->imageFile = $imageFile;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of filename
+     *
+     * @return  string|null
+     */ 
+    public function getFilename()
+    {
+        return $this->filename;
+    }
+
+    /**
+     * Set the value of filename
+     *
+     * @param  string|null  $filename
+     *
+     * @return  self
+     */ 
+    public function setFilename($filename)
+    {
+        $this->filename = $filename;
 
         return $this;
     }
