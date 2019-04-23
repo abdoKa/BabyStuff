@@ -31,7 +31,7 @@ class Produit
     private $referance;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, unique=true)
      * @Assert\Length(
      *      min = 2,
      *      max = 255,
