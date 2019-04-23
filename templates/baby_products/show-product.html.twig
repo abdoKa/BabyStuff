@@ -5,6 +5,10 @@
         padding-top: 80px;
 
     }
+    .w-100{
+        width:50%;
+        height:30%;
+    }
 </style>
 
 {% endblock %}
@@ -14,7 +18,7 @@
 <div class="container">
     <div class="row">
         <div class="col-lg-4 ">
-            <img src="{{ single_p.image }}" class="rounded float-left w-100" alt="">
+            <img src="{{ asset('/brows_file/' ~ single_p.image) }}" class="rounded float-left w-100" alt="">
         </div>
 
         <div class="col-lg-6 product-pre">
@@ -26,7 +30,7 @@
                 <h1 class="text-left price-css">{{ single_p.prix }} MAD</h1>
             </div>
             <div>
-                <p class="text-left lead" style="font-weight:80" ;>{{ single_p.description }}</p>
+                <p class="text-left lead" style="font-weight:80" ;>{{ single_p.description|raw }}</p>
             </div>
 
             {% if single_p.stock > 0 %}

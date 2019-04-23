@@ -15,12 +15,10 @@
 
 {% block body %}
 <div class="row">
-    <div class="col-md-10 col-md-offset-1">
+    <div class="col-lg-12">
         {% if cartDetails.products is not empty and cartDetails.products is defined %}
-        <div class="row">
-            <div>
-                <h2>your cart</h2>
-            </div>
+        <div>
+            <h2>your cart</h2>
         </div>
         <table class="table">
             <thead>
@@ -38,9 +36,9 @@
                 <tr class="product-position">
 
 
-                    <td class="col-md-3">
+                    <td class="col-md-5">
                         <a href="#" class="pull-left" style="margin-right:15px;">
-                            <img src="http://placehold.it/200x100" alt="">
+                            <img src="{{ asset('/brows_file/' ~ product.product.image) }}" alt="">
                         </a>
                         <div>
                             <a href="{{ path('single_product', {'slug': product.product.slug }) }}">
@@ -51,7 +49,7 @@
                         </div>
                     </td>
 
-                    <td class="col-md-2">
+                    <td class="col-md-3">
                         <div class="form-group">
                             <div>
                                 <input type="number" name="quantity" required="required" min="1" data-id=""
@@ -99,9 +97,12 @@
                 </div>
             </div>
         </div>
-                <p><a href="{{ path('show-all-categories') }}" class="btn btn-warning"><i class="fas fa-chevron-left"></i>
-                        <spane>Continue</spane>
-                    </a></p>
+        <div class="row">
+            <p><a href="{{ path('show-all-categories') }}" class="btn btn-warning"><i class="fas fa-chevron-left"></i>
+                    <spane>Continue</spane>
+                </a></p>
+        </div>
+
 
 
         <!-- ******************************************if cart is empty****************************************** -->
@@ -114,32 +115,7 @@
         </div>
     </div>
 </div>
-        {% endif %}
-<!-- Modal -->
-<div class="modal fade" id="authSuggest" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                        aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel">Register</h4>
-            </div>
-            <div class="modal-body">
+{% endif %}
 
-            </div>
-            <div class="modal-footer">
-                <a href="#" class="btn btn-success">
-
-                </a>
-                <a href="#" class="btn btn-success">
-
-                </a>
-                <a href="#" class="btn btn-primary">
-
-                </a>
-            </div>
-        </div>
-    </div>
-</div>
 
 {% endblock %}

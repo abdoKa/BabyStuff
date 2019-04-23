@@ -3,16 +3,12 @@
 namespace App\Entity;
 
 
-use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
-use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\HttpFoundation\File\File;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ProduitRepository")
- * @UniqueEntity("slug")
- * @Vich\Uploadable
  */
 class Produit
 {
@@ -52,18 +48,10 @@ class Produit
     private $description;
 
     /**
-     * @var string|null
      * @ORM\Column(type="string", length=255)
+     * @Assert\File(mimeTypes={ "image/jpeg","image/png" })
      */
-    private $filename;
-
-
-    /**
-     * @Vich\UploadableField(mapping="product_image", fileNameProperty="filename")
-     * @var File
-     */
-    private $imageFile;
-
+    private $image;
 
     /**
      * @ORM\Column(type="decimal", precision=6, scale=2)
@@ -74,7 +62,7 @@ class Produit
     /**
      * @ORM\Column(type="boolean")
      */
-    private $features;
+    private $features=0;
 
     /**
      * @ORM\Column(type="integer")
@@ -83,8 +71,8 @@ class Produit
     private $stock;
 
     /**
-     * @ORM\Column(type="string", length=170)
-     * 
+     * @Gedmo\Slug(fields={"nom"})
+     * @ORM\Column(type="string", length=50)
      */
     private $slug;
 
@@ -102,11 +90,13 @@ class Produit
 
     /**
      * @ORM\Column(type="datetime")
+     * @Gedmo\Timestampable(on="create")
      */
     private $dateAjout;
 
     /**
      * @ORM\Column(type="datetime")
+     * @Gedmo\Timestampable(on="update")
      */
     private $dateModif;
 
@@ -151,6 +141,18 @@ class Produit
         return $this;
     }
 
+    public function getImage(): ?string
+    {
+        return $this->image;
+    }
+
+    public function setImage(string $image): self
+    {
+        $this->image = $image;
+
+        return $this;
+    }
+
     public function getPrix()
     {
         return $this->prix;
@@ -163,17 +165,7 @@ class Produit
         return $this;
     }
 
-    public function getFeatures(): ?bool
-    {
-        return $this->features;
-    }
-
-    public function setFeatures(bool $features): self
-    {
-        $this->features = $features;
-
-        return $this;
-    }
+    
 
     public function getStock(): ?int
     {
@@ -247,51 +239,22 @@ class Produit
         return $this;
     }
 
-   
     /**
-     * Get the value of imageFile
-     *
-     * @return  File
+     * Get the value of features
      */ 
-    public function getImageFile()
+    public function getFeatures()
     {
-        return $this->imageFile;
+        return $this->features;
     }
 
     /**
-     * Set the value of imageFile
-     *
-     * @param  File  $imageFile
+     * Set the value of features
      *
      * @return  self
      */ 
-    public function setImageFile(File $imageFile)
+    public function setFeatures($features)
     {
-        $this->imageFile = $imageFile;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of filename
-     *
-     * @return  string|null
-     */ 
-    public function getFilename()
-    {
-        return $this->filename;
-    }
-
-    /**
-     * Set the value of filename
-     *
-     * @param  string|null  $filename
-     *
-     * @return  self
-     */ 
-    public function setFilename($filename)
-    {
-        $this->filename = $filename;
+        $this->features = $features;
 
         return $this;
     }

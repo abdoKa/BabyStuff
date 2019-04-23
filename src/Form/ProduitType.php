@@ -46,7 +46,7 @@ class ProduitType extends AbstractType
                     'attr'=> array('class'=>'form-control')))
 
             ->add('image', FileType::class,[
-                'label'=> 'image (PNG file)',
+                'label'=> 'image'
             ])
 
             ->add('prix', MoneyType::class,array(

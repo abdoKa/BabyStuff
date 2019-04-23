@@ -38,7 +38,7 @@
                 <div class="card-body">
                 <a href="{{ path('single_product', {'slug': produit.slug }) }}" >
                     <div class="product-image ">
-                        <img src="{{ produit.image }}" alt="" class=" w-100"><a/>
+                        <img src="{{ asset('/brows_file/' ~ produit.image) }}" alt="" class=" w-100"><a/>
 
                         <a href="#" class="add-to-favourite"><i class="far fa-heart icon-change"></i></a>
                     </div>
@@ -65,7 +65,7 @@
                 <div class="card-body">
                     <div class="product-image ">
                      <a href="{{ path('single_product', {'slug': produit.slug }) }}" >
-                        <img src="{{ produit.image }}" alt="" class=" w-100">
+                        <img src="{{ asset('/brows_file/' ~ produit.image) }}" alt="" class=" w-100">
                         <a/>
                         <a href="#" class="add-to-favourite"><i class="far fa-heart icon-change"></i></a>
                     </div>
@@ -97,7 +97,7 @@
                 <div class="card-body">
                     <div class="product-image ">
                      <a href="{{ path('show_marque', {'slug': fournisseur.slug }) }}" >
-                        <img src="{{ fournisseur.image }}" alt="" class=" w-100"></a>
+                        <img src="{{ asset('/brows_file/' ~ fournisseur.image) }}" alt="" class=" w-100"></a>
                         <div class="card-title product-title"> {{ fournisseur.nom }} </div>
                         <a href="#" class="add-to-favourite"></a>
                     </div>

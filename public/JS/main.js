@@ -50,27 +50,18 @@ $(document).ready(function() {
 
 
 
-    // tinymce.init({
-    //     selector: 'textarea#produit_description',
-    //     height: 500,
-    //     menubar: true,
-    //     plugins: [
-    //         'advlist autolink lists link image charmap print preview anchor textcolor',
-    //         'searchreplace visualblocks code fullscreen',
-    //         'insertdatetime media table paste code help wordcount code'
-    //     ],
-    //     toolbar: 'undo redo | formatselect | bold italic backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat | help | code',
+    tinymce.init({
+        selector: '#produit_description',
+        height: 500,
+        menubar: true,
+        plugins: "lists",
+        toolbar: 'numlist bullist | undo redo | formatselect | bold italic backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat | help | code',
+        setup: function(editor) {
+            editor.on('change', function(e) {
+                editor.save();
+            });
+        }
+    });
 
-    // });
 
-
-    const products = $('#product');
-
-    if (products) {
-        products.click(function(e) {
-            if (e.target.className === 'btn-danger delete-product') {
-                alert('ok');
-            }
-        });
-    }
 });

@@ -9,7 +9,6 @@ use App\Entity\Fourniseur;
 use Cocur\Slugify\Slugify;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
-use symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Validator\Constraints\DateTime;
 
 class AppFixtures extends Fixture
@@ -37,7 +36,7 @@ class AppFixtures extends Fixture
             $categorie=new Categorie();
             $categorie->setNom('Categorie ' . $i);
             $categorie->setDescription('Lorem, ipsum dolor sit amet consectetur adipisicing elit. Delectus consectetur, laudantium maxime eaque a repellendus?');
-            $categorie->setImageFile();
+            $categorie->setImage('06daf0f2c40ea9a16a0538d483bd0c2c.jpeg');
             $slug = $slugify->slugify($categorie->getNom());
             $categorie->setSlug($slug);
             $categorie->setDateAjout($this->faker->dateTimeBetween('-10 days', 'now'));
@@ -48,7 +47,7 @@ class AppFixtures extends Fixture
             $fournisseur = new Fourniseur();
             $fournisseur->setNom('Fourniseur ' .$i);
             $fournisseur->setDescription('Lorem, ipsum dolor sit amet consectetur adipisicing elit. Delectus consectetur, laudantium maxime eaque a repellendus?');
-            $fournisseur->setImageFile();
+            $fournisseur->setImage('06daf0f2c40ea9a16a0538d483bd0c2c.jpeg');
             $slug = $slugify->slugify($fournisseur->getNom());
             $fournisseur->setSlug($slug);
             $fournisseur->setDateAjout($this->faker->dateTimeBetween('-10 days', 'now'));
@@ -68,13 +67,11 @@ class AppFixtures extends Fixture
             $produit = new Produit();
             $produit->setReferance('Ref' .$i);
             $produit->setNom('Produit ' .$i);
-            $produit->setImageFile();
+            $produit->setImage('06daf0f2c40ea9a16a0538d483bd0c2c.jpeg');
             $produit->setDescription('Lorem, ipsum dolor sit amet consectetur adipisicing elit');
             $produit->setPrix('50');
             $produit->setStock(50);
             $produit->setFeatures((bool)\rand(0,1));
-            $slug = $slugify->slugify($produit->getNom());
-            $produit->setSlug($slug);
             $produit->setFourniseur($fournisseurs[mt_rand(0,19)]);
             $produit->setCategorie($categories[mt_rand(0,19)]);
             $produit->setDateAjout($this->faker->dateTimeBetween('-10 days', 'now'));

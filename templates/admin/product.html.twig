@@ -1,15 +1,16 @@
   {% extends "admin/base-admin.html.twig" %}
   {% block stylesheets %}
 
-    <style>
-.image_B{
-    width:50%;
-    
-}
-td,th{
-    text-align: center;
-}
+  <style>
+      .image_B {
+          width: 50%;
 
+      }
+
+      td,
+      th {
+          text-align: center;
+      }
   </style>
   {% endblock %}
 
@@ -30,9 +31,11 @@ td,th{
           {% include 'admin/menu.html.twig' %}
       </div>
       <div class="col-sm-9">
-      <div>
-     <i class="fas fa-plus"></i> <a href="{{ path('new_product') }}"> <spane>Nouvelle Produit</spane></a>
-      </div>
+          <div>
+              <i class="fas fa-plus"></i> <a href="{{ path('new_product') }}">
+                  <spane>Nouvelle Produit</spane>
+              </a>
+          </div>
 
           <table class="table" id="product">
               <thead>
@@ -48,29 +51,31 @@ td,th{
                   </tr>
               </thead>
               <tbody>
-              {% for product in pagination %}
+                  {% for product in pagination %}
 
                   <tr>
-                      <th scope="row">{{ product.referance }}</th>
+                      <td> {{ product.referance }}</td>
                       <td>{{ product.nom }}</td>
                       <td>{{ product.categorie.nom }}</td>
                       <td>{{ product.fourniseur.nom }}</td>
                       <td>{{ product.prix }}</td>
-                      <td><img src="/public/brows_file/{{ product.fileName }}" class="image_B"></td>
-                      <td>{{ product.stock }}</td>
-                      <td><a href="#"><i class="fas fa-eye btn-light btn-sm"></i></a>
-                          <a href="#"><i class="fas fa-pencil-alt btn-light btn-sm"></i></a>
-                          <a href="#"><i class="far fa-bookmark btn-light btn-sm"></i></a>
-                          <a href="#"><i class="fas fa-trash-alt btn-danger delete-product btn-sm" data-id="{{ product.id }}"></i></a>
+                      <td><img src="{{ asset('/brows_file/' ~ product.image) }}" class="image_B"></td>
+                         <td>{{ product.stock }}</td>
+                      <td>
+                          <spane class="col-3">
+                              <a href="#"><i class="fas fa-eye btn-light btn-sm"></i></a>
+                              <a href="#"><i class="fas fa-pencil-alt btn-light btn-sm"></i></a>
+                              <a href="#"><i class="far fa-bookmark btn-light btn-sm"></i></a>
+                          </spane>
                       </td>
                   </tr>
                   {% endfor %}
               </tbody>
           </table>
       </div>
-        <div class="navigation" style="text-align:centre;">
-            {{ knp_pagination_render(pagination) }}
-            <div>
-  </div>
-  </div>
-  {% endblock %}
+      <div class="navigation" style="text-align:centre;">
+          {{ knp_pagination_render(pagination) }}
+          <div>
+          </div>
+      </div>
+      {% endblock %}
