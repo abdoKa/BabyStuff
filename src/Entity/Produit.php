@@ -72,7 +72,7 @@ class Produit
 
     /**
      * @Gedmo\Slug(fields={"nom"})
-     * @ORM\Column(type="string", length=50)
+     * @ORM\Column(type="string", length=50, unique=true)
      */
     private $slug;
 
