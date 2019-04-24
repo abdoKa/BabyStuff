@@ -32,7 +32,8 @@
       </div>
       <div class="col-sm-9">
           <div>
-              <i class="fas fa-plus"></i> <a href="{{ path('new_product') }}">
+              <a href="{{ path('new_product') }}" class=" btn btn-primary" style="margin:5px;">
+               <i class="fas fa-plus"></i> 
                   <spane>Nouvelle Produit</spane>
               </a>
           </div>
@@ -64,7 +65,7 @@
                       <td>
                           <spane class="col-3">
                               <a href="{{ path('product_detail', {'slug': product.slug }) }}"><i class="fas fa-eye btn-light btn-sm"></i></a>
-                              <a href="#"><i class="fas fa-pencil-alt btn-light btn-sm"></i></a>
+                              <a href="{{ path('new_product') }}"><i class="fas fa-pencil-alt btn-light btn-sm"></i></a>
                               <a href="#"><i class="far fa-bookmark btn-light btn-sm"></i></a>
                           </spane>
                       </td>

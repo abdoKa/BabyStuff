@@ -13,7 +13,7 @@ class OrdersManageController extends AbstractController
      */
     public function admin_Bcommande()
     {
-        return $this->render('order.html.twig', [
+        return $this->render('admin/order.html.twig', [
            
         ]);
     }

@@ -17,13 +17,13 @@ class CommandeProduit
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\produit", inversedBy="commandeProduits")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Produit", inversedBy="commandeProduits")
      * @ORM\JoinColumn(nullable=false)
      */
     private $produit;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\commande", inversedBy="commandeProduits")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Commande", inversedBy="commandeProduits")
      * @ORM\JoinColumn(nullable=false)
      */
     private $commande;

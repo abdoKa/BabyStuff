@@ -10,6 +10,7 @@ use Cocur\Slugify\Slugify;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\Validator\Constraints\DateTime;
+use App\Entity\Utilisateur;
 
 class AppFixtures extends Fixture
 {
