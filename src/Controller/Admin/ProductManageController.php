@@ -8,7 +8,9 @@ use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Knp\Component\Pager\PaginatorInterface;
 
+
 use App\Entity\Produit;
+use App\Entity\Categorie;
 
 use Cocur\Slugify\Slugify;
 use App\Form\ProduitType;
@@ -30,7 +32,7 @@ class ProductManageController extends AbstractController
             $request->query->getInt('page',1),9
         );
         
-        return $this->render('admin/product.html.twig', [
+        return $this->render('Admin/product.html.twig', [
             'pagination'=>$pagination,
             
         ]);
@@ -74,10 +76,31 @@ class ProductManageController extends AbstractController
                 }
 
                 
-            return $this->render('admin/newProduct.html.twig',array(
+            return $this->render('Admin/newProduct.html.twig',array(
                 'form'=> $form->createView()
             ));
      }
+
+      /**
+     * @Route("/product/{slug}", name="product_detail")
+     */
+    public function show_product($slug)
+    {
+        
+        $em =$this->getDoctrine()->getManager();
+        $repoF =$em->getRepository(Produit::class);
+        
+        $single_p =$repoF->findOneBy(array('slug'=> $slug));
+        $fournisseur=$single_p->getFourniseur();
+
+        $repoC =$em->getRepository(Categorie::class);
+        $categoriesMenu =$repoC->getCategories();
+        return $this->render('Admin/prduct_detail.html.twig',[
+            'single_p' =>$single_p,
+            'categoriesMenu' =>$categoriesMenu,
+            'fournisseur'=>$fournisseur
+        ]);
+    }
 
 
 }

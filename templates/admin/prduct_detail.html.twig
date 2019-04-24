@@ -1,0 +1,67 @@
+  {% extends "admin/base-admin.html.twig" %}
+  {% block stylesheets %}
+
+  <style>
+    .image_B {
+      width: 50%;
+
+    }
+
+    td,
+    th {
+      text-align: center;
+    }
+  </style>
+  {% endblock %}
+
+  {% block head %}
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <h1 class="Welcom-title"> list des Produits </h1>
+      </div>
+      {# / part backend client settings #}
+    </div>
+    {# / part backend client settings #}
+  </div>
+  <div class="row">
+    <div class="col-sm-9">
+
+
+      <table class="table" id="product">
+        <tr>
+          <th>Nom du produit</th>
+          <td>produit 5</td>
+        </tr>
+        <tr>
+          <th>Categories</th>
+          <td>categorie 1</td>
+        </tr>
+        <tr>
+          <th>Fournisseur</th>
+          <td>Fournisseur 1</td>
+        </tr>
+        <tr>
+          <th>Prix</th>
+          <td>9999MAD</td>
+        </tr>
+        <tr>
+          <th>Image</th>
+          <td><img src="http://placehold.it/300x200" </td> </tr> <tr>
+          <th>Quantité</th>
+          <td>20</td>
+        </tr>
+      </table>
+      <div class="row">
+        <div class="col-4">
+          <ul class="list-group-sm">
+            <li class="list-group-item"><a href="#">retoure</a></li>
+            <li class="list-group-item"><a href="#">edit</a></li>
+            <li class="list-group-item"><a href="#">supprimer</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {% endblock %}

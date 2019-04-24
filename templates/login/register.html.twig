@@ -1,14 +1,17 @@
 {% extends 'base.html.twig' %}
 {% block stylesheets %}
 <style>
-  .form-group {
+ 
+  .form-title 
+  {
     text-align: center;
-    margin: 50px 0 0 100px;
+    margin: 10px 0 40px 0;
   }
-
-  .form-title {
-    text-align: center;
-    margin: 10px 0 100px 0;
+  .col-sm-5{
+    margin: 10px 0 40px 300px;
+  }
+  label{
+        color: black;
   }
 </style>
 
@@ -24,7 +27,7 @@
     <!-- Register Form -->
     <section class="signup">
       <!-- <img src="images/signup-bg.jpg" alt=""> -->
-      <div class="container">
+      <div class="container form-centre">
         <div class="signup-content">
           <form method="POST" id="signup-form" class="signup-form">
             <h2 class="form-title"> Create account</h2>
@@ -34,41 +37,35 @@
               <input type="text" class="form-control" name="name" id="name" placeholder="Votre Nom" />
             </div>
 
-            <div class="form-group col-sm-9 row">
+            <div class="form-group col-sm-5 row">
               <label for="email" class=" "> Entre votre E-mail</label>
               <input type="password" class="form-control" name="email" id="email" placeholder="vous.@exemple.com" />
             </div>
 
-            <div class="form-group col-6 row">
+            <div class="form-group col-sm-5 row">
               <label for="tel"> Telephone</label>
               <input class="form-control" type="tel" name="tel" placeholder="1-(555)-555-5555">
             </div>
         </div>
 
-        <div class="form-group col-sm-6 row">
+        <div class="form-group col-sm-5 row">
           <label for="Adresse">Adresse</label>
           <textarea class="form-control" rows="5" id="Adresse"></textarea>
         </div>
 
-        <div class="form-group col-sm-6 row">
+        <div class="form-group col-sm-5 row">
           <label for="password"> Mot de passe </label>
           <input type="password" class="form-control" name="password" id="password" placeholder="Votre mot de passe" />
         </div>
 
-        <div class="form-group col-sm-6 row">
+        <div class="col-sm-5 row">
           <label for="re_password" class=" "> Confirmer mot de passe</label>
           <input type="password" class="form-control" name="re_password" id="re_password"
             placeholder="Confirmer ce mot de passe" />
         </div>
 
-        <div class="form-group col-sm-9">
-          <input type="checkbox" name="agree-term" id="agree-term" class="agree-term" />
-          <label for="agree-term" class="label-agree-term"><span><span></span></span>I agree all statements in <a
-              href="#" class="term-service">Terms of service</a></label>
-        </div>
-
-        <div>
-          <input type="submit" name="submit" class="btn btn-lg btn-primary btn-block btn-login text-uppercase font-weight-bold mb-2" value="S'inscrire" />
+        <div class="row  form-group" style="padding-left:450px;top:20px">
+          <input type="submit" name="submit" class="btn btn-lg btn-primary  btn-login text-uppercase font-weight-bold" value="S'inscrire"  />
         </div>
 
         </form>

@@ -209,6 +209,7 @@ class BabyProductsController extends AbstractController
 
         ]);
     }
+    
     /**
      * @Route("/produit/{slug}", name="single_product")
      */

@@ -63,7 +63,7 @@
                          <td>{{ product.stock }}</td>
                       <td>
                           <spane class="col-3">
-                              <a href="#"><i class="fas fa-eye btn-light btn-sm"></i></a>
+                              <a href="{{ path('product_detail', {'slug': product.slug }) }}"><i class="fas fa-eye btn-light btn-sm"></i></a>
                               <a href="#"><i class="fas fa-pencil-alt btn-light btn-sm"></i></a>
                               <a href="#"><i class="far fa-bookmark btn-light btn-sm"></i></a>
                           </spane>
@@ -73,9 +73,8 @@
               </tbody>
           </table>
       </div>
-      <div class="navigation" style="text-align:centre;">
-          {{ knp_pagination_render(pagination) }}
-          <div>
-          </div>
       </div>
+       <div class="navigation pagination-sm" style="padding-left:1000px;">
+          {{ knp_pagination_render(pagination) }}
+          </div>
       {% endblock %}

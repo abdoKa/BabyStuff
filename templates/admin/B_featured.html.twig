@@ -32,7 +32,6 @@ td,th{
       <div class="col-sm-9">
           <table class="table">
               <thead>
-               {% for product_fea in pagination %}
                   
                   <tr bgcolor="d7f7f5">
                     <th scope="col">N°</th>
@@ -44,6 +43,7 @@ td,th{
                   </tr>
               </thead>
               <tbody>
+               {% for product_fea in pagination %}
                   <tr>
                       <th scope="row">
                          {{ product_fea.id }} 
@@ -51,10 +51,9 @@ td,th{
                       <td>{{ product_fea.nom }}</td>
                       <td>{{ product_fea.prix }}MAD</td>
                       <td>{{ product_fea.stock }}</td>
-                      <td><img src="{{ product_fea.image }}" class="image_B"</td>
+                      <td><img src="{{ asset('/brows_file/' ~ product_fea.image) }}" class="image_B"</td>
                       <td><a href="#"><i class="fas fa-eye btn-light btn-sm"></i></a>
-                      <a href="" class="btn btn-danger btn-sm">
-                              <spane> <i class="fas fa-trash-alt"></i></spane>
+                     
                           </a></td>
                   </tr>
               {% endfor %} 
@@ -64,4 +63,7 @@ td,th{
       </div>
   </div>
   </div>
+   <div class="navigation pagination-sm" style="padding-left:1000px;">
+          {{ knp_pagination_render(pagination) }}
+          </div>
   {% endblock %}

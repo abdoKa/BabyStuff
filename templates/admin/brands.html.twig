@@ -38,7 +38,6 @@
           </div>
           <table class="table">
               <thead>
-                  {% for fournisseur in pagination %}
                   <tr bgcolor="d7f7f5">
                       <th scope="col">N°</th>
                       <th scope="col">Fournisseur</th>
@@ -48,6 +47,7 @@
                   </tr>
               </thead>
               <tbody>
+                  {% for fournisseur in pagination %}
                   <tr>
                       <th scope="row">{{ fournisseur.id }}</th>
                       <td>{{ fournisseur.nom }}</td>
@@ -63,9 +63,8 @@
               </tbody>
           </table>
       </div>
-      <div class="navigation" style="text-align:centre;">
-          {{ knp_pagination_render(pagination) }}
-          <div>
-          </div>
       </div>
+        <div class="navigation pagination-sm" style="padding-left:1000px;">
+          {{ knp_pagination_render(pagination) }}
+          </div>
       {% endblock %}
