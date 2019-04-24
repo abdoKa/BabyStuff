@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Symfony\Component\Validator\Constraints as Assert;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\ORM\Mapping as ORM;
@@ -99,6 +101,17 @@ class Produit
      * @Gedmo\Timestampable(on="update")
      */
     private $dateModif;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\CommandeProduit", mappedBy="produit")
+     */
+    private $commandeProduits;
+
+    public function __construct()
+    {
+        $this->commandeProduits = new ArrayCollection();
+    }
+
 
     public function getId(): ?int
     {
@@ -258,4 +271,37 @@ class Produit
 
         return $this;
     }
+
+    /**
+     * @return Collection|CommandeProduit[]
+     */
+    public function getCommandeProduits(): Collection
+    {
+        return $this->commandeProduits;
+    }
+
+    public function addCommandeProduit(CommandeProduit $commandeProduit): self
+    {
+        if (!$this->commandeProduits->contains($commandeProduit)) {
+            $this->commandeProduits[] = $commandeProduit;
+            $commandeProduit->setProduit($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCommandeProduit(CommandeProduit $commandeProduit): self
+    {
+        if ($this->commandeProduits->contains($commandeProduit)) {
+            $this->commandeProduits->removeElement($commandeProduit);
+            // set the owning side to null (unless already changed)
+            if ($commandeProduit->getProduit() === $this) {
+                $commandeProduit->setProduit(null);
+            }
+        }
+
+        return $this;
+    }
+
+   
 }

@@ -8,6 +8,8 @@ use App\Entity\Produit;
 use Symfony\Component\HttpFoundation\Response;
 use App\Entity\Fourniseur;
 use App\Entity\Categorie;
+
+
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\Session;
