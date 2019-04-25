@@ -38,7 +38,7 @@
               </a>
           </div>
 
-          <table class="table" id="product">
+          <table class="table">
               <thead>
                   <tr bgcolor="d7f7f5">
                       <th scope="col">Referance</th>
@@ -65,7 +65,7 @@
                       <td>
                           <spane class="col-3">
                               <a href="{{ path('product_detail', {'slug': product.slug }) }}"><i class="fas fa-eye btn-light btn-sm"></i></a>
-                              <a href="{{ path('new_product') }}"><i class="fas fa-pencil-alt btn-light btn-sm"></i></a>
+                              <a href="{{ path('product_edit', {'slug': product.slug }) }}"><i class="fas fa-pencil-alt btn-light btn-sm"></i></a>
                               <a href="#"><i class="far fa-bookmark btn-light btn-sm"></i></a>
                           </spane>
                       </td>

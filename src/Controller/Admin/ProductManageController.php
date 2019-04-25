@@ -12,8 +12,8 @@ use Knp\Component\Pager\PaginatorInterface;
 use App\Entity\Produit;
 use App\Entity\Categorie;
 
-use Cocur\Slugify\Slugify;
 use App\Form\ProduitType;
+use Symfony\Component\HttpFoundation\Response;
 
 
 class ProductManageController extends AbstractController
@@ -38,9 +38,42 @@ class ProductManageController extends AbstractController
         ]);
     }
 
+
     /**
-     * @Route("/admin/new/product", name="new_product")
-     * @Method({"GET", "POST"})
+     * @Route("/admin/edit/{slug}", name="product_edit", methods={"GET","POST"})
+     */
+    public function edit_product(Request $request, Produit $product): Response
+    {
+        $form = $this->createForm(ProduitType::class, $product);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $image=$form->get('image')->getData();
+                $fileName = md5(uniqid()).'.'.$image->guessExtension();
+
+                $image->move(
+                    $this->getParameter('uploads_directory'),
+                    $fileName
+                );
+              
+                $product->setImage($fileName);
+            $entityManager =$this->getDoctrine()->getManager();
+            $entityManager->flush();
+           
+            return $this->redirectToRoute('admin_product', [
+                'slug' => $product->getSlug(),
+            ]);
+        }
+
+        return $this->render('Admin/edit_product.html.twig', [
+            'product' => $product,
+            'form' => $form->createView(),
+        ]);
+    }
+
+    /**
+     * @Route("/admin/new/product", name="new_product",  methods={"GET","POST"})
      */
 
      public function new_product(Request $request)
@@ -53,8 +86,6 @@ class ProductManageController extends AbstractController
 
             if($form->isSubmitted() && $form->isValid())
             {
-                
-                $product=$form->getData();
                 
                 $image=$form->get('image')->getData();
                 $fileName = md5(uniqid()).'.'.$image->guessExtension();
@@ -82,7 +113,7 @@ class ProductManageController extends AbstractController
      }
 
       /**
-     * @Route("/product/{slug}", name="product_detail")
+     * @Route("/admin/product/{slug}", name="product_detail")
      */
     public function show_product($slug)
     {
@@ -102,5 +133,6 @@ class ProductManageController extends AbstractController
         ]);
     }
 
+    
 
 }

@@ -28,7 +28,7 @@
     <div class="col-sm-9">
 
 
-      <table class="table w-100" id="single_p">
+      <table class="table w-100">
         <tr>
           <th bgcolor="#f3f9fb">Referance</th>
           <td>{{ single_p.referance }}</td>
@@ -69,7 +69,7 @@
             <li class="list-group-item"> <a href="#" class="btn btn-primary btn-sm"> <i class="far fa-edit"></i>
                 <spane>Modifer</spane>
               </a></li>
-            <li class="list-group-item"> <a href="#" class="btn btn-danger btn-sm"> <i class="fas fa-trash-alt"> </i>
+            <li class="list-group-item"> <a href="#" class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"> </i>
                 <spane>supprimer</spane>
               </a></li>
           </ul>
@@ -78,4 +78,8 @@
     </div>
   </div>
 
+  {% endblock %}
+
+  {% block javascripts %}
+  <script src="{{ asset('js/main.js') }}"></script>
   {% endblock %}

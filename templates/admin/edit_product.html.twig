@@ -1,0 +1,32 @@
+ {% extends "admin/base-admin.html.twig" %}
+ {% block stylesheets %}
+
+ <style>
+.form_product
+{
+   margin:5% 5%;
+}
+.form-control{
+   top:15px 0 15px 0;
+}
+.required ,
+.valider{
+    margin-top:25px;
+}
+
+
+ </style>
+ {% endblock %}
+
+ {% block head %}
+<div class="form_product">
+<h1> Modifer Produit </h1>
+<div>
+ <div class="form_product">
+{{ form_start(form) }}
+{{ form_widget(form) }}
+{{ form_row(form.image) }}
+
+{{ form_end(form) }}
+<div>
+ {% endblock %}
