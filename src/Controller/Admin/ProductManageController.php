@@ -6,7 +6,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Knp\Component\Pager\PaginatorInterface;
-use Symfony\Component\HttpFoundation\File\File;
 
 
 use App\Entity\Produit;
@@ -57,7 +56,6 @@ class ProductManageController extends AbstractController
             $product = $form->getData();
             $file = $product->getImage();
 
-<<<<<<< HEAD
             if ($file instanceof UploadedFile) {
                 $fileName = md5(uniqid()).'.'.$file->guessExtension();
                 $file->move(
@@ -70,11 +68,6 @@ class ProductManageController extends AbstractController
             $em->persist($product);
             $em->flush();
             return $this->redirectToRoute('admin_product');
-=======
-                $image=$form->get('image')->getData();
-                    
-                
->>>>>>> 1d060e1e7d427c4e851f12c43564668122f64316
 
         }
 
