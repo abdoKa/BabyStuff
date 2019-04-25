@@ -2,17 +2,21 @@
 
 namespace App\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
-use Symfony\Component\Validator\Constraints as Assert;
-use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\ORM\Mapping as ORM;
-
+use Gedmo\Mapping\Annotation as Gedmo;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UtilisateurRepository")
+ * @UniqueEntity({"email"},
+ *  message= "L'email que vous avez indiqué est deja utilisé !"
+ * )
  */
-class Utilisateur
+class Utilisateur implements UserInterface
 {
     /**
      * @ORM\Id()
@@ -32,7 +36,8 @@ class Utilisateur
     private $prenom;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255 , unique=true)
+     * @Assert\Email
      */
     private $email;
 
@@ -242,5 +247,17 @@ class Utilisateur
         $this->password = $password;
 
         return $this;
+    }
+    public function eraseCredentials()
+    {
+        
+    }
+    public function getSalt()
+    {
+        
+    }
+    public function getUsername()
+    {
+        
     }
 }
