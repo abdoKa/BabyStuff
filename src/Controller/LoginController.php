@@ -9,6 +9,8 @@ use App\Form\RegistraionType;
 use App\Entity\Utilisateur;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\Common\Persistence\ObjectManager;
+use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class LoginController extends AbstractController
 {
@@ -25,7 +27,7 @@ class LoginController extends AbstractController
     /**
      * @Route("/inscrire", name="login_registration")
      */
-    public function registration(Request $request)
+    public function registration(Request $request,UserPasswordEncoderInterface  $encoder)
     {
         $utilisateur = new Utilisateur();
         $form=$this->createForm(RegistraionType::class, $utilisateur);
@@ -36,6 +38,10 @@ class LoginController extends AbstractController
         
         if($form->isSubmitted() && $form->isValid())
         {
+            $hash = $encoder->encodePassword($utilisateur, $utilisateur->getPassword());
+
+            $utilisateur->setPassword($hash);
+
             $entityManager =$this->getDoctrine()->getManager();
             $entityManager->persist($utilisateur);
             $entityManager->flush();

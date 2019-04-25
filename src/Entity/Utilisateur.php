@@ -39,9 +39,13 @@ class Utilisateur
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Length(min="8",minMessage="Votre mot de passe doit faire minimum 8 caractéres")
      */
     private $password;
-
+    
+    /** 
+    * @Assert\EqualTo(propertyPath="password",message="vous n'avez pas tapé le méme mot de passe")
+    */
     public $confirm_password;
 
     /**

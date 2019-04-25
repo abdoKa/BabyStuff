@@ -30,7 +30,7 @@
       <div class="container form-centre">
         <div class="signup-content">
           <form method="POST" id="signup-form" class="signup-form">
-            <h2 class="form-title"> Create account</h2>
+            <h2 class="form-title">Inscription sure le site </h2>
               {{ form_start(form) }}
               {{ form_row(form.nom, {'attr': {'placeholder':'Votre Nom'}})}}
 
@@ -49,8 +49,8 @@
           
               {{ form_row(form.confirm_password, {'attr': {'placeholder':'Répétez votre mot de passe '}})}}
 
-        </form>
          {{ form_end(form) }}
+        </form>
 
         <p class="loginhere">
           Vous avez déjà un compte ? <a href="{{ path('login') }}" class="loginhere-link">Connectez-vous ici</a>
