@@ -68,20 +68,4 @@ $(document).ready(function() {
         }
     });
 
-
-    // UPDATE TABLES
-    var products = $('#products');
-
-    if ($(products)) {
-        $(products).click(function(e) {
-            e.preventDefault();
-            if ($(e.target).hasClass('delete-me btn-danger')) {
-                if (confirm('Are You Sure')) {
-                    var id = e.target.attr('data-id');
-                    alert(id);
-                    alert("yes");
-                }
-            }
-        });
-    }
 });

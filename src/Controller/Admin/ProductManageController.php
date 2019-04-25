@@ -52,7 +52,7 @@ class ProductManageController extends AbstractController
                
           
 
-                //$image=$form->get('image')->getData();
+                $image=$form->get('image')->getData();
                     
                 
 

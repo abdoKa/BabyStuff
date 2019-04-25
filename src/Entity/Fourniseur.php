@@ -39,8 +39,12 @@ class Fourniseur
     private $description;
 
     /**
-     * @ORM\Column(type="string", length=300)
-     *  @Assert\File(mimeTypes={ "image/jpeg","image/png" })
+     * @ORM\Column(type="string", length=255)
+     * @Assert\File(
+     *     maxSize = "2M",
+     *     mimeTypes = {"image/jpeg", "image/png"},
+     *     mimeTypesMessage = "Please upload a valid PDF"
+     * )
      */
     private $image;
 

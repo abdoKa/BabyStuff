@@ -59,7 +59,7 @@ class ProduitType extends AbstractType
 
                      ->add('save',SubmitType::class,array(
                          'label' =>'Valider',
-                         'attr'=> array('class'=>'btn btn-success btn-lg valider')))
+                         'attr'=> array('class'=>'btn btn-success btn-lg ')))
         ;
     }
 

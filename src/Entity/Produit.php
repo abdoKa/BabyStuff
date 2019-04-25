@@ -22,7 +22,7 @@ class Produit
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, unique=true)
      * @Assert\Length(
      *      min = 2,
      *      max = 255,
@@ -33,7 +33,7 @@ class Produit
     private $referance;
 
     /**
-     * @ORM\Column(type="string", length=255, unique=true)
+     * @ORM\Column(type="string", length=255)
      * @Assert\Length(
      *      min = 2,
      *      max = 255,
@@ -51,7 +51,11 @@ class Produit
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\File(mimeTypes={ "image/jpeg","image/png" })
+     * @Assert\File(
+     *     maxSize = "2M",
+     *     mimeTypes = {"image/jpeg", "image/png"},
+     *     mimeTypesMessage = "Please upload a valid PDF"
+     * )
      */
     private $image;
 
