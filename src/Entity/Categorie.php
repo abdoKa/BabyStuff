@@ -38,9 +38,13 @@ class Categorie
      */
     private $description;
 
-    /**
+     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\File(mimeTypes={ "image/jpeg","image/png" })
+     * @Assert\File(
+     *     maxSize = "2M",
+     *     mimeTypes = {"image/jpeg", "image/png"},
+     *     mimeTypesMessage = "Please upload a valid PDF"
+     * )
      */
     private $image;
 

@@ -4,8 +4,9 @@ namespace App\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Doctrine\ORM\Mapping as ORM;
 
 
 /**
@@ -37,9 +38,11 @@ class Utilisateur
 
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="string", length=255)
      */
     private $password;
+
+    public $confirm_password;
 
     /**
      * @ORM\Column(type="integer")
@@ -55,7 +58,7 @@ class Utilisateur
     /**
      * @ORM\Column(type="json_array")
      */
-    private $roles;
+    private $roles=array("ROLE_USER");
 
 
     /**
@@ -122,17 +125,7 @@ class Utilisateur
     }
 
 
-    public function getPassword(): ?int
-    {
-        return $this->password;
-    }
-
-    public function setPassword(int $password): self
-    {
-        $this->password = $password;
-
-        return $this;
-    }
+   
 
     public function getTelephone(): ?int
     {
@@ -227,5 +220,23 @@ class Utilisateur
         return $this;
     }
 
+    /**
+     * Get the value of password
+     */ 
+    public function getPassword()
+    {
+        return $this->password;
+    }
 
+    /**
+     * Set the value of password
+     *
+     * @return  self
+     */ 
+    public function setPassword($password)
+    {
+        $this->password = $password;
+
+        return $this;
+    }
 }
