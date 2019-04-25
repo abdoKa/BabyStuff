@@ -44,6 +44,11 @@ $(document).ready(function() {
         $(this).find('.icon-change').toggleClass('fas');
     });
 
+    $('.add-features').click(function(e) {
+        e.preventDefault();
+        $(this).find('.icon-change').toggleClass('fas');
+    });
+
     $('.dropdown-toggle').select2({
         selectOnClose: true
     });
@@ -51,7 +56,7 @@ $(document).ready(function() {
 
 
     tinymce.init({
-        selector: '#produit_description',
+        selector: '#produit_description , #edit_p_description',
         height: 500,
         menubar: true,
         plugins: "lists",

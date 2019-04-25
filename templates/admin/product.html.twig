@@ -3,7 +3,7 @@
 
   <style>
       .image_B {
-          width: 50%;
+          width: 40%;
 
       }
 
@@ -38,7 +38,7 @@
               </a>
           </div>
 
-          <table class="table">
+          <table class="table" >
               <thead>
                   <tr bgcolor="d7f7f5">
                       <th scope="col">Referance</th>
@@ -63,10 +63,10 @@
                       <td><img src="{{ asset('/brows_file/' ~ product.image) }}" class="image_B"></td>
                          <td>{{ product.stock }}</td>
                       <td>
-                          <spane class="col-3">
+                          <spane class="row " style="padding:10px">
                               <a href="{{ path('product_detail', {'slug': product.slug }) }}"><i class="fas fa-eye btn-light btn-sm"></i></a>
                               <a href="{{ path('product_edit', {'slug': product.slug }) }}"><i class="fas fa-pencil-alt btn-light btn-sm"></i></a>
-                              <a href="#"><i class="far fa-bookmark btn-light btn-sm"></i></a>
+                              <a href="#" class="add-features"><i class="far fa-bookmark icon-change btn-light btn-sm"></i></a>
                           </spane>
                       </td>
                   </tr>

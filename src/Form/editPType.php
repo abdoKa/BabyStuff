@@ -16,7 +16,7 @@ use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use App\Entity\Categorie;
 use App\Entity\Fourniseur;
 
-class ProduitType extends AbstractType
+class editPType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -47,7 +47,6 @@ class ProduitType extends AbstractType
 
             ->add('image', FileType::class,[
                  'data_class' => null,'required' => false,
-                 'attr'=>array('class'=>'file-upload-wrapper'),
                 'label'=> 'image'
             ])
 

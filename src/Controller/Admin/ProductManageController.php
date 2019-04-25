@@ -13,8 +13,9 @@ use App\Entity\Produit;
 use App\Entity\Categorie;
 
 use App\Form\ProduitType;
+use APP\Form\editPedit;
 use Symfony\Component\HttpFoundation\Response;
-
+use App\Form\editPType;
 
 class ProductManageController extends AbstractController
 
@@ -44,32 +45,47 @@ class ProductManageController extends AbstractController
      */
     public function edit_product(Request $request, Produit $product): Response
     {
-        $form = $this->createForm(ProduitType::class, $product);
+        $form = $this->createForm(editPType::class, $product);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+               
+          
 
-            $image=$form->get('image')->getData();
-                $fileName = md5(uniqid()).'.'.$image->guessExtension();
+                //$image=$form->get('image')->getData();
+                    
+                
 
-                $image->move(
-                    $this->getParameter('uploads_directory'),
-                    $fileName
-                );
-              
-                $product->setImage($fileName);
-            $entityManager =$this->getDoctrine()->getManager();
-            $entityManager->flush();
-           
-            return $this->redirectToRoute('admin_product', [
-                'slug' => $product->getSlug(),
+                    if($image==null)
+                    {
+                        $product->setImage($product->getImage());
+
+                    }
+                    else{
+                        $image=$form->get('image')->getData();
+                        $fileName = md5(uniqid()).'.'.$image->guessExtension();
+        
+                        $image->move(
+                            $this->getParameter('uploads_directory'),
+                            $fileName
+                        );
+                      
+                        $product->setImage($fileName);                
+                        $entityManager =$this->getDoctrine()->getManager();
+                        $entityManager->persist($product);
+                        $entityManager->flush();
+        
+                        return $this->redirectToRoute('admin_product');
+        
+                        }
+        }else{
+            return $this->render('Admin/edit_product.html.twig', [
+                'product' => $product,
+                'form' => $form->createView()
             ]);
         }
 
-        return $this->render('Admin/edit_product.html.twig', [
-            'product' => $product,
-            'form' => $form->createView(),
-        ]);
+        
     }
 
     /**
@@ -95,9 +111,7 @@ class ProductManageController extends AbstractController
                     $fileName
                 );
               
-                $product->setImage($fileName);
-                $product->setFeatures(0);
-                
+                $product->setImage($fileName);                
                 $entityManager =$this->getDoctrine()->getManager();
                 $entityManager->persist($product);
                 $entityManager->flush();
