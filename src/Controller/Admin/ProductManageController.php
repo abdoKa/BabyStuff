@@ -5,17 +5,17 @@ namespace App\Controller\Admin;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Knp\Component\Pager\PaginatorInterface;
+use Symfony\Component\HttpFoundation\File\File;
 
 
 use App\Entity\Produit;
 use App\Entity\Categorie;
 
 use App\Form\ProduitType;
-use APP\Form\editPedit;
 use Symfony\Component\HttpFoundation\Response;
 use App\Form\editPType;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class ProductManageController extends AbstractController
 
@@ -44,46 +44,40 @@ class ProductManageController extends AbstractController
      * @Route("/admin/edit/{slug}", name="product_edit", methods={"GET","POST"})
      */
     public function edit_product(Request $request, Produit $product): Response
-    {
+    {   
+
+        $em =$this->getDoctrine()->getManager();
+        
+
+        
         $form = $this->createForm(editPType::class, $product);
         $form->handleRequest($request);
-
+        
         if ($form->isSubmitted() && $form->isValid()) {
-               
-          
+            $product = $form->getData();
+            $file = $product->getImage();
 
-                //$image=$form->get('image')->getData();
-                    
-                
+            if ($file instanceof UploadedFile) {
+                $fileName = md5(uniqid()).'.'.$file->guessExtension();
+                $file->move(
+                    $this->getParameter('uploads_directory'),
+                    $fileName
+                );
+                $product->setImage($fileName);
+            }
+            
+            $em->persist($product);
+            $em->flush();
+            return $this->redirectToRoute('admin_product');
 
-                    if($image==null)
-                    {
-                        $product->setImage($product->getImage());
+        }
 
-                    }
-                    else{
-                        $image=$form->get('image')->getData();
-                        $fileName = md5(uniqid()).'.'.$image->guessExtension();
-        
-                        $image->move(
-                            $this->getParameter('uploads_directory'),
-                            $fileName
-                        );
-                      
-                        $product->setImage($fileName);                
-                        $entityManager =$this->getDoctrine()->getManager();
-                        $entityManager->persist($product);
-                        $entityManager->flush();
-        
-                        return $this->redirectToRoute('admin_product');
-        
-                        }
-        }else{
+      
             return $this->render('Admin/edit_product.html.twig', [
                 'product' => $product,
                 'form' => $form->createView()
             ]);
-        }
+  
 
         
     }

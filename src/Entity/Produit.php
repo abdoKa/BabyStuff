@@ -51,7 +51,7 @@ class Produit
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\File(mimeTypes={ "image/jpeg","image/png" })
+     * @Assert\File(mimeTypes={ "image/jpeg","image/png" }, groups={"create"})
      */
     private $image;
 
@@ -154,16 +154,18 @@ class Produit
         return $this;
     }
 
-    public function getImage(): ?string
+    public function getImage()
     {
         return $this->image;
     }
 
-    public function setImage(string $image): self
+    public function setImage($image)
     {
-        $this->image = $image;
+        if($image !== null) {
+            $this->image = $image;
 
-        return $this;
+            return $this;
+        } 
     }
 
     public function getPrix()

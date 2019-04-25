@@ -67,6 +67,8 @@ class ProduitType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Produit::class,
+            'validation_groups' => ['create'],
+
         ]);
     }
 }

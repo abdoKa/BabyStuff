@@ -46,8 +46,8 @@ class editPType extends AbstractType
                     'attr'=> array('class'=>'form-control')))
 
             ->add('image', FileType::class,[
-                 'data_class' => null,'required' => false,
-                'label'=> 'image'
+                'data_class' => null,'required' => false,
+                'label'=> 'image',
             ])
 
             ->add('prix', MoneyType::class,array(
@@ -66,6 +66,7 @@ class editPType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Produit::class,
+            'validation_groups' => ['edit']
         ]);
     }
 }
