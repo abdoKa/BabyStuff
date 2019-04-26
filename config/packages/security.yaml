@@ -1,7 +1,7 @@
 security:
     encoders:
         App\Entity\Utilisateur:
-            algorithm: 'bcrypt'
+            algorithm: bcrypt
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
     providers:
         in_memory: { memory: ~ }
@@ -26,6 +26,7 @@ security:
             logout:
                 path: logout
                 target: home
+                
             # activate different ways to authenticate
 
             # http_basic: true

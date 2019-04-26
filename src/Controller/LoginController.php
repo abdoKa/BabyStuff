@@ -14,11 +14,12 @@ use Symfony\Flex\Path;
 class LoginController extends AbstractController
 {
     /**
-     * @Route("/login", name="security_login", methods={"GET", "POST"})
+     * @Route("/login", name="security_login")
      */
     public function login()
     {
-        return $this->render('login/login.html.twig', [
+        $this->redirectToRoute('home');
+        return $this->render('login/simple_login.html.twig', [
             
         ]);
     }
@@ -30,7 +31,7 @@ class LoginController extends AbstractController
     {}
 
     /**
-     * @Route("/inscrire", name="login_registration")
+     * @Route("/inscrire", name="login_registration" , methods={"GET", "POST"})
      */
     public function registration(Request $request, UserPasswordEncoderInterface $encoder)
     {
