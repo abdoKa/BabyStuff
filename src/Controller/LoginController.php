@@ -2,25 +2,30 @@
 
 namespace App\Controller;
 
+use Symfony\Flex\Path;
 use App\Entity\Categorie;
 use App\Entity\Utilisateur;
 use App\Form\RegistraionType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
-use Symfony\Flex\Path;
 
 class LoginController extends AbstractController
 {
     /**
      * @Route("/login", name="security_login")
      */
-    public function login()
+    public function login(AuthenticationUtils $authenticationUtils)
     {
+        $error = $authenticationUtils->getLastAuthenticationError();
+        $lastUsername = $authenticationUtils->getLastUsername();
         $this->redirectToRoute('home');
+        dump($lastUsername);
         return $this->render('login/simple_login.html.twig', [
-            
+            'error'=>$error,
+            'last_username'=>$lastUsername
         ]);
     }
 
@@ -51,6 +56,8 @@ class LoginController extends AbstractController
             $entityManager =$this->getDoctrine()->getManager();
             $entityManager->persist($utilisateur);
             $entityManager->flush();
+
+
             return $this->redirectToRoute('security_login');
         }
         return $this->render('login/register.html.twig', [

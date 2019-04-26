@@ -3,14 +3,16 @@
 namespace App\Entity;
 
 
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
-use Symfony\Component\Validator\Constraints as Assert;
-use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ProduitRepository")
+ * @UniqueEntity(fields={"referance"}, message="Its look like you already have an account!")
  */
 class Produit
 {
@@ -23,6 +25,7 @@ class Produit
 
     /**
      * @ORM\Column(type="string", length=255, unique=true)
+     *  @Assert\NotBlank()
      * @Assert\Length(
      *      min = 2,
      *      max = 255,
@@ -34,6 +37,7 @@ class Produit
 
     /**
      * @ORM\Column(type="string", length=255)
+     *  @Assert\NotBlank()
      * @Assert\Length(
      *      min = 2,
      *      max = 255,
@@ -51,15 +55,12 @@ class Produit
 
     /**
      * @ORM\Column(type="string", length=255)
-<<<<<<< HEAD
-     * @Assert\File(mimeTypes={ "image/jpeg","image/png" }, groups={"create"})
-=======
+     *  @Assert\NotBlank()
      * @Assert\File(
      *     maxSize = "2M",
      *     mimeTypes = {"image/jpeg", "image/png"},
      *     mimeTypesMessage = "Please upload a valid PDF"
      * )
->>>>>>> 1d060e1e7d427c4e851f12c43564668122f64316
      */
     private $image;
 

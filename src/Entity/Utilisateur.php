@@ -257,7 +257,5 @@ class Utilisateur implements UserInterface
         
     }
     public function getUsername()
-    {
-        
-    }
+    {}
 }

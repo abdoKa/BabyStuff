@@ -3,8 +3,9 @@
 
   <style>
     .image_B {
-      width: 50%;
-
+      height: 150px;
+      width: 200px;
+      object-fit: cover;
     }
 
     td,
@@ -69,7 +70,8 @@
             <li class="list-group-item"> <a href="#" class="btn btn-primary btn-sm"> <i class="far fa-edit"></i>
                 <spane>Modifer</spane>
               </a></li>
-            <li class="list-group-item"> <a href="#" class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"> </i>
+            <li class="list-group-item"> <a href="{{ path('product_delete', {'slug': single_p.slug}) }}"
+                class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"> </i>
                 <spane>supprimer</spane>
               </a></li>
           </ul>

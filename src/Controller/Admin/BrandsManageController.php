@@ -21,8 +21,6 @@ class BrandsManageController extends AbstractController
         $em=$this->getDoctrine()->getManager();
         $repoF=$em->getRepository(Fourniseur::class);
 
-        
-
         $fournissuer=$repoF->findAll();
 
         

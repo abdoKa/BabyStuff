@@ -1,52 +1,56 @@
   {% extends "admin/base-admin.html.twig" %}
-  {% block stylesheets %} 
-  
-   <style>
-    
-    
-    </style>
+  {% block stylesheets %}
+
+  <style>
+
+
+  </style>
   {% endblock %}
 
   {% block head %}
-   <div class="container">
-        <div class="row">
-            <div class="col-lg-12">
-                <h1 class="Welcom-title"> list des Utilisateur </h1>
-            </div>
-            {# / part backend client settings #}
-        </div>
-            {# / part backend client settings #}
-        </div>
-        <div class="row">
+  <div class="container">
+      <div class="row">
+          <div class="col-lg-12">
+              <h1 class="Welcom-title"> list des Utilisateur </h1>
+          </div>
+          {# / part backend client settings #}
+      </div>
+      {# / part backend client settings #}
+  </div>
+  <div class="row">
 
-            <div class="col-sm-3">
+      <div class="col-sm-3">
 
-                {% include 'admin/menu.html.twig' %}
-            </div>
-            <div class="col-sm-9">
-                <table class="table">
-                    <thead>
-                        <tr bgcolor="d7f7f5">
-                            <th scope="col">#</th>
-                            <th scope="col">Utilisateur</th>
-                            <th scope="col">E-mail</th>
-                            <th scope="col">Date d'inscription</th>
-                            <th scope="col">Commandes</th>
-                            <th scope="col-md-2">actes</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <th scope="row">1</th>
-                            <td>Ali123</td>
-                            <td>yxz@exemple.com</td>
-                            <td>02/07/2018 17:00:00</td>
-                            <th scope="col"><a href="#">Commandes(*)</a></th>
-                            <td><a href="#"><i class="fas fa-eye btn-light btn-sm"></i></a></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-{% endblock %}
+          {% include 'admin/menu.html.twig' %}
+      </div>
+      <div class="col-sm-9">
+          <table class="table">
+              <thead>
+                  <tr bgcolor="d7f7f5">
+                      <th scope="col">#</th>
+                      <th scope="col">Utilisateur</th>
+                      <th scope="col">E-mail</th>
+                      <th scope="col">Date d'inscription</th>
+                      <th scope="col">Commandes</th>
+                      <th scope="col-md-2">actes</th>
+                  </tr>
+              </thead>
+              {% for user in users %}
+
+              <tbody>
+                  <tr>
+                      <th scope="row">1</th>
+                      <td>{{ user.nom }} {{ user.prenom }} </td>
+                      <td>{{user.email}}</td>
+                      <td>{{ user.createdAt|date('Y-m-d') }}</td>
+                      <th scope="col"><a href="#">Commandes(*)</a></th>
+                      <td><a href="#"><i class="fas fa-eye btn-light btn-sm"></i></a></td>
+                  </tr>
+                  {% endfor %}
+
+              </tbody>
+          </table>
+      </div>
+  </div>
+  </div>
+  {% endblock %}

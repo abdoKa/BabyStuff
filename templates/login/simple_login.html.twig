@@ -112,11 +112,16 @@
                             <div class="row">
                                 <div class="col-md-9 col-lg-8 mx-auto">
                                     <h3 class="login-heading mb-4">Bienvenue!</h3>
+                                    {% if error %}
+                                    <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                                    {% endif %}
+
+
                                     <form action="{{ path('security_login') }}" method="post">
                                         <div class="form-group">
                                             <div class="form-label-group">
                                                 <input type="email" id="inputE" class="form-control"
-                                                    placeholder="E-mail adresse" required autofocus name="_username">
+                                                    placeholder="E-mail adresse" required autofocus name="_username" value="{{ last_username }}">
                                                 <label for="inputE">Email address</label>
                                             </div>
                                             <div class="form-label-group">

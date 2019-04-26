@@ -15,6 +15,7 @@ use App\Form\ProduitType;
 use Symfony\Component\HttpFoundation\Response;
 use App\Form\editPType;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Gedmo\Mapping\Annotation\Slug;
 
 class ProductManageController extends AbstractController
 
@@ -42,12 +43,18 @@ class ProductManageController extends AbstractController
     /**
      * @Route("/admin/edit/{slug}", name="product_edit", methods={"GET","POST"})
      */
-    public function edit_product(Request $request, Produit $product): Response
+    public function edit_product(Request $request, Produit $product, $slug): Response
     {   
 
         $em =$this->getDoctrine()->getManager();
-        
+        $product = $em->getRepository(Produit::class)->findOneBy(array('slug'=>$slug));
 
+        dump($product);
+        if ($product==null) {
+            return $this->render('admin/NotFound.html.twig'
+                
+            );
+        }
         
         $form = $this->createForm(editPType::class, $product);
         $form->handleRequest($request);
@@ -93,17 +100,16 @@ class ProductManageController extends AbstractController
 
             $form->handleRequest($request);
 
+            dump($product);              
             if($form->isSubmitted() && $form->isValid())
             {
                 
                 $image=$form->get('image')->getData();
                 $fileName = md5(uniqid()).'.'.$image->guessExtension();
-
                 $image->move(
                     $this->getParameter('uploads_directory'),
                     $fileName
                 );
-              
                 $product->setImage($fileName);                
                 $entityManager =$this->getDoctrine()->getManager();
                 $entityManager->persist($product);
@@ -112,14 +118,26 @@ class ProductManageController extends AbstractController
                 return $this->redirectToRoute('admin_product');
 
                 }
-
-                
             return $this->render('Admin/newProduct.html.twig',array(
-                'form'=> $form->createView()
+                'form'=> $form->createView(),
+                'product'=>$product
             ));
      }
+     /**
+      * @Route("admin/product/delete/{slug}", name="product_delete")
+      */
+      public function delete($slug)
+      {
+        $em =$this->getDoctrine()->getManager();
+        $repoP=$em->getRepository(Produit::class);
+        $product=$repoP->findOneBy(array('slug'=> $slug));
 
-      /**
+        $em->remove($product);
+        $em->flush();
+        return $this->redirectToRoute('admin_product');
+      }
+
+    /**
      * @Route("/admin/product/{slug}", name="product_detail")
      */
     public function show_product($slug)
