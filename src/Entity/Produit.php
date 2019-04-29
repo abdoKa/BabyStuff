@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Entity\CommandeProduit;
 
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
@@ -12,7 +13,9 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ProduitRepository")
- * @UniqueEntity(fields={"referance"}, message="Its look like you already have an account!")
+ * @UniqueEntity({"referance"},
+ * message="ce referance est déja utilisé!! "
+ * )
  */
 class Produit
 {
@@ -25,24 +28,23 @@ class Produit
 
     /**
      * @ORM\Column(type="string", length=255, unique=true)
-     *  @Assert\NotBlank()
      * @Assert\Length(
      *      min = 2,
-     *      max = 255,
-     *      minMessage = "Ce champ doit être au moins 2 caractères.",
-     *      maxMessage = "Ce champ ne peut pas contenir plus de 255 caractères"
+     *      max = 50,
+     *      minMessage = "Your first name must be at least {{ limit }} characters long",
+     *      maxMessage = "Your first name cannot be longer than {{ limit }} characters"
      * )
      */
     private $referance;
 
-    /**
+   /**
      * @ORM\Column(type="string", length=255)
-     *  @Assert\NotBlank()
+     * @Assert\NotBlank
      * @Assert\Length(
-     *      min = 2,
-     *      max = 255,
-     *      minMessage = "Ce Nom doit être au moins 2 caractères.",
-     *      maxMessage = "Ce Nom ne peut pas contenir plus de 255 caractères"
+     * min=2,
+     * max=255,
+     * minMessage="Ce Nom doit être au moins 2 caractères.",
+     * maxMessage="Ce Nom ne peut pas contenir plus de 255 caractères"
      * )
      */
     private $nom;
@@ -55,12 +57,7 @@ class Produit
 
     /**
      * @ORM\Column(type="string", length=255)
-     *  @Assert\NotBlank()
-     * @Assert\File(
-     *     maxSize = "2M",
-     *     mimeTypes = {"image/jpeg", "image/png"},
-     *     mimeTypesMessage = "Please upload a valid PDF"
-     * )
+     *@Assert\NotBlank
      */
     private $image;
 
@@ -77,7 +74,7 @@ class Produit
 
     /**
      * @ORM\Column(type="integer")
-     * @Assert\NotBlank
+     * 
      */
     private $stock;
 

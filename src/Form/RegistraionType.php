@@ -19,26 +19,26 @@ class RegistraionType extends AbstractType
     {
         $builder
             ->add('nom',TextType::class,array('attr'=>
-            array('class'=>'form-group col-sm-5 row')),array(
+            array('class'=>'form-control ')),array(
                 'placeholder'=> 'Votre Nom'))
 
             ->add('prenom',TextType::class,array('attr'=>
-            array('class'=>'form-group col-sm-5 row')))
+            array('class'=>'form-control ')))
 
             ->add('telephone',NumberType::class,array('attr'=>
-            array('class'=>'form-group col-sm-5 row')))
+            array('class'=>'form-group col-ml-5  require')))
 
             ->add('adresse',TextareaType::class,array('attr'=>
-            array('class'=>'form-group col-sm-5 row')))
+            array('class'=>'form-group col-ml-5 ')))
 
             ->add('email',EmailType::class,array('attr'=>
-            array('class'=>'form-group col-sm-5 row')))
+            array('class'=>'form-group  ')))
 
             ->add('password',PasswordType::class,array('attr'=>
-            array('class'=>'form-group col-sm-5 row')))
+            array('class'=>'form-group ')))
 
             ->add('confirm_password',PasswordType::class,array('attr'=>
-            array('class'=>'form-group col-sm-5 row'),
+            array('class'=>'form-group  '),
             'label'=>'Confirmation du mot de passe'))
 
             ->add('save',SubmitType::class,array(

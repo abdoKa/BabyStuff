@@ -2,12 +2,14 @@
 
 namespace App\Controller;
 
-use App\Entity\Categorie;
 use App\Entity\Produit;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Entity\Categorie;
+use Symfony\Component\HttpFoundation\Cookie;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Session\Session;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\Session\Session;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class CartController extends AbstractController
 {
@@ -29,7 +31,8 @@ class CartController extends AbstractController
 
         if($session->get('my_cart') == null){
             $session->set('my_cart', $cart);
-        }else{
+        }
+        else{
             $cart = $session->get('my_cart');
         }
         
@@ -67,13 +70,22 @@ class CartController extends AbstractController
                 $productsArray[] = $productPosition;
             }
         }
-
+        
         $cartDetails = ['products' => $productsArray, 'totalsum' => $totalSum ];
 
-        
+       
 
         // $session->invalidate();
-      
+        $response=new Response();
+        $val = $session->get('my_cart');
+        $cookie =Cookie::create('my_cart',serialize($val), time() + 60 * 60 * 24 * 365,'~',
+        'BabyStuff.com', true, true,true);
+
+        $response->headers->setCookie($cookie);
+        $cookie = $response->headers->getCookies();
+        
+
+       
 
         return $this->render('shopping/bag-shoping.html.twig', [
             'cartDetails' => $cartDetails

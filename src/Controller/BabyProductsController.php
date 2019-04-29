@@ -2,17 +2,18 @@
 
 namespace App\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Produit;
-use Symfony\Component\HttpFoundation\Response;
-use App\Entity\Fourniseur;
 use App\Entity\Categorie;
-
-
+use App\Entity\Fourniseur;
 use Knp\Component\Pager\PaginatorInterface;
+use Symfony\Component\HttpFoundation\Cookie;
 use Symfony\Component\HttpFoundation\Request;
+
+
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Session\Session;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class BabyProductsController extends AbstractController
 {
@@ -87,8 +88,11 @@ class BabyProductsController extends AbstractController
             }
 
         $cartDetails = ['products' => $productsArray, 'totalsum' => $totalSum ];
+        
 
-      
+        
+
+
         return $this->render(
             'menu.html.twig',['categoriesMenu' =>$categoriesMenu,
              'cartDetails' => $cartDetails]

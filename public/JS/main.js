@@ -1,42 +1,30 @@
 $(document).ready(function() {
     $('.new-products').slick({
+        centerMode: true,
         infinite: true,
         dots: true,
-        centerMode: true,
-        centerPadding: '40px',
-        slidesToShow: 4,
+        centerPadding: '10px',
+        slidesToShow: 3,
         responsive: [{
-                breakpoint: 770,
+                breakpoint: 768,
                 settings: {
-                    arrows: true,
+                    arrows: false,
                     centerMode: true,
-                    centerPadding: '40px',
-                    slidesToShow: 2
+                    centerPadding: '10px',
+                    slidesToShow: 3
                 }
             },
             {
                 breakpoint: 480,
                 settings: {
-                    arrows: true,
+                    arrows: false,
                     centerMode: true,
-                    centerPadding: '40px',
+                    centerPadding: '10px',
                     slidesToShow: 1
                 }
-            },
-            {
-                breakpoint: 1024,
-                settings: {
-                    arrows: true,
-                    centerMode: true,
-                    centerPadding: '40px',
-                    slidesToShow: 3
-                }
             }
-
         ]
     });
-
-
 
 
     $('.add-to-favourite').click(function(e) {
@@ -49,6 +37,7 @@ $(document).ready(function() {
         $(this).find('.icon-change').toggleClass('fas');
     });
 
+
     $('.dropdown-toggle').select2({
         selectOnClose: true
     });
@@ -56,10 +45,10 @@ $(document).ready(function() {
 
 
     tinymce.init({
-        selector: '#produit_description , #edit_p_description',
+        selector: '#produit_description , #edit_p_description , #categorie_description , #edit_categorie_description',
         height: 500,
         menubar: true,
-        plugins: "lists",
+        plugins: "lists code ",
         toolbar: 'numlist bullist | undo redo | formatselect | bold italic backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat | help | code',
         setup: function(editor) {
             editor.on('change', function(e) {
@@ -67,5 +56,6 @@ $(document).ready(function() {
             });
         }
     });
+
 
 });

@@ -21,41 +21,35 @@ class ProduitType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('referance',TextType::class,array('attr'=>
-             array('class'=>'form-control')))
+            ->add('referance',TextType::class)
 
-            ->add('nom',TextType::class,array(
-                'attr'=> array('class'=>'form-control')))
+            ->add('nom',TextType::class)
 
                 ->add('categorie',EntityType::class,[
                            'class'=> Categorie::class,
                            'choice_label'=> 'nom',
                            'placeholder' => 'Choisir un Catégorie',
-                           'attr'=>array('class'=>' dropdown-toggle form-control')
-            
+                           'attr'=>array('class'=>' dropdown-toggle form-control require')
                            ])
 
                 ->add('fourniseur',EntityType::class,[
                     'class'=> Fourniseur::class,
                     'choice_label'=> 'nom',
                     'placeholder' => 'Choisir un Fournisseur',
-                    'attr'=>array('class'=>' dropdown-toggle form-control ')
+                    'attr'=>array('class'=>' dropdown-toggle form-control require')
                     ])
 
-            ->add('description',TextareaType::class,array(
-                    'attr'=> array('class'=>'form-control')))
+            ->add('description',TextareaType::class)
 
             ->add('image', FileType::class,[
                  'data_class' => null,'required' => false,
-                 'attr'=>array('class'=>'file-upload-wrapper'),
                 'label'=> 'image'
             ])
 
             ->add('prix', MoneyType::class,array(
                 'attr'=>array('class'=>'form-control')))
 
-            ->add('stock',IntegerType::class,array(
-                     'attr'=> array('class'=>'form-control')))
+            ->add('stock',IntegerType::class)
 
                      ->add('save',SubmitType::class,array(
                          'label' =>'Valider',

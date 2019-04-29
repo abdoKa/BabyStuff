@@ -95,6 +95,7 @@
         font-size: 12px;
         color: #777;
     }
+    
 </style>
 
 {% endblock %}
@@ -117,16 +118,16 @@
                                     {% endif %}
 
 
-                                    <form action="{{ path('security_login') }}" method="post">
+                                    <form action="{{ path('security_login') }}" method="post" class="was-validated" >
                                         <div class="form-group">
                                             <div class="form-label-group">
-                                                <input type="email" id="inputE" class="form-control"
-                                                    placeholder="E-mail adresse" required autofocus name="_username" value="{{ last_username }}">
+                                                <input type="email" id="inputE" class="form-control " 
+                                                    placeholder="E-mail adresse" required autofocus name="_username" value="{{ last_username }}"></input>
                                                 <label for="inputE">Email address</label>
                                             </div>
                                             <div class="form-label-group">
-                                                <input type="password" id="inputP" class="form-control"
-                                                    placeholder="mot de passe" required name="_password">
+                                                <input type="password" id="inputP" class="form-control "
+                                                    placeholder="mot de passe" required name="_password"></input>
                                                 <label for="inputP">Password</label>
                                             </div>
 

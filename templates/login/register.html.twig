@@ -1,18 +1,34 @@
 {% extends 'base.html.twig' %}
 {% block stylesheets %}
 <style>
- 
-  .form-title 
-  {
+  body {
+    padding-top: 50px;
+  }
+
+  .form-title {
     text-align: center;
-    margin: 10px 0 40px 0;
+    margin: 10px 0 30px 0;
   }
-  .col-sm-5{
-    margin: 10px 0 40px 300px;
+
+  .login,
+  .image {
+    min-height: 100vh;
   }
-  label{
-        color: black;
+
+  .bg-image {
+    background-size: cover;
+    background-position: center;
+    background-image: url('baby-blue-baby-pink-balloons-1851361.jpg')
   }
+
+  .registration {
+    width: 100%;
+  }
+
+  .required{
+    color:black; 
+  }
+ 
 </style>
 
 {% endblock %}
@@ -21,43 +37,51 @@
 
 {% block body %}
 <div class="wrapper fadeInDown">
-  <div id="formContentRe">
-    <!-- Tabs Titles -->
-    <h1>Bienvenu sur BabyStuff</h1>
-    <!-- Register Form -->
-    <section class="signup">
-      <!-- <img src="images/signup-bg.jpg" alt=""> -->
-      <div class="container form-centre">
-        <div class="signup-content">
-          <form method="POST" id="signup-form" class="signup-form">
-            <h2 class="form-title">Inscription sure le site </h2>
-              {{ form_start(form) }}
-              {{ form_row(form.nom, {'attr': {'placeholder':'Votre Nom'}})}}
+  <div id="formContent">
+    <div class="container-fluid">
+      <div class="row no-gutter">
+        <div class="d-none d-md-flex col-md-4 col-lg-6 bg-image"></div>
+        <div class="col-md-8 col-lg-6">
+          <div class="login d-flex align-items-center py-5">
+            <div class="container">
+              <div class="row registration">
+                <div class="col-ml-9 col-ml-8 mx-auto">
+                  <h3 class="login-heading mb-4">Bienvenue!</h3>
+                  <form method="POST" id="signup-form" class="signup-form">
+                    <h2 class="form-title">Inscription sur le site </h2>
+                    {{ form_start(form) }}
 
-              {{ form_row(form.prenom, {'attr': {'placeholder':'Votre Prénom'}})}}
-              
+                    {{ form_row(form.nom, {'attr': {'placeholder':'Votre Nom'}})}}
+                    {{ form_row(form.prenom, {'attr': {'placeholder':'Votre Prénom'}})}}
+                    {{ form_row(form.telephone, {'attr': {'placeholder':'+221 6 00 00 00'}})}}
 
-              {{ form_row(form.telephone, {'attr': {'placeholder':'+221 6 00 00 00'}})}}
-              
 
-              {{ form_row(form.adresse, {'attr': {'placeholder':'Votre Adresse'}})}}
-         
+                    {{ form_row(form.adresse, {'attr': {'placeholder':'Votre Adresse'}})}}
 
-              {{ form_row(form.email, {'attr': {'placeholder':'Enter votre e-mail'}})}}
 
-              {{ form_row(form.password, {'attr': {'placeholder':'Mot de passe !'}})}}
-          
-              {{ form_row(form.confirm_password, {'attr': {'placeholder':'Répétez votre mot de passe '}})}}
+                    {{ form_row(form.email, {'attr': {'placeholder':'Enter votre e-mail'}})}}
 
-         {{ form_end(form) }}
-        </form>
+                    {{ form_row(form.password, {'attr': {'placeholder':'Mot de passe !'}})}}
 
-        <p class="loginhere">
-          Vous avez déjà un compte ? <a href="{{ path('security_login') }}" class="loginhere-link">Connectez-vous ici</a>
-        </p>
+                    {{ form_row(form.confirm_password, {'attr': {'placeholder':'Répétez votre mot de passe '}})}}
+                    {{ form_end(form) }}
+                  </form>
+
+                  <p class="loginhere">
+                    Vous avez déjà un compte ? <a href="{{ path('security_login') }}"
+                      class="loginhere-link">Connectez-vous ici</a>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
+    </div>
   </div>
-  </section>
+</div>
+</div>
+</section>
 
 </div>
 

@@ -21,9 +21,14 @@ class CategorieType extends AbstractType
             array('class'=>'form-control')))
             ->add('description',TextareaType::class,array(
                 'attr'=> array('class'=>'form-control')))
+                
             ->add('image', FileType::class,[
-                'label'=> 'image'
-            ])
+                'data_class' => null,'required' => false,
+               'label'=> 'image'
+           ])
+                    ->add('save',SubmitType::class,array(
+                        'label' =>'Valider',
+                        'attr'=> array('class'=>'btn btn-success btn-lg ')))
         ;
     }
 

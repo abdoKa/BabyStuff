@@ -71,7 +71,7 @@
                 <spane>Modifer</spane>
               </a></li>
             <li class="list-group-item"> <a href="{{ path('product_delete', {'slug': single_p.slug}) }}"
-                class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"> </i>
+                class="btn btn-danger btn-sm" id="alert"><i class="fas fa-trash-alt"> </i>
                 <spane>supprimer</spane>
               </a></li>
           </ul>
@@ -83,5 +83,5 @@
   {% endblock %}
 
   {% block javascripts %}
-  <script src="{{ asset('js/main.js') }}"></script>
+   
   {% endblock %}

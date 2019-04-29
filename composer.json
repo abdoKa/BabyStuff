@@ -6,6 +6,7 @@
         "ext-ctype": "*",
         "ext-iconv": "*",
         "cocur/slugify": "^3.2",
+        "doctrine/annotations": "^1.6",
         "fzaninotto/faker": "^1.8",
         "knplabs/knp-paginator-bundle": "^3.0",
         "sensio/framework-extra-bundle": "^5.3",
@@ -17,6 +18,7 @@
         "symfony/flex": "^1.1",
         "symfony/form": "4.2.*",
         "symfony/framework-bundle": "4.2.*",
+        "symfony/http-foundation": "4.2.*",
         "symfony/monolog-bundle": "^3.3",
         "symfony/orm-pack": "*",
         "symfony/process": "4.2.*",
@@ -25,6 +27,7 @@
         "symfony/swiftmailer-bundle": "^3.1",
         "symfony/translation": "4.2.*",
         "symfony/twig-bundle": "4.2.*",
+        "symfony/validator": "4.2.*",
         "symfony/web-link": "4.2.*",
         "symfony/yaml": "4.2.*",
         "thomaspark/bootswatch": "^4.3",
@@ -32,14 +35,12 @@
         "vich/uploader-bundle": "^1.8"
     },
     "require-dev": {
-        "doctrine/annotations": "^1.6",
         "doctrine/doctrine-fixtures-bundle": "^3.1",
         "knplabs/doctrine-behaviors": "~1.1",
         "symfony/debug-pack": "*",
         "symfony/maker-bundle": "^1.11",
         "symfony/profiler-pack": "*",
         "symfony/test-pack": "*",
-        "symfony/validator": "4.2.*",
         "symfony/web-server-bundle": "4.2.*"
     },
     "config": {

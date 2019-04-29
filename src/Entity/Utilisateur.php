@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Entity\Commande;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\Common\Collections\Collection;
@@ -27,29 +28,47 @@ class Utilisateur implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Length(
+     *      min = 2,
+     *      max = 255,
+     *      minMessage = "Ce Nom doit être au moins 2 caractères.",
+     *      maxMessage = "Ce Nom ne peut pas contenir plus de 255 caractères"
+     * )
      */
     private $nom;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Length(
+     *      min = 2,
+     *      max = 255,
+     *      minMessage = "Ce Prénom doit être au moins 2 caractères.",
+     *      maxMessage = "Ce Prénomom ne peut pas contenir plus de 255 caractères."
+     * )
      */
     private $prenom;
 
     /**
      * @ORM\Column(type="string", length=255 , unique=true)
-     * @Assert\Email
+     * @Assert\NotBlank
+     * @Assert\Email(
+     *     message = "The email '{{ value }}' is not a valid email.",
+     *     checkMX = true
+     * )
      */
     private $email;
 
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\Length(min="8",minMessage="Votre mot de passe doit faire minimum 8 caractéres")
+     * @Assert\Length(min="8", minMessage="Votre mot de passe doit faire minimum 8 caractéres")
+     * @Assert\NotBlank
      */
     private $password;
     
     /** 
     * @Assert\EqualTo(propertyPath="password",message="vous n'avez pas tapé le méme mot de passe")
+    * @Assert\NotBlank
     */
     public $confirm_password;
 
@@ -60,6 +79,7 @@ class Utilisateur implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank
      */
     private $adresse;
 
