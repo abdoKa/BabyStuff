@@ -37,7 +37,6 @@
             <div>
                 <a href="{{ path('new_categorie') }}" class=" btn btn-primary" style="margin:5px;">
                     <i class="fas fa-plus"></i>
-                    <spane>Nouvelle Categorie</spane>
                 </a>
             </div>
             <table class="table">
@@ -57,14 +56,11 @@
                             <td>{{ categorie.nom }}</td>
                             <td>{{ categorie.description|raw }}</td>
                             <td><img src="{{ asset('/brows_file/' ~ categorie.image) }}" class="image_B"></td>
-                            <td>
-                                <a href="">
-                                    <i class="fas fa-eye btn-light btn-sm"></i>
-                                </a>
-                                <a href="{{ path('edit_categorie',{'slug': categorie.slug }) }}">
-                                    <i class="fas fa-pencil-alt btn-light btn-sm"></i>
-                                </a>
-                            </td>
+                             <td>
+                          <a href="{{ path('categorie_detail', {'slug':categorie.slug}) }}"><i class="fas fa-eye btn-light btn-sm"></i></a> <a href="{{ path('edit_categorie',{'slug':categorie.slug}) }}"><i
+                                  class="fas fa-pencil-alt btn-light btn-sm"></i></a>
+
+                      </td>
                         </tr>
                     {% endfor %}
                 </tbody>

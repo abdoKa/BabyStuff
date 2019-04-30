@@ -1,0 +1,59 @@
+ {% extends "admin/base-admin.html.twig" %}
+ {% block stylesheets %}
+
+ <style>
+    .form_product {
+       margin: 5% 5%;
+    }
+
+    .form-control {
+       top: 15px 0 15px 0;
+    }
+
+    .required,
+    .valider {
+       margin-top: 25px;
+    }
+
+    .image_B {
+       height: 150px;
+       width: 200px;
+       object-fit: cover;
+    }
+
+    .btn-success,
+    .btn {
+       margin-left: 30px;
+    }
+ </style>
+ {% endblock %}
+
+ {% block head %}
+ <div class="form_product">
+    <h1> Modifer Produit </h1>
+
+    
+    {{ form_start(form) }}
+    <div class="row">
+       <div class="col-md-3">{{ form_row(form.referance) }}</div>
+       <div class="col-md-3">{{ form_row(form.nom) }}</div>
+    </div>
+    <div class="row">
+       <div class="col-md-3">{{ form_row(form.categorie) }}</div>
+       <div class="col-md-3">{{ form_row(form.fourniseur) }}</div>
+    </div>
+    <div class="row">
+       {{ form_row(form.description) }}
+    </div>
+    
+       <div class="col-sm-5">{{ form_row(form.image) }}</div>
+       <div class="col-lg-2"><img src="{{ asset('/brows_file/' ~ product.image) }}" class="image_B"></div>
+
+    <div class="row">
+       <div class="col-md-3">{{ form_row(form.prix) }}</div>
+       <div class="col-md-3">{{ form_row(form.stock) }}</div>
+    </div>
+
+    {{ form_end(form) }}
+ </div>
+ {% endblock %}

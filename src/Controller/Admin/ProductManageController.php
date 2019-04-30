@@ -16,6 +16,7 @@ use Symfony\Component\HttpFoundation\Response;
 use App\Form\editPType;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Gedmo\Mapping\Annotation\Slug;
+use App\Form\EditProductType;
 
 class ProductManageController extends AbstractController
 
@@ -27,15 +28,15 @@ class ProductManageController extends AbstractController
     {
         $em=$this->getDoctrine()->getManager();
         $repoP=$em->getRepository(Produit::class);
+       
         $produit=$repoP->findAll();
         $pagination=$paginator->paginate(
             $produit,
             $request->query->getInt('page',1),9
         );
-        
-        return $this->render('Admin/product.html.twig', [
+            dump($pagination);
+        return $this->render('Admin/Admine_ProductsTwigs/product.html.twig', [
             'pagination'=>$pagination,
-            
         ]);
     }
 
@@ -49,6 +50,7 @@ class ProductManageController extends AbstractController
         $em =$this->getDoctrine()->getManager();
         $product = $em->getRepository(Produit::class)->findOneBy(array('slug'=>$slug));
 
+        
         dump($product);
         if ($product==null) {
             return $this->render('admin/NotFound.html.twig'
@@ -56,10 +58,14 @@ class ProductManageController extends AbstractController
             );
         }
         
-        $form = $this->createForm(editPType::class, $product);
+        $form = $this->createForm(EditProductType::class, $product);
         $form->handleRequest($request);
         
         if ($form->isSubmitted() && $form->isValid()) {
+
+            if($product->getImage() instanceof UploadedFile){
+                $product->remove('image');
+            }
             $product = $form->getData();
             $file = $product->getImage();
 
@@ -74,12 +80,13 @@ class ProductManageController extends AbstractController
             
             $em->persist($product);
             $em->flush();
+            $this->addFlash('info','ce produit est modifer avec succée !');
             return $this->redirectToRoute('admin_product');
 
         }
 
       
-            return $this->render('Admin/edit_product.html.twig', [
+            return $this->render('Admin/Admine_ProductsTwigs/edit_product.html.twig', [
                 'product' => $product,
                 'form' => $form->createView()
             ]);
@@ -112,11 +119,11 @@ class ProductManageController extends AbstractController
                 $entityManager =$this->getDoctrine()->getManager();
                 $entityManager->persist($product);
                 $entityManager->flush();
-
+                $this->addFlash('success', 'ce produit est ajouté avec succée !');
                 return $this->redirectToRoute('admin_product');
 
                 }
-            return $this->render('Admin/newProduct.html.twig',array(
+            return $this->render('Admin/Admine_ProductsTwigs/newProduct.html.twig',array(
                 'form'=> $form->createView(),
                 'product'=>$product
             ));
@@ -132,6 +139,8 @@ class ProductManageController extends AbstractController
 
         $em->remove($product);
         $em->flush();
+        $this->addFlash('info_delete','ce produit est supprimer avec succée !');
+
         return $this->redirectToRoute('admin_product');
       }
 
@@ -149,7 +158,7 @@ class ProductManageController extends AbstractController
 
         $repoC =$em->getRepository(Categorie::class);
         $categoriesMenu =$repoC->getCategories();
-        return $this->render('Admin/prduct_detail.html.twig',[
+        return $this->render('Admin/Admine_ProductsTwigs/prduct_detail.html.twig',[
             'single_p' =>$single_p,
             'categoriesMenu' =>$categoriesMenu,
             'fournisseur'=>$fournisseur

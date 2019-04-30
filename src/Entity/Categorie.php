@@ -3,11 +3,12 @@
 namespace App\Entity;
 
 
-use Doctrine\Common\Collections\ArrayCollection;
+use App\Entity\Produit;
+use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\Common\Collections\Collection;
 use Symfony\Component\Validator\Constraints as Assert;
-use Gedmo\Mapping\Annotation as Gedmo;
-use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\CategorieRepository")
@@ -23,10 +24,11 @@ class Categorie
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank
      * @Assert\Length(
-     *      min = 2,
+     *      min = 5,
      *      max = 255,
-     *      minMessage = "Ce Nom doit être au moins 2 caractères.",
+     *      minMessage = "Ce Nom doit être au moins 10 caractères.",
      *      maxMessage = "Ce Nom ne peut pas contenir plus de 255 caractères"
      * )
      */
@@ -35,15 +37,24 @@ class Categorie
     /**
      * @ORM\Column(type="text")
      * @Assert\NotBlank
+     * @Assert\Length(
+     *      min = 2,
+     *      max = 255,
+     *      minMessage = "Ce Nom doit être au moins 2 caractères.",
+     *      maxMessage = "Ce Nom ne peut pas contenir plus de 255 caractères"
+     * )
      */
     private $description;
 
-     /**
+    /**
      * @ORM\Column(type="string", length=255)
      * @Assert\File(
      *     maxSize = "2M",
      *     mimeTypes = {"image/jpeg", "image/png"},
-     *     mimeTypesMessage = "Please upload a valid PDF"
+     *     mimeTypesMessage = "Please upload a valid jpeg or png"
+     * )
+     * @Assert\NotBlank(
+     * message="ce champ ne doit pas être vide !"
      * )
      */
     private $image;
@@ -55,7 +66,7 @@ class Categorie
     private $slug;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Produit", mappedBy="categorie")
+     * @ORM\OneToMany(targetEntity="App\Entity\Produit", mappedBy="categorie", cascade={"remove"})
      */
     private $produits;
 
@@ -183,6 +194,4 @@ class Categorie
 
         return $this;
     }
-
-   
 }

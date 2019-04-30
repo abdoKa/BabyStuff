@@ -29,25 +29,24 @@ class ProduitType extends AbstractType
                            'class'=> Categorie::class,
                            'choice_label'=> 'nom',
                            'placeholder' => 'Choisir un Catégorie',
-                           'attr'=>array('class'=>' dropdown-toggle form-control require')
+                           'attr'=>array('class'=>' dropdown-toggle form-control')
                            ])
 
                 ->add('fourniseur',EntityType::class,[
                     'class'=> Fourniseur::class,
                     'choice_label'=> 'nom',
                     'placeholder' => 'Choisir un Fournisseur',
-                    'attr'=>array('class'=>' dropdown-toggle form-control require')
+                    'attr'=>array('class'=>' dropdown-toggle form-control')
                     ])
 
             ->add('description',TextareaType::class)
 
             ->add('image', FileType::class,[
                  'data_class' => null,'required' => false,
-                'label'=> 'image'
+                 'label'=>'Upload Image'
             ])
 
-            ->add('prix', MoneyType::class,array(
-                'attr'=>array('class'=>'form-control')))
+            ->add('prix', MoneyType::class)
 
             ->add('stock',IntegerType::class)
 

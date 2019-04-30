@@ -2,14 +2,17 @@
 
 namespace App\Entity;
 
-use App\Entity\CommandeProduit;
 
+
+use App\Entity\CommandeProduit;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\Common\Collections\Collection;
+use Symfony\Component\HttpFoundation\File\File;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ProduitRepository")
@@ -28,12 +31,8 @@ class Produit
 
     /**
      * @ORM\Column(type="string", length=255, unique=true)
-     * @Assert\Length(
-     *      min = 2,
-     *      max = 50,
-     *      minMessage = "Your first name must be at least {{ limit }} characters long",
-     *      maxMessage = "Your first name cannot be longer than {{ limit }} characters"
-     * )
+     * @Assert\NotBlank
+     * @Assert\Range(min=5,max=255)
      */
     private $referance;
 
@@ -52,12 +51,25 @@ class Produit
     /**
      * @ORM\Column(type="text")
      * @Assert\NotBlank
+     *  @Assert\Length(
+     *      min = 2,
+     *      max = 255,
+     *      minMessage = "Ce Nom doit être au moins 2 caractères.",
+     *      maxMessage = "Ce Nom ne peut pas contenir plus de 255 caractères"
+     * )
      */
     private $description;
 
     /**
      * @ORM\Column(type="string", length=255)
-     *@Assert\NotBlank
+     * @Assert\File(
+     *     maxSize="2M",
+     *     mimeTypes={"image/jpeg", "image/png"},
+     *     mimeTypesMessage="Please upload a valid jpeg or png"
+     * )
+     * @Assert\NotBlank(
+     * message="ce champ ne doit pas etre vide !s"
+     * )
      */
     private $image;
 

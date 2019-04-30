@@ -16,7 +16,7 @@ use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use App\Entity\Categorie;
 use App\Entity\Fourniseur;
 
-class editPType extends AbstractType
+class EditProductType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {

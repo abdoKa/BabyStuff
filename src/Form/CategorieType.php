@@ -17,17 +17,15 @@ class CategorieType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('nom',TextType::class,array('attr'=>
-            array('class'=>'form-control')))
-            ->add('description',TextareaType::class,array(
-                'attr'=> array('class'=>'form-control')))
+            ->add('nom',TextType::class)
+            ->add('description',TextareaType::class)
                 
             ->add('image', FileType::class,[
                 'data_class' => null,'required' => false,
-               'label'=> 'image'
-           ])
+                'label'=> 'image',
+            ])
                     ->add('save',SubmitType::class,array(
-                        'label' =>'Valider',
+                        'label' =>'Enregister',
                         'attr'=> array('class'=>'btn btn-success btn-lg ')))
         ;
     }

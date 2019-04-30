@@ -1,0 +1,36 @@
+ {% extends "admin/base-admin.html.twig" %}
+ {% block stylesheets %}
+
+ <style>
+    .form_product {
+       margin: 5% 5%;
+    }
+
+    .form-control {
+       top: 15px 0 15px 0;
+    }
+
+    .required,
+    .Enregister {
+       margin-top: 25px;
+    }
+
+    .btn-success,
+    .btn {
+       margin-left: 30px;
+    }
+ </style>
+ {% endblock %}
+
+ {% block head %}
+ <div class="form_product">
+    <h1> Nounelle Marques </h1>
+    {{ form_start(form) }}
+    {{ form_row(form.nom) }}
+    {{ form_row(form.image) }}
+    {{ form_row(form.description) }}
+
+
+    {{ form_end(form) }}
+ </div>
+ {% endblock %}

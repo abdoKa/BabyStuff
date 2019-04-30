@@ -19,7 +19,7 @@
   <div class="container">
       <div class="row">
           <div class="col-lg-12">
-              <h1 class="Welcom-title"> list des fournisseur </h1>
+              <h1 class="Welcom-title"> list des Marques </h1>
           </div>
           {# / part backend client settings #}
       </div>
@@ -33,30 +33,29 @@
       </div>
       <div class="col-sm-10">
           <div>
-              <a href="{{ path('new_product') }}" class=" btn btn-primary" style="margin:5px;">
+              <a href="{{ path('new_brand') }}" class=" btn btn-primary" style="margin:5px;">
                   <i class="fas fa-plus"></i>
-                  <spane>Nouvelle Fournisseur</spane>
               </a>
           </div>
           <table class="table">
               <thead>
                   <tr bgcolor="d7f7f5">
                       <th scope="col">N°</th>
-                      <th scope="col">Fournisseur</th>
+                      <th scope="col">Marques</th>
                       <th scope="col">Descriprtion</th>
                       <th scope="col">image</th>
                       <th scope="col-md-2">actes</th>
                   </tr>
               </thead>
               <tbody>
-                  {% for fournisseur in pagination %}
+                  {% for brand in pagination %}
                   <tr>
-                      <th scope="row">{{ fournisseur.id }}</th>
-                      <td>{{ fournisseur.nom }}</td>
-                      <td>{{ fournisseur.description }}</td>
-                      <td><img src="{{ asset('/brows_file/' ~ fournisseur.image) }}" class="image_B"></td>
+                      <th scope="row">{{ brand.id }}</th>
+                      <td>{{ brand.nom }}</td>
+                      <td>{{ brand.description }}</td>
+                      <td><img src="{{ asset('/brows_file/' ~ brand.image) }}" class="image_B"></td>
                       <td>
-                          <a href="#"><i class="fas fa-eye btn-light btn-sm"></i></a> <a href="#"><i
+                          <a href="{{ path('brand_detail',{'slug':brand.slug}) }}"><i class="fas fa-eye btn-light btn-sm"></i></a> <a href="{{ path('edit_brand',{'slug':brand.slug}) }}"><i
                                   class="fas fa-pencil-alt btn-light btn-sm"></i></a>
 
                       </td>

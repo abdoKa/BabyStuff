@@ -6,7 +6,6 @@ use App\Entity\Categorie;
 
 use App\Form\CategorieType;
 
-
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -33,16 +32,16 @@ class CategoriesManageController extends AbstractController
             9
         );
 
-
-        return $this->render('admin/B_categories.html.twig', [
+        dump($pagination);
+        return $this->render('admin/Admin_CategorieTwigs/B_categories.html.twig', [
             'pagination' => $pagination
         ]);
     }
 
     /**
-     * @Route("/admin/edit/{slug}", name="edit_categorie", methods={"GET","POST"})
+     * @Route("/admin/{slug}/edit", name="edit_categorie", methods={"GET","POST"})
      */
-    public function edit_categorie(Request $request, Categorie $categorie, $slug): Response
+    public function edit_categorie(Request $request, Categorie $categorie, $slug)
     {
 
         $em = $this->getDoctrine()->getManager();
@@ -59,26 +58,28 @@ class CategoriesManageController extends AbstractController
         $form = $this->createForm(EditCategorieType::class, $categorie);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $categorie = $form->getData();
-            $file = $categorie->getImage();
+        dump($categorie);              
+        if($form->isSubmitted() && $form->isValid())
+        {
+            
+            $image=$form->get('image')->getData();
+            $fileName = md5(uniqid()).'.'.$image->guessExtension();
+            $image->move(
+                $this->getParameter('uploads_directory'),
+                $fileName
+            );
+            $categorie->setImage($fileName);                
+            $entityManager =$this->getDoctrine()->getManager();
+            $entityManager->persist($categorie);
+            $entityManager->flush();
 
-            if ($file instanceof UploadedFile) {
-                $fileName = md5(uniqid()) . '.' . $file->guessExtension();
-                $file->move(
-                    $this->getParameter('uploads_directory'),
-                    $fileName
-                );
-                $categorie->setImage($fileName);
-            }
-
-            $em->persist($categorie);
-            $em->flush();
             return $this->redirectToRoute('admin_categories');
-        }
+
+            }
+        
 
 
-        return $this->render('Admin/editCategorie.html.twig', [
+        return $this->render('Admin/Admin_CategorieTwigs/editCategorie.html.twig', [
             'categorie' => $categorie,
             'form' => $form->createView()
         ]);
@@ -99,22 +100,52 @@ class CategoriesManageController extends AbstractController
         dump($categorie);
         if ($form->isSubmitted() && $form->isValid()) {
 
-                $image = $form->get('image')->getData();
-                $fileName = md5(uniqid()) . '.' . $image->guessExtension();
-                $image->move(
-                    $this->getParameter('uploads_directory'),
-                    $fileName
-                );
-                $categorie->setImage($fileName);
-                $entityManager = $this->getDoctrine()->getManager();
-                $entityManager->persist($categorie);
-                $entityManager->flush();
+            $image = $form->get('image')->getData();
+            $fileName = md5(uniqid()) . '.' . $image->guessExtension();
+            $image->move(
+                $this->getParameter('uploads_directory'),
+                $fileName
+            );
+            $categorie->setImage($fileName);
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($categorie);
+            $entityManager->flush();
 
-                return $this->redirectToRoute('admin_categories');
-            }
-        return $this->render('Admin/newCategorie.html.twig', array(
+            return $this->redirectToRoute('admin_categories');
+        }
+        return $this->render('Admin/Admin_CategorieTwigs/newCategorie.html.twig', array(
             'form' => $form->createView(),
             'categorie' => $categorie
         ));
+    }
+
+    /**
+     * @Route("/admin/detail/{slug}", name="categorie_detail")
+     */
+    public function show_categorie($slug)
+    {
+
+        $em = $this->getDoctrine()->getManager();
+        $repoF = $em->getRepository(Categorie::class);
+
+        $single_C = $repoF->findOneBy(array('slug' => $slug));
+        dump($single_C);
+        return $this->render('Admin/Admin_CategorieTwigs/categorie_detail.html.twig', [
+            'single_C' => $single_C,
+        ]);
+    }
+
+    /**
+     * @Route("admin/detail/delete/{slug}", name="categorie_delete")
+     */
+    public function delete($slug)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $repoP = $em->getRepository(Categorie::class);
+        $categorie = $repoP->findOneBy(array('slug' => $slug));
+
+        $em->remove($categorie);
+        $em->flush();
+        return $this->redirectToRoute('admin_categories');
     }
 }

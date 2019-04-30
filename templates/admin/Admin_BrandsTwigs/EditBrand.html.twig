@@ -1,0 +1,46 @@
+ {% extends "admin/base-admin.html.twig" %}
+ {% block stylesheets %}
+
+ <style>
+     .form_categorie {
+         margin: 10% 10%;
+     }
+
+     .image_B {
+         height: 150px;
+         max-width: 200px;
+         object-fit: cover;
+     }
+
+     .form-control {
+         top: 15px 0 15px 0;
+     }
+
+     .required,
+     .valider {
+         margin-top: 25px;
+     }
+
+     .btn-success,
+     .btn {
+         margin-left: 30px;
+     }
+ </style>
+ {% endblock %}
+
+ {% block head %}
+ <div class="form_categorie ">
+     <h1> Modifer Marques </h1>
+     {{ form_start(form) }}
+
+     {{ form_row(form.nom) }}
+     {{ form_row(form.image) }}
+     <img src="{{ asset('/brows_file/' ~ brand.image) }}" class="image_B">
+     {{ form_row(form.description) }}
+
+     {{ form_end(form) }}
+
+ </div>
+
+
+ {% endblock %}

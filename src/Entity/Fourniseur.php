@@ -3,11 +3,13 @@
 namespace App\Entity;
 
 
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
-use Symfony\Component\Validator\Constraints as Assert;
-use Gedmo\Mapping\Annotation as Gedmo;
+use App\Entity\Produit;
+
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\FourniseurRepository")
@@ -23,6 +25,7 @@ class Fourniseur
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank
      * @Assert\Length(
      *      min = 2,
      *      max = 255,
@@ -35,11 +38,17 @@ class Fourniseur
     /**
      * @ORM\Column(type="text")
      * @Assert\NotBlank
+     * @Assert\Length(
+     *  min= 5,
+     *  minMessage="Ce Nom doit être au moins 2 caractères."
+     * 
+     * )
      */
     private $description;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank
      * @Assert\File(
      *     maxSize = "2M",
      *     mimeTypes = {"image/jpeg", "image/png"},
@@ -55,7 +64,7 @@ class Fourniseur
     private $slug;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Produit", mappedBy="fourniseur")
+     * @ORM\OneToMany(targetEntity="App\Entity\Produit", mappedBy="fourniseur",cascade={"remove"})
      */
     private $produits;
 
