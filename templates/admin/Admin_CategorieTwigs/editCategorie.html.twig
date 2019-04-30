@@ -31,16 +31,23 @@
  {% block head %}
  <div class="form_categorie ">
      <h1> Modifer Categorie </h1>
+
      {{ form_start(form) }}
 
      {{ form_row(form.nom) }}
-     {{ form_row(form.image) }}
-     <img src="{{ asset('/brows_file/' ~ categorie.image) }}" class="image_B">
-     {{ form_row(form.description) }}
+     {# {% if form.image == null  %}
+     <h1> is null </h1>
+     {% else %}
+     <h1> is not null </h1>
+
+     {% endif %} #}
+         {{ form_row(form.image) }}
+         <img src="{{ asset('/brows_file/' ~ categorie.image) }}" class="image_B">
+
+     <div class="row">
+         {{ form_row(form.description) }}
+     </div>
 
      {{ form_end(form) }}
-
  </div>
-
-
  {% endblock %}

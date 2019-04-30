@@ -3,8 +3,8 @@
 
   <style>
       .image_B {
-          height: 150px;
-          width: 200px;
+          height: 100px;
+          width: 150px;
           object-fit: cover;
       }
 
@@ -16,6 +16,10 @@
       .alert {
           width: 40%;
           margin:10px 0 0 20px;
+      }
+      .col-sm-10{
+         padding:2px 0 5px 2px;
+         
       }
   </style>
   {% endblock %}
@@ -55,7 +59,7 @@
       </div>
       <div class="col-sm-10">
           <div>
-              <a href="{{ path('new_product') }}" class=" btn btn-primary" style="margin:5px;">
+              <a href="{{ path('new_product') }}" class=" btn btn-primary"  style="margin:5px; background-color:##34314f;">
                   <i class="fas fa-plus"></i>
 
               </a>

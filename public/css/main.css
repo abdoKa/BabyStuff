@@ -47,6 +47,15 @@ h3 {
     line-height: 1.1;
 }
 
+h5 {
+    color: black;
+}
+
+.navbar {
+    box-shadow: 0 10px 8px 0 rgba(0, 0, 0, 0.2);
+    background-image: linear-gradient(to right, #6CCED9, #BF3F61);
+}
+
 .sectionTitle h1 {
     margin-top: 1px;
     padding-bottom: 3px;
@@ -118,8 +127,9 @@ h3 {
 
 #footer {
     height: 90px;
+    color: black;
     /* Height of the footer */
-    background: #d7f7f5;
+    background-image: linear-gradient(to right, #74EBD5, #ACB6E5);
     text-align: center;
 }
 
@@ -145,7 +155,7 @@ h3 {
 }
 
 .card {
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    box-shadow: 0 10px 8px 0 rgba(0, 0, 0, 0.2);
     /* this adds the "card" effect */
     padding: 16px;
     text-align: center;

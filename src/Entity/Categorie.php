@@ -53,9 +53,6 @@ class Categorie
      *     mimeTypes = {"image/jpeg", "image/png"},
      *     mimeTypesMessage = "Please upload a valid jpeg or png"
      * )
-     * @Assert\NotBlank(
-     * message="ce champ ne doit pas être vide !"
-     * )
      */
     private $image;
 
@@ -121,11 +118,13 @@ class Categorie
         return $this->image;
     }
 
-    public function setImage(string $image): self
+    public function setImage($image)
     {
-        $this->image = $image;
+        if($image !== null) {
+            $this->image = $image;
 
-        return $this;
+            return $this;
+        } 
     }
 
     public function getSlug(): ?string

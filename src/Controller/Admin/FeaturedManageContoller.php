@@ -24,7 +24,7 @@ class FeaturedManageContoller extends AbstractController
 
         $pagination=$paginator->paginate(
             $features,
-            $request->query->getInt('page',1),9
+            $request->query->getInt('page',1),6
         );
 
         return $this->render('admin/B_featured.html.twig', [

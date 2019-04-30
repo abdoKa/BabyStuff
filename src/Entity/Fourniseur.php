@@ -48,7 +48,6 @@ class Fourniseur
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank
      * @Assert\File(
      *     maxSize = "2M",
      *     mimeTypes = {"image/jpeg", "image/png"},
@@ -119,11 +118,13 @@ class Fourniseur
         return $this->image;
     }
 
-    public function setImage(string $image): self
+    public function setImage($image)
     {
-        $this->image = $image;
+        if($image !== null) {
+            $this->image = $image;
 
-        return $this;
+            return $this;
+        } 
     }
 
     public function getSlug(): ?string

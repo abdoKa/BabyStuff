@@ -32,7 +32,7 @@ class ProductManageController extends AbstractController
         $produit=$repoP->findAll();
         $pagination=$paginator->paginate(
             $produit,
-            $request->query->getInt('page',1),9
+            $request->query->getInt('page',1),6
         );
             dump($pagination);
         return $this->render('Admin/Admine_ProductsTwigs/product.html.twig', [

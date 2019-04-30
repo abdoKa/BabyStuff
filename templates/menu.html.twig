@@ -105,11 +105,14 @@
           </a>
       </ul>
       {% if is_granted("ROLE_USER") %}
-      Hi {{ app.user.email }}
+
       <ul class="navbar-nav ml-auto">
-        <li class="navbar-nav ml-auto">
-          <a class="nav-link" href="{{ path('logout') }}"> Deconnexion </a>
-        </li>
+        <div class="btn-group">
+          <a href="#"><i class="fas fa-caret-down"></i> </a>
+          <a href="#" class="nav-link"> Hi {{ app.user.nom }}</a>
+          <li class="navbar-nav ml-auto">
+            <a class="nav-link" href="{{ path('logout') }}"> Deconnexion </a>
+          </li>
       </ul>
       {% else %}
       <ul class="navbar-nav ml-auto">
