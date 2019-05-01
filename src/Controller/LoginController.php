@@ -7,6 +7,7 @@ use App\Entity\Categorie;
 use App\Entity\Utilisateur;
 use App\Form\RegistraionType;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
@@ -17,7 +18,7 @@ class LoginController extends AbstractController
     /**
      * @Route("/login", name="security_login")
      */
-    public function login(AuthenticationUtils $authenticationUtils)
+    public function login(AuthenticationUtils $authenticationUtils):Response
     {
         $error = $authenticationUtils->getLastAuthenticationError();
         $lastUsername = $authenticationUtils->getLastUsername();
@@ -35,7 +36,7 @@ class LoginController extends AbstractController
     {}
 
     /**
-     * @Route("/inscrire", name="login_registration" , methods={"GET", "POST"})
+     * @Route("/registration", name="login_registration" , methods={"GET", "POST"})
      */
     public function registration(Request $request, UserPasswordEncoderInterface $encoder)
     {

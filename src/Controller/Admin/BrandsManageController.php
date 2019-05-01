@@ -2,14 +2,15 @@
 
 namespace App\Controller\Admin;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\HttpFoundation\Request;
+use App\Form\BrandsType;
+use App\Entity\Fourniseur;
+use App\Form\EditBrandType;
 use Knp\Component\Pager\PaginatorInterface;
 
-use App\Entity\Fourniseur;
-use App\Form\BrandsType;
-use App\Form\EditBrandType;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class BrandsManageController extends AbstractController
 
@@ -54,24 +55,40 @@ class BrandsManageController extends AbstractController
         $form = $this->createForm(EditBrandType::class, $brand);
         $form->handleRequest($request);
 
-        dump($brand);              
-        if($form->isSubmitted() && $form->isValid())
-        {
-            
-            $image=$form->get('image')->getData();
-            $fileName = md5(uniqid()).'.'.$image->guessExtension();
-            $image->move(
-                $this->getParameter('uploads_directory'),
-                $fileName
-            );
-            $brand->setImage($fileName);                
-            $entityManager =$this->getDoctrine()->getManager();
-            $entityManager->persist($brand);
-            $entityManager->flush();
+        if ($form->isSubmitted() && $form->isValid()) {
 
+        
+            $brand = $form->getData();
+            $file = $brand->getImage();
+
+            if ($form->isSubmitted() && $form->isValid()) {
+
+        
+                $brand = $form->getData();
+                $file = $brand->getImage();
+    
+                if ($file instanceof UploadedFile) {
+                    $fileName = md5(uniqid()).'.'.$file->guessExtension();
+                    $file->move(
+                        $this->getParameter('uploads_directory'),
+                        $fileName
+                    );
+                    $brand->setImage($fileName);
+                }
+                
+                $em->persist($brand);
+                $em->flush();
+                $this->addFlash('info','ce produit est modifer avec succée !');
+                return $this->redirectToRoute('admin_brands');
+    
+            }
+            
+            $em->persist($brand);
+            $em->flush();
+            $this->addFlash('info','ce produit est modifer avec succée !');
             return $this->redirectToRoute('admin_brands');
 
-            }
+        }
         
 
 
@@ -104,6 +121,7 @@ class BrandsManageController extends AbstractController
             $brand->setImage($fileName);
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($brand);
+            $this->addFlash('success','Ce catégorie est ajouter avec succée !');
             $entityManager->flush();
 
             return $this->redirectToRoute('admin_brands');

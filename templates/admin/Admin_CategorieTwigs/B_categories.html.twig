@@ -1,73 +1,95 @@
 {% extends "admin/base-admin.html.twig" %}
 {% block stylesheets %}
 
-    <style>
-         .image_B {
-          height: 100px;
-          width: 150px;
-          object-fit: cover;
-      }
+<style>
+    .image_B {
+        height: 100px;
+        width: 150px;
+        object-fit: cover;
+    }
 
-        td,
-        th {
-            text-align: center;
-        }
-    </style>
+    td,
+    th {
+        text-align: center;
+    }
+
+    .alert {
+        width: 300px;
+    }
+</style>
 {% endblock %}
 
 {% block head %}
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12">
-                <h1 class="Welcom-title">
-                    list des Catégories
-                </h1>
-            </div>
-            {# / part backend client settings #}
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="Welcom-title">
+                list des Catégories
+            </h1>
         </div>
         {# / part backend client settings #}
     </div>
-    <div class="row">
-
-        <div class="col-sm-2">
-
-            {% include 'admin/menu.html.twig' %}
-        </div>
-        <div class="col-sm-10">
-            <div>
-                <a href="{{ path('new_categorie') }}" class=" btn btn-primary" style="margin:5px;">
-                    <i class="fas fa-plus"></i>
-                </a>
-            </div>
-            <table class="table">
-                <thead>
-                    <tr bgcolor="d7f7f5">
-                        <th scope="col">N°</th>
-                        <th scope="col">Catégories</th>
-                        <th scope="col">Description</th>
-                        <th scope="col">Image</th>
-                        <th scope="col-md-2">actes</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for categorie in pagination %}
-                        <tr>
-                            <th scope="row">{{ categorie.id }}</th>
-                            <td>{{ categorie.nom }}</td>
-                            <td>{{ categorie.description|raw }}</td>
-                            <td><img src="{{ asset('/brows_file/' ~ categorie.image) }}" class="image_B"></td>
-                             <td>
-                          <a href="{{ path('categorie_detail', {'slug':categorie.slug}) }}"><i class="fas fa-eye btn-light btn-sm"></i></a> <a href="{{ path('edit_categorie',{'slug':categorie.slug}) }}"><i
-                                  class="fas fa-pencil-alt btn-light btn-sm"></i></a>
-
-                      </td>
-                        </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-        </div>
+    {# / part backend client settings #}
+    {% for message in app.flashes('success') %}
+    <div class="alert  alert-success" role="alert" id="'#successMessage">
+        {{ message }}
+        {% endfor %}
     </div>
-    <div class="navigation pagination-sm" style="padding-left:1000px;">
-        {{ knp_pagination_render(pagination) }}
+    {% for message in app.flashes('info') %}
+    <div class="alert  alert-info" role="alert" id="'#successMessage">
+        {{ message }}
+        {% endfor %}
     </div>
+     {% for message in app.flashes('delete') %}
+    <div class="alert  alert-danger" role="alert" id="'#successMessage">
+        {{ message }}
+        {% endfor %}
+    </div>
+</div>
+
+<div class="row">
+
+    <div class="col-sm-2">
+
+        {% include 'admin/menu.html.twig' %}
+    </div>
+    <div class="col-sm-10">
+        <div>
+            <a href="{{ path('new_categorie') }}" class=" btn btn-primary" style="margin:5px;">
+                <i class="fas fa-plus"></i>
+            </a>
+        </div>
+        <table class="table">
+            <thead>
+                <tr bgcolor="d7f7f5">
+                    <th scope="col">N°</th>
+                    <th scope="col">Catégories</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Image</th>
+                    <th scope="col-md-2">actes</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for categorie in pagination %}
+                <tr>
+                    <th scope="row">{{ categorie.id }}</th>
+                    <td>{{ categorie.nom }}</td>
+                    <td>{{ categorie.description|raw }}</td>
+                    <td><img src="{{ asset('/brows_file/' ~ categorie.image) }}" class="image_B"></td>
+                    <td>
+                        <a href="{{ path('categorie_detail', {'slug':categorie.slug}) }}"><i
+                                class="fas fa-eye btn-light btn-sm"></i></a> <a
+                            href="{{ path('edit_categorie',{'slug':categorie.slug}) }}"><i
+                                class="fas fa-pencil-alt btn-light btn-sm"></i></a>
+
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+<div class="navigation pagination-sm" style="padding-left:1000px;">
+    {{ knp_pagination_render(pagination) }}
+</div>
 {% endblock %}

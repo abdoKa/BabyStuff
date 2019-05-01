@@ -52,7 +52,7 @@
                   <tr>
                       <th scope="row">{{ brand.id }}</th>
                       <td>{{ brand.nom }}</td>
-                      <td>{{ brand.description }}</td>
+                      <td>{{ brand.description|raw }}</td>
                       <td><img src="{{ asset('/brows_file/' ~ brand.image) }}" class="image_B"></td>
                       <td>
                           <a href="{{ path('brand_detail',{'slug':brand.slug}) }}"><i class="fas fa-eye btn-light btn-sm"></i></a> <a href="{{ path('edit_brand',{'slug':brand.slug}) }}"><i

@@ -16,8 +16,10 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ProduitRepository")
+ * 
  * @UniqueEntity({"referance"},
- * message="ce referance est déja utilisé!! "
+ * message="ce referance est déja utilisé!! ",
+ * errorPath="referance"
  * )
  */
 class Produit
@@ -32,7 +34,11 @@ class Produit
     /**
      * @ORM\Column(type="string", length=255, unique=true)
      * @Assert\NotBlank
-     * @Assert\Range(min=5,max=255)
+     * @Assert\Length(min=2,max=255,
+     *  maxMessage="ce referance ne peut pas contenir plus de 255 caractères",
+     *  minMessage="Ce referance doit être au moins 2 caractères"
+     * 
+     * )
      */
     private $referance;
 
@@ -42,7 +48,7 @@ class Produit
      * @Assert\Length(
      * min=2,
      * max=255,
-     * minMessage="Ce Nom doit être au moins 2 caractères.",
+     * minMessage="Ce Nom doit être au moins 2 caractère.",
      * maxMessage="Ce Nom ne peut pas contenir plus de 255 caractères"
      * )
      */
@@ -52,10 +58,10 @@ class Produit
      * @ORM\Column(type="text")
      * @Assert\NotBlank
      *  @Assert\Length(
-     *      min = 2,
+     *      min = 10,
      *      max = 255,
-     *      minMessage = "Ce Nom doit être au moins 2 caractères.",
-     *      maxMessage = "Ce Nom ne peut pas contenir plus de 255 caractères"
+     *      minMessage = "Ce champ doit être au moins 10 caractères.",
+     *      maxMessage = "Ce champ ne peut pas contenir plus de 255 caractères"
      * )
      */
     private $description;
@@ -68,7 +74,7 @@ class Produit
      *     mimeTypesMessage="Please upload a valid jpeg or png"
      * )
      * @Assert\NotBlank(
-     * message="ce champ ne doit pas etre vide !s"
+     * message="ce champ ne doit pas etre vide !"
      * )
      */
     private $image;

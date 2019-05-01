@@ -100,7 +100,7 @@ class BabyProductsController extends AbstractController
     }
 
     /**
-     * @Route("/a-propos", name="about")
+     * @Route("/about-us", name="about")
      */
     public function about()
     {
@@ -116,7 +116,7 @@ class BabyProductsController extends AbstractController
     }
 
 /**
- * @Route("/marques", name="marques")
+ * @Route("/brands", name="marques")
  */
     public function marques(PaginatorInterface $paginator,Request $request):Response
     {
@@ -140,27 +140,28 @@ class BabyProductsController extends AbstractController
     }
 
     /**
-     * @Route("/marques/{slug}", name="show_marque")
+     * @Route("/brands/{slug}", name="show_marque")
      */
     public function show($slug, PaginatorInterface $paginator, Request $request)
     {
         $em =$this->getDoctrine()->getManager();
         $repoF =$em->getRepository(Fourniseur::class);
+
         $fournisseur =$repoF->findOneBy(array('slug'=> $slug));
-        $produits= $fournisseur->getProduits();
+        $products= $fournisseur->getProduits();
 
         
         
         
         $pagination =$paginator->paginate(
-            $repoF->getAllmarquesQuery(),
+            $products,
             $request->query->getInt('page',1),9
         );
 
         dump($pagination);
         return $this->render('baby_products/show-marques.html.twig',[
             'fournisseur' =>$fournisseur,
-            'produits' => $produits,
+            'products' => $products,
             'pagination' =>$pagination
 
         ]);
@@ -168,7 +169,7 @@ class BabyProductsController extends AbstractController
 
     
      /**
-     * @Route("/tous-categorie", name="show-all-categories")
+     * @Route("/all-categories", name="show-all-categories")
      */
     public function show_all_cat(PaginatorInterface $paginator,Request $request)
     {
@@ -217,7 +218,7 @@ class BabyProductsController extends AbstractController
     }
     
     /**
-     * @Route("/produit/{slug}", name="single_product")
+     * @Route("/product/{slug}", name="single_product")
      */
     public function show_product($slug)
     {
@@ -226,7 +227,6 @@ class BabyProductsController extends AbstractController
         $repoF =$em->getRepository(Produit::class);
         $single_p =$repoF->findOneBy(array('slug'=> $slug));
         $fournisseur=$single_p->getFourniseur();
-
         $repoC =$em->getRepository(Categorie::class);
         $categoriesMenu =$repoC->getCategories();
         return $this->render('baby_products/show-product.html.twig',[

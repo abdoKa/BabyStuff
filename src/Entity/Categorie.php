@@ -26,9 +26,9 @@ class Categorie
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank
      * @Assert\Length(
-     *      min = 5,
+     *      min=1,
      *      max = 255,
-     *      minMessage = "Ce Nom doit être au moins 10 caractères.",
+     *      minMessage = "Ce Nom doit être au moins 1 caractères.",
      *      maxMessage = "Ce Nom ne peut pas contenir plus de 255 caractères"
      * )
      */
@@ -36,23 +36,20 @@ class Categorie
 
     /**
      * @ORM\Column(type="text")
-     * @Assert\NotBlank
      * @Assert\Length(
      *      min = 2,
      *      max = 255,
      *      minMessage = "Ce Nom doit être au moins 2 caractères.",
      *      maxMessage = "Ce Nom ne peut pas contenir plus de 255 caractères"
      * )
+     * @Assert\NotBlank(
+     * message="ce champ ne doit pas etre vide !s"
+     * )
      */
     private $description;
 
-    /**
+   /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\File(
-     *     maxSize = "2M",
-     *     mimeTypes = {"image/jpeg", "image/png"},
-     *     mimeTypesMessage = "Please upload a valid jpeg or png"
-     * )
      */
     private $image;
 
@@ -113,7 +110,7 @@ class Categorie
         return $this;
     }
 
-    public function getImage(): ?string
+    public function getImage()
     {
         return $this->image;
     }
@@ -122,7 +119,6 @@ class Categorie
     {
         if($image !== null) {
             $this->image = $image;
-
             return $this;
         } 
     }

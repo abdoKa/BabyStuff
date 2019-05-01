@@ -32,7 +32,7 @@ class ProductManageController extends AbstractController
         $produit=$repoP->findAll();
         $pagination=$paginator->paginate(
             $produit,
-            $request->query->getInt('page',1),6
+            $request->query->getInt('page',1),9
         );
             dump($pagination);
         return $this->render('Admin/Admine_ProductsTwigs/product.html.twig', [
@@ -42,7 +42,7 @@ class ProductManageController extends AbstractController
 
 
     /**
-     * @Route("/admin/edit/{slug}", name="product_edit", methods={"GET","POST"})
+     * @Route("/admin/products/edit/{slug}", name="product_edit", methods={"GET","POST"})
      */
     public function edit_product(Request $request, Produit $product, $slug): Response
     {   
@@ -63,9 +63,7 @@ class ProductManageController extends AbstractController
         
         if ($form->isSubmitted() && $form->isValid()) {
 
-            if($product->getImage() instanceof UploadedFile){
-                $product->remove('image');
-            }
+        
             $product = $form->getData();
             $file = $product->getImage();
 

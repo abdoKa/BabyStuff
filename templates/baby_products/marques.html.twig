@@ -1,6 +1,7 @@
 {% extends 'base.html.twig' %}
 {% block stylesheets %}
 <link rel="stylesheet" href="{{ asset('bower_components/font-awesome/css/all.css') }}">
+
 {% endblock %}
 
 {% block body %}
@@ -27,7 +28,7 @@
             <!--END SINGLE PRODUCTS-->
             {% endfor %}
         </div>
-            <div class="navigation">
+            <div class="navigation pagination-sm">
             {{ knp_pagination_render(pagination) }}
             <div>
     </div>

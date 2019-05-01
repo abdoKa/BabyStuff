@@ -21,11 +21,16 @@
     <link rel="stylesheet" href="{{ asset('css/main.css') }}">
 
 
-    {% block stylesheets %}{% endblock %}
+    {% block stylesheets %}
+    
+    
+
+    
+    {% endblock %}
 </head>
 
 <body>
-
+    
     {{ render(controller('App\\Controller\\BabyProductsController::menuNav')) }}
 
 

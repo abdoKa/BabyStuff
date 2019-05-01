@@ -15,17 +15,17 @@
        margin-top: 25px;
     }
 
-     .btn-success, .btn {
-        margin-left: 30px;
-     }
-        .list-group-item,
-    .bg-primary,
-    .btn
-    {
-        background-image: linear-gradient(to right,#203A43    ,#0F2027);
-            color: #fff;
+    .btn-success,
+    .btn {
+       margin-left: 30px;
     }
-    
+
+    .list-group-item,
+    .bg-primary,
+    .btn {
+       background-image: linear-gradient(to right, #203A43, #0F2027);
+       color: #fff;
+    }
  </style>
  {% endblock %}
 
@@ -34,12 +34,15 @@
     <h1> Modifer Produit </h1>
     {{ form_start(form) }}
     <div class="row">
-       <div class="col-md-3">{{ form_row(form.referance) }}</div>
-       <div class="col-md-3">{{ form_row(form.nom) }}</div>
+       <div class="col-md-5">{{ form_row(form.referance) }}</div>
     </div>
     <div class="row">
-       <div class="col-md-3">{{ form_row(form.categorie) }}</div>
-       <div class="col-md-3">{{ form_row(form.fourniseur) }}</div>
+
+       <div class="col-md-9">{{ form_row(form.nom) }}</div>
+    </div>
+    <div class="row">
+       <div class="col-md-6">{{ form_row(form.categorie) }}</div>
+       <div class="col-md-6">{{ form_row(form.fourniseur) }}</div>
     </div>
     <div class="row">
        {{ form_row(form.description) }}

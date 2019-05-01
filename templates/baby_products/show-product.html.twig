@@ -25,6 +25,7 @@
             <div>
                 <h4 class="text-left title-css">{{ single_p.nom|upper }}</h4>
                 <h6>Referance: {{ single_p.referance }}</h6>
+            <a href="{{ path('show_marque', {'slug': fournisseur.slug }) }}" class="btn btn-link">{{ fournisseur.nom }}<a>
             </div>
             <div>
                 <h1 class="text-left price-css">{{ single_p.prix }} MAD</h1>

@@ -3,15 +3,18 @@
 
   <style>
       .image_B {
-      height: 150px;
-      max-width: 200px;
-      object-fit: cover;
-    }
+          height: 150px;
+          max-width: 200px;
+          object-fit: cover;
+      }
 
       td,
       th {
           text-align: center;
       }
+
+     
+     
   </style>
   {% endblock %}
 
@@ -42,7 +45,7 @@
               </tr>
               <tr>
                   <th bgcolor="#f3f9fb">Image</th>
-                  <td><img src="{{ asset('/brows_file/' ~ single_C.image) }}" class="image_B" ></td>
+                  <td><img src="{{ asset('/brows_file/' ~ single_C.image) }}" class="image_B"></td>
               <tr>
           </table>
           <hr>
@@ -53,8 +56,8 @@
                               class="btn btn-warning btn-sm"><i class="fas fa-arrow-circle-left"></i>
                               <spane>retoure</spane>
                           </a></li>
-                      <li class="list-group-item"> <a href="{{ path('edit_categorie',{'slug': single_C.slug }) }}" class="btn btn-primary btn-sm"> <i
-                                  class="far fa-edit"></i>
+                      <li class="list-group-item"> <a href="{{ path('edit_categorie',{'slug': single_C.slug }) }}"
+                              class="btn btn-primary btn-sm"> <i class="far fa-edit"></i>
                               <spane>Modifer</spane>
                           </a></li>
                       <li class="list-group-item"> <a href="{{ path('categorie_delete', {'slug': single_C.slug}) }}"

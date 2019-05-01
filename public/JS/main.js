@@ -6,20 +6,20 @@ $(document).ready(function() {
         centerPadding: '10px',
         slidesToShow: 3,
         responsive: [{
-                breakpoint: 768,
+                breakpoint: 800,
                 settings: {
                     arrows: false,
                     centerMode: true,
-                    centerPadding: '10px',
-                    slidesToShow: 3
+                    centerPadding: '25px',
+                    slidesToShow: 2
                 }
             },
             {
-                breakpoint: 480,
+                breakpoint: 570,
                 settings: {
                     arrows: false,
                     centerMode: true,
-                    centerPadding: '10px',
+                    centerPadding: '100px',
                     slidesToShow: 1
                 }
             }

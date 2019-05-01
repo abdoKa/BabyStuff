@@ -34,6 +34,8 @@ class FourniseurRepository extends ServiceEntityRepository
     public function getAllmarquesQuery(){
         return $this->findAll();          
     }
+
+    
   
 
 }

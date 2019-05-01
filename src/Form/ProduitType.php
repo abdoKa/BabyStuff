@@ -15,6 +15,8 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use App\Entity\Categorie;
 use App\Entity\Fourniseur;
+use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Validator\Constraints\Length;
 
 class ProduitType extends AbstractType
 {
@@ -59,8 +61,7 @@ class ProduitType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => Produit::class,
-            'validation_groups' => ['create'],
+            'data_class' => Produit::class
 
         ]);
     }

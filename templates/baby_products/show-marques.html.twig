@@ -1,29 +1,56 @@
 {% extends 'base.html.twig' %}
+{% block stylesheets %}
+<style>
+    .row,
+    .container {
+        padding: 10px 20px 5px 20px;
+        text-align: center;
+        width: 100%;
+        margin: 0 auto;
+    }
+
+    #container {
+        width: 100%;
+        margin: 0;
+    }
+
+    .navigation {
+        margin-left: 100px;
+    }
+   
+</style>
+{% endblock stylesheets %}
+
+
+
 {% block body %}
 
 <h1> {{ fournisseur.nom }} </h1>
 <div class="container">
-    <div class="row" <div class="row new-products">
+    <div class="row">
         <!--useing slick-->
-        {% for produit in produits %}
+        {% for product in pagination %}
         <div class="col-sm-3 card single-product ">
             <div class="card-body">
                 <div class="product-image ">
-                    <a href="{{ path('single_product', {'slug': produit.slug }) }}"><img src="{{ asset('/brows_file/' ~ produit.image) }}" class="w-100" alt=""><a/>
+                    <a href="{{ path('single_product', {'slug': product.slug }) }}"><img
+                            src="{{ asset('/brows_file/' ~ product.image) }}" class="w-100" alt=""><a />
                         <a href="#" class="add-to-favourite"><i class="far fa-heart icon-change"></i></a>
                 </div>
-                <a href="{{ path('single_product', {'slug': produit.slug }) }}">
-                <div class="card-title product-title"> {{ produit.nom }} </div></a>
-                <div class="product-price">{{ produit.prix }} MAD </div>
-                
+                <a href="{{ path('single_product', {'slug': product.slug }) }}">
+                    <div class="card-title product-title"> {{ product.nom }} </div>
+                </a>
+                <div class="product-price">{{ product.prix }} MAD </div>
+
             </div>
         </div>
         {% endfor %}
-        </div>
-                <div class="navigation">
-                {{ knp_pagination_render(pagination) }}
-                <div>
-       
+    </div>
+<div class="navigation">
+    {{ knp_pagination_render(pagination) }}
+    <div>
+</div>
     </div>
 </div>
+
 {% endblock body %}
