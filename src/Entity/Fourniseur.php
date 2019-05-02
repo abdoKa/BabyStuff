@@ -35,23 +35,19 @@ class Fourniseur
      */
     private $nom;
 
-    /**
-     * @ORM\Column(type="text")
-     * @Assert\NotBlank
-     * @Assert\Length(
-     *  min= 5,
-     *  minMessage="Ce Nom doit être au moins 2 caractères."
+     /**
+     * @ORM\Column(type="text", nullable=true)
      * 
-     * )
      */
-    private $description;
+    private $description = 'default value to overwrite';
 
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\File(
-     *     maxSize = "2M",
+     *    maxSize="2M",
      *     mimeTypes = {"image/jpeg", "image/png"},
-     *     mimeTypesMessage = "Please upload a valid PDF"
+     *     mimeTypesMessage = "Please upload a valid PDF",
+     *      
      * )
      */
     private $image;

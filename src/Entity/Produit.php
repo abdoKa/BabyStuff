@@ -34,9 +34,9 @@ class Produit
     /**
      * @ORM\Column(type="string", length=255, unique=true)
      * @Assert\NotBlank
-     * @Assert\Length(min=2,max=255,
+     * @Assert\Length(min=3,max=255,
      *  maxMessage="ce referance ne peut pas contenir plus de 255 caractères",
-     *  minMessage="Ce referance doit être au moins 2 caractères"
+     *  minMessage="Ce referance doit être au moins 3 caractères"
      * 
      * )
      */
@@ -46,30 +46,23 @@ class Produit
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank
      * @Assert\Length(
-     * min=2,
+     * min=3,
      * max=255,
-     * minMessage="Ce Nom doit être au moins 2 caractère.",
+     * minMessage="Ce Nom doit être au moins 3 caractère.",
      * maxMessage="Ce Nom ne peut pas contenir plus de 255 caractères"
      * )
      */
     private $nom;
 
-    /**
-     * @ORM\Column(type="text")
-     * @Assert\NotBlank
-     *  @Assert\Length(
-     *      min = 10,
-     *      max = 255,
-     *      minMessage = "Ce champ doit être au moins 10 caractères.",
-     *      maxMessage = "Ce champ ne peut pas contenir plus de 255 caractères"
-     * )
+  /**
+     * @ORM\Column(type="text", nullable=true)
+     * 
      */
-    private $description;
+    private $description = 'default value to overwrite';
 
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\File(
-     *     maxSize="2M",
      *     mimeTypes={"image/jpeg", "image/png"},
      *     mimeTypesMessage="Please upload a valid jpeg or png"
      * )

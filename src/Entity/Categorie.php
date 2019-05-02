@@ -26,30 +26,30 @@ class Categorie
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank
      * @Assert\Length(
-     *      min=1,
+     *      min=2,
      *      max = 255,
-     *      minMessage = "Ce Nom doit être au moins 1 caractères.",
+     *      minMessage = "Ce Nom doit être au moins 2 caractères.",
      *      maxMessage = "Ce Nom ne peut pas contenir plus de 255 caractères"
      * )
      */
     private $nom;
 
     /**
-     * @ORM\Column(type="text")
-     * @Assert\Length(
-     *      min = 2,
-     *      max = 255,
-     *      minMessage = "Ce Nom doit être au moins 2 caractères.",
-     *      maxMessage = "Ce Nom ne peut pas contenir plus de 255 caractères"
-     * )
-     * @Assert\NotBlank(
-     * message="ce champ ne doit pas etre vide !s"
-     * )
+     * @ORM\Column(type="text", nullable=true)
+     * 
      */
-    private $description;
-
+    private $description = 'default value to overwrite';
+    
    /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\File(
+     *     maxSize="2M",
+     *     mimeTypes={"image/jpeg", "image/png"},
+     *     mimeTypesMessage="Please upload a valid jpeg or png"
+     * )
+     * @Assert\NotBlank(
+     * message="ce champ ne doit pas etre vide !"
+     * )
      */
     private $image;
 

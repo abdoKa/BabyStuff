@@ -23,38 +23,38 @@ class ProduitType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('referance',TextType::class)
+        ->add('referance',TextType::class)
 
-            ->add('nom',TextType::class)
+        ->add('nom',TextType::class)
 
-                ->add('categorie',EntityType::class,[
-                           'class'=> Categorie::class,
-                           'choice_label'=> 'nom',
-                           'placeholder' => 'Choisir un Catégorie',
-                           'attr'=>array('class'=>' dropdown-toggle form-control')
-                           ])
+            ->add('categorie',EntityType::class,[
+                       'class'=> Categorie::class,
+                       'choice_label'=> 'nom',
+                       'placeholder' => 'Choisir un Catégorie',
+                       'attr'=>array('class'=>' dropdown-toggle form-control')
+                       ])
 
-                ->add('fourniseur',EntityType::class,[
-                    'class'=> Fourniseur::class,
-                    'choice_label'=> 'nom',
-                    'placeholder' => 'Choisir un Fournisseur',
-                    'attr'=>array('class'=>' dropdown-toggle form-control')
-                    ])
+            ->add('fourniseur',EntityType::class,[
+                'class'=> Fourniseur::class,
+                'choice_label'=> 'nom',
+                'placeholder' => 'Choisir un Fournisseur',
+                'attr'=>array('class'=>' dropdown-toggle form-control')
+                ])
 
-            ->add('description',TextareaType::class)
+        ->add('description',TextareaType::class,['required' => false,])
 
-            ->add('image', FileType::class,[
-                 'data_class' => null,'required' => false,
-                 'label'=>'Upload Image'
-            ])
+        ->add('image', FileType::class,[
+             'data_class' => null,'required' => false
+        ])
 
-            ->add('prix', MoneyType::class)
+        ->add('prix', MoneyType::class)
 
-            ->add('stock',IntegerType::class)
+        ->add('stock',IntegerType::class)
 
-                     ->add('save',SubmitType::class,array(
-                         'label' =>'Valider',
-                         'attr'=> array('class'=>'btn  btn-lg ')))
+                 ->add('save',SubmitType::class,array(
+                     'label' =>'Modifer',
+                     'attr'=> array('class'=>'btn btn-success btn-lg ')))
+    
         ;
     }
 

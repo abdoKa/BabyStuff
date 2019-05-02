@@ -2,55 +2,57 @@
 <style>
     .list-group {
         margin: 20px 0 0 0;
-       
+
+
     }
+
     .list-group-item,
-    .col-sm-3
-    {
-        left:-10px;
+    .col-sm-3 {
+        left: -10px;
     }
+
     .list-group-item,
     .bg-primary,
-    .btn
-    {
-        background-image: linear-gradient(to right,#203A43    ,#0F2027);
-            color: #fff;
+    .btn {
+        background-image: linear-gradient(to right, #203A43, #0F2027);
+        color: #fff;
     }
-    
+
     
 </style>
 
 {% endblock %}
 
-
-<div class="list-group">
-    <a href="{{ path('admin_orders') }}" class="list-group-item "><i class="far fa-bell"></i>
-        Commande
-    </a>
-    <a href="{{ path('admin_user_list') }}" class="list-group-item "><i class="fas fa-users"></i>
-        liste d'utilisateurs
-    </a>
-</div>
-
-<div class="list-group">
-    <a href="{{ path('admin_product') }}" class="list-group-item"><i class="fab fa-product-hunt"></i>
-        <spane> Produit</spane>
-    </a>
-    <a href="{{ path('admin_categories') }}" class="list-group-item"><i class="fas fa-tags"></i>
-        <spane> Categories<spane>
-    </a>
-    <a href="{{ path('admin_brands') }}" class="list-group-item  "><i class="far fa-copyright"></i>
-        <spane>Marques</spane>
-    </a>
-</div>
-
-<div class="list-group">
-    <a href="{{ path('admin_featured') }}" class="list-group-item  "><i class="fas fa-bookmark"></i>
-        <spane>Liste de produits en vedette</spane>
-    </a>
-    <a href="#" class="list-group-item "> <i class="fas fa-sliders-h"></i>
-        <spane>Slides</spane>
-        <a href="#" class="list-group-item "> <i class="fas fa-cogs"></i>
-            <spane>paramètres du site</spane>
+<div class="container-list">
+    <div class="list-group ">
+        <a href="{{ path('admin_orders') }}" class="list-group-item "><i class="far fa-bell"></i>
+            Commande
         </a>
+        <a href="{{ path('admin_user_list') }}" class="list-group-item "><i class="fas fa-users"></i>
+            liste d'utilisateurs
+        </a>
+    </div>
+
+    <div class="list-group">
+        <a href="{{ path('admin_product') }}" class="list-group-item"><i class="fab fa-product-hunt"></i>
+            <spane> Produit</spane>
+        </a>
+        <a href="{{ path('admin_categories') }}" class="list-group-item"><i class="fas fa-tags"></i>
+            <spane> Categories<spane>
+        </a>
+        <a href="{{ path('admin_brands') }}" class="list-group-item  "><i class="far fa-copyright"></i>
+            <spane>Marques</spane>
+        </a>
+    </div>
+
+    <div class="list-group">
+        <a href="{{ path('admin_featured') }}" class="list-group-item  "><i class="fas fa-bookmark"></i>
+            <spane>Liste de produits en vedette</spane>
+        </a>
+        <a href="#" class="list-group-item "> <i class="fas fa-sliders-h"></i>
+            <spane>Slides</spane>
+            <a href="#" class="list-group-item "> <i class="fas fa-cogs"></i>
+                <spane>paramètres du site</spane>
+            </a>
+    </div>
 </div>

@@ -2,21 +2,24 @@
 
 namespace App\Controller\Admin;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\HttpFoundation\Request;
-use Knp\Component\Pager\PaginatorInterface;
-
-
 use App\Entity\Produit;
-use App\Entity\Categorie;
-
-use App\Form\ProduitType;
-use Symfony\Component\HttpFoundation\Response;
 use App\Form\editPType;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
-use Gedmo\Mapping\Annotation\Slug;
+use App\Entity\Categorie;
+use App\Form\ProduitType;
+
+
 use App\Form\EditProductType;
+use Gedmo\Mapping\Annotation\Slug;
+
+use Knp\Component\Pager\PaginatorInterface;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
+use Symfony\Component\HttpFoundation\File\Exception\IniSizeFileException;
+use Symfony\Component\HttpFoundation\File\Exception\FormSizeFileException;
 
 class ProductManageController extends AbstractController
 
@@ -32,7 +35,7 @@ class ProductManageController extends AbstractController
         $produit=$repoP->findAll();
         $pagination=$paginator->paginate(
             $produit,
-            $request->query->getInt('page',1),9
+            $request->query->getInt('page',1),6
         );
             dump($pagination);
         return $this->render('Admin/Admine_ProductsTwigs/product.html.twig', [
@@ -42,7 +45,7 @@ class ProductManageController extends AbstractController
 
 
     /**
-     * @Route("/admin/products/edit/{slug}", name="product_edit", methods={"GET","POST"})
+     * @Route("/admin/edit/{slug}", name="product_edit", methods={"GET","POST"})
      */
     public function edit_product(Request $request, Produit $product, $slug): Response
     {   
@@ -63,7 +66,7 @@ class ProductManageController extends AbstractController
         
         if ($form->isSubmitted() && $form->isValid()) {
 
-        
+          
             $product = $form->getData();
             $file = $product->getImage();
 
@@ -109,10 +112,14 @@ class ProductManageController extends AbstractController
                 
                 $image=$form->get('image')->getData();
                 $fileName = md5(uniqid()).'.'.$image->guessExtension();
+               
                 $image->move(
                     $this->getParameter('uploads_directory'),
                     $fileName
                 );
+            
+           
+
                 $product->setImage($fileName);                
                 $entityManager =$this->getDoctrine()->getManager();
                 $entityManager->persist($product);

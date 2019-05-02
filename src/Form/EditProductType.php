@@ -21,52 +21,44 @@ class EditProductType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('referance',TextType::class,array('attr'=>
-             array('class'=>'form-control')))
+            ->add('referance',TextType::class)
 
-            ->add('nom',TextType::class,array(
-                'attr'=> array('class'=>'form-control')))
+            ->add('nom',TextType::class)
 
                 ->add('categorie',EntityType::class,[
                            'class'=> Categorie::class,
                            'choice_label'=> 'nom',
                            'placeholder' => 'Choisir un Catégorie',
                            'attr'=>array('class'=>' dropdown-toggle form-control')
-            
                            ])
 
                 ->add('fourniseur',EntityType::class,[
                     'class'=> Fourniseur::class,
                     'choice_label'=> 'nom',
                     'placeholder' => 'Choisir un Fournisseur',
-                    'attr'=>array('class'=>' dropdown-toggle form-control ')
+                    'attr'=>array('class'=>' dropdown-toggle form-control')
                     ])
 
-            ->add('description',TextareaType::class,array(
-                    'attr'=> array('class'=>'form-control')))
+            ->add('description',TextareaType::class,['required' => false,])
 
             ->add('image', FileType::class,[
-                'data_class' => null,'required' => false,
-                'label'=> 'image',
+                 'data_class' => null,'required' => false
             ])
 
-            ->add('prix', MoneyType::class,array(
-                'attr'=>array('class'=>'form-control')))
+            ->add('prix', MoneyType::class)
 
-            ->add('stock',IntegerType::class,array(
-                     'attr'=> array('class'=>'form-control')))
+            ->add('stock',IntegerType::class)
 
                      ->add('save',SubmitType::class,array(
-                         'label' =>'Valider',
-                         'attr'=> array('class'=>'btn  btn-success btn-lg valider')))
+                         'label' =>'Modifer',
+                         'attr'=> array('class'=>'btn btn-success btn-lg ')))
         ;
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => Produit::class,
-            'validation_groups' => ['edit']
+            'data_class' => Produit::class
         ]);
     }
 }
