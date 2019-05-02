@@ -44,7 +44,6 @@ class Fourniseur
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\File(
-     *    maxSize="2M",
      *     mimeTypes = {"image/jpeg", "image/png"},
      *     mimeTypesMessage = "Please upload a valid PDF",
      *      

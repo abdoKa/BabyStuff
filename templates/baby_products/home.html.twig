@@ -1,5 +1,11 @@
 {% extends 'base.html.twig' %} {% block body %}
 
+ {% block stylesheets %}
+<style>
+
+
+</style>
+{% endblock %}
 <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
     <div class="carousel-inner">
 
@@ -38,7 +44,7 @@
                 <div class="card-body">
                 <a href="{{ path('single_product', {'slug': produit.slug }) }}" >
                     <div class="product-image ">
-                        <img src="{{ asset('/brows_file/' ~ produit.image) }}" alt="" class=" w-100"><a/>
+                        <img src="{{ asset('/brows_file/' ~ produit.image) }}" alt="" class="w-100"><a/>
 
                         <a href="#" class="add-to-favourite"><i class="far fa-heart icon-change"></i></a>
                     </div>

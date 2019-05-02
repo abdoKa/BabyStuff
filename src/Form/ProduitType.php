@@ -52,7 +52,7 @@ class ProduitType extends AbstractType
         ->add('stock',IntegerType::class)
 
                  ->add('save',SubmitType::class,array(
-                     'label' =>'Modifer',
+                     'label' =>'Valider',
                      'attr'=> array('class'=>'btn btn-success btn-lg ')))
     
         ;

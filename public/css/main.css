@@ -164,6 +164,7 @@ h5 {
 
 .card {
     margin: 19.50px;
+    flex-direction: column;
 }
 
 .about,
