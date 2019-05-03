@@ -41,12 +41,14 @@ class Fourniseur
      */
     private $description = 'default value to overwrite';
 
-    /**
+  /**
      * @ORM\Column(type="string", length=255)
      * @Assert\File(
-     *     mimeTypes = {"image/jpeg", "image/png"},
-     *     mimeTypesMessage = "Please upload a valid PDF",
-     *      
+     *     mimeTypes={"image/jpeg", "image/png"},
+     *     mimeTypesMessage="Please upload a valid jpeg or png"
+     * )
+     * @Assert\NotBlank(
+     * message="ce champ ne doit pas etre vide !"
      * )
      */
     private $image;

@@ -97,6 +97,11 @@
        background-repeat: no-repeat;
        background-position: center;
     }
+
+    
+    .avatar-upload .invalid-feedback {
+       display: none !important;
+    }
  </style>
  {% endblock %}
 
@@ -106,8 +111,10 @@
 
 
     {{ form_start(form) }}
+    <div class="row">
 
     {{ form_row(form.nom) }}
+    </div>
 
 
     <div class="row">
@@ -127,6 +134,10 @@
                 </div>
           </div>
        </div>
+    </div>
+
+     <div class="form-error row" style="margin:0 0 50px 0;">
+       {{ form_errors(form.image) }}
     </div>
 
     {{ form_end(form) }}

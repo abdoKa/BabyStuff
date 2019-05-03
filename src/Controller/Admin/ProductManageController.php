@@ -106,7 +106,6 @@ class ProductManageController extends AbstractController
 
             $form->handleRequest($request);
 
-            dump($product);              
             if($form->isSubmitted() && $form->isValid())
             {
                 

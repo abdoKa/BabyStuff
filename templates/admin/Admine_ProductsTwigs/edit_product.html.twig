@@ -94,7 +94,7 @@
        background-position: center;
     }
 
-      .avatar-upload .invalid-feedback {
+    .avatar-upload .invalid-feedback {
        display: none !important;
     }
  </style>
@@ -134,11 +134,14 @@
        </div>
     </div>
 
-     <div class="form-error row" style="margin:0 0 50px 0;">
+    <div class="form-error row" style="margin:5px 0 50px 0;">
        {{ form_errors(form.image) }}
     </div>
 
     <div class="row">
+       <div class="form-error row" style="margin:-5px 0 50px 0;">
+          {{ form_errors(form.prix) }}
+       </div>
        <div class="col-md-3">{{ form_row(form.prix) }}</div>
        <div class="col-md-3">{{ form_row(form.stock) }}</div>
     </div>

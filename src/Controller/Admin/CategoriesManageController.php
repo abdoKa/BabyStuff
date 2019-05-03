@@ -32,7 +32,6 @@ class CategoriesManageController extends AbstractController
             $request->query->getInt('page', 1),9
         );
 
-        dump($pagination);
         return $this->render('admin/Admin_CategorieTwigs/B_categories.html.twig', [
             'pagination' => $pagination
         ]);
@@ -72,7 +71,6 @@ class CategoriesManageController extends AbstractController
                 );
                 $categorie->setImage($fileName);
             }
-            dump($categorie);
             
             $em->persist($categorie);
             $em->flush();
@@ -100,7 +98,6 @@ class CategoriesManageController extends AbstractController
 
         $form->handleRequest($request);
 
-        dump($categorie);
         if($form->isSubmitted() && $form->isValid())
         {
             
