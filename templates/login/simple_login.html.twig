@@ -116,8 +116,7 @@
                                     <div class="alert alert-danger">
                                         {{ error.messageKey|trans(error.messageData, 'security') }}</div>
                                     {% endif %}
-
-
+                                    
                                     <form action="{{ path('security_login') }}" method="post">
                                         <div class="form-group">
                                             <div class="form-label-group">

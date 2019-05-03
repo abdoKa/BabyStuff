@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use Serializable;
 use App\Entity\Commande;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
@@ -17,7 +18,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  *  message= "L'email que vous avez indiqué est deja utilisé !"
  * )
  */
-class Utilisateur implements UserInterface
+class Utilisateur implements UserInterface 
 {
     /**
      * @ORM\Id()
@@ -65,11 +66,11 @@ class Utilisateur implements UserInterface
      * @Assert\NotBlank
      */
     private $password;
-    
+
     /** 
-    * @Assert\EqualTo(propertyPath="password",message="vous n'avez pas tapé le méme mot de passe")
-    * @Assert\NotBlank
-    */
+     * @Assert\EqualTo(propertyPath="password",message="vous n'avez pas tapé le méme mot de passe")
+     * @Assert\NotBlank
+     */
     public $confirm_password;
 
     /**
@@ -87,7 +88,7 @@ class Utilisateur implements UserInterface
     /**
      * @ORM\Column(type="json_array")
      */
-    private $roles=array("ROLE_USER");
+    private $roles = array('ROLE_USER');
 
 
     /**
@@ -111,7 +112,7 @@ class Utilisateur implements UserInterface
     {
         $this->commandes = new ArrayCollection();
     }
-   
+
     public function getId(): ?int
     {
         return $this->id;
@@ -154,7 +155,7 @@ class Utilisateur implements UserInterface
     }
 
 
-   
+
 
     public function getTelephone(): ?int
     {
@@ -251,7 +252,7 @@ class Utilisateur implements UserInterface
 
     /**
      * Get the value of password
-     */ 
+     */
     public function getPassword()
     {
         return $this->password;
@@ -261,7 +262,7 @@ class Utilisateur implements UserInterface
      * Set the value of password
      *
      * @return  self
-     */ 
+     */
     public function setPassword($password)
     {
         $this->password = $password;
@@ -269,13 +270,34 @@ class Utilisateur implements UserInterface
         return $this;
     }
     public function eraseCredentials()
-    {
-        
-    }
+    { }
     public function getSalt()
-    {
-        
-    }
+    { }
     public function getUsername()
-    {}
+    { }
+
+    // // public function serialize()
+    // // { 
+    // //     return serialize([
+
+    // //             $this->id,
+    // //             $this->email,
+    // //             $this->password,
+    // //             $this->telephone,
+    // //             $this->adresse,
+    // //             $this->commandes
+    // //         ]);
+    // // }
+
+    // // public function unserialize($string)
+    // // { 
+    // //    list(
+    // //     $this->id,
+    // //     $this->email,
+    // //     $this->password,
+    // //     $this->telephone,
+    // //     $this->adresse,
+    
+    // //    ) = unserialize($string, ['allowed_classes'=>false]);
+    // // }   
 }

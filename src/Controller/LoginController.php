@@ -46,7 +46,6 @@ class LoginController extends AbstractController
 
         $form->handleRequest($request);
         
-        dump($utilisateur);
         
         if($form->isSubmitted() && $form->isValid())
         {

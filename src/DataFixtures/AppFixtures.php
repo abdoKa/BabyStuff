@@ -11,12 +11,18 @@ use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\Validator\Constraints\DateTime;
 use App\Entity\Utilisateur;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class AppFixtures extends Fixture
 {
     protected $faker;
 
+    private $encoder;
 
+    public function __construct(UserPasswordEncoderInterface $encoder)
+    {
+        $this->encoder =$encoder;
+    }
     
     
     public function load(ObjectManager $manager)
@@ -75,11 +81,23 @@ class AppFixtures extends Fixture
             $produit->setFeatures((bool)\rand(0,1));
             $produit->setFourniseur($fournisseurs[mt_rand(0,19)]);
             $produit->setCategorie($categories[mt_rand(0,19)]);
-            $produit->setDateAjout($this->faker->dateTimeBetween('-10 days', 'now'));
-            $produit->setDateModif($this->faker->dateTimeBetween('-10 days', 'now'));
+          
 
             $manager->persist($produit);
         }
+
+
+        $user = new Utilisateur();
+        $user->setNom('Abdelali');
+        $user->setPrenom('Kabou');
+        $user->setAdresse('str Abdelah senahjy 169');
+        $user->setEmail('abdellalikabou39@gmail.com');
+        $user->setTelephone(605267483);
+        $user->setPassword(
+            $this->encoder->encodePassword($user, 'ali649'));
+        $user->setRoles('ROLE_ADMIN');
+
+        $manager->persist($user);
 
         $manager->flush();
     }
