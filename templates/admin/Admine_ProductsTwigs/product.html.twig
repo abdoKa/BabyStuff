@@ -1,27 +1,7 @@
   {% extends "admin/base-admin.html.twig" %}
   {% block stylesheets %}
 
-  <style>
-      .image_B {
-          height: 100px;
-          width: 150px;
-          object-fit: cover;
-      }
-
-      td,
-      th {
-          text-align: center;
-      }
-
-      .alert {
-          width: 40%;
-          margin:10px 0 0 20px;
-      }
-      .col-sm-10{
-         padding:2px 0 5px 2px;
-         
-      }
-  </style>
+  
   {% endblock %}
 
   {% block head %}
@@ -37,29 +17,29 @@
   {% for message in app.flashes('success') %}
   <div class="alert  alert-success" role="alert" id="'#successMessage">
       {{ message }}
-  {% endfor %}
-   </div>
+      {% endfor %}
+  </div>
   {% for message in app.flashes('info') %}
-    <div class="alert alert-info"  role="alert">
-        {{ message }} 
-         {# {{ pagination[0].nom }}  #}
-    </div>
-    {% endfor %}
-    {% for message in app.flashes('info_delete') %}
-    <div class="alert alert-danger"  role="alert">
-        {{ message }} 
-         {# {{ pagination[0].nom }}  #}
-    </div>
-    {% endfor %}
+  <div class="alert alert-info" role="alert">
+      {{ message }}
+      {# {{ pagination[0].nom }}  #}
+  </div>
+  {% endfor %}
+  {% for message in app.flashes('info_delete') %}
+  <div class="alert alert-danger" role="alert">
+      {{ message }}
+      {# {{ pagination[0].nom }}  #}
+  </div>
+  {% endfor %}
   <div class="row">
-
-      <div class="col-sm-2">
+      <div class="col-sm-3">
 
           {% include 'admin/menu.html.twig' %}
       </div>
-      <div class="col-sm-10">
+      <div class="col-sm-9">
           <div>
-              <a href="{{ path('new_product') }}" class=" btn btn-primary"  style="margin:5px; background-color:##34314f;">
+              <a href="{{ path('new_product') }}" class=" btn btn-primary"
+                  style="margin:5px; background-color:##34314f;">
                   <i class="fas fa-plus"></i>
 
               </a>
@@ -104,7 +84,7 @@
           </table>
       </div>
   </div>
-  <div class="navigation pagination-sm" style="padding-left:1000px;">
+  <div class="navigation pagination-sm">
       {{ knp_pagination_render(pagination) }}
   </div>
   {% endblock %}

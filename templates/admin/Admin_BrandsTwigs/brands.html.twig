@@ -1,18 +1,6 @@
   {% extends "admin/base-admin.html.twig" %}
   {% block stylesheets %}
 
-  <style>
-     .image_B {
-          height: 100px;
-          width: 150px;
-          object-fit: cover;
-      }
-
-      td,
-      th {
-          text-align: center;
-      }
-  </style>
   {% endblock %}
 
   {% block head %}
@@ -27,11 +15,11 @@
   </div>
   <div class="row">
 
-      <div class="col-sm-2">
+      <div class="col-sm-3">
 
           {% include 'admin/menu.html.twig' %}
       </div>
-      <div class="col-sm-10">
+      <div class="col-sm-9">
           <div>
               <a href="{{ path('new_brand') }}" class=" btn btn-primary" style="margin:5px;">
                   <i class="fas fa-plus"></i>
@@ -55,7 +43,9 @@
                       <td>{{ brand.description|raw }}</td>
                       <td><img src="{{ asset('/brows_file/' ~ brand.image) }}" class="image_B"></td>
                       <td>
-                          <a href="{{ path('brand_detail',{'slug':brand.slug}) }}"><i class="fas fa-eye btn-light btn-sm"></i></a> <a href="{{ path('edit_brand',{'slug':brand.slug}) }}"><i
+                          <a href="{{ path('brand_detail',{'slug':brand.slug}) }}"><i
+                                  class="fas fa-eye btn-light btn-sm"></i></a> <a
+                              href="{{ path('edit_brand',{'slug':brand.slug}) }}"><i
                                   class="fas fa-pencil-alt btn-light btn-sm"></i></a>
 
                       </td>
@@ -65,7 +55,7 @@
           </table>
       </div>
   </div>
-  <div class="navigation pagination-sm" style="padding-left:1000px;">
+  <div class="navigation pagination-sm" >
       {{ knp_pagination_render(pagination) }}
   </div>
   {% endblock %}

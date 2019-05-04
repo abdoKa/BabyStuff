@@ -26,7 +26,8 @@
 
 <body>
     {% block body %}
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top" style="background-image: linear-gradient(to right, #203A43, #0F2027);">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top"
+        style="background-image: linear-gradient(to right, #203A43, #0F2027);">
         <a class="navbar-brand" href="{{ path('admin') }}">
             <i class="fas fa-baby-carriage">
             </i>BabyStuff</a>
@@ -36,15 +37,16 @@
         </button>
 
         <div class="collapse navbar-collapse justify-content-end " id="navbarColor01">
+            {% if is_granted("ROLE_ADMIN") %}
             <ul class="nav justify-content-end" style="color: #fff;">
                 <li class="nav-item">
-                    <a class="nav-link active" href="#">Déconnexion</a>
+                    <a class="nav-link active" href="{{ path('logout') }}">Déconnexion</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Bienvenu Admin</a>
+                    <a class="nav-link" href="#">Bienvenu  {{ app.user.nom }}</a>
                 </li>
             </ul>
-
+           {% endif %}
         </div>
     </nav>
     {% endblock %}
@@ -57,39 +59,39 @@
             </div>
             {# / part backend client settings #}
         </div>
-            {# / part backend client settings #}
+        {# / part backend client settings #}
+    </div>
+    <div class="row">
+        <div class="col-sm-3">
+            {% include 'admin/menu.html.twig' %}
         </div>
-        <div class="row">
-            <div class="col-sm-3">
-                {% include 'admin/menu.html.twig' %}
-            </div>
-            <div class="col-sm-9">
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">Nom du client</th>
-                            <th scope="col">Utilisateur</th>
-                            <th scope="col">Somme totale de cette commande</th>
-                            <th scope="col">Date de commande</th>
-                            <th scope="col-md-2">actes</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <th scope="row">1</th>
-                            <td>Mark</td>
-                            <td>Otto</td>
-                            <td>7000 MAD</td>
-                            <td>02/07/2018</td>
-                            <td><a href="">Montrer</a></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+        <div class="col-sm-9">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Nom du client</th>
+                        <th scope="col">Utilisateur</th>
+                        <th scope="col">Somme totale de cette commande</th>
+                        <th scope="col">Date de commande</th>
+                        <th scope="col-md-2">actes</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th scope="row">1</th>
+                        <td>Mark</td>
+                        <td>Otto</td>
+                        <td>7000 MAD</td>
+                        <td>02/07/2018</td>
+                        <td><a href="">Montrer</a></td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </div>
-    
+    </div>
+
     {% endblock %}
 
 
@@ -100,7 +102,7 @@
     <script src="{{ asset('bower_components/tinymce/tinymce.min.js') }}"></script>
     <script src="{{ asset('bower_components/tinymce/jquery.tinymce.min.js') }}"></script>
 
-    
+
     <script src="{{ asset('js/main.js') }}"></script>
 
     {% block javascripts %}{% endblock %}

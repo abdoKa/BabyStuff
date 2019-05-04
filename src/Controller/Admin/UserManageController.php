@@ -17,6 +17,7 @@ use App\Form\editPType;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Gedmo\Mapping\Annotation\Slug;
 use App\Entity\Utilisateur;
+use App\Entity\Commande;
 
 class UserManageController extends AbstractController
 
@@ -30,10 +31,27 @@ class UserManageController extends AbstractController
         $repoC=$em->getRepository(Utilisateur::class);
         $user=$repoC->findAll();
         dump($user);
-        return $this->render('admin/B_userList.html.twig', [
+        return $this->render('admin/Admin_UsersTwigs/B_userList.html.twig', [
             'users'=>$user
         ]);
     }
+
+    /**
+     * @Route("/admin/user/detail/{id}" , name="user_detail")
+     */
+
+     public function user_detail($id)
+     {
+        $em =$this->getDoctrine()->getManager();
+        $repoU =$em->getRepository(Utilisateur::class);
+        $repoCom =$em->getRepository(Commande::class);
+
+        $user_detail=$repoU->findOneBy(array('id'=> $id));
+        dump($user_detail);
+        return $this->render('admin/Admin_UsersTwigs/user_detail.html.twig',[
+            'user_detail'=>$user_detail,
+        ]);
+     }
 
     
 }

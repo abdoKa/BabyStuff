@@ -1,0 +1,71 @@
+
+  {% extends "admin/base-admin.html.twig" %}
+  {% block stylesheets %}
+  <style>
+  </style>
+  {% endblock %}
+  {% block head %}
+ <div class="container">
+      <div class="row ">
+          <div class="col-lg-12">
+              <h1 class="Welcom-title">Description sur ce utilisateur</h1>
+          </div>
+      </div>
+  </div>
+  <div class="row w-100" style="margin-left:150px">
+      <div class="col-sm-9">
+
+
+          <table class="table">
+
+              <tr>
+                  <th bgcolor="#f3f9fb">Nom </th>
+                  <td>{{ user_detail.nom }}</td>
+              </tr>
+              <tr>
+                  <th bgcolor="#f3f9fb">Prénom </th>
+                  <td>{{ user_detail.prenom }}</td>
+              </tr>
+              <tr>
+                  <th bgcolor="#f3f9fb">Address </th>
+                  <td>{{ user_detail.adresse }}</td>
+              </tr>
+              <tr>
+                  <th bgcolor="#f3f9fb">E-mail </th>
+                  <td>{{ user_detail.email }}</td>
+              </tr>
+
+              <tr>
+                  <th bgcolor="#f3f9fb">Télephone</th>
+                  <td>{{user_detail.telephone}}</td>
+              </tr>
+              <tr>
+                  <th bgcolor="#f3f9fb">Date d'inscription</th>
+                  <td>{{ user_detail.createdAt|date('Y-m-d, H:i') }}</td>
+              </tr>
+              <tr>
+                  <th bgcolor="#f3f9fb">Date de modification</th>
+                  <td>{{ user_detail.updatedAt|date('Y-m-d, H:i') }}</td>
+              </tr>
+              
+             
+             
+          </table>
+          <hr>
+          <div class="row">
+              <div class="col-3" style="margin-left:-65px">
+                  <ul class="list-group-sm" style="text-align:center;">
+                      <li class="list-group-item"><a href="{{ path('admin_user_list') }}" class="btn btn-warning btn-sm"><i
+                                  class="fas fa-arrow-circle-left"></i>
+                              <spane>retour</spane>
+                          </a></li>
+                      <li class="list-group-item"> <a href="#"
+                              class="btn btn-danger btn-sm" id="alert"><i class="fas fa-trash-alt"> </i>
+                              <spane>supprimer</spane>
+                          </a></li>
+                  </ul>
+              </div>
+          </div>
+      </div>
+  </div>
+  {% endblock %}
