@@ -46,6 +46,11 @@
     -webkit-animation-name: slideIn;
     animation-name: slideIn;
   }
+  .btn-group{
+    right:-120px;
+  }
+
+ 
 </style>
 
 <div class="container">
@@ -91,7 +96,7 @@
 
 
       <ul class="navbar-nav ml-auto">
-        <li class="nav-item">
+        <li "class=" dropdown"">
 
           <a class="nav-link" href="{{ path('shopping') }}"> Panier
             <i class="fas fa-shopping-basket">
@@ -106,19 +111,24 @@
       </ul>
       {% if is_granted("ROLE_USER") %}
 
-      <ul class="navbar-nav ml-auto">
+      <ul class="navbar-nav m-auto" id="profile-right">
         <div class="btn-group">
-          <a href="#"><i class="fas fa-caret-down"></i> </a>
-          <a href="#" class="nav-link"> Hi {{ app.user.nom }}</a>
-          <li class="navbar-nav ml-auto">
-            <a class="nav-link" href="{{ path('logout') }}"> Deconnexion </a>
-          </li>
+          <li class="nav-item dropdown" id="navbarSupportedContent">
+            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
+              aria-expanded="true"><spane>Slaut!</spane> {{ app.user.nom }} </a>
+            <div class="dropdown-menu  animate slideIn" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="#">
+                <i class="far fa-user-circle"></i><spane> Mon Compte </spane>
+              </a>
+              <a class="dropdown-item" href="{{ path('logout') }}"><i class="fas fa-sign-out-alt"></i> <spane> Deconnexion </spane></a>
+              <a class="dropdown-item" href="#"><i class="fas fa-cogs"></i><spane> Paramètres </spane></a>
+            </div>
       </ul>
       {% else %}
-     
+
       <ul class="navbar-nav ml-auto">
         <li class="navbar-nav ml-auto">
-          <a class="nav-link" href="{{ path('security_login') }}"> Se connecter </a>
+          <a class="nav-link" href="{{ path('security_login') }}"><i class="fas fa-sign-in-alt"></i><spane> <small>Se connecter</small> </spane></a>
         </li>
       </ul>
 

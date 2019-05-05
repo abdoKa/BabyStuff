@@ -34,9 +34,6 @@ class BabyProductsController extends AbstractController
 
         $repoFea =$em->getRepository(Produit::class);
         $features =$repoFea->getFeatures();
-
-
-
         
 
         return $this->render('baby_products/home.html.twig',[
@@ -46,6 +43,8 @@ class BabyProductsController extends AbstractController
             ]);
 
     }
+
+  
 
     public function menuNav()
     {
@@ -104,16 +103,10 @@ class BabyProductsController extends AbstractController
      */
     public function about()
     {
-        $em =$this->getDoctrine()->getManager();
-
-        $repoC =$em->getRepository(Categorie::class);
-        $categoriesMenu =$repoC->getCategories();
-
         return $this->render('baby_products/about.html.twig' ,[
-            'categoriesMenu' =>$categoriesMenu
-
         ]);
     }
+
 
 /**
  * @Route("/brands", name="marques")
@@ -175,7 +168,6 @@ class BabyProductsController extends AbstractController
     {
         $em =$this->getDoctrine()->getManager();
         $repoC =$em->getRepository(Categorie::class);
-        $categoriesMenu =$repoC->getCategories();
 
 
         $pagination =$paginator->paginate(
@@ -185,7 +177,6 @@ class BabyProductsController extends AbstractController
             dump($repoC);
 
         return $this->render('baby_products/allcategorie.html.twig',[
-            'categoriesMenu' =>$categoriesMenu,
             'pagination' =>$pagination,
         ]);
     }
@@ -198,7 +189,6 @@ class BabyProductsController extends AbstractController
     {
         $em =$this->getDoctrine()->getManager();
         $repoC =$em->getRepository(Categorie::class);
-        $categoriesMenu =$repoC->getCategories();
         $categorie =$repoC->findOneBy(array('slug'=> $slug));
         $produits= $categorie->getProduits();
 
@@ -208,7 +198,6 @@ class BabyProductsController extends AbstractController
         );
         return $this->render('baby_products/show-cat.html.twig',[
             'categorie' =>$categorie,  
-            'categoriesMenu' =>$categoriesMenu,
             'produits'=>$produits, 
             'pagination' =>$pagination,
 
@@ -227,11 +216,9 @@ class BabyProductsController extends AbstractController
         $repoF =$em->getRepository(Produit::class);
         $single_p =$repoF->findOneBy(array('slug'=> $slug));
         $fournisseur=$single_p->getFourniseur();
-        $repoC =$em->getRepository(Categorie::class);
-        $categoriesMenu =$repoC->getCategories();
+    
         return $this->render('baby_products/show-product.html.twig',[
             'single_p' =>$single_p,
-            'categoriesMenu' =>$categoriesMenu,
             'fournisseur'=>$fournisseur
         ]);
     }

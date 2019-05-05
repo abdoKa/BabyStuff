@@ -3,12 +3,12 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>{% block title %}BabyStuff{% endblock %}</title>
+    <title>{% block title %} BabyStuff {% endblock %} </title>
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
     <link rel="manifest" href="{{ asset('/site.webmanifest') }}">
-    <link rel="mask-icon" href="{{ asset('/safari-pinned-tab.svg') }} color=" #5bbad5">
+    <link rel="mask-icon" href="{{ asset('/safari-pinned-tab.svg') }}" color=" #5bbad5">
 
     <meta name="msapplication-TileColor" content="#da532c">
     <meta name="theme-color" content="#ffffff">
@@ -21,32 +21,29 @@
 
 
     {% block stylesheets %}
-    
-    
 
-    
+
     {% endblock %}
 </head>
 
+
 <body>
-    
+
     {{ render(controller('App\\Controller\\BabyProductsController::menuNav')) }}
 
 
-    {% block body %} {% endblock %} 
+    {% block body %} {% endblock %}
 
 
 
 
 
-    <div id="container">
 
-        <div id="footer">
-            <i class="fas fa-baby-carriage"></i>
-            <h5> BabyStuff © </h6>
-            {{ "now"|date("Y") }}
-        </div>
-    </div>
+    <div id="footer">
+        <i class="fas fa-baby-carriage"></i>
+            <h5> BabyStuff © </h5>
+                 <small>{{ "now"|date("Y") }}</small>
+    </div>  
 
     <script src="{{ asset('bower_components/jquery/dist/jquery.min.js') }}"></script>
     <script src="{{ asset('bower_components/bootstrap/dist/js/bootstrap.min.js') }}"></script>

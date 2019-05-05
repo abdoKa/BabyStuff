@@ -46,13 +46,6 @@ class CategoriesManageController extends AbstractController
         $em = $this->getDoctrine()->getManager();
         $categorie = $em->getRepository(Categorie::class)->findOneBy(array('slug' => $slug));
 
-        if ($categorie == null) {
-            return $this->render(
-                'admin/NotFound.html.twig'
-
-            );
-        }
-
         $form = $this->createForm(EditCategorieType::class, $categorie);
         $form->handleRequest($request);
 

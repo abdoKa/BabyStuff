@@ -9,29 +9,33 @@
 <h1 class="marque-title">Nos partenaires</h1>
 
 <section class="marques">
-    <div class="container" >
+    <div class="container">
         <div class="row">
             {% for fournisseur in pagination %}
             <div class="col-sm-3 card marque-products">
                 <div class="card-body">
                     <div class="product-image">
-                        <img src="{{ asset('/brows_file/' ~ fournisseur.image) }}" alt="">
-                        <p class="card-text">{{ fournisseur.nom }}</p>
+                        <a href="{{ path('show_marque', {'slug': fournisseur.slug }) }}"> 
+                        <img src="{{ asset('/brows_file/' ~ fournisseur.image) }}" class=" w-100" alt="">
+                        </a>
+                        <a href="{{ path('show_marque', {'slug': fournisseur.slug }) }}"> 
+                       <div class="card-title product-title"><a href="{{ path('show_marque', {'slug': fournisseur.slug }) }}">  {{ fournisseur.nom }}</a></div>
+                        </a>
                         <a href="#" class="add-to-favourite"></a>
                     </div>
                     <div class="card-title product-title"></div>
                     <a href="{{ path('show_marque', {'slug': fournisseur.slug }) }}"
-                        class="btn btn-primary add-to-cart">
+                        class="btn btn-primary add-to-cart"><i class="fas fa-shopping-cart"></i>
                         Check out!!</a>
                 </div>
             </div>
             <!--END SINGLE PRODUCTS-->
             {% endfor %}
         </div>
-            <div class="navigation pagination-sm">
+        <div class="navigation pagination-sm">
             {{ knp_pagination_render(pagination) }}
             <div>
-    </div>
+            </div>
 </section>
 
 {% endblock %}

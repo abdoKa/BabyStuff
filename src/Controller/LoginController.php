@@ -2,8 +2,6 @@
 
 namespace App\Controller;
 
-use Symfony\Flex\Path;
-use App\Entity\Categorie;
 use App\Entity\Utilisateur;
 use App\Form\RegistraionType;
 use Symfony\Component\HttpFoundation\Request;
