@@ -10,6 +10,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 
 class LoginController extends AbstractController
 {
@@ -54,8 +55,16 @@ class LoginController extends AbstractController
             $entityManager->persist($utilisateur);
             $entityManager->flush();
 
+            $token = new UsernamePasswordToken(
+             $utilisateur,
+             $hash,
+             'main',
+             $utilisateur->getRoles()
+            );
 
-            return $this->redirectToRoute('security_login');
+            $this->get('security.token_storage')->setToken($token);
+            $this->get('session')->set('_security_main', serialize($token));
+            return $this->redirectToRoute('home');
         }
         return $this->render('login/register.html.twig', [
             'form'=>$form->createView()

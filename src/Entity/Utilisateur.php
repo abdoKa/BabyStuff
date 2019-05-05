@@ -18,7 +18,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  *  message= "L'email que vous avez indiqué est deja utilisé !"
  * )
  */
-class Utilisateur implements UserInterface 
+class Utilisateur implements UserInterface, \Serializable
 {
     /**
      * @ORM\Id()
@@ -270,34 +270,38 @@ class Utilisateur implements UserInterface
         return $this;
     }
     public function eraseCredentials()
-    { }
+    {
+        $this->confirm_password =null;
+     }
     public function getSalt()
-    { }
+    {
+        return null;
+    }
     public function getUsername()
     { }
 
-    // // public function serialize()
-    // // { 
-    // //     return serialize([
+    public function serialize()
+    { 
+        return serialize([
 
-    // //             $this->id,
-    // //             $this->email,
-    // //             $this->password,
-    // //             $this->telephone,
-    // //             $this->adresse,
-    // //             $this->commandes
-    // //         ]);
-    // // }
+                $this->id,
+                $this->email,
+                $this->password,
+                $this->telephone,
+                $this->adresse,
+                $this->commandes,
+            ]);
+    }
 
-    // // public function unserialize($string)
-    // // { 
-    // //    list(
-    // //     $this->id,
-    // //     $this->email,
-    // //     $this->password,
-    // //     $this->telephone,
-    // //     $this->adresse,
-    
-    // //    ) = unserialize($string, ['allowed_classes'=>false]);
-    // // }   
+    public function unserialize($string)
+    { 
+       list(
+        $this->id,
+        $this->email,
+        $this->password,
+        $this->telephone,
+        $this->adresse,
+
+       ) = unserialize($string, ['allowed_classes'=>false]);
+    }   
 }

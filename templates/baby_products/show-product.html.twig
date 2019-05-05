@@ -5,10 +5,14 @@
         padding-top: 80px;
 
     }
-    .w-100{
-        width:50%;
-        height:30%;
-    }
+   .rounded{
+       height:100%;
+       padding: 5px 0 20px 0;
+        -webkit-box-shadow: 0 30px 60px 0 rgba(0, 0, 0, 0.3);
+    box-shadow: 0 30px 60px 0 rgba(0, 0, 0, 0.4);
+   }
+   
+       
 </style>
 
 {% endblock %}
@@ -17,7 +21,7 @@
 {% block body %}
 <div class="container">
     <div class="row">
-        <div class="col-lg-4 ">
+        <div class="col-lg">
             <img src="{{ asset('/brows_file/' ~ single_p.image) }}" class="rounded float-left w-100" alt="">
         </div>
 
@@ -46,7 +50,7 @@
                         <i class="fas fa-cart-plus"></i>
                         <spane>ACHETER</spane>
                     </button>
-                    <spane><i class="fas fa-check"></i> en stock </spane>
+                    <div><i class="fas fa-check"></i> en stock </div>
             </form>
             {% else %}
             <div class="alert alert-info" role="alert">

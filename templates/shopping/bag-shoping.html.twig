@@ -7,6 +7,24 @@
     body {
         padding-top: 80px;
     }
+
+    img {
+        width: 30%;
+        height: 20%;
+    }
+
+    th {
+        color: black;
+    }
+    hr{
+        background-color:black;
+    }
+    tr{
+        width:50%;
+    }
+    .table{
+       padding:10px 30px 10px 30px;
+    }
 </style>
 
 {% endblock %}
@@ -18,38 +36,38 @@
     <div class="col-lg-12">
         {% if cartDetails.products is not empty and cartDetails.products is defined %}
         <div>
-            <h2>your cart</h2>
+            <h2>Votre Panier</h2>
         </div>
-        <table class="table">
+        <table class="table ">
             <thead>
                 <tr>
 
-                    <th>produit</th>
+                    <th>Vos produits</th>
                     <th>Quantité</th>
                     <th></th>
-                    <th>prix</th>
-                    <th style="text-align:right;"> total</th>
+                    <th>Prix</th>
+                    <th style="text-align:right;"> Total</th>
                 </tr>
             </thead>
             <tbody>
                 {% for product in cartDetails.products %}
-                <tr class="product-position">
+                <tr >
 
 
-                    <td class="col-md-5">
-                        <a href="#" class="pull-left" style="margin-right:15px;">
-                            <img src="{{ asset('/brows_file/' ~ product.product.image) }}" alt="">
-                        </a>
-                        <div>
+                   <td class="col-lg-3">
                             <a href="{{ path('single_product', {'slug': product.product.slug }) }}">
                                 <strong>{{ product.product.nom }}</strong>
                             </a>
-                            <ul class="list-unstyled">
-                            </ul>
-                        </div>
+                        <a href="#" class="pull-left">
+                            <img src="{{ asset('/brows_file/' ~ product.product.image) }}" alt="">
+                        </a>
+                         
                     </td>
+                          
+                            
 
-                    <td class="col-md-3">
+
+                    <td class="col-lg-3">
                         <div class="form-group">
                             <div>
                                 <input type="number" name="quantity" required="required" min="1" data-id=""
@@ -57,49 +75,54 @@
                             </div>
                         </div>
                     </td>
-                    <td class="col-md-1">
+                    <td class="col-lg-1">
                         <a href="#" class="btn btn-danger glyphicon glyphicon-remove product-remove"
                             data-toggle="confirmation" data-popout="true" data-placement="left">
-                            <i class="fas fa-times"></i>
+                            <small><i class="fas fa-times"></i></small>
 
                         </a>
                     </td>
-                    <td class="col-md-1 price">
-                        <span>{{ product.product.prix }}</span>
+                    <td class="col-lg-3 price">
+                        <span>{{ product.product.prix }}</span> <small>MAD</small>
                     </td>
-                    <td class="col-md-1 sum" style="text-align: right">
-                        {{ product.sum }}
+                    <td class="col-lg-3 sum" style="text-align: right">
+                        {{ product.sum }} <small>MAD</small>
                     </td>
                 </tr>
+
                 {% endfor %}
+               
+
             </tbody>
             <tfoot>
                 <tr>
                     <td colspan="6" style="text-align: right;">
-                        <strong>total sum:</strong>
-                        <span class="totalsum">{{ cartDetails.totalsum }}</span>
+                        <strong style="color:black;">Total sum:</strong>
+                        <span class="totalsum">{{ cartDetails.totalsum }}</span> <small>MAD</small>
                     </td>
                 </tr>
             </tfoot>
+                <hr />
         </table>
 
 
         <div class="row">
+
             <div>
                 <div>
-                    <a href="#" class="btn btn-success glyphicon glyphicon-ok" id="">
-                        checkout !!
+                    <a href="#" class="btn btn-success" id="">
+                        Commandez maintenant !
                     </a>
                     <a href="#" class="btn btn-danger glyphicon glyphicon-trash clear-cart" data-toggle="confirmation"
                         data-popout="true" data-placement="left">
-                        Clear <i class="fas fa-trash-alt"></i>
+                        vider le panier <i class="fas fa-trash-alt"></i>
                     </a>
                 </div>
             </div>
         </div>
         <div class="row">
             <p><a href="{{ path('show-all-categories') }}" class="btn btn-warning"><i class="fas fa-chevron-left"></i>
-                    <spane>Continue</spane>
+                    <spane>Continuer vos achats</spane>
                 </a></p>
         </div>
 
@@ -113,9 +136,9 @@
                 <h2>votre cart est vide !!</h2>
             </div>
         </div>
+        {% endif %}
     </div>
 </div>
-{% endif %}
 
 
 {% endblock %}

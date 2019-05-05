@@ -11,7 +11,6 @@ class AdminController extends AbstractController
 {
     /**
      * @Route("/admin", name="admin")
-     * @IsGranted("ROLE_ADMIN")
      */
     public function adminDashboard()
     {

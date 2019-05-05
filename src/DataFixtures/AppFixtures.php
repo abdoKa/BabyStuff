@@ -43,7 +43,7 @@ class AppFixtures extends Fixture
             $categorie=new Categorie();
             $categorie->setNom('Categorie ' . $i);
             $categorie->setDescription('Lorem, ipsum dolor sit amet consectetur adipisicing elit. Delectus consectetur, laudantium maxime eaque a repellendus?');
-            $categorie->setImage('06daf0f2c40ea9a16a0538d483bd0c2c.jpeg');
+            $categorie->setImage('accessories-adorable-baby-325867.jpg');
             $slug = $slugify->slugify($categorie->getNom());
             $categorie->setSlug($slug);
             $categorie->setDateAjout($this->faker->dateTimeBetween('-10 days', 'now'));
@@ -54,7 +54,7 @@ class AppFixtures extends Fixture
             $fournisseur = new Fourniseur();
             $fournisseur->setNom('Fourniseur ' .$i);
             $fournisseur->setDescription('Lorem, ipsum dolor sit amet consectetur adipisicing elit. Delectus consectetur, laudantium maxime eaque a repellendus?');
-            $fournisseur->setImage('06daf0f2c40ea9a16a0538d483bd0c2c.jpeg');
+            $fournisseur->setImage('HM-Share-Image.jpg');
             $slug = $slugify->slugify($fournisseur->getNom());
             $fournisseur->setSlug($slug);
             $fournisseur->setDateAjout($this->faker->dateTimeBetween('-10 days', 'now'));
@@ -74,7 +74,7 @@ class AppFixtures extends Fixture
             $produit = new Produit();
             $produit->setReferance('Ref' .$i);
             $produit->setNom('Produit ' .$i);
-            $produit->setImage('06daf0f2c40ea9a16a0538d483bd0c2c.jpeg');
+            $produit->setImage('accessories-adorable-baby-325867.jpg');
             $produit->setDescription('Lorem, ipsum dolor sit amet consectetur adipisicing elit');
             $produit->setPrix('50');
             $produit->setStock(50);

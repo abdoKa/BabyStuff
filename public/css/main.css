@@ -178,10 +178,6 @@ h5 {
     margin-left: 10%;
 }
 
-.header {
-    margin: 5% 0 5% 0;
-}
-
 .img-header,
 .row,
 .img-bottom,
@@ -192,10 +188,6 @@ h5 {
 .img-center-one,
 .img-center-three {
     width: 20%;
-}
-
-.img-three {
-    height: 105%;
 }
 
 .img-header,
@@ -211,6 +203,10 @@ h5 {
 
 .img-center-three {
     margin: 0 0 1% 1%;
+}
+
+.header {
+    margin: 5% 0 5% 0;
 }
 
 .product-pre {

@@ -20,15 +20,15 @@ class CartController extends AbstractController
     {
         $em = $this->getDoctrine()->getManager();
         $repoP = $em->getRepository(Produit::class);
-    
+        
         $session = new Session();
-
+        
         $productsArray = [];
         $cart = [];
         $totalSum = 0;
-
+        
         $session = new Session();
-
+        
         if($session->get('my_cart') == null){
             $session->set('my_cart', $cart);
         }
@@ -39,9 +39,9 @@ class CartController extends AbstractController
         if ($request->isMethod('post')) {
             $productQuantity = $request->request->get('qte');
             $productId = $request->request->get('product_id');
-
+            
             $item[$productId] = (int)$productQuantity;
-
+            
             if(array_key_exists($productId, $cart)){
                 $cart[$productId] += $productQuantity;
             }else{
@@ -51,32 +51,32 @@ class CartController extends AbstractController
         }
         
         
-
+        
         foreach ($cart as $productId => $productQuantity) {
             $product = $repoP->findOneBy([
                 'id' => $productId,
-            ]);
-
-            if (is_object($product)) {
-                $productPosition = [];
-                $quantity = abs((int)$productQuantity);
-                $price = $product->getPrix();
-                $sum = $price * $quantity;
-                $productPosition['product'] = $product;
-                $productPosition['quantity'] = $quantity;
-                $productPosition['price'] = $price;
-                $productPosition['sum'] = $sum;
-                $totalSum += $sum;
-                $productsArray[] = $productPosition;
+                ]);
+                
+                if (is_object($product)) {
+                    $productPosition = [];
+                    $quantity = abs((int)$productQuantity);
+                    $price = $product->getPrix();
+                    $sum = $price * $quantity;
+                    $productPosition['product'] = $product;
+                    $productPosition['quantity'] = $quantity;
+                    $productPosition['price'] = $price;
+                    $productPosition['sum'] = $sum;
+                    $totalSum += $sum;
+                    $productsArray[] = $productPosition;
+                }
             }
-        }
-        
-        $cartDetails = ['products' => $productsArray, 'totalsum' => $totalSum ];
-
-       
-
-        // $session->invalidate();
-        $response=new Response();
+            
+            $cartDetails = ['products' => $productsArray, 'totalsum' => $totalSum ];
+            
+            
+            
+            // $session->invalidate();
+            $response=new Response();
         $val = $session->get('my_cart');
         $cookie =Cookie::create('my_cart',serialize($val), time() + 60 * 60 * 24 * 365,'~',
         'BabyStuff.com', true, true,true);
@@ -85,7 +85,6 @@ class CartController extends AbstractController
         $cookie = $response->headers->getCookies();
         
 
-       
 
         return $this->render('shopping/bag-shoping.html.twig', [
             'cartDetails' => $cartDetails
