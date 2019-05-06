@@ -1,24 +1,22 @@
 <?php
 
-namespace App\Controller\Users;
+namespace App\Controller\Orders;
 
-use App\Entity\Utilisateur;
-
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
-class UserAccountController extends AbstractController
+class OrderController extends AbstractController
 {
     /**
-     * @Route("/user/account", name="user_account")
+     * @Route("/user/order", name="order")
      * @IsGranted("ROLE_USER")
      */
-    public function accout()
+    public function index()
     {
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
-
-        return $this->render('user_account/user_space.html.twig', []);
+        return $this->render('order/oders.html.twig', [
+            'controller_name' => 'OrderController',
+        ]);
     }
 }

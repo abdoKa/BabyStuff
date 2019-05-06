@@ -1,4 +1,6 @@
 <style>
+
+
   @media (min-width: 780px) {
     .animate {
       animation-duration: 0.3s;
@@ -49,6 +51,7 @@
   .btn-group{
     right:-120px;
   }
+  
 
  
 </style>
@@ -117,7 +120,7 @@
             <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
               aria-expanded="true"><spane>Slaut!</spane> {{ app.user.nom }} </a>
             <div class="dropdown-menu  animate slideIn" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="#">
+              <a class="dropdown-item" href="{{ path('user_account') }}">
                 <i class="far fa-user-circle"></i><spane> Mon Compte </spane>
               </a>
               <a class="dropdown-item" href="{{ path('logout') }}"><i class="fas fa-sign-out-alt"></i> <spane> Deconnexion </spane></a>
