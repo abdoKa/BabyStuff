@@ -11,6 +11,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
+use App\Form\LoginFormType;
 
 class LoginController extends AbstractController
 {
@@ -19,14 +20,17 @@ class LoginController extends AbstractController
      */
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
+        // get the login error if there is one
         $error = $authenticationUtils->getLastAuthenticationError();
+        // last username entered by the user
         $lastUsername = $authenticationUtils->getLastUsername();
+        $form = $this->createForm(LoginFormType::class, [
+            '_username' => $lastUsername,
+        ]);
 
-      
-        $this->redirectToRoute('home');
         return $this->render('login/simple_login.html.twig', [
+            'form' => $form->createView(),
             'error' => $error,
-            'last_username' => $lastUsername
         ]);
     }
 
@@ -34,7 +38,9 @@ class LoginController extends AbstractController
      * @Route("/logout", name="logout")
      */
     public function logout()
-    { }
+    {
+        throw new \Exception('this should not be reached');
+    }
 
     /**
      * @Route("/registration", name="login_registration" , methods={"GET", "POST"})
@@ -51,6 +57,9 @@ class LoginController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $hash = $encoder->encodePassword($utilisateur, $utilisateur->getPassword());
             $utilisateur->setPassword($hash);
+            $utilisateur->setRoles(['ROLE_USER']);
+
+
 
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($utilisateur);

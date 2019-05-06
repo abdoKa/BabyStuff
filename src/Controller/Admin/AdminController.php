@@ -16,9 +16,7 @@ class AdminController extends AbstractController
     public function adminDashboard()
     {
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
-        $this->denyAccessUnlessGranted('ROLE_USER');
-        return $this->render('admin/base-admin.html.twig', []); 
-
+        // $this->denyAccessUnlessGranted('ROLE_USER');
+        return $this->render('admin/base-admin.html.twig', []);
     }
-
 }

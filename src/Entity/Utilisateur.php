@@ -27,6 +27,8 @@ class Utilisateur implements UserInterface, \Serializable
      */
     private $id;
 
+
+
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\Length(
@@ -88,7 +90,7 @@ class Utilisateur implements UserInterface, \Serializable
     /**
      * @ORM\Column(type="json_array")
      */
-    private $roles = array('ROLE_USER');
+    private $roles = [];
 
 
     /**
@@ -184,7 +186,12 @@ class Utilisateur implements UserInterface, \Serializable
 
     public function getRoles()
     {
-        return $this->roles;
+        $roles = $this->roles;
+        // everyone is a user
+        if (!in_array('ROLE_USER', $roles)) {
+            $roles[] = 'ROLE_USER';
+        }
+        return $roles;
     }
 
     public function setRoles($roles): self
@@ -250,6 +257,7 @@ class Utilisateur implements UserInterface, \Serializable
         return $this;
     }
 
+
     /**
      * Get the value of password
      */
@@ -279,7 +287,7 @@ class Utilisateur implements UserInterface, \Serializable
     }
     public function getUsername()
     {
-        $this->getUsername = null;
+        return $this->email;
     }
 
     public function serialize()
