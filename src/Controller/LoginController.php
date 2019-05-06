@@ -17,14 +17,16 @@ class LoginController extends AbstractController
     /**
      * @Route("/login", name="security_login")
      */
-    public function login(AuthenticationUtils $authenticationUtils):Response
+    public function login(AuthenticationUtils $authenticationUtils): Response
     {
         $error = $authenticationUtils->getLastAuthenticationError();
         $lastUsername = $authenticationUtils->getLastUsername();
+
+      
         $this->redirectToRoute('home');
         return $this->render('login/simple_login.html.twig', [
-            'error'=>$error,
-            'last_username'=>$lastUsername
+            'error' => $error,
+            'last_username' => $lastUsername
         ]);
     }
 
@@ -32,7 +34,7 @@ class LoginController extends AbstractController
      * @Route("/logout", name="logout")
      */
     public function logout()
-    {}
+    { }
 
     /**
      * @Route("/registration", name="login_registration" , methods={"GET", "POST"})
@@ -41,25 +43,24 @@ class LoginController extends AbstractController
     {
         $utilisateur = new Utilisateur();
 
-        $form=$this->createForm(RegistraionType::class, $utilisateur);
+        $form = $this->createForm(RegistraionType::class, $utilisateur);
 
         $form->handleRequest($request);
-        
-        
-        if($form->isSubmitted() && $form->isValid())
-        {
-           $hash = $encoder->encodePassword($utilisateur, $utilisateur->getPassword());
-           $utilisateur->setPassword($hash);
 
-            $entityManager =$this->getDoctrine()->getManager();
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $hash = $encoder->encodePassword($utilisateur, $utilisateur->getPassword());
+            $utilisateur->setPassword($hash);
+
+            $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($utilisateur);
             $entityManager->flush();
 
             $token = new UsernamePasswordToken(
-             $utilisateur,
-             $hash,
-             'main',
-             $utilisateur->getRoles()
+                $utilisateur,
+                $hash,
+                'main',
+                $utilisateur->getRoles()
             );
 
             $this->get('security.token_storage')->setToken($token);
@@ -67,7 +68,7 @@ class LoginController extends AbstractController
             return $this->redirectToRoute('home');
         }
         return $this->render('login/register.html.twig', [
-            'form'=>$form->createView()
+            'form' => $form->createView()
         ]);
     }
 }

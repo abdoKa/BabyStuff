@@ -11,9 +11,12 @@ class AdminController extends AbstractController
 {
     /**
      * @Route("/admin", name="admin")
+     *  @IsGranted("ROLE_ADMIN")
      */
     public function adminDashboard()
     {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+        $this->denyAccessUnlessGranted('ROLE_USER');
         return $this->render('admin/base-admin.html.twig', []); 
 
     }

@@ -18,16 +18,19 @@ security:
 
             provider: in_database
 
-
             form_login:
                 login_path: security_login
                 check_path: security_login
 
-
-
             logout:
                 path: logout
                 target: home
+
+            remember_me:
+                secret:   '%kernel.secret%'
+                lifetime: 604800
+                path:     /
+
 
 
             # activate different ways to authenticate

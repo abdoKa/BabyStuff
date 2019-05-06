@@ -271,37 +271,39 @@ class Utilisateur implements UserInterface, \Serializable
     }
     public function eraseCredentials()
     {
-        $this->confirm_password =null;
-     }
+        $this->confirm_password = null;
+    }
     public function getSalt()
     {
         return null;
     }
     public function getUsername()
-    { }
+    {
+        $this->getUsername = null;
+    }
 
     public function serialize()
-    { 
+    {
         return serialize([
 
-                $this->id,
-                $this->email,
-                $this->password,
-                $this->telephone,
-                $this->adresse,
-                $this->commandes,
-            ]);
+            $this->id,
+            $this->email,
+            $this->password,
+            $this->telephone,
+            $this->adresse,
+            $this->commandes,
+        ]);
     }
 
     public function unserialize($string)
-    { 
-       list(
-        $this->id,
-        $this->email,
-        $this->password,
-        $this->telephone,
-        $this->adresse,
+    {
+        list(
+            $this->id,
+            $this->email,
+            $this->password,
+            $this->telephone,
+            $this->adresse,
 
-       ) = unserialize($string, ['allowed_classes'=>false]);
-    }   
+        ) = unserialize($string, ['allowed_classes' => false]);
+    }
 }

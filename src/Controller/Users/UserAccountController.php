@@ -16,13 +16,14 @@ class UserAccountController extends AbstractController
     public function accout($id)
     {
         $em = $this->getDoctrine()->getManager();
-        $repoUser= $em->getRepository(Utilisateur::class);
-        $user=$repoUser->findOneBy(array('id'=> $id));
+        $repoUser = $em->getRepository(Utilisateur::class);
+        $user = $repoUser->findOneBy(array('id' => $id));
         dump($user);
 
+
+      
         return $this->render('user_account/user_space.html.twig', [
             'user' => $user,
         ]);
-
     }
 }
