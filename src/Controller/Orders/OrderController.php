@@ -63,8 +63,8 @@ class OrderController extends AbstractController
         }
         $cartDetails = ['products' => $product, 'totalsum' => $sum];
 
-        $order->getUtilisateur();
-        dump($order->getUtilisateur());
+        $user = $this->getUser();
+        $order->setUtilisateur($user);
        
         $order->setPrixTotale($sum);
 
@@ -76,6 +76,7 @@ class OrderController extends AbstractController
             $em = $this->getDoctrine()->getManager();
             $em->persist($order);
             $em->flush();
+            $session->clear();
 
             return $this->redirectToRoute('user_account');
         }
@@ -85,6 +86,12 @@ class OrderController extends AbstractController
             'order' => $order,
             'cartDetails' => $cartDetails
         ]);
+    }
+    public function clearCart()
+    {
+        $response = new Response();
+        $response->headers->clearSessions('cart');
+        $response->sendHeaders();
     }
 
    
