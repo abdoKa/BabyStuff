@@ -4,12 +4,15 @@
 {% block stylesheets %}
 <style>
     .form-group {
-        margin:100px 0 50px 50px;
+        margin: 100px 0 50px 50px;
     }
-   
-    
-    label{
-        color:black;
+
+    label {
+        color: black;
+    }
+
+    hr {
+        background-color: black;
     }
 
 </style>
@@ -20,19 +23,24 @@
 
 <div class="form-group">
     {{ form_start(form) }}
+    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
     <div class="row">
-        <div class="col-sm-3">{{ form_row(form.nomUtilisateur) }}</div>
-        <div class="col-sm-3">{{ form_row(form.PrenomUtilisateur) }}</div>
+        <div class="col-sm-3">{{ form_row(form.nomUtilisateur, {'value':app.user.nom }) }}</div>
+        <div class="col-sm-3">{{ form_row(form.PrenomUtilisateur, {'value':app.user.prenom }) }}</div>
     </div>
 
-        <div class="col-sm-6">{{ form_row(form.email) }}</div>
+    <div class="col-sm-6">{{ form_row(form.email, {'value':app.user.email }) }}</div>
 
-        <div class="col-sm-6">{{ form_row(form.telephone) }}</div>
+    <div class="col-sm-6">{{ form_row(form.telephone, {'value':app.user.telephone }) }}</div>
 
-        <div class="col-sm-6">{{ form_row(form.adresse) }}</div>
+    <div class="col-sm-6">{{ form_row(form.adresse, {'value':app.user.adresse }) }}</div>
 
-        <div class="col-sm-6">{{ form_row(form.commentaire) }}</div>
+    <div class="col-sm-6">{{ form_row(form.commentaire) }}</div>
 
+    <div colspan="6" style="text-align:right;margin:0 500px 0 30px">
+        <strong style="color:black;">Total:{{ cartDetails.totalsum }} <small>MAD</small></strong>
+    </div>
     {{ form_end(form) }}
 </div>
+{% endif %}
 {% endblock %}

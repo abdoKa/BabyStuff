@@ -40,7 +40,7 @@ class LoginFormAuthenticator  extends AbstractFormLoginAuthenticator
         }
 
         // if a User object, checkCredentials() is called
-        return $this->em->getRepository(User::class)
+        return $this->em->getRepository(Utilisateur::class)
             ->findOneBy(['apiToken' => $apiToken]);
     }
 

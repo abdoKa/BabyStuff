@@ -7,6 +7,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
 class OrdersFormType extends AbstractType
 {
@@ -17,10 +18,12 @@ class OrdersFormType extends AbstractType
             ->add('PrenomUtilisateur')
             ->add('email')
             ->add('telephone')
-            ->add('adresse')
-            ->add('commentaire')
+            ->add('adresse',TextareaType::class)
+            ->add('commentaire',TextareaType::class,[
+                'required'   => false,
+            ])
             ->add('save',SubmitType::class,array(
-                'label' =>'Commander Maintenant',
+                'label' =>'Valider la Commande',
                 'attr'=> array('class'=>'btn btn-success btn-lg ')))
             
         ;

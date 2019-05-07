@@ -34,10 +34,7 @@ class Commande
      */
     private $email;
 
-    /**
-     * @ORM\Column(type="integer")
-     */
-    private $password;
+   
 
     /**
      * @ORM\Column(type="integer")
@@ -49,10 +46,6 @@ class Commande
      */
     private $adresse;
 
-    /**
-     * @ORM\Column(type="datetime")
-     */
-    private $dateCommande;
 
     /**
      * @ORM\Column(type="decimal", precision=6, scale=2)
@@ -135,18 +128,6 @@ class Commande
         return $this;
     }
 
-    public function getPassword(): ?int
-    {
-        return $this->password;
-    }
-
-    public function setPassword(int $password): self
-    {
-        $this->password = $password;
-
-        return $this;
-    }
-
     public function getTelephone(): ?int
     {
         return $this->telephone;
@@ -171,17 +152,7 @@ class Commande
         return $this;
     }
 
-    public function getDateCommande(): ?\DateTimeInterface
-    {
-        return $this->dateCommande;
-    }
-
-    public function setDateCommande(\DateTimeInterface $dateCommande): self
-    {
-        $this->dateCommande = $dateCommande;
-
-        return $this;
-    }
+   
 
     public function getPrixTotale()
     {
@@ -262,7 +233,6 @@ class Commande
                 $commandeProduit->setCommande(null);
             }
         }
-
         return $this;
     }
 

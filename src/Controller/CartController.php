@@ -27,7 +27,6 @@ class CartController extends AbstractController
         $cart = [];
         $totalSum = 0;
         
-        $session = new Session();
         
         if($session->get('my_cart') == null){
             $session->set('my_cart', $cart);
@@ -51,7 +50,6 @@ class CartController extends AbstractController
         }
         
         
-        
         foreach ($cart as $productId => $productQuantity) {
             $product = $repoP->findOneBy([
                 'id' => $productId,
@@ -73,19 +71,7 @@ class CartController extends AbstractController
             
             $cartDetails = ['products' => $productsArray, 'totalsum' => $totalSum ];
             
-            
-            
             // $session->invalidate();
-            $response=new Response();
-        $val = $session->get('my_cart');
-        $cookie =Cookie::create('my_cart',serialize($val), time() + 60 * 60 * 24 * 365,'~',
-        'BabyStuff.com', true, true,true);
-
-        $response->headers->setCookie($cookie);
-        $cookie = $response->headers->getCookies();
-        
-
-
         return $this->render('shopping/bag-shoping.html.twig', [
             'cartDetails' => $cartDetails
         ]);

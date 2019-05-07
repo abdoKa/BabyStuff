@@ -13,7 +13,6 @@ class UserAccountController extends AbstractController
 {
     /**
      * @Route("/user/account", name="user_account")
-     * @IsGranted("ROLE_USER")
      */
     public function accout()
     {
