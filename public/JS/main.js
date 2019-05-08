@@ -37,6 +37,11 @@ $(document).ready(function() {
         $(this).find('.icon-change').toggleClass('fas');
     });
 
+    // $('.list-group a').click(function(e) {
+    //     e.preventDefault();
+    //     $this.find('a').removeClass('active');
+    //     $this.addClass('active');
+    // });
 
     $('.dropdown-toggle').select2({
         selectOnClose: true

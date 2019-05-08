@@ -79,10 +79,6 @@ h5 {
 
 /* the parent */
 
-.slick-list {
-    margin: 0 -27px;
-}
-
 .card-title,
 .product-title {
     font-weight: bold;
@@ -191,7 +187,6 @@ h5 {
 }
 
 .img-header,
-.row,
 .img-center-tow,
 .img-bottom {
     margin: 1%;

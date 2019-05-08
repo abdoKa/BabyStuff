@@ -12,12 +12,7 @@
         max-width: 15em;
     }
 
-    .list-group-item,
-    .bg-primary,
-    .btn {
-        background-image: linear-gradient(to right, #203A43, #0F2027);
-        color: #fff;
-    }
+   
     .container-list{
         position:fixed;
         top:100px;
@@ -49,12 +44,12 @@
       }
 
     
-</style>
+    </style>
 
 {% endblock %}
 
 <div class="container-list">
-    <div class="list-group ">
+    <div class="list-group">
         <a href="{{ path('admin_orders') }}" class="list-group-item "><i class="far fa-bell"></i>
             Commande
         </a>
@@ -63,14 +58,14 @@
         </a>
     </div>
 
-    <div class="list-group">
+    <div class="list-group" id="list-tab" role="tablist">
         <a href="{{ path('admin_product') }}" class="list-group-item"><i class="fab fa-product-hunt"></i>
             <spane> Produit</spane>
         </a>
         <a href="{{ path('admin_categories') }}" class="list-group-item"><i class="fas fa-tags"></i>
             <spane> Categories<spane>
         </a>
-        <a href="{{ path('admin_brands') }}" class="list-group-item  "><i class="far fa-copyright"></i>
+        <a href="{{ path('admin_brands') }}" class="list-group-item"><i class="far fa-copyright"></i>
             <spane>Marques</spane>
         </a>
     </div>
@@ -86,3 +81,12 @@
             </a>
     </div>
 </div>
+
+{% block javascripts %}
+<script>
+
+   
+
+</script>
+
+{% endblock %}

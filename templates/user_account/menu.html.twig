@@ -1,0 +1,32 @@
+{% block stylesheets %}
+<style>
+  .container {
+    width: 100%;
+    position: relative;
+    padding: 30px 0 10px 0px;
+  }
+
+  .row {
+    margin-left: 0 auto;
+  }
+
+  .list-group {
+    margin: 5px 0 0 0;
+
+  }
+
+</style>
+
+{% endblock %}
+
+<div class="container-list">
+  <div class="list-group ">
+    <a href="{{ path('admin_orders') }}" class="list-group-item "><i class="fas fa-box-open"></i>
+      Mes Commandes
+    </a>
+    <a href="{{ path('admin_user_list') }}" class="list-group-item "><i class="fas fa-heart"></i>
+    Mes Favories
+    </a>
+  </div>
+
+</div>

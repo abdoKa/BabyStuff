@@ -1,0 +1,110 @@
+  {% extends "admin/base-admin.html.twig" %}
+  {% block stylesheets %}
+
+  <style>
+      .image_B {
+          height: 150px;
+          max-width: 200px;
+          object-fit: cover;
+      }
+
+      td,
+      th {
+          text-align: center;
+      }
+
+      .container {
+          margin-top: 50px;
+      }
+
+      hr {
+          background-color: black;
+      }
+
+  </style>
+  {% endblock %}
+
+  {% block head %}
+  <div class="container">
+      <div class="row ">
+          <div class="col-lg-12">
+              <h1 class="Welcom-title"> Commande en détail </h1>
+          </div>
+          {# / part backend client settings #}
+      </div>
+      {# / part backend client settings #}
+  </div>
+  <div class="row w-100" style="margin-left:150px">
+      <div class="col-sm-9">
+
+
+          <table class="table w-100">
+              <thead class="thead-dark">
+                  <th scope="col" style="widght:50%">order N° {{ order.id }}</th>
+              </thead>
+
+              <tr>
+                  <th bgcolor="#f3f9fb">Client</th>
+                  <td>{{ order.nomUtilisateur }} {{ order.PrenomUtilisateur }}</td>
+              </tr>
+
+              <tr>
+                  <th bgcolor="#f3f9fb">Adresse</th>
+                  <td>{{ order.adresse }}</td>
+              </tr>
+
+              <tr>
+                  <th bgcolor="#f3f9fb">Télephone</th>
+                  <td>{{ order.telephone }}</td>
+              </tr>
+
+              <tr>
+                  <th bgcolor="#f3f9fb">E-mail</th>
+                  <td>{{ order.email }}</td>
+              </tr>
+              <tr>
+                  <th bgcolor="#f3f9fb">Date du Commande</th>
+                  <td>{{ order.createdAt|date("m/d/Y H:i", "Europe/Paris") }}</td>
+              </tr>
+              <tr>
+                  <th bgcolor="#f3f9fb">Commentaire</th>
+                  <td>{{ order.commentaire}}</td>
+              </tr>
+          </table>
+
+          <hr />
+
+          <table class="table w-100">
+              <thead class="thead-dark">
+                  <th scope="col" style="widght:50%">Produits</th>
+                  <th bgcolor="#f3f9fb">Nom du Produit</th>
+                  <th bgcolor="#f3f9fb">Quantité</th>
+                  <th bgcolor="#f3f9fb">Prix</th>
+                  <th bgcolor="#f3f9fb">Total</th>
+                  
+              </thead>
+              <tbody>
+              
+                      {% for orderProduct in detailOrder %}
+                     
+                  <tr>
+                      <th scope="row">{{orderProduct.produit.id}}</th>
+                      <td>{{ orderProduct.produit.nom }}</td>
+                      <td>{{ orderProduct.quantity }}</td>
+                      <td>{{ orderProduct.prix }} <small>MAD</small></td>
+                      <td>{{ orderProduct.prix * orderProduct.quantity }}<small>MAD</small></td>
+                  </tr>
+                  {% endfor %}
+                      <th class="table-info">TTC</th>
+                      <td class="table-info">{{ order.prixTotale}} <strong>MAD</strong></td>
+              </tbody>
+          </table>
+
+      </div>
+  </div>
+
+  {% endblock %}
+
+  {% block javascripts %}
+
+  {% endblock %}

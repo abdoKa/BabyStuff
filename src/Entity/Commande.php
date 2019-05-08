@@ -55,7 +55,7 @@ class Commande
     /**
      * @ORM\Column(type="text", nullable=true)
      */
-    private $commentaire;
+    private $commentaire='pas de commentaire';
 
 
     /**

@@ -125,6 +125,10 @@
               </a>
               <a class="dropdown-item" href="{{ path('logout') }}"><i class="fas fa-sign-out-alt"></i> <spane> Deconnexion </spane></a>
               <a class="dropdown-item" href="#"><i class="fas fa-cogs"></i><spane> Paramètres </spane></a>
+
+              {% if is_granted("ROLE_ADMIN") %}
+              <a class="dropdown-item" href="{{ path('admin') }}"><i class="fas fa-desktop"></i> <spane> Back-Office </spane></a>
+              {% endif %}
             </div>
       </ul>
       {% else %}
