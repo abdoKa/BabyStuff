@@ -27,12 +27,14 @@ class UserManageController extends AbstractController
      */
     public function admin_BuserList()
     {
-        $em=$this->getDoctrine()->getManager();
-        $repoC=$em->getRepository(Utilisateur::class);
-        $user=$repoC->findAll();
-        dump($user);
+        $em = $this->getDoctrine()->getManager();
+        $repoC = $em->getRepository(Utilisateur::class);
+
+        $user = $repoC->findAll();
+
         return $this->render('admin/Admin_UsersTwigs/B_userList.html.twig', [
-            'users'=>$user
+            'users' => $user,
+
         ]);
     }
 
@@ -40,18 +42,34 @@ class UserManageController extends AbstractController
      * @Route("/admin/user/detail/{id}" , name="user_detail")
      */
 
-     public function user_detail($id)
-     {
-        $em =$this->getDoctrine()->getManager();
-        $repoU =$em->getRepository(Utilisateur::class);
-        $repoCom =$em->getRepository(Commande::class);
+    public function user_detail($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $repoU = $em->getRepository(Utilisateur::class);
 
-        $user_detail=$repoU->findOneBy(array('id'=> $id));
+
+        $user_detail = $repoU->findOneBy(array('id' => $id));
         dump($user_detail);
-        return $this->render('admin/Admin_UsersTwigs/user_detail.html.twig',[
-            'user_detail'=>$user_detail,
+        return $this->render('admin/Admin_UsersTwigs/user_detail.html.twig', [
+            'user_detail' => $user_detail,
         ]);
-     }
+    }
+
+    /**
+     * @Route("/admin/user/{id}/order/detail" , name="userOrderDetail")
+     */
+    public function userOrderDetail($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $repoUserOrder = $em->getRepository(Commande::class);
+
+
+        $userOrderDetails = $repoUserOrder->findOneBy(array('id' => $id));
+        dump($userOrderDetails);
+        return $this->render('admin/Admin_UsersTwigs/userOrderDetail.html.twig', [
+            'userOrderDetails' => $userOrderDetails,
+        ]);
+    }
 
     
 }
