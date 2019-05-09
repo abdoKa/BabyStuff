@@ -41,9 +41,7 @@ class EditProductType extends AbstractType
 
             ->add('description',TextareaType::class,['required' => false,])
 
-            ->add('image', FileType::class,[
-                 'data_class' => null,'required' => false
-            ])
+            ->add('image', FileType::class, array('data_class' => null,'required' => false))
 
             ->add('prix', MoneyType::class)
 

@@ -21,4 +21,14 @@ class UserAccountController extends AbstractController
 
         return $this->render('user_account/user_space.html.twig', []);
     }
+
+     /**
+     * @Route("/user/account/settings", name="user_setting")
+     *  @IsGranted("ROLE_USER")
+     */
+    public function settings()
+    {
+
+        return $this->render('user_account/settings.html.twig', []);
+    }
 }

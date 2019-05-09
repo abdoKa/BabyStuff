@@ -13,7 +13,7 @@
   <div class="container">
       <div class="row">
           <div class="col-lg-12">
-              <h1 class="Welcom-title"> {{userOrderDetails.nomUtilisateur}} -Commande list </h1>
+              <h1 class="Welcom-title"> {{users.nom}} {{users.prenom}} <small>-Commande list</small> </h1>
           </div>
           {# / part backend client settings #}
       </div>
@@ -24,30 +24,25 @@
       <div class="col-sm-3">
 
           {% include 'admin/menu.html.twig' %}
-      </div>
+      </div>    
       <div class="col-sm-9">
           <table class="table">
               <thead>
                   <tr bgcolor="d7f7f5">
-                      <th scope="col">#</th>
-                      <th scope="col">la commande</th>
-                      <th scope="col">Utilisateur</th>
+                      <th scope="col">les commande</th>
                       <th scope="col">Date du commande</th>
                       <th scope="col-md-2">actes</th>
                   </tr>
               </thead>
 
               <tbody>
-                  {% for userOrderDetail in userOrderDetails %}
+              {% for userOrders in order %}
                   <tr>
-                      <th scope="row"></th>
-                      <td>{{ userOrderDetail.id }} </td>
-                      <td>{{ userOrderDetail.nomUtilisateur }} {{ userOrderDetail.PrenomUtilisateur }} </td>
-                      <td>{{ userOrderDetail.createdAt|date('Y-m-d') }}</td>
-                      <td><a href="#"><i class="fas fa-eye btn-light btn-sm"></i></a></td>
+                      <td>{{ userOrders.id }} </td>
+                      <td>{{ userOrders.createdAt|date("m/d/Y H:i", "Europe/Paris") }}</td>
+                      <td><a href="{{ path('order_detail',{'id':userOrders.id}) }}"><i class="fas fa-eye btn-light btn-sm"></i></a></td>
                   </tr>
-                  {% endfor %}
-
+                 {% endfor %}
               </tbody>
           </table>
       </div>

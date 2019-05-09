@@ -8,14 +8,14 @@ use Symfony\Component\HttpFoundation\Request;
 use Knp\Component\Pager\PaginatorInterface;
 
 
-use App\Entity\Produit;
-use App\Entity\Categorie;
+    use App\Entity\Produit;
+    use App\Entity\Categorie;
 
-use App\Form\ProduitType;
-use Symfony\Component\HttpFoundation\Response;
-use App\Form\editPType;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
-use Gedmo\Mapping\Annotation\Slug;
+    use App\Form\ProduitType;
+    use Symfony\Component\HttpFoundation\Response;
+    use App\Form\editPType;
+    use Symfony\Component\HttpFoundation\File\UploadedFile;
+    use Gedmo\Mapping\Annotation\Slug;
 use App\Entity\Utilisateur;
 use App\Entity\Commande;
 
@@ -55,19 +55,23 @@ class UserManageController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/admin/user/{id}/order/detail" , name="userOrderDetail")
+   /**
+     * @Route("/admin/orders/user/detail/{id}", name="userOrderDetail")
      */
-    public function userOrderDetail($id)
+    public function show_order($id)
     {
+
         $em = $this->getDoctrine()->getManager();
-        $repoUserOrder = $em->getRepository(Commande::class);
+        $repoUser = $em->getRepository(Utilisateur::class);
+
+        $users = $repoUser->findOneBy(array('id' => $id));
+        $order =$users->getCommandes();
 
 
-        $userOrderDetails = $repoUserOrder->findOneBy(array('id' => $id));
-        dump($userOrderDetails);
+        dump($order);
         return $this->render('admin/Admin_UsersTwigs/userOrderDetail.html.twig', [
-            'userOrderDetails' => $userOrderDetails,
+            'users' => $users,
+            'order'=>$order
         ]);
     }
 

@@ -47,9 +47,6 @@ class Fourniseur
      *     mimeTypes={"image/jpeg", "image/png"},
      *     mimeTypesMessage="Please upload a valid jpeg or png"
      * )
-     * @Assert\NotBlank(
-     * message="ce champ ne doit pas etre vide !"
-     * )
      */
     private $image;
 

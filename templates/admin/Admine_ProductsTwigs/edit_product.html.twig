@@ -127,7 +127,8 @@
                 <label for="imageUpload"></label>
              </div>
              <div class="avatar-preview">
-                <div id="imagePreview" style="background-image: url({{ asset('/brows_file/' ~ product.image) }});">
+                <div id="imagePreview" style="background-image: url({{ asset('/brows_file/' ~ product.image.filename) }});">
+               
                 </div>
              </div>
           </div>
