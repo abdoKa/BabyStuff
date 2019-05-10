@@ -51,40 +51,43 @@ class ProductManageController extends AbstractController
         $em = $this->getDoctrine()->getManager();
         $product = $em->getRepository(Produit::class)->findOneBy(array('slug' => $slug));
 
-
-        if ($product->getImage() != null) {
-
+        
+            
             $product->setImage(
                 new File($this->getParameter('uploads_directory') . '/' . $product->getImage())
             );
-        }
 
+        // $product->setImage(basename($product->getImage()));
+        
+        
         $form = $this->createForm(EditProductType::class, $product);
         $form->handleRequest($request);
-
         if ($form->isSubmitted() && $form->isValid()) {
+            
+    
             $product = $form->getData();
             $file = $product->getImage();
-
             if ($file instanceof UploadedFile) {
                 $fileName = md5(uniqid()) . '.' . $file->guessExtension();
-                // // try {
-                    $file->move(
-                        $this->getParameter('uploads_directory'),
-                        $fileName
-                    );
-                    $product->setImage(basename($product->getImage()));
-            // //     } catch (FileException $e) { }
+                $file->move(
+                    $this->getParameter('uploads_directory'),
+                    $fileName
+                );
+                
+                $product->setImage($fileName);
+                // $product->setImage(basename($product->getImage()));
             }
-
+            $product->setImage(basename($product->getImage()));
+            
             $em->persist($product);
             $em->flush();
             $this->addFlash('info', 'ce produit est modifer avec succée !');
             return $this->redirectToRoute('admin_product');
         }
+        dump( $product);
+        
 
-        dump($product);
-
+        
         return $this->render('Admin/Admine_ProductsTwigs/edit_product.html.twig', [
             'product' => $product,
             'form' => $form->createView()
@@ -106,10 +109,10 @@ class ProductManageController extends AbstractController
             $file = $product->getImage();
             $fileName = md5(uniqid()) . '.' . $file->guessExtension();
             // // try {
-                $file->move(
-                    $this->getParameter('uploads_directory'),
-                    $fileName
-                );
+            $file->move(
+                $this->getParameter('uploads_directory'),
+                $fileName
+            );
             // // } catch (FileException $e) {
             // //     // ... handle exception if something happens during file upload
             // // }
