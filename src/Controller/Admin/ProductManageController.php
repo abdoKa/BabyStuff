@@ -51,8 +51,6 @@ class ProductManageController extends AbstractController
         $em = $this->getDoctrine()->getManager();
         $product = $em->getRepository(Produit::class)->findOneBy(array('slug' => $slug));
 
-        
-            
             $product->setImage(
                 new File($this->getParameter('uploads_directory') . '/' . $product->getImage())
             );
@@ -64,7 +62,6 @@ class ProductManageController extends AbstractController
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             
-    
             $product = $form->getData();
             $file = $product->getImage();
             if ($file instanceof UploadedFile) {
@@ -108,14 +105,14 @@ class ProductManageController extends AbstractController
 
             $file = $product->getImage();
             $fileName = md5(uniqid()) . '.' . $file->guessExtension();
-            // // try {
+            try {
             $file->move(
                 $this->getParameter('uploads_directory'),
                 $fileName
             );
-            // // } catch (FileException $e) {
-            // //     // ... handle exception if something happens during file upload
-            // // }
+            } catch (FileException $e) {
+                // ... handle exception if something happens during file upload
+            }
 
             $product->setImage($fileName);
 

@@ -5,14 +5,15 @@ namespace App\Controller\Admin;
 use App\Entity\Categorie;
 
 
+use App\Form\CategorieType;
 use App\Form\EditCategorieType;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use App\Form\CategorieType;
 
 class CategoriesManageController extends AbstractController
 
@@ -46,24 +47,26 @@ class CategoriesManageController extends AbstractController
         $em = $this->getDoctrine()->getManager();
         $categorie = $em->getRepository(Categorie::class)->findOneBy(array('slug' => $slug));
 
+        $categorie->setImage(
+            new File($this->getParameter('uploads_directory') . '/' . $categorie->getImage())
+        );
+
         $form = $this->createForm(EditCategorieType::class, $categorie);
         $form->handleRequest($request);
-
-
         if ($form->isSubmitted() && $form->isValid()) {
 
-        
             $categorie = $form->getData();
             $file = $categorie->getImage();
-
             if ($file instanceof UploadedFile) {
                 $fileName = md5(uniqid()).'.'.$file->guessExtension();
                 $file->move(
                     $this->getParameter('uploads_directory'),
                     $fileName
                 );
+                
                 $categorie->setImage($fileName);
             }
+            $categorie->setImage(basename($categorie->getImage()));
             
             $em->persist($categorie);
             $em->flush();

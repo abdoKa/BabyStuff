@@ -8,6 +8,7 @@ use App\Form\EditBrandType;
 use Knp\Component\Pager\PaginatorInterface;
 
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -44,6 +45,10 @@ class BrandsManageController extends AbstractController
         $em = $this->getDoctrine()->getManager();
         $brand = $em->getRepository(Fourniseur::class)->findOneBy(array('slug' => $slug));
 
+        $brand->setImage(
+            new File($this->getParameter('uploads_directory') . '/' . $brand->getImage())
+        );
+
         dump($brand);
         if ($brand == null) {
             return $this->render(
@@ -56,14 +61,10 @@ class BrandsManageController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-
-        
             $brand = $form->getData();
             $file = $brand->getImage();
 
             if ($form->isSubmitted() && $form->isValid()) {
-
-        
                 $brand = $form->getData();
                 $file = $brand->getImage();
     
@@ -75,6 +76,7 @@ class BrandsManageController extends AbstractController
                     );
                     $brand->setImage($fileName);
                 }
+            $brand->setImage(basename($brand->getImage()));
                 
                 $em->persist($brand);
                 $em->flush();
