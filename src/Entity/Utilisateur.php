@@ -110,9 +110,15 @@ class Utilisateur implements UserInterface, \Serializable
      */
     private $commandes;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\ProductLike", mappedBy="User")
+     */
+    private $likes;
+
     public function __construct()
     {
         $this->commandes = new ArrayCollection();
+        $this->likes = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -313,5 +319,36 @@ class Utilisateur implements UserInterface, \Serializable
             $this->adresse,
 
         ) = unserialize($string, ['allowed_classes' => false]);
+    }
+
+    /**
+     * @return Collection|ProductLike[]
+     */
+    public function getLikes(): Collection
+    {
+        return $this->likes;
+    }
+
+    public function addLike(ProductLike $like): self
+    {
+        if (!$this->likes->contains($like)) {
+            $this->likes[] = $like;
+            $like->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeLike(ProductLike $like): self
+    {
+        if ($this->likes->contains($like)) {
+            $this->likes->removeElement($like);
+            // set the owning side to null (unless already changed)
+            if ($like->getUser() === $this) {
+                $like->setUser(null);
+            }
+        }
+
+        return $this;
     }
 }

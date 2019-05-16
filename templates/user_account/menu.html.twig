@@ -28,9 +28,20 @@
     <a href="{{ path('user_orders_list') }}" class="list-group-item " style="color:black"><i class="fas fa-box-open"></i>
       Mes commandes({{ app.user.commandes|length}})
     </a>
-    <a href="{{ path('admin_user_list') }}" class="list-group-item" style="color:black"><i class="fas fa-heart"></i>
-      Mes Favories
+    <a href="{{ path('user_favorite') }}" class="list-group-item" style="color:black"><i class="fas fa-heart"></i>
+      Mes favorites
     </a>
+    <a href="{{ path('user_profile') }}" class="list-group-item " style="color:black"><i class="fas fa-user"></i>
+        Profile
+      </a>
+      <a href="{{ path('admin_user_list') }}" class="list-group-item" style="color:black"><i class="fas fa-lock"></i>
+        Changer le mot de passe
+      </a>
+
+      <a href="{{ path('logout') }}" class="list-group-item" style="color:black"><i
+          class="fas fa-sign-out-alt"></i>
+        Deconnexion
+      </a>
   </div>
 </div>
 {% endblock %}

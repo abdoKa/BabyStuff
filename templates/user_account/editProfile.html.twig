@@ -23,20 +23,24 @@
         padding: 10px;
     }
 
+    .btn-default {
+        color: black;
+    }
+
 </style>
 {% endblock %}
 
 {% block body %}
 <div class="row">
     <div class="col-lg-12">
-        <h1 class="Welcom-title"> Edit Profile- <small>{{ (app.user.nom) }}</small>
+        <h1 class="Welcom-title"> Edit Profile | <small>{{ (app.user.nom) }}</small>
             <h1>
     </div>
 </div>
 
 <div class="row">
     <div class="col-sm-4 card ">
-        <a href="#"><i class="far fa-user-circle btn-light btn-sm"></i></a>
+        <a href="{{ path('user_profile') }}"><i class="far fa-user-circle btn-light btn-sm"></i></a>
         <div class="card-body">
             <h5>Utilisateur: <small style="color:black;">{{ app.user.nom }} {{ app.user.prenom }}</small></h5>
             <h5>E-mail: <small style="color:black;">{{ app.user.email }}</small></h5>
@@ -62,4 +66,37 @@
     </div>
 
 </div>
+{% endblock %}
+{% block javascripts %}
+<script>
+            let userId= app.user.id
+            console.log(userId);
+    $(document).ready(function () {
+        $('#edit_user_save').click(function (e) {
+            e.preventDefault();
+
+               
+            swal({
+                    title: "Validation",
+                    text: "pour une raison de sécurité, enter votre mot de passe pour sauvegarder les modifications",
+                    type: "info",
+                    type: "input",
+                    inputType: "password",
+                    inputPlaceholder: "Enter votre mot de passe",
+                   
+                    showCancelButton: true,
+                    closeOnConfirm: false,
+                    showLoaderOnConfirm: true
+                },
+
+                function () {
+                    setTimeout(function () {
+                        swal("Ajax request finished!");
+                    }, 2000);
+                });
+
+        });
+    });
+
+</script>
 {% endblock %}

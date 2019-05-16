@@ -19,5 +19,18 @@ class UtilisateurRepository extends ServiceEntityRepository
         parent::__construct($registry, Utilisateur::class);
     }
 
-    
+    public function BelongsToUser($id)
+    {
+        $sql = "
+            SELECT 
+            c FROM 
+            App:Utilisateur c
+            WHERE
+            c.id=:id
+        ";
+        $result = $this->getEntityManager()->createQuery($sql)
+            ->setParameter('id', $id)
+            ->getResult();
+        return $result;
+    }
 }

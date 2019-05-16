@@ -124,9 +124,15 @@ class Produit
      */
     private $commandeProduits;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\ProductLike", mappedBy="product")
+     */
+    private $productLikes;
+
     public function __construct()
     {
         $this->commandeProduits = new ArrayCollection();
+        $this->productLikes = new ArrayCollection();
     }
 
 
@@ -320,6 +326,50 @@ class Produit
         }
 
         return $this;
+    }
+
+    /**
+     * @return Collection|ProductLike[]
+     */
+    public function getProductLikes(): Collection
+    {
+        return $this->productLikes;
+    }
+
+    public function addProductLike(ProductLike $productLike): self
+    {
+        if (!$this->productLikes->contains($productLike)) {
+            $this->productLikes[] = $productLike;
+            $productLike->setProduct($this);
+        }
+
+        return $this;
+    }
+
+    public function removeProductLike(ProductLike $productLike): self
+    {
+        if ($this->productLikes->contains($productLike)) {
+            $this->productLikes->removeElement($productLike);
+            // set the owning side to null (unless already changed)
+            if ($productLike->getProduct() === $this) {
+                $productLike->setProduct(null);
+            }
+        }
+
+        return $this;
+    }
+      /**
+       * knew if this product liked by user
+       *
+       * @param Utilisateur $User
+       * @return boolean
+       */
+     public function isLikedByUser(Utilisateur $User):bool
+    {
+       foreach($this->productLikes as $like){
+           if($like->getUtilisateur() == $User) return true;
+       }
+       return false;
     }
 
    

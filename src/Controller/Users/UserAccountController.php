@@ -14,6 +14,7 @@ use Knp\Component\Pager\PaginatorInterface;
 use App\Form\EditUserType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\HttpFoundation\Session\Session;
 
 class UserAccountController extends AbstractController
 {
@@ -27,14 +28,7 @@ class UserAccountController extends AbstractController
         return $this->render('user_account/user_space.html.twig', []);
     }
 
-    /**
-     * @Route("/user/account/settings", name="user_setting")
-     * @IsGranted("ROLE_USER")
-     */
-    public function settings()
-    {
-        return $this->render('user_account/settings.html.twig', []);
-    }
+   
 
     /**
      * @Route("/user/account/profile", name="user_profile")
@@ -46,26 +40,40 @@ class UserAccountController extends AbstractController
     }
 
     /**
-     * @Route("/user/account/profile/edit", name="user_profile_edit", methods={"GET","POST"})
+     * @Route("/user/account/profile/{id}/edit", name="user_profile_edit", methods={"GET","POST"})
      * @IsGranted("ROLE_USER")
      */
-    public function editProfile(Request $request, Utilisateur $user)
+    public function editProfile(Request $request, $id,UserInterface $currentUser)
     {
 
         $em = $this->getDoctrine()->getManager();
+        $repoUser = $em->getRepository(Utilisateur::class);
+        $user = $repoUser->findOneBy(array('id' => $id));
+        
+        $userId = $currentUser->getId();
+        $belongTo = $repoUser->BelongsToUser($id);
+        dump($belongTo[0]->getId() == $userId);
+        dump($belongTo);
+        dump($userId);
 
         $form = $this->createForm(EditUserType::class, $user);
         $form->handleRequest($request);
 
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $em->persist($user);
-            $em->flush();
+        if($belongTo[0]->getId() == $userId)
+        {
+            
+            if ($form->isSubmitted() && $form->isValid()) {
+               
+                $em->persist($user);
+                $em->flush();
+            }
+    
+            return $this->render('user_account/editProfile.html.twig', [
+                'form' => $form->createView(),
+            ]);
+        }else{
+            return $this->render('bundles/TwigBundle/Exception/error404.html.twig');
         }
-
-        return $this->render('user_account/editProfile.html.twig', [
-            'form' => $form->createView(),
-        ]);
     }
 
 
@@ -75,13 +83,15 @@ class UserAccountController extends AbstractController
      */
     public function UserOrderList(PaginatorInterface $paginator, Request $request)
     {
-
+        $em = $this->getDoctrine()->getManager();
+        $repoOrder = $em->getRepository(Commande::class);
 
         return $this->render('user_account/userOrder.html.twig', []);
     }
 
     /**
      * @Route("/user/orders/detail/{id}", name="user_detail")
+     * @IsGranted("ROLE_USER")
      */
     public function show_order(PaginatorInterface $paginator, Request $request, $id, UserInterface $user)
     {
@@ -92,20 +102,33 @@ class UserAccountController extends AbstractController
 
         $userId = $user->getId();
         $belongTo = $repoOrder->BelongsToUser($id);
-        dump($belongTo[0]->getUtilisateur()->getId() == $userId );
+        dump($belongTo[0]->getUtilisateur()->getId() == $userId);
         dump($userId);
-       
 
-        if($belongTo[0]->getUtilisateur()->getId() == $userId ){
+        $pagination = $paginator->paginate(
+            $detailOrder,
+            $request->query->getInt('page', 1),
+            2
+        );
+
+        if ($belongTo[0]->getUtilisateur()->getId() == $userId) {
 
             return $this->render('user_account/user_detail.html.twig', [
                 'order' => $order,
                 'detailOrder' => $detailOrder,
+                'pagination' => $pagination
             ]);
-        }else{
-            return $this->redirectToRoute('home');
+        } else {
+            return $this->render('bundles/TwigBundle/Exception/error404.html.twig');
         }
-
-       
     }
+
+    /**
+     * @Route("/user/favorite/" , name="user_favorite")
+     */
+
+     public function favorite()
+     {
+        return $this->render('user_account/favorite.html.twig', []);
+     }
 }

@@ -1,6 +1,4 @@
 <style>
-
-
   @media (min-width: 780px) {
     .animate {
       animation-duration: 0.3s;
@@ -48,12 +46,11 @@
     -webkit-animation-name: slideIn;
     animation-name: slideIn;
   }
-  .btn-group{
-    right:-120px;
-  }
-  
 
- 
+  .btn-group {
+    right: -120px;
+  }
+
 </style>
 
 <div class="container">
@@ -112,30 +109,52 @@
             </i>
           </a>
       </ul>
+      <li class="navbar-nav " style="margin:0 -20px 0 30px;">
+        <small><a class="nav-link" href="#"><i class="far fa-heart"></i>
+          <spane>Favorites</spane>
+        </a></small>
+      </li>
       {% if is_granted("ROLE_USER") %}
 
       <ul class="navbar-nav m-auto" id="profile-right">
         <div class="btn-group">
           <li class="nav-item dropdown" id="navbarSupportedContent">
             <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
-              aria-expanded="true"><spane>Slaut!</spane> {{ app.user.nom }} </a>
+              aria-expanded="true">
+              <spane>Slaut!</spane> {{ app.user.nom }}
+            </a>
             <div class="dropdown-menu  animate slideIn" aria-labelledby="navbarDropdown">
               <a class="dropdown-item" href="{{ path('user_account') }}">
-                <i class="far fa-user-circle"></i><spane> Mon Espace </spane>
+                <i class="far fa-user-circle"></i>
+                <spane> Mon Espace </spane>
               </a>
-              <a class="dropdown-item" href="{{ path('user_setting') }}"><i class="fas fa-cogs"></i><spane> Paramètres </spane></a>
-
+              <a class="dropdown-item" href="{{ path('user_favorite') }}"><i class="fas fa-heart"></i>
+                <spane> Favorites </spane>
+              </a>
+              <a class="dropdown-item" href="{{ path('user_profile_edit',{'id':app.user.id}) }}"><i
+                  class="fas fa-cogs"></i>
+                <spane> Settings </spane>
+              </a>
               {% if is_granted("ROLE_ADMIN") %}
-              <a class="dropdown-item" href="{{ path('admin') }}"><i class="fas fa-desktop"></i> <spane> Back-Office </spane></a>
+              <a class="dropdown-item" href="{{ path('admin') }}"><i class="fas fa-desktop"></i>
+                <spane> Back-Office </spane>
+              </a>
               {% endif %}
-              <a class="dropdown-item" href="{{ path('logout') }}"><i class="fas fa-sign-out-alt"></i> <spane> Deconnexion </spane></a>
+              <a class="dropdown-item" href="{{ path('logout') }}"><i class="fas fa-sign-out-alt"></i>
+                <spane> Deconnexion </spane>
+              </a>
             </div>
+
       </ul>
+
+
       {% else %}
 
       <ul class="navbar-nav ml-auto">
         <li class="navbar-nav ml-auto">
-          <a class="nav-link" href="{{ path('security_login') }}"><i class="fas fa-sign-in-alt"></i><spane> <small>Se connecter</small> </spane></a>
+          <a class="nav-link" href="{{ path('security_login') }}"><i class="fas fa-sign-in-alt"></i>
+            <spane> <small>Se connecter</small> </spane>
+          </a>
         </li>
       </ul>
 

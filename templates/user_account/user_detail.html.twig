@@ -48,9 +48,9 @@
 
                 </thead>
                 <tbody>
-                
-                    {% for orderProduct in detailOrder  %}
-                   
+
+                    {% for orderProduct in pagination  %}
+
                     <tr>
                         <th scope="row">{{orderProduct.id}}</th>
                         <td>{{ orderProduct.produit.nom }} {{ orderProduct.produit.description|raw }} <img
@@ -64,7 +64,9 @@
                     <td class="table-info">{{ order.prixTotale}} <strong>MAD</strong></td>
                 </tbody>
             </table>
-           
+            <div class="navigation pagination-sm">
+                {{ knp_pagination_render(pagination) }}
+            </div>
         </div>
     </div>
 </div>
