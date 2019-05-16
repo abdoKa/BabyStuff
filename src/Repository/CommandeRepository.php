@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\Commande;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
+use Doctrine\DBAL\Driver\PDOSqlsrv\Statement;
 
 /**
  * @method Commande|null find($id, $lockMode = null, $lockVersion = null)
@@ -19,9 +20,23 @@ class CommandeRepository extends ServiceEntityRepository
         parent::__construct($registry, Commande::class);
     }
 
-   
 
-    // /**
+    public function BelongsToUser($id)
+    {
+        $sql = "
+            SELECT 
+            c FROM 
+            App:Commande c
+            WHERE
+            c.id=:id
+        ";
+        $result = $this->getEntityManager()->createQuery($sql)
+            ->setParameter('id', $id)
+            ->getResult();
+            return $result;
+    }
+
+    // /**      
     //  * @return Commande[] Returns an array of Commande objects
     //  */
     /*

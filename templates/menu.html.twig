@@ -121,14 +121,14 @@
               aria-expanded="true"><spane>Slaut!</spane> {{ app.user.nom }} </a>
             <div class="dropdown-menu  animate slideIn" aria-labelledby="navbarDropdown">
               <a class="dropdown-item" href="{{ path('user_account') }}">
-                <i class="far fa-user-circle"></i><spane> Mon Compte </spane>
+                <i class="far fa-user-circle"></i><spane> Mon Espace </spane>
               </a>
-              <a class="dropdown-item" href="{{ path('logout') }}"><i class="fas fa-sign-out-alt"></i> <spane> Deconnexion </spane></a>
               <a class="dropdown-item" href="{{ path('user_setting') }}"><i class="fas fa-cogs"></i><spane> Paramètres </spane></a>
 
               {% if is_granted("ROLE_ADMIN") %}
               <a class="dropdown-item" href="{{ path('admin') }}"><i class="fas fa-desktop"></i> <spane> Back-Office </spane></a>
               {% endif %}
+              <a class="dropdown-item" href="{{ path('logout') }}"><i class="fas fa-sign-out-alt"></i> <spane> Deconnexion </spane></a>
             </div>
       </ul>
       {% else %}

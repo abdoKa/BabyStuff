@@ -30,13 +30,12 @@ class OrderController extends AbstractController
 
         $em = $this->getDoctrine()->getManager();
         $repoP = $em->getRepository(Produit::class);
+
         if ($session->get('my_cart') == null) {
             $session->set('my_cart', $cart);
         } else {
             $cart = $session->get('my_cart');
         }
-
-        
 
         $sum = 0; //total control sum of the order
         foreach ($cart as $productId => $productQuantity) {
@@ -51,14 +50,12 @@ class OrderController extends AbstractController
                 $orderProduct->setProduit($product);
                 $orderProduct->setPrix($product->getPrix());
                 $orderProduct->setQuantity($quantity);
-                // die();
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($orderProduct);
 
                 $order->addCommandeProduit($orderProduct);
                 dump($orderProduct);
-                // // dump($orderProduct);
-                // // die();
+              
             }
         }
         $cartDetails = ['products' => $product, 'totalsum' => $sum];

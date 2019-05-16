@@ -1,0 +1,65 @@
+{% extends 'base.html.twig' %}
+{% block title %}BabyStuff | Account-Profile{% endblock %}
+
+{% block stylesheets %}
+<style>
+    body,
+    html {
+        height: 100%;
+        width: 100%;
+    }
+
+    .container-list {
+        margin: 10px 0 10px 10px;
+    }
+
+
+
+    .card-body {
+        padding: 50px;
+    }
+
+    h5 {
+        padding: 10px;
+    }
+
+</style>
+{% endblock %}
+
+{% block body %}
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="Welcom-title"> Edit Profile- <small>{{ (app.user.nom) }}</small>
+            <h1>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-sm-4 card ">
+        <a href="#"><i class="far fa-user-circle btn-light btn-sm"></i></a>
+        <div class="card-body">
+            <h5>Utilisateur: <small style="color:black;">{{ app.user.nom }} {{ app.user.prenom }}</small></h5>
+            <h5>E-mail: <small style="color:black;">{{ app.user.email }}</small></h5>
+            <h5>Téléphone: <small style="color:black;">{{ app.user.telephone }}</small></h5>
+            <h5>Adresse: <small style="color:black;">{{ app.user.adresse }}</small></h5>
+        </div>
+    </div>
+
+    <div class="col-sm-6">
+
+        {{ form_start(form) }}
+        <div class="row">
+            <div class="col-md-5">{{ form_row(form.nom) }}</div>
+            <div class="col-md-5">{{ form_row(form.prenom) }}</div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">{{ form_row(form.email) }}</div>
+            <div class="col-md-5">{{ form_row(form.telephone) }}</div>
+        </div>
+
+        {{ form_row(form.adresse) }}
+        {{ form_end(form) }}
+    </div>
+
+</div>
+{% endblock %}

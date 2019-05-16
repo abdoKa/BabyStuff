@@ -56,7 +56,7 @@ class UserManageController extends AbstractController
     }
 
    /**
-     * @Route("/admin/orders/user/detail/{id}", name="userOrderDetail")
+         * @Route("/admin/orders/user/detail/{id}", name="userOrderDetail")
      */
     public function show_order($id)
     {

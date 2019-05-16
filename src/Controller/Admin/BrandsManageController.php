@@ -50,12 +50,6 @@ class BrandsManageController extends AbstractController
         );
 
         dump($brand);
-        if ($brand == null) {
-            return $this->render(
-                'admin/NotFound.html.twig'
-
-            );
-        }
 
         $form = $this->createForm(EditBrandType::class, $brand);
         $form->handleRequest($request);
@@ -77,11 +71,6 @@ class BrandsManageController extends AbstractController
                     $brand->setImage($fileName);
                 }
             $brand->setImage(basename($brand->getImage()));
-                
-                $em->persist($brand);
-                $em->flush();
-                $this->addFlash('info','ce produit est modifer avec succée !');
-                return $this->redirectToRoute('admin_brands');
     
             }
             

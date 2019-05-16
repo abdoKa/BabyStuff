@@ -53,6 +53,9 @@
                 <li class="nav-item">
                     <a class="nav-link" href="#">Bienvenu {{ app.user.nom }}</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('home') }}">Accueil</a>
+                </li>
             </ul>
             {% endif %}
         </div>
@@ -88,7 +91,7 @@
                 <tbody>
                     {% for order in pagination %}
                     <tr>
-                        <th scope="row">1</th>
+                        <th scope="row">{{ order.id }}</th>
                         <td>{{ order.nomUtilisateur }} {{ order.PrenomUtilisateur }}</td>
                         <td>{{order.email}}</td>
                         <td>{{order.prixTotale}} <small>MAD</small></td>

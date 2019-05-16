@@ -25,8 +25,8 @@
 
 <div class="container-list">
   <div class="list-group ">
-    <a href="{{ path('admin_orders') }}" class="list-group-item " style="color:black"><i class="fas fa-box-open"></i>
-      Mes Commandes
+    <a href="{{ path('user_orders_list') }}" class="list-group-item " style="color:black"><i class="fas fa-box-open"></i>
+      Mes commandes({{ app.user.commandes|length}})
     </a>
     <a href="{{ path('admin_user_list') }}" class="list-group-item" style="color:black"><i class="fas fa-heart"></i>
       Mes Favories

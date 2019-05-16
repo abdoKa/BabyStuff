@@ -1,0 +1,74 @@
+{% extends 'base.html.twig' %}
+{% block title %}BabyStuff | User-Orders{% endblock %}
+
+{% block stylesheets %}
+<style>
+    body,
+    html {
+        height: 100%;
+        width: 100%;
+    }
+
+
+
+
+    .col-sm-9 {
+        margin: 25px 0 150px;
+    }
+
+    .image_B {
+        height: 150px;
+        max-width: 200px;
+        object-fit: cover;
+    }
+
+</style>
+{% endblock %}
+
+{% block body %}
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="Welcom-title"> {{ (app.user.nom) }} | <small>List des commandes</small>
+                <h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-3">
+            {% include 'user_account/menu.html.twig' %}
+        </div>
+        <div class="col-sm-9">
+            <table class="table w-100">
+                <thead>
+                    <th scope="col" style="widght:50%">Produits</th>
+                    <th bgcolor="#f3f9fb">Nom du Produit</th>
+                    <th bgcolor="#f3f9fb">Quantité</th>
+                    <th bgcolor="#f3f9fb">Prix</th>
+                    <th bgcolor="#f3f9fb">Total</th>
+
+                </thead>
+                <tbody>
+                
+                    {% for orderProduct in detailOrder  %}
+                   
+                    <tr>
+                        <th scope="row">{{orderProduct.id}}</th>
+                        <td>{{ orderProduct.produit.nom }} {{ orderProduct.produit.description|raw }} <img
+                                src="{{ asset('/brows_file/' ~ orderProduct.produit.image) }}" class="image_B"></td>
+                        <td>{{ orderProduct.quantity }}</td>
+                        <td>{{ orderProduct.prix }} <small>MAD</small></td>
+                        <td>{{ orderProduct.prix * orderProduct.quantity }}<small>MAD</small></td>
+                    </tr>
+                    {% endfor %}
+                    <th class="table-info">TTC</th>
+                    <td class="table-info">{{ order.prixTotale}} <strong>MAD</strong></td>
+                </tbody>
+            </table>
+           
+        </div>
+    </div>
+</div>
+
+
+
+{% endblock %}

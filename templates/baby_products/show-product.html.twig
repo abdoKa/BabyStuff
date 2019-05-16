@@ -6,10 +6,13 @@
 
     }
    .rounded{
-       height:100%;
+       height:90%;
        padding: 5px 0 20px 0;
         -webkit-box-shadow: 0 30px 60px 0 rgba(0, 0, 0, 0.3);
     box-shadow: 0 30px 60px 0 rgba(0, 0, 0, 0.4);
+   }
+   .col-lg{
+       margin:10px;
    }
    
        
@@ -20,16 +23,16 @@
 
 {% block body %}
 <div class="container">
+            <a href="{{ path('show_marque', {'slug': fournisseur.slug }) }}" class="btn btn-link">{{ fournisseur.nom }}<a>
     <div class="row">
         <div class="col-lg">
-            <img src="{{ asset('/brows_file/' ~ single_p.image) }}" class="rounded float-left w-100" alt="">
+            <img src="{{ asset('/brows_file/' ~ single_p.image) }}" class="rounded float-left w-100" alt="image du produit">
         </div>
 
         <div class="col-lg-6 product-pre">
             <div>
                 <h4 class="text-left title-css">{{ single_p.nom|upper }}</h4>
                 <h6>Referance: {{ single_p.referance }}</h6>
-            <a href="{{ path('show_marque', {'slug': fournisseur.slug }) }}" class="btn btn-link">{{ fournisseur.nom }}<a>
             </div>
             <div>
                 <h1 class="text-left price-css">{{ single_p.prix }} MAD</h1>

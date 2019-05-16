@@ -10,6 +10,10 @@
     }
 }
 
+.title-home {
+    font-family: 'Lilita One', cursive;
+}
+
 
 /* 
   ##Device = Desktops
@@ -65,10 +69,6 @@ h5 {
     color: #000000;
 }
 
-.product-image>img {
-    max-width: 100%;
-}
-
 
 /* the slides */
 
@@ -95,7 +95,7 @@ h5 {
     margin: 0 auto;
     padding: 0.5px;
     display: block;
-    font-size: 12px;
+    font-size: 18px;
 }
 
 .product-titlemm,
@@ -109,10 +109,6 @@ h5 {
     right: 5px;
     top: 5px;
     color: red !important;
-}
-
-.product-image {
-    position: relative;
 }
 
 .feartures,
@@ -151,11 +147,16 @@ h5 {
 }
 
 .card {
-    box-shadow: 0 10px 8px 0 rgba(0, 0, 0, 0.2);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+    transition: all 0.3s cubic-bezier(.25, .8, .25, 1);
     /* this adds the "card" effect */
     padding: 16px;
     text-align: center;
     background-color: #f1f1f1;
+}
+
+.card:hover {
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
 }
 
 .card {
@@ -172,32 +173,6 @@ h5 {
 
 .marques {
     margin-left: 10%;
-}
-
-.img-header,
-.row,
-.img-bottom,
-.img-center-tow {
-    margin: 0 0 1% 0;
-}
-
-.img-center-one,
-.img-center-three {
-    width: 20%;
-}
-
-.img-header,
-.img-center-tow,
-.img-bottom {
-    margin: 1%;
-}
-
-.img-center-tow {
-    width: 60%;
-}
-
-.img-center-three {
-    margin: 0 0 1% 1%;
 }
 
 .header {
