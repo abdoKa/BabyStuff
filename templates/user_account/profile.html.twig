@@ -38,7 +38,7 @@
         {% include 'user_account/menu.html.twig' %}
     </div>
     <div class="col-md-6 card ">
-        <a href="{{ path('user_profile_edit',{'id':app.user.id}) }}"><i
+        <a href="{{ path('user_profile_edit') }}"><i
                 class="fas fa-pencil-alt btn-light btn-sm"></i></a>
         <div class="card-body">
             <h5>Utilisateur: <small style="color:black;">{{ app.user.nom }} {{ app.user.prenom }}</small></h5>

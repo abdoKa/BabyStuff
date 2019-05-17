@@ -21,19 +21,26 @@ class CommandeRepository extends ServiceEntityRepository
     }
 
 
-    public function BelongsToUser($id)
+    public function BelongsToUser($id, $userId)
     {
         $sql = "
             SELECT 
             c FROM 
             App:Commande c
             WHERE
-            c.id=:id
+            c.id=:id AND
+            c.utilisateur=:userId  
         ";
+
         $result = $this->getEntityManager()->createQuery($sql)
             ->setParameter('id', $id)
-            ->getResult();
-            return $result;
+            ->setParameter('userId', $userId)
+            ->getOneOrNullResult();
+        if (null == $result) {
+            return false;
+        } else {
+            return true;
+        }
     }
 
     // /**      

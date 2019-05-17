@@ -26,7 +26,6 @@
     .btn-default {
         color: black;
     }
-   
 
 </style>
 {% endblock %}
@@ -51,19 +50,20 @@
     </div>
 
     <div class="col-sm-6">
-
-        {{ form_start(form) }}
+    {{ form_start(form) }}
         <div class="row">
             <div class="col-md-5">{{ form_row(form.nom) }}</div>
             <div class="col-md-5">{{ form_row(form.prenom) }}</div>
         </div>
+
         <div class="row">
             <div class="col-md-6">{{ form_row(form.email) }}</div>
             <div class="col-md-5">{{ form_row(form.telephone) }}</div>
         </div>
-
-
-        {{ form_row(form.adresse) }}
+        
+        <div class="row">
+        <div class="col-md-9">{{ form_row(form.adresse) }}</div>
+        </div>
         {{ form_end(form) }}
     </div>
 </div>
@@ -72,38 +72,41 @@
 
 {% block javascripts %}
 <script>
-    let userId = console.log({
-        {
-            app.user.id
-        }
-    });
-
-
-    $(document).ready(function () {
-
-        $('#edit_user_save').click(function (e) {
-            e.preventDefault();
-
-            swal({
-                    title: "Validation",
-                    text: "pour une raison de sécurité, enter votre mot de passe pour sauvegarder les modifications",
-                    type: "info",
-                    type: "input",
-                    inputType: "password",
-                    inputPlaceholder: "Enter votre mot de passe",
-                    showCancelButton: true,
-                    closeOnConfirm: false,
-                    showLoaderOnConfirm: true
-                },
-
-                function () {
-                    setTimeout(function () {
-                        swal("Ajax request finished!");
-                    }, 2000);
-                });
-
+    {
+        #
+        let userId = console.log({
+            {
+                app.user.id
+            }
         });
-    });
+
+
+        $(document).ready(function () {
+
+            $('#edit_user_save').click(function (e) {
+                e.preventDefault();
+
+                swal({
+                        title: "Validation",
+                        text: "pour une raison de sécurité, enter votre mot de passe pour sauvegarder les modifications",
+                        type: "info",
+                        type: "input",
+                        inputType: "password",
+                        inputPlaceholder: "Enter votre mot de passe",
+                        showCancelButton: true,
+                        closeOnConfirm: false,
+                        showLoaderOnConfirm: true
+                    },
+
+                    function () {
+                        setTimeout(function () {
+                            swal("Ajax request finished!");
+                        }, 2000);
+                    });
+
+            });
+        });#
+    }
 
 </script>
 {% endblock %}

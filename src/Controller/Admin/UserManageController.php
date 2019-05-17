@@ -8,14 +8,14 @@ use Symfony\Component\HttpFoundation\Request;
 use Knp\Component\Pager\PaginatorInterface;
 
 
-    use App\Entity\Produit;
-    use App\Entity\Categorie;
+use App\Entity\Produit;
+use App\Entity\Categorie;
 
-    use App\Form\ProduitType;
-    use Symfony\Component\HttpFoundation\Response;
-    use App\Form\editPType;
-    use Symfony\Component\HttpFoundation\File\UploadedFile;
-    use Gedmo\Mapping\Annotation\Slug;
+use App\Form\ProduitType;
+use Symfony\Component\HttpFoundation\Response;
+use App\Form\editPType;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Gedmo\Mapping\Annotation\Slug;
 use App\Entity\Utilisateur;
 use App\Entity\Commande;
 
@@ -55,8 +55,8 @@ class UserManageController extends AbstractController
         ]);
     }
 
-   /**
-         * @Route("/admin/orders/user/detail/{id}", name="userOrderDetail")
+    /**
+     * @Route("/admin/orders/user/detail/{id}", name="userOrderDetail")
      */
     public function show_order($id)
     {
@@ -65,15 +65,13 @@ class UserManageController extends AbstractController
         $repoUser = $em->getRepository(Utilisateur::class);
 
         $users = $repoUser->findOneBy(array('id' => $id));
-        $order =$users->getCommandes();
+        $order = $users->getCommandes();
 
 
         dump($order);
         return $this->render('admin/Admin_UsersTwigs/userOrderDetail.html.twig', [
             'users' => $users,
-            'order'=>$order
+            'order' => $order
         ]);
     }
-
-    
 }
