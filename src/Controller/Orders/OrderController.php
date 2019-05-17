@@ -8,6 +8,7 @@ use App\Form\OrdersFormType;
 use App\Entity\CommandeProduit;
 use Proxies\__CG__\App\Entity\Utilisateur;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\User\User;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
@@ -18,6 +19,7 @@ class OrderController extends AbstractController
 {
     /**
      * @Route("/user/order", name="user_giorder", methods={"GET","POST"})
+     * @IsGranted("ROLE_USER")
      */
     public function order(Request $request)
     {
@@ -55,14 +57,13 @@ class OrderController extends AbstractController
 
                 $order->addCommandeProduit($orderProduct);
                 dump($orderProduct);
-              
             }
         }
         $cartDetails = ['products' => $product, 'totalsum' => $sum];
 
         $user = $this->getUser();
         $order->setUtilisateur($user);
-       
+
         $order->setPrixTotale($sum);
 
         //Form Order
@@ -77,6 +78,7 @@ class OrderController extends AbstractController
 
             return $this->redirectToRoute('user_account');
         }
+        dump($cartDetails);
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
         return $this->render('order/oders.html.twig', [
             'form' => $form->createView(),
@@ -90,6 +92,4 @@ class OrderController extends AbstractController
         $response->headers->clearSessions('cart');
         $response->sendHeaders();
     }
-
-   
 }

@@ -38,10 +38,9 @@
             {% include 'user_account/menu.html.twig' %}
         </div>
         <div class="col-sm-9">
-            <table class="table w-100">
+            <table class="table w-100" style="color:black">
                 <thead>
-                    <th scope="col" style="widght:50%">Produits</th>
-                    <th bgcolor="#f3f9fb">Nom du Produit</th>
+                    <th bgcolor="#f3f9fb"> Produit</th>
                     <th bgcolor="#f3f9fb">Quantité</th>
                     <th bgcolor="#f3f9fb">Prix</th>
                     <th bgcolor="#f3f9fb">Total</th>
@@ -52,7 +51,6 @@
                     {% for orderProduct in pagination  %}
 
                     <tr>
-                        <th scope="row">{{orderProduct.id}}</th>
                         <td>{{ orderProduct.produit.nom }} {{ orderProduct.produit.description|raw }} <img
                                 src="{{ asset('/brows_file/' ~ orderProduct.produit.image) }}" class="image_B"></td>
                         <td>{{ orderProduct.quantity }}</td>
@@ -60,8 +58,8 @@
                         <td>{{ orderProduct.prix * orderProduct.quantity }}<small>MAD</small></td>
                     </tr>
                     {% endfor %}
-                    <th class="table-info">TTC</th>
-                    <td class="table-info">{{ order.prixTotale}} <strong>MAD</strong></td>
+                    
+                    <td class="table-info"> TTC {{ order.prixTotale}} <strong>MAD</strong></td>
                 </tbody>
             </table>
             <div class="navigation pagination-sm">

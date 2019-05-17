@@ -6,6 +6,7 @@ use App\Entity\Produit;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class AjaxController extends AbstractController
@@ -48,13 +49,13 @@ class AjaxController extends AbstractController
         }
         $cartDetails = ['products' => $product, 'totalsum' => $sum];
 
-        dump($cartDetails);
-        die();  
-
+        
         $cartDetails = false;
         return new JsonResponse([
             'add to cart ' => $cartDetails,
             'success' => true
         ], 200);
+        dump($cartDetails);
+        die();  
     }
 }

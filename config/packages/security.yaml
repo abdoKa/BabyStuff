@@ -48,6 +48,5 @@ security:
           - { path: ^/registration, roles: IS_AUTHENTICATED_ANONYMOUSLY }
           - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
           - { path: ^/, roles: IS_AUTHENTICATED_ANONYMOUSLY } 
-          - { path: ^/user/order, roles: ROLE_USER }
-          - { path: ^/user/account, roles: ROLE_USER }  
+
 

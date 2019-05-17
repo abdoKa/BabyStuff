@@ -37,6 +37,12 @@
         padding: 20px;
     }
 
+    .image_B {
+        height: 150px;
+        max-width: 150px;
+        object-fit: cover;
+    }
+
 </style>
 
 {% endblock %}
@@ -50,27 +56,34 @@
         <div>
             <h2>Votre Panier</h2>
         </div>
-        <table class="table ">
+        <table class="table " style="color:black;">
             <thead>
                 <tr>
 
                     <th scope="col">Vos produits</th>
+                    <th scope="col">Description</th>
                     <th scope="col">Quantité</th>
-                    <th scope="col"></th>
                     <th scope="col">Prix</th>
                     <th style="text-align:right;"> Total</th>
+                    <th scope="col"></th>
                 </tr>
             </thead>
             <tbody>
                 {% for product in cartDetails.products %}
                 <tr>
 
-                    <td class="w-100" style="margin-top:10px">
-                        <spane><img src="{{ asset('/brows_file/' ~ product.product.image) }}" alt="" ></spane>
-                        <a href="{{ path('single_product', {'slug': product.product.slug }) }}">
-                            <strong>{{ product.product.nom }}</strong>
-                        </a>
+                    <td style="margin-top:10px">
+                        <span><img src="{{ asset('/brows_file/' ~ product.product.image) }}" class="image_B w-100"
+                                alt="">
+                            <spane>
+                                <div class="row"> <a
+                                        href="{{ path('single_product', {'slug': product.product.slug }) }}">
+                                        <strong>{{ product.product.nom }}</strong>
+                                    </a></div>
 
+                    </td>
+                    <td>
+                        {{ product.product.description }}
                     </td>
 
                     <td>
@@ -82,33 +95,38 @@
                         </div>
                     </td>
                     <td>
-                        <a href="#" class="btn btn-danger glyphicon glyphicon-remove product-remove"
-                            data-toggle="confirmation" data-popout="true" data-placement="left">
-                            <spane><small><i class="fas fa-times"></i></small></spane>
-                        </a>
-                    </td>
-                    <td>
                         <span>{{ product.product.prix }}</span> <small>MAD</small>
                     </td>
                     <td style="text-align: right">
                         {{ product.sum }} <small>MAD</small>
                     </td>
+                    <td>
+                        <a href="#" class="btn btn-danger glyphicon glyphicon-remove product-remove"
+                            data-toggle="confirmation" data-popout="true" data-placement="left">
+                            <spane><small><i class="fas fa-times"></i></small></spane>
+                        </a>
+                    </td>
                 </tr>
 
                 {% endfor %}
-
-
+                <hr>
             </tbody>
-            <tfoot>
-                <tr>
-                    <td colspan="6" style="text-align: right;">
-                        <strong style="color:black;">Total sum:</strong>
-                        <span class="totalsum">{{ cartDetails.totalsum }}</span> <small>MAD</small>
-                    </td>
-                </tr>
-            </tfoot>
-            <hr />
         </table>
+
+
+        <div class="col-sm-4 card " style="position: absolute;right: 150px; color:black;">
+                <i class="fas fa-shopping-bag"></i>
+            <div>
+                <strong style="color:black;">TTC:</strong>
+                {{ cartDetails.totalsum }} <small>MAD</small>
+            </div>
+            <div>
+                <strong style="color:black;">Quantité :</strong>
+                {{ cartDetails.products[0].quantity }}
+            </div>
+           
+        </div>
+
 
 
         <div class="row">

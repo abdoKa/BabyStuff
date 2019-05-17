@@ -15,6 +15,27 @@
         background-color: black;
     }
 
+    .image_B {
+        height: 150px;
+        max-width: 150px;
+        object-fit: cover;
+    }
+
+    .card {
+        margin-bottom:-30%;
+        position: absolute;
+        bottom: 100px;
+        right: 150px;
+        color: black;
+
+    }
+    .row{
+            padding-top: 30px;
+    }
+    strong{
+          padding-top: 20px;
+    }
+
 </style>
 {% endblock %}
 
@@ -37,10 +58,29 @@
 
     <div class="col-sm-6">{{ form_row(form.commentaire) }}</div>
 
-    <div colspan="6" style="text-align:right;margin:0 500px 0 30px">
-        <strong style="color:black;">Total:{{ cartDetails.totalsum }} <small>MAD</small></strong>
+    
+    <div class="col-md-5 card " style="position: absolute;right:1px;">
+        <div><h6>votre panier</h6><i class="fas fa-shopping-bag"></i></div>
+        <strong>Produit :</strong>
+        <div class="row m-auto"> {{ cartDetails.products.nom }}</div>
+        <strong>Description :</strong>
+        <div class="row m-auto"> {{ cartDetails.products.description }}</div>
+        <strong>Image :</strong>
+        <div class="row m-auto"><img src="{{ asset('/brows_file/' ~ cartDetails.products.image) }}"
+                class="image_B w-100"></div>
+        <strong>Prix :</strong>
+        <div class="row m-auto">
+            <spane>{{ cartDetails.products.prix }} <small>MAD</small> </spane>
+        </div>
+         <strong>TTC :</strong>
+        <div class="row m-auto">
+            <h5 style="color:green;">{{ cartDetails.totalsum}} <small>MAD</small> </h5>
+        </div>
+
+
     </div>
     {{ form_end(form) }}
 </div>
+
 {% endif %}
 {% endblock %}

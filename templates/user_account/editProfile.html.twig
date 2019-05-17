@@ -26,6 +26,7 @@
     .btn-default {
         color: black;
     }
+   
 
 </style>
 {% endblock %}
@@ -61,21 +62,28 @@
             <div class="col-md-5">{{ form_row(form.telephone) }}</div>
         </div>
 
+
         {{ form_row(form.adresse) }}
         {{ form_end(form) }}
     </div>
-
 </div>
+
 {% endblock %}
+
 {% block javascripts %}
 <script>
-            let userId= app.user.id
-            console.log(userId);
+    let userId = console.log({
+        {
+            app.user.id
+        }
+    });
+
+
     $(document).ready(function () {
+
         $('#edit_user_save').click(function (e) {
             e.preventDefault();
 
-               
             swal({
                     title: "Validation",
                     text: "pour une raison de sécurité, enter votre mot de passe pour sauvegarder les modifications",
@@ -83,7 +91,6 @@
                     type: "input",
                     inputType: "password",
                     inputPlaceholder: "Enter votre mot de passe",
-                   
                     showCancelButton: true,
                     closeOnConfirm: false,
                     showLoaderOnConfirm: true
