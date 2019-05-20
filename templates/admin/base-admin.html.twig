@@ -23,12 +23,12 @@
 
     {% block stylesheets %}
     <style>
-    .container{
-        margin-top:50px;
-    }
+        .container {
+            margin-top: 50px;
+        }
 
     </style>
-    
+
     {% endblock %}
 </head>
 
@@ -63,8 +63,8 @@
     {% endblock %}
 
     {% block head %}
-    <div class="container" >
-        <div class="row" >
+    <div class="container">
+        <div class="row">
             <div class="col-lg-12">
                 <h1 class="Welcom-title"> list des Commandes </h1>
             </div>
@@ -104,9 +104,11 @@
             </table>
         </div>
     </div>
+    <div class="navigation pagination-sm">
+        {{ knp_pagination_render(pagination) }}
     </div>
-
     {% endblock %}
+
 
 
     <script src="{{ asset('bower_components/jquery/dist/jquery.min.js') }}"></script>

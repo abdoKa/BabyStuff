@@ -22,8 +22,9 @@ class BabyProductsController extends AbstractController
     /**
      * @Route("/", name="home")
      */
-    public function home()
+    public function home(Request $request)
     {
+        $session = $request->getSession();
         $em =$this->getDoctrine()->getManager();
         $repoP =$em->getRepository(Produit::class);
         $produits =$repoP->getLastProducts();
@@ -35,7 +36,7 @@ class BabyProductsController extends AbstractController
         $repoFea =$em->getRepository(Produit::class);
         $features =$repoFea->getFeatures();
         
-
+dump($session);
         return $this->render('baby_products/home.html.twig',[
             'produits' => $produits,
             'fournissueurs' =>$fournisseurs,

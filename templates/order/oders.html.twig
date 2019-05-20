@@ -64,7 +64,7 @@
         <strong>Produit :</strong>
         <div class="row m-auto"> {{ cartDetails.products.nom }}</div>
         <strong>Description :</strong>
-        <div class="row m-auto"> {{ cartDetails.products.description }}</div>
+        <div class="row m-auto"> {{ cartDetails.products.description|raw }}</div>
         <strong>Image :</strong>
         <div class="row m-auto"><img src="{{ asset('/brows_file/' ~ cartDetails.products.image) }}"
                 class="image_B w-100"></div>

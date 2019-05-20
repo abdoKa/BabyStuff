@@ -37,6 +37,20 @@ $(document).ready(function() {
         $(this).find('.icon-change').toggleClass('fas');
     });
 
+    $('.add-to-cart').click(function(e) {
+        var url = $(this).data("url");
+        e.preventDefault();
+        $.post(url, function(data) {
+                alert(data);
+            })
+            .done(function() {
+                console.log("Done");
+            })
+            .fail(function() {
+                console.log("Error");
+            });
+    });
+
     // $('.list-group a').click(function(e) {
     //     e.preventDefault();
     //     $this.find('a').removeClass('active');
@@ -66,6 +80,7 @@ $(document).ready(function() {
         }
 
     });
+
 
 
 });

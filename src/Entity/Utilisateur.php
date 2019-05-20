@@ -53,10 +53,10 @@ class Utilisateur implements UserInterface, \Serializable
 
     /**
      * @ORM\Column(type="string", length=255 , unique=true)
-     * @Assert\NotBlank
+     * @Assert\NotBlank(groups={"registration"})
      * @Assert\Email(
      *     message = "The email '{{ value }}' is not a valid email.",
-     *     checkMX = true
+     *     checkMX = true,groups={"registration"}
      * )
      */
     private $email;
@@ -64,14 +64,14 @@ class Utilisateur implements UserInterface, \Serializable
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\Length(min="8", minMessage="Votre mot de passe doit faire minimum 8 caractéres")
-     * @Assert\NotBlank
+     * @Assert\Length(min="8", minMessage="Votre mot de passe doit faire minimum 8 caractéres", groups={"registration"})
+     * @Assert\NotBlank(groups={"registration"})
      */
     private $password;
 
     /** 
-     * @Assert\EqualTo(propertyPath="password",message="vous n'avez pas tapé le méme mot de passe")
-     * @Assert\NotBlank
+     * @Assert\EqualTo(propertyPath="password",message="vous n'avez pas tapé le méme mot de passe",groups={"registration"})
+     * @Assert\NotBlank(groups={"registration"})
      */
     public $confirm_password;
 

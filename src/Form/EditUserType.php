@@ -11,6 +11,7 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 
 class EditUserType extends AbstractType
 {
@@ -22,9 +23,15 @@ class EditUserType extends AbstractType
             ->add('email', EmailType::class)
             ->add('telephone', NumberType::class)
             ->add('adresse', TextareaType::class)
+            ->add('confirm_password', PasswordType::class, array(
+                'attr' => array(
+                    'placeholder' => 'Enter votre mot de passe',
+                    
+                )
+            ))
             ->add('save', SubmitType::class, array(
                 'label' => 'Enregistrer',
-                'attr' => array('class' => 'btn btn-success btn-sm ')
+                'attr' => array('class' => 'btn btn-success btn-sm', 'data-toggle' => 'modal', 'data-target' => '#CheckPassword')
             ));
     }
 

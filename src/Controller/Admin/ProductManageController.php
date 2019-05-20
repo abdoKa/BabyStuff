@@ -60,6 +60,7 @@ class ProductManageController extends AbstractController
         
         $form = $this->createForm(EditProductType::class, $product);
         $form->handleRequest($request);
+
         if ($form->isSubmitted() && $form->isValid()) {
             
             $product = $form->getData();
@@ -81,7 +82,6 @@ class ProductManageController extends AbstractController
             $this->addFlash('info', 'ce produit est modifer avec succée !');
             return $this->redirectToRoute('admin_product');
         }
-        dump( $product);
         
 
         

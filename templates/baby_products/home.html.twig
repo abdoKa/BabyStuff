@@ -61,8 +61,8 @@ object-fit: cover;
                         </div>
                         <div class="card-title product-title"> {{ produit.nom }} </div>
                         <div class="product-price"> {{ produit.prix }} MAD </div>
-                        <a href="# " class="btn btn-primary add-to-cart"><i
-                                class="fas fa-cart-plus"></i> Ajouter au
+                        <a href="# " class="btn btn-primary add-to-cart" data-url="{{ path('add_to_cart',{'id':produit.id ,'quantity':1}) }}"><i
+                                class="fas fa-cart-plus" ></i> Ajouter au
                             panier</a>
                 </div>
             </div>

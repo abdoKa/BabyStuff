@@ -1,0 +1,5 @@
+etp1 : click add to cart
+etp2 : get id product and quantité
+etp3:send data to Ajax
+etp4: get id from url and check if id
+etp5: add to Session() 

@@ -17,6 +17,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\CssSelector\Parser\Token;
 use Symfony\Component\HttpFoundation\Response;
+use PhpParser\Builder\Method;
 
 class UserAccountController extends AbstractController
 {
@@ -49,28 +50,34 @@ class UserAccountController extends AbstractController
         $em = $this->getDoctrine()->getManager();
         // $repoUser = $em->getRepository(Utilisateur::class);
         // $userOrser = $repoUser->findOneBy(array('id' => $id));
-
-        // (int)$userId = $currentUser->getId();
-
         // $belongTo = $repoUser->BelongsToUser($id, $userId);
 
 
-        dump($currentUser);
+
         $form = $this->createForm(EditUserType::class, $currentUser);
         $form->handleRequest($request);
 
+        $getPasswordFromInput = $form->get("confirm_password")->getData();
+
+        $hash = $currentUser->getpassword();
+        dump($getPasswordFromInput);
+
         if ($form->isSubmitted() && $form->isValid()) {
+            if (password_verify($getPasswordFromInput, $hash)) {
 
-            $em->persist($currentUser);
-            $em->flush();
-            return $this->redirectToRoute('user_profile');
+                $em->persist($currentUser);
+                $em->flush();
+                $this->addFlash('info', 'Modification avec succée!');
+                return $this->redirectToRoute('user_profile');
+            } else {
+                return $this->redirectToRoute('home');
+            }
         }
-        
 
-            return $this->render('user_account/editProfile.html.twig', [
-                'form' => $form->createView(),
-            ]);
-        
+
+        return $this->render('user_account/editProfile.html.twig', [
+            'form' => $form->createView(),
+        ]);
     }
 
 

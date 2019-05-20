@@ -1,12 +1,17 @@
   {% extends "admin/base-admin.html.twig" %}
   {% block stylesheets %}
   <style>
-  .container{
-        margin-top:50px;
-    }
+      .container {
+          margin-top: 50px;
+      }
+
+      .alert {
+          text-align: center;
+          float: center;
+      }
 
   </style>
-  
+
   {% endblock %}
 
   {% block head %}
@@ -15,30 +20,30 @@
           <div class="col-lg-12">
               <h1 class="Welcom-title"> list des Produits </h1>
           </div>
-          {# / part backend client settings #}
+      {% for message in app.flashes('success') %}
+      <div class="alert p-2 sm-success alert-success" role="alert">
+          {{ message }}
+          {% endfor %}
       </div>
-      {# / part backend client settings #}
-  </div>
-  {% for message in app.flashes('success') %}
-  <div class="alert  alert-success" role="alert" id="'#successMessage">
-      {{ message }}
+      {% for message in app.flashes('info') %}
+      <div class="alert p-2 m-auto sm-info alert-info" role="alert">
+          {{ message }}
+      </div>
       {% endfor %}
+
+      {% for message in app.flashes('info_delete') %}
+      <div class="alert alert-danger" role="alert">
+          {{ message }}
+      </div>
+      {% endfor %}
+      </div>
+
+
   </div>
-  {% for message in app.flashes('info') %}
-  <div class="alert alert-info" role="alert">
-      {{ message }}
-      {# {{ pagination[0].nom }}  #}
-  </div>
-  {% endfor %}
-  {% for message in app.flashes('info_delete') %}
-  <div class="alert alert-danger" role="alert">
-      {{ message }}
-      {# {{ pagination[0].nom }}  #}
-  </div>
-  {% endfor %}
+
+
   <div class="row">
       <div class="col-sm-3">
-
           {% include 'admin/menu.html.twig' %}
       </div>
       <div class="col-sm-9">
@@ -49,7 +54,6 @@
 
               </a>
           </div>
-
           <table class="table">
               <thead>
                   <tr bgcolor="d7f7f5">

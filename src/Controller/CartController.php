@@ -29,7 +29,7 @@ class CartController extends AbstractController
         $cart = [];
         $totalSum = 0;
         
-        
+        $session = $request->getSession();
         if($session->get('my_cart') == null){
             $session->set('my_cart', $cart);
         }

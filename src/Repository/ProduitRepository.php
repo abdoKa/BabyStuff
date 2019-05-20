@@ -18,7 +18,7 @@ class ProduitRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Produit::class);
     }
-    
+
 
     public function getLastProducts(): array
     {
@@ -59,28 +59,48 @@ class ProduitRepository extends ServiceEntityRepository
 
     public function getFournisseurById($id)
     {
-    $conn = $this->getEntityManager()->getConnection();
-    $statement = $conn->prepare("SELECT * FROM fourniseur WHERE id = :id");
-    $statement->bindValue('id', $id);
-    $statement->execute();
-    return $statement->fetchAll();
+        $conn = $this->getEntityManager()->getConnection();
+        $statement = $conn->prepare("SELECT * FROM fourniseur WHERE id = :id");
+        $statement->bindValue('id', $id);
+        $statement->execute();
+        return $statement->fetchAll();
+    }
+    
+    // backend categories
+    
+    public  function getCategoriesTable()
+    {
+        $conn = $this->getEntityManager()->getConnection();
+        $sql = '
+        SELECT produit.nom ,categorie.nom ,fourniseur.nom,produit.prix, produit.image,produit.stock 
+        FROM produit,categorie,fourniseur 
+        where categorie.id=categorie_id and 
+        fourniseur.id=fourniseur_id
+        ';
+        $stmt = $conn->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetchAll();
+    }
+    
+    public function ifProductExist($id)
+    {
+        $sql = "
+            SELECT 
+            c FROM 
+            App:Produit c
+            WHERE
+            c.id=:id  
+        ";
+        $result = $this->getEntityManager()->createQuery($sql)
+            ->setParameter('id', $id)
+            ->getOneOrNullResult();
+        if (null == $result) {
+            return false;
+        } else {
+            return true;
+        }
     }
 
- // backend categories
-
- public  function getCategoriesTable()
- {
-     $conn = $this->getEntityManager()->getConnection();
-     $sql = '
-     SELECT produit.nom ,categorie.nom ,fourniseur.nom,produit.prix, produit.image,produit.stock 
-     FROM produit,categorie,fourniseur 
-     where categorie.id=categorie_id and 
-     fourniseur.id=fourniseur_id
-     ';
-     $stmt = $conn->prepare($sql); 
-     $stmt->execute();
-     return $stmt->fetchAll();
- }
     // /**
     //  * @return Produit[] Returns an array of Produit objects
     //  */

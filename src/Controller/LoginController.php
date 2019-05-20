@@ -48,8 +48,11 @@ class LoginController extends AbstractController
     public function registration(Request $request, UserPasswordEncoderInterface $encoder)
     {
         $utilisateur = new Utilisateur();   
+        
 
-        $form = $this->createForm(RegistraionType::class, $utilisateur);
+        $form = $this->createForm(RegistraionType::class, $utilisateur,[
+            'validation_groups' => ['registration']
+        ]);
 
         $form->handleRequest($request);
 
