@@ -101,9 +101,9 @@
           <a class="nav-link" href="{{ path('shopping') }}"> Panier
             <i class="fas fa-shopping-basket">
               {% if cartDetails is defined and cartDetails is not null %}
-              {{cartDetails.totalsum}} <spane><small>MAD</small></spane>
+              <span id="totalSum">{{cartDetails.totalsum}}</span> <small>MAD</small>
               {% else %}
-              <spane><small>0 MAD</small></spane>
+              <span><small>0 MAD</small></span>
               {% endif %}
 
             </i>
@@ -111,8 +111,8 @@
       </ul>
       <li class="navbar-nav " style="margin:0 -20px 0 30px;">
         <small><a class="nav-link" href="#"><i class="far fa-heart"></i>
-          <spane>Favorites</spane>
-        </a></small>
+            <spane>Favorites</spane>
+          </a></small>
       </li>
       {% if is_granted("ROLE_USER") %}
 
@@ -131,8 +131,7 @@
               <a class="dropdown-item" href="{{ path('user_favorite') }}"><i class="fas fa-heart"></i>
                 <spane> Favorites </spane>
               </a>
-              <a class="dropdown-item" href="{{ path('user_profile_edit') }}"><i
-                  class="fas fa-cogs"></i>
+              <a class="dropdown-item" href="{{ path('user_profile_edit') }}"><i class="fas fa-cogs"></i>
                 <spane> Paramètre </spane>
               </a>
               {% if is_granted("ROLE_ADMIN") %}
@@ -159,8 +158,6 @@
       </ul>
 
       {% endif %}
-
-
     </div>
   </nav>
 

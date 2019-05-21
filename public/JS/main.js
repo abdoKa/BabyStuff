@@ -41,21 +41,17 @@ $(document).ready(function() {
         var url = $(this).data("url");
         e.preventDefault();
         $.post(url, function(data) {
-                alert(data);
-            })
-            .done(function() {
-                console.log("Done");
-            })
-            .fail(function() {
-                console.log("Error");
-            });
+            JSON.stringify(data);
+            console.log(data);
+            if (data.status == 'ok') {
+                $('#totalSum').text(data.totalsum);
+
+            } else {}
+        });
+
     });
 
-    // $('.list-group a').click(function(e) {
-    //     e.preventDefault();
-    //     $this.find('a').removeClass('active');
-    //     $this.addClass('active');
-    // });
+
 
     $('.dropdown-toggle').select2({
         selectOnClose: true

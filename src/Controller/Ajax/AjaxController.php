@@ -22,9 +22,9 @@ class AjaxController extends AbstractController
         $repoP = $em->getRepository(Produit::class);
         $session = new Session();
 
-        // $productsArray = [];
         $cart = [];
         $totalSum = 0;
+        $productsArray = [];
 
         $checkProduct = $repoP->ifProductExist($id);
         if ($checkProduct) {
@@ -45,11 +45,34 @@ class AjaxController extends AbstractController
                     $cart += $item;
                 }
                 $session->set('my_cart', $cart);
-                $totalSum = $session->getPrixTotal();
             }
 
+            foreach ($cart as $productId => $productQuantity) {
+                $product = $repoP->findOneBy([
+                    'id' => $productId,
+                ]);
 
-            return $this->json('Succeed');
+                if (is_object($product)) {
+                    $productPosition = [];
+                    $quantity = abs((int)$productQuantity);
+                    $price = $product->getPrix();
+                    $sum = $price * $quantity;
+                    $productPosition['product'] = $product;
+                    $productPosition['quantity'] = $quantity;
+                    $productPosition['price'] = $price;
+                    $productPosition['sum'] = $sum;
+                    $totalSum += $sum;
+                    $productsArray[] = $productPosition;
+                }
+            }
+
+            $cartDetails = ['products' => $productsArray, 'totalsum' => $totalSum];
+
+            $data = array(
+                'status' => 'ok',
+                'totalsum' => $totalSum
+            );
+            return  new JsonResponse($data);
         } else {
             return $this->json('Error');
         }

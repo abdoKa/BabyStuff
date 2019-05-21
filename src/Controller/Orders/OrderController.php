@@ -79,7 +79,6 @@ class OrderController extends AbstractController
             return $this->redirectToRoute('user_account');
         }
         dump($cartDetails);
-        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
         return $this->render('order/oders.html.twig', [
             'form' => $form->createView(),
             'order' => $order,
