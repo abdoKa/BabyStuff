@@ -77,4 +77,87 @@ class AjaxController extends AbstractController
             return $this->json('Error');
         }
     }
+    /**
+     * @Route("/cart/remove/{id}", name="remove_one_product", methods={"POST"})
+     */
+
+    public function removeAction(Request $request, $id)
+    {
+        $cart = [];
+        $totalSum = 0;
+        $productsArray = [];
+
+        $session = new Session();
+
+        $em = $this->getDoctrine()->getManager();
+        $repoP = $em->getRepository(Produit::class);
+        $checkProduct = $repoP->ifProductExist($id);
+
+
+
+        if ($checkProduct) {
+            if ($session->get('my_cart') == null) {
+                $session->set('my_cart', $cart);
+            } else {
+                $cart = $session->get('my_cart');
+            }
+            unset($cart[$id]);
+            $session->set('my_cart', $cart);
+            foreach ($cart as $productId => $productQuantity) {
+                $product = $repoP->findOneBy([
+                    'id' => $productId,
+                ]);
+
+                if (is_object($product)) {
+                    $productPosition = [];
+                    $quantity = abs((int)$productQuantity);
+                    $price = $product->getPrix();
+                    $sum = $price * $quantity;
+                    $productPosition['product'] = $product;
+                    $productPosition['quantity'] = $quantity;
+                    $productPosition['price'] = $price;
+                    $productPosition['sum'] = $sum;
+                    $totalSum += $sum;
+                    $productsArray[] = $productPosition;
+                }
+            }
+
+            $cartDetails = ['products' => $productsArray, 'totalsum' => $totalSum];
+
+            $data = array(
+                'status' => 'ok',
+                'cart' => count($cart),
+                'totalSum' => $totalSum,
+
+            );
+
+            return  new JsonResponse($data);
+        } else {
+            $data = array(
+                'status' => 'error',
+            );
+        }
+    }
+
+    /**
+     * @Route("cart/remove/all/products", name="remove_all_products", methods={"POST"})
+     */
+
+    public function removeAllAction()
+    {
+        $cart = [];
+        $session = new Session();
+
+        if ($session->get('my_cart') == null) {
+            $session->set('my_cart', $cart);
+        } else {
+            $cart = $session->get('my_cart');
+        }
+
+        $data = array(
+            'status' => 'ok',
+            'removeSession' => $session->remove('my_cart')
+        );
+        return  new JsonResponse($data);
+    }
 }

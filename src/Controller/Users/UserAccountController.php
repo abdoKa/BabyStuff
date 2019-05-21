@@ -18,6 +18,7 @@ use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\CssSelector\Parser\Token;
 use Symfony\Component\HttpFoundation\Response;
 use PhpParser\Builder\Method;
+use App\Form\EditPasswordType;
 
 class UserAccountController extends AbstractController
 {
@@ -46,14 +47,7 @@ class UserAccountController extends AbstractController
      */
     public function editProfile(Request $request, UserInterface $currentUser)
     {
-
         $em = $this->getDoctrine()->getManager();
-        // $repoUser = $em->getRepository(Utilisateur::class);
-        // $userOrser = $repoUser->findOneBy(array('id' => $id));
-        // $belongTo = $repoUser->BelongsToUser($id, $userId);
-
-
-
         $form = $this->createForm(EditUserType::class, $currentUser);
         $form->handleRequest($request);
 
@@ -67,7 +61,6 @@ class UserAccountController extends AbstractController
 
                 $em->persist($currentUser);
                 $em->flush();
-                $this->addFlash('info', 'Modification avec succée!');
                 return $this->redirectToRoute('user_profile');
             } else {
                 return $this->redirectToRoute('home');
@@ -80,6 +73,20 @@ class UserAccountController extends AbstractController
         ]);
     }
 
+
+    /**
+     * @Route("/user/account/password/edit", name="user_password_edit", methods={"GET","POST"})
+     */
+    public function editPassword(Request $request, UserInterface $currentUser)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $form = $this->createForm(EditPasswordType::class, $currentUser);
+        $form->handleRequest($request);
+
+        return $this->render('user_account/editPassword.html.twig', [
+            'form' => $form->createView(),
+        ]);
+    }
 
     /**
      * @Route("user/order/list", name="user_orders_list")

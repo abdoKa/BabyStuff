@@ -43,6 +43,11 @@
         object-fit: cover;
     }
 
+    .btn ,
+    .btn:hover {
+        color:black;
+    }
+
 </style>
 
 {% endblock %}
@@ -70,7 +75,7 @@
             </thead>
             <tbody>
                 {% for product in cartDetails.products %}
-                <tr>
+                <tr class="item">
 
                     <td style="margin-top:10px">
                         <span><img src="{{ asset('/brows_file/' ~ product.product.image) }}" class="image_B w-100"
@@ -89,7 +94,7 @@
                     <td>
                         <div class="form-group">
                             <div>
-                                <input type="number" name="quantity" required="required" min="1" data-id=""
+                                <input type="number" name="quantity" required="required" min="1" 
                                     class="form-control quantity" value="{{ product.quantity }}">
                             </div>
                         </div>
@@ -102,7 +107,8 @@
                     </td>
                     <td>
                         <a href="#" class="btn btn-danger glyphicon glyphicon-remove product-remove"
-                            data-toggle="confirmation" data-popout="true" data-placement="left">
+                            data-toggle="confirmation" data-popout="true" data-placement="left"
+                            data-url="{{ path('remove_one_product',{'id':product.product.id}) }}">
                             <spane><small><i class="fas fa-times"></i></small></spane>
                         </a>
                     </td>
@@ -115,8 +121,8 @@
 
 
         <div class="col-sm-4 card " style="position: absolute;right: 150px; color:black;">
-                <i class="fas fa-shopping-bag"></i>
-            <div>
+            <i class="fas fa-shopping-bag"></i>
+            <div class="totamSum">
                 <strong style="color:black;">TTC:</strong>
                 {{ cartDetails.totalsum }} <small>MAD</small>
             </div>
@@ -124,7 +130,7 @@
                 <strong style="color:black;">Quantité :</strong>
                 {{ cartDetails.products[0].quantity }}
             </div>
-           
+
         </div>
 
 
@@ -137,7 +143,7 @@
                         Commandez maintenant !
                     </a>
                     <a href="#" class="btn btn-danger glyphicon glyphicon-trash clear-cart" data-toggle="confirmation"
-                        data-popout="true" data-placement="left">
+                        data-popout="true" data-placement="left" data-url="{{ path('remove_all_products') }}">
                         vider le panier <i class="fas fa-trash-alt"></i>
                     </a>
                 </div>
