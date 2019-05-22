@@ -71,9 +71,15 @@ class Utilisateur implements UserInterface, \Serializable
 
     /** 
      * @Assert\EqualTo(propertyPath="password",message="vous n'avez pas tapé le méme mot de passe",groups={"registration"})
-     * @Assert\NotBlank(groups={"registration"})
+     * @Assert\NotBlank()
      */
     public $confirm_password;
+
+     /** 
+     * @Assert\EqualTo(propertyPath="confirm_password",message="vous n'avez pas tapé le méme mot de passe",groups={"registration"})
+     * @Assert\NotBlank()
+     */
+    public $new_password;
 
     /**
      * @ORM\Column(type="integer")

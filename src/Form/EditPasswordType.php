@@ -16,6 +16,9 @@ class EditPasswordType extends AbstractType
         $builder
            
             ->add('password', PasswordType::class)
+            ->add('Nouveau_mot_de_passe', PasswordType::class,array(
+                'mapped' => false
+            ))
             ->add('confirm_password', PasswordType::class)
             ->add('save', SubmitType::class, array(
                 'label' => 'Enregistrer',

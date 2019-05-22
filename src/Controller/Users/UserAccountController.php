@@ -4,21 +4,22 @@ namespace App\Controller\Users;
 
 use App\Entity\Commande;
 
-use App\Entity\Utilisateur;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Security\Core\Security;
-use Symfony\Component\Routing\Annotation\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Knp\Component\Pager\PaginatorInterface;
 use App\Form\EditUserType;
-use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Component\Security\Core\User\UserInterface;
-use Symfony\Component\HttpFoundation\Session\Session;
-use Symfony\Component\CssSelector\Parser\Token;
-use Symfony\Component\HttpFoundation\Response;
+use App\Entity\Utilisateur;
 use PhpParser\Builder\Method;
 use App\Form\EditPasswordType;
+use Doctrine\ORM\EntityManagerInterface;
+use Knp\Component\Pager\PaginatorInterface;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Security\Core\Security;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\CssSelector\Parser\Token;
+use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\Session\Session;
+use Symfony\Component\Security\Core\User\UserInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class UserAccountController extends AbstractController
 {
@@ -67,7 +68,6 @@ class UserAccountController extends AbstractController
             }
         }
 
-
         return $this->render('user_account/editProfile.html.twig', [
             'form' => $form->createView(),
         ]);
@@ -77,11 +77,46 @@ class UserAccountController extends AbstractController
     /**
      * @Route("/user/account/password/edit", name="user_password_edit", methods={"GET","POST"})
      */
-    public function editPassword(Request $request, UserInterface $currentUser)
+    public function editPassword(Request $request, UserInterface $currentUser, UserPasswordEncoderInterface $encoder)
     {
         $em = $this->getDoctrine()->getManager();
+        $email = $currentUser->getEmail();
+        $hash = $currentUser->getPassword();
+
+
+
         $form = $this->createForm(EditPasswordType::class, $currentUser);
         $form->handleRequest($request);
+        $password = $form->get('password')->getData();
+        $Nouveau_mot_de_passe = $form->get('Nouveau_mot_de_passe')->getData();
+        $confirm_password = $form->get('confirm_password')->getData();
+
+        dump($password);
+        dump($Nouveau_mot_de_passe);
+        dump($confirm_password);
+        dump($hash);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $oldPassword = $password;
+            $newPassword = $Nouveau_mot_de_passe;
+            $checkPassword =  $confirm_password;
+            $repoUSer = $em->getRepository(Utilisateur::class);
+            $user = $repoUSer->findOneBy(array('email' => $email));
+            if ($user == null) {
+                return $this->redirectToRoute('home');
+            }
+            if (password_verify($oldPassword, $hash)) {
+                if ($newPassword == $checkPassword) {
+
+                    $oldPassword = $encoder->encodePassword($user, $newPassword);
+                    $currentUser->setPassword($oldPassword);
+
+                    $em->persist($currentUser);
+                    $em->flush();
+                    return $this->redirectToRoute('user_profile');
+                }
+            }
+        }
+
 
         return $this->render('user_account/editPassword.html.twig', [
             'form' => $form->createView(),
