@@ -72,8 +72,6 @@ class UserAccountController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
-
-
     /**
      * @Route("/user/account/password/edit", name="user_password_edit", methods={"GET","POST"})
      */
@@ -83,38 +81,18 @@ class UserAccountController extends AbstractController
         $email = $currentUser->getEmail();
         $hash = $currentUser->getPassword();
 
-
-
-        $form = $this->createForm(EditPasswordType::class, $currentUser);
+        $form = $this->createForm(EditPasswordType::class, $currentUser, []);
         $form->handleRequest($request);
-        $password = $form->get('password')->getData();
-        $Nouveau_mot_de_passe = $form->get('Nouveau_mot_de_passe')->getData();
-        $confirm_password = $form->get('confirm_password')->getData();
 
-        dump($password);
-        dump($Nouveau_mot_de_passe);
-        dump($confirm_password);
         dump($hash);
         if ($form->isSubmitted() && $form->isValid()) {
-            $oldPassword = $password;
-            $newPassword = $Nouveau_mot_de_passe;
-            $checkPassword =  $confirm_password;
-            $repoUSer = $em->getRepository(Utilisateur::class);
-            $user = $repoUSer->findOneBy(array('email' => $email));
-            if ($user == null) {
-                return $this->redirectToRoute('home');
-            }
-            if (password_verify($oldPassword, $hash)) {
-                if ($newPassword == $checkPassword) {
 
-                    $oldPassword = $encoder->encodePassword($user, $newPassword);
-                    $currentUser->setPassword($oldPassword);
+            $hash = $encoder->encodePassword($currentUser, $currentUser->getPassword());
+            $currentUser->setPassword($hash);
 
-                    $em->persist($currentUser);
-                    $em->flush();
-                    return $this->redirectToRoute('user_profile');
-                }
-            }
+            $em->persist($currentUser);
+            $em->flush();
+            return $this->redirectToRoute('user_profile');
         }
 
 

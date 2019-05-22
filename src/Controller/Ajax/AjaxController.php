@@ -160,4 +160,26 @@ class AjaxController extends AbstractController
         );
         return  new JsonResponse($data);
     }
+
+    // //  /**
+    // //  * @Route("user/account/password/edit/{id}", name="remove_all_products", methods={"POST"})
+    // //  */
+
+    // // public function changePassword()
+    // // {
+    // //     $cart = [];
+    // //     $session = new Session();
+
+    // //     if ($session->get('my_cart') == null) {
+    // //         $session->set('my_cart', $cart);
+    // //     } else {
+    // //         $cart = $session->get('my_cart');
+    // //     }
+
+    // //     $data = array(
+    // //         'status' => 'ok',
+    // //         'removeSession' => $session->remove('my_cart')
+    // //     );
+    // //     return  new JsonResponse($data);
+    // // }
 }

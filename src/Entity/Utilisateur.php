@@ -4,10 +4,13 @@ namespace App\Entity;
 
 use Serializable;
 use App\Entity\Commande;
+use App\Entity\ProductLike;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints\Length;
+use Symfony\Component\Validator\Constraints\EqualTo;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
@@ -69,17 +72,12 @@ class Utilisateur implements UserInterface, \Serializable
      */
     private $password;
 
-    /** 
-     * @Assert\EqualTo(propertyPath="password",message="vous n'avez pas tapé le méme mot de passe",groups={"registration"})
-     * @Assert\NotBlank()
+   /** 
+     * @Assert\EqualTo(propertyPath="password",message="vous n'avez pas tapé le méme mot de passe" ,groups={"registration"})
+     * @Assert\NotBlank( groups={"registration"})
      */
     public $confirm_password;
 
-     /** 
-     * @Assert\EqualTo(propertyPath="confirm_password",message="vous n'avez pas tapé le méme mot de passe",groups={"registration"})
-     * @Assert\NotBlank()
-     */
-    public $new_password;
 
     /**
      * @ORM\Column(type="integer")
