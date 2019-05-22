@@ -16,27 +16,28 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class BrandsManageController extends AbstractController
 
 {
- /**
+    /**
      * @Route("/admin/Brands", name="admin_brands")
      */
-    public function admin_Bfournisseur(PaginatorInterface $paginator,Request $request)
+    public function admin_Bfournisseur(PaginatorInterface $paginator, Request $request)
     {
-        $em=$this->getDoctrine()->getManager();
-        $repoF=$em->getRepository(Fourniseur::class);
+        $em = $this->getDoctrine()->getManager();
+        $repoF = $em->getRepository(Fourniseur::class);
 
-        $fournissuer=$repoF->findAll();
+        $fournissuer = $repoF->findAll();
 
-        
-        $pagination=$paginator->paginate(
+
+        $pagination = $paginator->paginate(
             $fournissuer,
-            $request->query->getInt('page',1),9
+            $request->query->getInt('page', 1),
+            9
         );
         return $this->render('admin/Admin_BrandsTwigs/brands.html.twig', [
-           'pagination'=>$pagination
+            'pagination' => $pagination
         ]);
     }
 
-     /**
+    /**
      * @Route("/admin/brand/edit/{slug}", name="edit_brand", methods={"GET","POST"})
      */
     public function edit_brand(Request $request, Fourniseur $brand, $slug)
@@ -61,26 +62,24 @@ class BrandsManageController extends AbstractController
             if ($form->isSubmitted() && $form->isValid()) {
                 $brand = $form->getData();
                 $file = $brand->getImage();
-    
+
                 if ($file instanceof UploadedFile) {
-                    $fileName = md5(uniqid()).'.'.$file->guessExtension();
+                    $fileName = md5(uniqid()) . '.' . $file->guessExtension();
                     $file->move(
                         $this->getParameter('uploads_directory'),
                         $fileName
                     );
                     $brand->setImage($fileName);
                 }
-            $brand->setImage(basename($brand->getImage()));
-    
+                $brand->setImage(basename($brand->getImage()));
             }
-            
+
             $em->persist($brand);
             $em->flush();
-            $this->addFlash('info','ce produit est modifer avec succée !');
+            $this->addFlash('info', $brand->getNom() . ' est modifer avec succée !');
             return $this->redirectToRoute('admin_brands');
-
         }
-        
+
 
 
         return $this->render('Admin/Admin_BrandsTwigs/EditBrand.html.twig', [
@@ -112,7 +111,7 @@ class BrandsManageController extends AbstractController
             $brand->setImage($fileName);
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($brand);
-            $this->addFlash('success','Ce catégorie est ajouter avec succée !');
+            $this->addFlash('success', $brand->getNom() . ' est ajouter avec succée !');
             $entityManager->flush();
 
             return $this->redirectToRoute('admin_brands');
@@ -123,7 +122,7 @@ class BrandsManageController extends AbstractController
         ));
     }
 
-     /**
+    /**
      * @Route("/admin/brand/detail/{slug}", name="brand_detail")
      */
     public function show_brand($slug)
@@ -139,7 +138,7 @@ class BrandsManageController extends AbstractController
         ]);
     }
 
-     /**
+    /**
      * @Route("admin/brand/delete/{slug}", name="brand_delete")
      */
     public function delete($slug)
@@ -149,7 +148,8 @@ class BrandsManageController extends AbstractController
         $brand = $repoP->findOneBy(array('slug' => $slug));
 
         $em->remove($brand);
-        $em->flush();
+        $em->flush();        
+        $this->addFlash('delete', $brand->getNom() . ' est supprimer avec succée !');
         return $this->redirectToRoute('admin_brands');
     }
 }

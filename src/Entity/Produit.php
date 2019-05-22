@@ -120,7 +120,7 @@ class Produit
     private $dateModif;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\CommandeProduit", mappedBy="produit")
+     * @ORM\OneToMany(targetEntity="App\Entity\CommandeProduit", mappedBy="produit", cascade={"remove"})
      */
     private $commandeProduits;
 

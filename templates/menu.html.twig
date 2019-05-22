@@ -121,7 +121,7 @@
           <li class="nav-item dropdown" id="navbarSupportedContent">
             <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
               aria-expanded="true">
-              <spane>Slaut!</spane> {{ app.user.nom }}
+              <span>Slaut!</span> <small>{{ app.user.nom }}  {{ app.user.prenom }}</small>
             </a>
             <div class="dropdown-menu  animate slideIn" aria-labelledby="navbarDropdown">
               <a class="dropdown-item" href="{{ path('user_account') }}">

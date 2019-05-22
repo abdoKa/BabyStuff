@@ -30,8 +30,10 @@ class CategoriesManageController extends AbstractController
 
         $pagination = $paginator->paginate(
             $categories,
-            $request->query->getInt('page', 1),9
+            $request->query->getInt('page', 1),
+            9
         );
+        dump($pagination);
 
         return $this->render('admin/Admin_CategorieTwigs/B_categories.html.twig', [
             'pagination' => $pagination
@@ -41,7 +43,7 @@ class CategoriesManageController extends AbstractController
     /**
      * @Route("/admin/categories/edit/{slug}", name="edit_categorie", methods={"GET","POST"})
      */
-    public function edit_categorie(Request $request, Categorie $categorie, $slug):Response
+    public function edit_categorie(Request $request, Categorie $categorie, $slug): Response
     {
 
         $em = $this->getDoctrine()->getManager();
@@ -58,21 +60,20 @@ class CategoriesManageController extends AbstractController
             $categorie = $form->getData();
             $file = $categorie->getImage();
             if ($file instanceof UploadedFile) {
-                $fileName = md5(uniqid()).'.'.$file->guessExtension();
+                $fileName = md5(uniqid()) . '.' . $file->guessExtension();
                 $file->move(
                     $this->getParameter('uploads_directory'),
                     $fileName
                 );
-                
+
                 $categorie->setImage($fileName);
             }
             $categorie->setImage(basename($categorie->getImage()));
-            
+
             $em->persist($categorie);
             $em->flush();
-            $this->addFlash('info','ce produit est modifer avec succée !');
+            $this->addFlash('info', $categorie->getNom() . ' est modifer avec succée !');
             return $this->redirectToRoute('admin_categories');
-
         }
 
 
@@ -94,23 +95,21 @@ class CategoriesManageController extends AbstractController
 
         $form->handleRequest($request);
 
-        if($form->isSubmitted() && $form->isValid())
-        {
-            
-            $image=$form->get('image')->getData();
-            $fileName = md5(uniqid()).'.'.$image->guessExtension();
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $image = $form->get('image')->getData();
+            $fileName = md5(uniqid()) . '.' . $image->guessExtension();
             $image->move(
                 $this->getParameter('uploads_directory'),
                 $fileName
             );
-            $categorie->setImage($fileName);                
-            $entityManager =$this->getDoctrine()->getManager();
+            $categorie->setImage($fileName);
+            $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($categorie);
             $entityManager->flush();
-            $this->addFlash('success', 'ce Catégorie est ajouté avec succée !');
+            $this->addFlash('success', $categorie->getNom() . ' est ajouté avec succée !');
             return $this->redirectToRoute('admin_categories');
-
-            }
+        }
         return $this->render('Admin/Admin_CategorieTwigs/newCategorie.html.twig', array(
             'form' => $form->createView(),
             'categorie' => $categorie
@@ -143,7 +142,7 @@ class CategoriesManageController extends AbstractController
         $categorie = $repoP->findOneBy(array('slug' => $slug));
 
         $em->remove($categorie);
-        $this->addFlash('delete','Ce catégorie est supprimer avec succée !');
+        $this->addFlash('delete', $categorie->getNom() . ' est supprimer avec succée !');
         $em->flush();
         return $this->redirectToRoute('admin_categories');
     }

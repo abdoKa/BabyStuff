@@ -26,7 +26,6 @@ $(document).ready(function() {
         ]
     });
 
-
     $('.add-to-favourite').click(function(e) {
         e.preventDefault();
         $(this).find('.icon-change').toggleClass('fas');
@@ -124,6 +123,7 @@ $(document).ready(function() {
     setTimeout(function() {
         $("div.alert").delay(6000).slideUp(300);
     }, 5000); // 5 secs
+
 
     tinymce.init({
         selector: '#produit_description , #edit_product_description , #categorie_description , #edit_categorie_description , #brands_description, #edit_brand_description',

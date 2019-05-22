@@ -20,7 +20,7 @@ class ProductLike
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Produit", inversedBy="productLikes")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Produit", inversedBy="productLikes", cascade={"remove"})
      */
     private $product;
 

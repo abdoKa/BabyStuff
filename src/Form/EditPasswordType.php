@@ -39,7 +39,7 @@ class EditPasswordType extends AbstractType
             ])
             ->add('save', SubmitType::class, array(
                 'label' => 'Enregistrer',
-                'attr' => array('class' => 'btn btn-success btn-sm')
+                'attr' => array('class' => 'btn btn-success btn-sm ')
             ));
     }
 

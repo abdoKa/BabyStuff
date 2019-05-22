@@ -1,11 +1,16 @@
 {% extends "admin/base-admin.html.twig" %}
 {% block stylesheets %}
- <style>
-  .container{
-        margin-top:50px;
+<style>
+    .container {
+        margin-top: 50px;
     }
 
-  </style>
+    .alert {
+        text-align: center;
+        float: center;
+    }
+
+</style>
 {% endblock %}
 
 {% block head %}
@@ -16,24 +21,23 @@
                 list des Catégories
             </h1>
         </div>
-        {# / part backend client settings #}
     </div>
-    {# / part backend client settings #}
     {% for message in app.flashes('success') %}
-    <div class="alert  alert-success" role="alert" id="'#successMessage">
+    <div class="alert p-2 m-auto sm-success alert-success" role="alert">
         {{ message }}
         {% endfor %}
     </div>
     {% for message in app.flashes('info') %}
-    <div class="alert  alert-info" role="alert" id="'#successMessage">
+    <div class="alert p-2 m-auto sm-info alert-info" role="alert">
         {{ message }}
-        {% endfor %}
     </div>
+    {% endfor %}
+
     {% for message in app.flashes('delete') %}
-    <div class="alert  alert-danger" role="alert" id="'#successMessage">
+    <div class="alert p-2 m-auto sm-danger alert-danger" role="alert">
         {{ message }}
-        {% endfor %}
     </div>
+    {% endfor %}
 </div>
 
 <div class="row">
@@ -78,7 +82,7 @@
         </table>
     </div>
 </div>
-<div class="navigation pagination-sm" >
+<div class="navigation pagination-sm">
     {{ knp_pagination_render(pagination) }}
 </div>
 {% endblock %}

@@ -56,6 +56,7 @@ class UserAccountController extends AbstractController
 
         $hash = $currentUser->getpassword();
         dump($getPasswordFromInput);
+        dump($currentUser);
 
         if ($form->isSubmitted() && $form->isValid()) {
             if (password_verify($getPasswordFromInput, $hash)) {
@@ -64,7 +65,7 @@ class UserAccountController extends AbstractController
                 $em->flush();
                 return $this->redirectToRoute('user_profile');
             } else {
-                return $this->redirectToRoute('home');
+            $this->addFlash('info', $currentUser->getNom() .  $currentUser->getPrenom() . ', votre information est modifer avec succée !');
             }
         }
 

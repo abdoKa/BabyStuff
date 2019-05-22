@@ -37,19 +37,22 @@
 {% block body %}
 <div class="row">
     <div class="col-lg-12">
-        <h1 class="Welcom-title"> Paramètre-Profile | <small>{{ (app.user.nom) }}</small>
+        <h1 class="Welcom-title"> Paramètre-Profile | <small>{{ (app.user.prenom) }} {{ app.user.nom }}</small>
             <h1>
     </div>
 </div>
 
 <div class="row">
     <div class="col-sm-4 card ">
+        <small>Profile</small>
         <a href="{{ path('user_profile') }}"><i class="far fa-user-circle btn-light btn-sm"></i></a>
         <div class="card-body">
             <h5>Utilisateur: <small style="color:black;">{{ app.user.nom }} {{ app.user.prenom }}</small></h5>
             <h5>E-mail: <small style="color:black;">{{ app.user.email }}</small></h5>
             <h5>Téléphone: <small style="color:black;">{{ app.user.telephone }}</small></h5>
             <h5>Adresse: <small style="color:black;">{{ app.user.adresse }}</small></h5>
+            <small>changer votre mot de passe</small>
+            <a href="{{ path('user_password_edit') }}"><i class="fas fa-lock btn-light btn-sm"></i></a>
         </div>
     </div>
 
@@ -72,7 +75,7 @@
             <div class="col-md-6">{{ form_row(form.confirm_password , {'label':false }) }}</div>
         </div>
         {{ form_end(form) }}
-        
+
     </div>
 </div>
 
@@ -81,8 +84,9 @@
 {% block javascripts %}
 <script>
     $(document).ready(function () {
+        swal("Validation", "Pour une raison de sécurity entrer votre mot de passe pour sauvgarder vos modifications");
+       
         $('#edit_user_save').click(function (e) {
-
             $("#edit_user_confirm_password").show();
         });
     });
