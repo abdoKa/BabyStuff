@@ -40,7 +40,6 @@
 
   $('.clear-cart').click(function(e) {
       e.preventDefault();
-      var item = $(this);
       var url = $(this).data("url");
       swal({
               title: "Are you sure?",
@@ -72,26 +71,21 @@
           });
   });
 
-  //edit quantity
-  //** var url = $(this).data("url");
-  //$.post(url, function (data) {
-  //if (data.status == 'ok') {
-  //  $('#totalSum').text(data.totalSum);
-  //  $('.totamSum').text(data.totalSum);
-
-
-
-
 
   $('input.quantity').change(function() {
+      var quantity = $(this).val();
       var url = $(this).data("url") + "/" + $(this).val();
-      td = $(this);
-      $.post(url, function(data) {
-          if (data.status == 'ok') {
-              console.log(data);
-              $('#totalSum').text(data.totalSum);
-              $(td).parent().parent('.sum').text(data.totalSum);
+      var input = $(this);
 
+      $.post(url, function(data) {
+
+          if (data.status == 'ok') {
+              $('#totalSum').text(data.totalSum);
+              $('.quantity-cart').text(data.quantity);
+              $(input).parents('.item').find('.sum-product').text(data.productSum);
+
+              console.log(data);
+              console.log(url);
           }
       });
 

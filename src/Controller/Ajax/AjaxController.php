@@ -174,12 +174,14 @@ class AjaxController extends AbstractController
     {
         $em = $this->getDoctrine()->getManager();
         $repoP = $em->getRepository(Produit::class);
-        
+
         $session = new Session();
 
         $cart = [];
         $totalSum = 0;
+        $productSum = 0;
         $productsArray = [];
+        $singleProductQte = (int)$quantity;
 
         $checkProduct = $repoP->ifProductExist($id);
         if ($checkProduct) {
@@ -188,6 +190,7 @@ class AjaxController extends AbstractController
             } else {
                 $cart = $session->get('my_cart');
             }
+
             if ($request->isMethod('post')) {
                 $productQuantity = $quantity;
                 $productId = $id;
@@ -207,33 +210,33 @@ class AjaxController extends AbstractController
                     'id' => $productId,
                 ]);
 
-                if (is_object($product)) {
-                    $productPosition = [];
-                    $quantity = abs((int)$productQuantity);
-                    $price = $product->getPrix();
-                    $sum = $price * $quantity;
-                    $productPosition['product'] = $product;
-                    $productPosition['quantity'] = $quantity;
-                    $productPosition['price'] = $price;
-                    $productPosition['sum'] = $sum;
-                    $totalSum += $sum;
-                    $productsArray[] = $productPosition;
-                }
+                $productPosition = [];
+                $quantity = abs((int)$productQuantity);
+                $price = $product->getPrix();
+                $sum = $price * $quantity;
+                $productPosition['product'] = $product;
+                $productPosition['quantity'] = $quantity;
+                $productPosition['price'] = $price;
+                $productPosition['sum'] = $sum;
+                $totalSum += $sum;
+                $productsArray[] = $productPosition;
             }
 
             $cartDetails = ['products' => $productsArray, 'totalsum' => $totalSum];
+            $product = $repoP->findOneBy([
+                'id' => $id,
+            ]);
 
             $data = array(
                 'status' => 'ok',
                 'totalSum' => $totalSum,
-                'sum' => $sum,
-                'id'=>$productId
+                'quantity' => $singleProductQte,
+                'productSum' =>  $product->getPrix() * $singleProductQte
+
             );
             return  new JsonResponse($data);
         } else {
             return $this->json('Error');
         }
     }
-
-   
 }

@@ -101,9 +101,10 @@
                         </div>
                     </td>
                     <td>
-                        <span>{{ product.product.prix }}</span> <small>MAD</small>
+                        <span>{{ product.product.prix }}</span> 
+                        <small>MAD</small>
                     </td>
-                    <td style="text-align: right" class="sum"> {{ product.sum }} <small>MAD</small>
+                    <td style="text-align: right" class="sum-product"> {{ product.sum }} <small>MAD</small>
                     </td>
                     <td>
                         <a href="#" class="btn btn-danger glyphicon glyphicon-remove product-remove"
@@ -127,8 +128,8 @@
                 {{ cartDetails.totalsum }} <small>MAD</small>
             </div>
             <div>
-                <strong style="color:black;">Quantité :</strong>
-                {{ cartDetails.products[0].quantity }}
+                <strong style="color:black;" >Quantité :</strong>
+           <spane class="quantity-cart">{{ cartDetails.products[0].quantity }}</span>
             </div>
 
         </div>
