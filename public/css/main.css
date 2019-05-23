@@ -57,7 +57,7 @@ h5 {
 
 .navbar {
     box-shadow: 0 10px 8px 0 rgba(0, 0, 0, 0.2);
-    background-image: linear-gradient(to right, #BF3F61, #6CCED9);
+    background-image: linear-gradient(to right, #6CCED9, #BF3F61);
 }
 
 .sectionTitle h1 {

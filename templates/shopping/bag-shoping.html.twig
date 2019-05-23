@@ -43,9 +43,9 @@
         object-fit: cover;
     }
 
-    .btn ,
+    .btn,
     .btn:hover {
-        color:black;
+        color: black;
     }
 
 </style>
@@ -94,16 +94,16 @@
                     <td>
                         <div class="form-group">
                             <div>
-                                <input type="number" name="quantity" required="required" min="1" 
-                                    class="form-control quantity" value="{{ product.quantity }}">
+                                <input type="number" name="quantity" required="required" min="1"
+                                    class="form-control quantity" value="{{ product.quantity }}"
+                                    data-url="cart/edit/quantity/{{product.product.id}}">
                             </div>
                         </div>
                     </td>
                     <td>
                         <span>{{ product.product.prix }}</span> <small>MAD</small>
                     </td>
-                    <td style="text-align: right">
-                        {{ product.sum }} <small>MAD</small>
+                    <td style="text-align: right" class="sum"> {{ product.sum }} <small>MAD</small>
                     </td>
                     <td>
                         <a href="#" class="btn btn-danger glyphicon glyphicon-remove product-remove"
@@ -168,6 +168,7 @@
         {% endif %}
     </div>
 </div>
-
-
+{% endblock %}
+{% block javascripts %}
+<script src="{{ asset('js/cart.js') }}"></script>
 {% endblock %}

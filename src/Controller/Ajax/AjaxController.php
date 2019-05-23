@@ -101,12 +101,16 @@ class AjaxController extends AbstractController
             } else {
                 $cart = $session->get('my_cart');
             }
-            unset($cart[$id]);
-            $session->set('my_cart', $cart);
+
+
+
             foreach ($cart as $productId => $productQuantity) {
                 $product = $repoP->findOneBy([
                     'id' => $productId,
                 ]);
+
+                unset($cart[$id]);
+                $session->set('my_cart', $cart);
 
                 if (is_object($product)) {
                     $productPosition = [];
@@ -123,6 +127,7 @@ class AjaxController extends AbstractController
             }
 
             $cartDetails = ['products' => $productsArray, 'totalsum' => $totalSum];
+
 
             $data = array(
                 'status' => 'ok',
@@ -161,25 +166,74 @@ class AjaxController extends AbstractController
         return  new JsonResponse($data);
     }
 
-    // //  /**
-    // //  * @Route("user/account/password/edit/{id}", name="remove_all_products", methods={"POST"})
-    // //  */
+    /**
+     * @Route("cart/edit/quantity/{id}/{quantity}", name="edit_quantity_in_cart", methods={"POST"})
+     */
 
-    // // public function changePassword()
-    // // {
-    // //     $cart = [];
-    // //     $session = new Session();
+    public function editQuantity(Request $request, $id, $quantity)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $repoP = $em->getRepository(Produit::class);
+        
+        $session = new Session();
 
-    // //     if ($session->get('my_cart') == null) {
-    // //         $session->set('my_cart', $cart);
-    // //     } else {
-    // //         $cart = $session->get('my_cart');
-    // //     }
+        $cart = [];
+        $totalSum = 0;
+        $productsArray = [];
 
-    // //     $data = array(
-    // //         'status' => 'ok',
-    // //         'removeSession' => $session->remove('my_cart')
-    // //     );
-    // //     return  new JsonResponse($data);
-    // // }
+        $checkProduct = $repoP->ifProductExist($id);
+        if ($checkProduct) {
+            if ($session->get('my_cart') == null) {
+                $session->set('my_cart', $cart);
+            } else {
+                $cart = $session->get('my_cart');
+            }
+            if ($request->isMethod('post')) {
+                $productQuantity = $quantity;
+                $productId = $id;
+
+                $item[$productId] = (int)$productQuantity;
+
+                if (array_key_exists($productId, $cart)) {
+                    $cart[$productId] = $productQuantity;
+                } else {
+                    $cart += $item;
+                }
+                $session->set('my_cart', $cart);
+            }
+
+            foreach ($cart as $productId => $productQuantity) {
+                $product = $repoP->findOneBy([
+                    'id' => $productId,
+                ]);
+
+                if (is_object($product)) {
+                    $productPosition = [];
+                    $quantity = abs((int)$productQuantity);
+                    $price = $product->getPrix();
+                    $sum = $price * $quantity;
+                    $productPosition['product'] = $product;
+                    $productPosition['quantity'] = $quantity;
+                    $productPosition['price'] = $price;
+                    $productPosition['sum'] = $sum;
+                    $totalSum += $sum;
+                    $productsArray[] = $productPosition;
+                }
+            }
+
+            $cartDetails = ['products' => $productsArray, 'totalsum' => $totalSum];
+
+            $data = array(
+                'status' => 'ok',
+                'totalSum' => $totalSum,
+                'sum' => $sum,
+                'id'=>$productId
+            );
+            return  new JsonResponse($data);
+        } else {
+            return $this->json('Error');
+        }
+    }
+
+   
 }
