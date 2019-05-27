@@ -33,6 +33,8 @@ class ProduitRepository extends ServiceEntityRepository
         $stmt->execute();
         return $stmt->fetchAll();
     }
+
+    
     public function getFeatures(): array
     {
         $conn = $this->getEntityManager()->getConnection();
@@ -65,9 +67,9 @@ class ProduitRepository extends ServiceEntityRepository
         $statement->execute();
         return $statement->fetchAll();
     }
-    
+
     // backend categories
-    
+
     public  function getCategoriesTable()
     {
         $conn = $this->getEntityManager()->getConnection();
@@ -81,7 +83,7 @@ class ProduitRepository extends ServiceEntityRepository
         $stmt->execute();
         return $stmt->fetchAll();
     }
-    
+
     public function ifProductExist($id)
     {
         $sql = "

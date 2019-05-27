@@ -45,14 +45,13 @@ class LoginController extends AbstractController
     /**
      * @Route("/registration", name="login_registration" , methods={"GET", "POST"})
      */
-    public function registration(Request $request, UserPasswordEncoderInterface $encoder)
+    public function registration(Request $request, UserPasswordEncoderInterface $encoder, \Swift_Mailer $mailer)
     {
         $utilisateur = new Utilisateur();   
         
 
-        $form = $this->createForm(RegistraionType::class, $utilisateur,[
-            'validation_groups' => ['registration']
-        ]);
+        $form = $this->createForm(RegistraionType::class, $utilisateur
+        );
 
         $form->handleRequest($request);
 
@@ -78,6 +77,17 @@ class LoginController extends AbstractController
             $this->get('security.token_storage')->setToken($token);
             $this->get('session')->set('_security_main', serialize($token));
             return $this->redirectToRoute('home');
+
+            $message = (new \Swift_Message('Hello Email'))
+            ->setFrom('abdellalikabou39@gmail.com')
+            ->setTo('alirjun16@gmail.com')
+            ->setBody(
+                $this->renderView(
+                    'send_email/igetEmailAfterRegistration.html.twig'
+                ),
+                'text/html'
+            );
+        $mailer->send($message);
         }
         return $this->render('login/register.html.twig', [
             'form' => $form->createView()

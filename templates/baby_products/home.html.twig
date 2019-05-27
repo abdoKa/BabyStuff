@@ -1,15 +1,20 @@
 {% extends 'base.html.twig' %}
- {% block stylesheets %}
+{% block stylesheets %}
 <style>
-.title-home{
-      font-family: 'Josefin Sans Regular', sans-serif ;
-}
+    .title-home {
+        font-family: 'Josefin Sans Regular', sans-serif;
+    }
 
-.card-img-top {
-width: 100%;
-height: 30vh;
-object-fit: cover;
-}
+    .card-img-top {
+        width: 100%;
+        height: 30vh;
+        object-fit: cover;
+    }
+
+    .slide-img {
+        object-fit: cover;
+        position:center;
+    }
 
 </style>
 
@@ -20,13 +25,14 @@ object-fit: cover;
     <div class="carousel-inner">
 
         <div class="carousel-item active">
-            <img src="http://placehold.it/1920x600" class="d-block w-100" alt="...">
+            <img src="{{ asset('baby-clothes-baby-shoes-booties-47220.jpg') }} " class="d-block w-100  slide-img"
+                alt="...">
         </div>
         <div class="carousel-item">
-            <img src="http://placehold.it/1920x600" class="d-block w-100" alt="...">
+            <img src="{{ asset('adorable-baby-child-356192.jpg') }} " class="d-block w-100  slide-img" alt="...">
         </div>
         <div class="carousel-item">
-            <img src="http://placehold.it/1920x600" class="d-block w-100" alt="...">
+            <img src="{{ asset('adorable-boy-child-1705234.jpg') }}" class="d-block w-100  slide-img" alt="...">
         </div>
     </div>
     <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
@@ -44,7 +50,7 @@ object-fit: cover;
 <!--*************************************************mailleure-produits******************************************************** -->
 
 <section class="mailleure-produits">
-    <header >
+    <header>
         <h1 class="title-home"> .......Dernier Produits.......</h1>
     </header>
     <div class="container">
@@ -61,8 +67,9 @@ object-fit: cover;
                         </div>
                         <div class="card-title product-title"> {{ produit.nom }} </div>
                         <div class="product-price"> {{ produit.prix }} MAD </div>
-                        <a href="" class="btn btn-primary add-to-cart" data-url="{{ path('add_to_cart',{'id':produit.id ,'quantity':1}) }}"><i
-                                class="fas fa-cart-plus" ></i> Ajouter au
+                        <a href="" class="btn btn-primary add-to-cart"
+                            data-url="{{ path('add_to_cart',{'id':produit.id ,'quantity':1}) }}"><i
+                                class="fas fa-cart-plus"></i> Ajouter au
                             panier</a>
                 </div>
             </div>
@@ -73,7 +80,7 @@ object-fit: cover;
 <!--*****************************************************Feartures**************************************************** -->
 
 <section class="feartures">
-    <header >
+    <header>
         <h1 class="title-home"> .......Juste Pour Vous.......</h1>
     </header>
 
@@ -91,7 +98,8 @@ object-fit: cover;
                     </div>
                     <div class="card-title product-title"> 🌟{{ produit.nom }} </div>
                     <div class="product-price">{{ produit.prix }} MAD </div>
-                    <a href="{{ path('shopping') }}" class="btn btn-primary add-to-cart" data-url="{{ path('add_to_cart',{'id':produit.id ,'quantity':1}) }}"><i
+                    <a href="{{ path('shopping') }}" class="btn btn-primary add-to-cart"
+                        data-url="{{ path('add_to_cart',{'id':produit.id ,'quantity':1}) }}"><i
                             class="fas fa-cart-plus"></i> Ajouter au
                         panier</a>
                 </div>
@@ -111,7 +119,7 @@ object-fit: cover;
 
 <section class="marques-product" id="marques-product">
     <header>
-        <h1  class="title-home"> .......Marques....... </h1>
+        <h1 class="title-home"> .......Marques....... </h1>
     </header>
 
     <div class="container">
@@ -135,13 +143,13 @@ object-fit: cover;
     </div>
 </section>
 {% endblock %}
-    {% block javascripts %}
-    <script>
-     // Add to cart 
-    $('.add-to-cart').click(function(e) {
+{% block javascripts %}
+<script>
+    // Add to cart 
+    $('.add-to-cart').click(function (e) {
         var url = $(this).data("url");
         e.preventDefault();
-        $.post(url, function(data) {
+        $.post(url, function (data) {
             JSON.stringify(data);
             console.log(data);
             if (data.status == 'ok') {
@@ -151,7 +159,7 @@ object-fit: cover;
         });
 
     });
-    </script>
 
-    {% endblock %}
+</script>
 
+{% endblock %}

@@ -22,18 +22,20 @@
     }
 
     .card {
-        margin-bottom:-30%;
+        margin-bottom: -30%;
         position: absolute;
         bottom: 100px;
         right: 150px;
         color: black;
 
     }
-    .row{
-            padding-top: 30px;
+
+    .row {
+        padding-top: 30px;
     }
-    strong{
-          padding-top: 20px;
+
+    strong {
+        padding-top: 20px;
     }
 
 </style>
@@ -58,25 +60,20 @@
 
     <div class="col-sm-6">{{ form_row(form.commentaire) }}</div>
 
-    
-    <div class="col-md-5 card " style="position: absolute;right:1px;">
-        <div><h6>votre panier</h6><i class="fas fa-shopping-bag"></i></div>
-        <strong>Produit :</strong>
-        <div class="row m-auto"> {{ cartDetails.products.nom }}</div>
-        <strong>Description :</strong>
-        <div class="row m-auto"> {{ cartDetails.products.description|raw }}</div>
-        <strong>Image :</strong>
-        <div class="row m-auto"><img src="{{ asset('/brows_file/' ~ cartDetails.products.image) }}"
-                class="image_B w-100"></div>
-        <strong>Prix :</strong>
-        <div class="row m-auto">
-            <spane>{{ cartDetails.products.prix }} <small>MAD</small> </spane>
-        </div>
-         <strong>TTC :</strong>
-        <div class="row m-auto">
-            <h5 style="color:green;">{{ cartDetails.totalsum}} <small>MAD</small> </h5>
-        </div>
 
+    <div class="col-md-5 card " style="right:1px; bottom:-30px;">
+        <h1> list des produits </h1>
+        {% for key in cartDetails.products %}
+        <ul style="margin:10px;">
+            <li class="row"> <span><b>{{key.product.nom}} </b> :</span> {{key.product.description|raw}}</li>
+            {# <img src="{{ asset('/brows_file/' ~ key.product.image) }}" class="image_B"> #}
+            
+        </ul>
+        {% endfor %}
+        <strong>Quantité :</strong>
+        {{cartDetails.products|length}} piéces<i class="fas fa-tag"></i>
+        <strong>TTC :</strong>
+        <h5 style="color:green;">{{ cartDetails.totalsum}} <small>MAD</small> </h5>
 
     </div>
     {{ form_end(form) }}

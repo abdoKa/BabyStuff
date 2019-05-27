@@ -239,4 +239,24 @@ class AjaxController extends AbstractController
             return $this->json('Error');
         }
     }
+
+    /**
+     * @Route("admin/product/featured/{id}" , name="is_featured_product", methods={"POST"})
+     */
+    public function clickAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $repoP = $em->getRepository(Produit::class);
+        $product = $repoP->findOneBy([
+            'id' => $id,
+        ]);
+        $fr =$product->setFeatures(1);
+            $data = array(
+                'status' => 'ok',
+                'featured'=> $fr
+            );
+            return  new JsonResponse($data);
+        
+            return $this->json('Error');
+    }
 }

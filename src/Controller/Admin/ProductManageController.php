@@ -30,6 +30,7 @@ class ProductManageController extends AbstractController
     {
         $em = $this->getDoctrine()->getManager();
         $repoP = $em->getRepository(Produit::class);
+        
 
         $produit = $repoP->findAll();
         $pagination = $paginator->paginate(

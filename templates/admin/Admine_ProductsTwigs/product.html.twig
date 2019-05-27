@@ -80,8 +80,8 @@
                                   class="fas fa-eye btn-light btn-sm"></i></a>
                           <a href="{{ path('product_edit', {'slug': product.slug }) }}"><i
                                   class="fas fa-pencil-alt btn-light btn-sm"></i></a>
-                          <a href="#" class="add-features"><i
-                                  class="far fa-bookmark icon-change btn-light btn-sm"></i></a>
+                          <a href="" class="btn-light btn-sm is-featured" data-url="{{ path('is_featured_product', {'id': product.id }) }}"><i
+                                  class="icon-change far fa-bookmark " ></i></a>
                       </td>
                   </tr>
                   {% endfor %}
@@ -93,3 +93,6 @@
       {{ knp_pagination_render(pagination) }}
   </div>
   {% endblock %}
+  {% block javascripts %}
+<script src="{{ asset('js/featured_product.js') }}"></script>
+{% endblock %}

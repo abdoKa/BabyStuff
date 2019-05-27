@@ -36,10 +36,7 @@
                 <tbody>
                     {% for userOrders in pagination %}
                     <tr>
-                        {# {% set i = 1 %}
-                        {% for i in userOrders %}
-                        {% set i = i + 1 %}
-                        {% endfor %} #}
+                        
 
                         <td>{{ userOrders.createdAt|date("m/d/Y H:i", "Europe/Paris") }}</td>
                         <td><a href="{{ path('user_detail',{'id':userOrders.id}) }}"><i

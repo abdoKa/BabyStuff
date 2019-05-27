@@ -1,12 +1,14 @@
 @media only screen and (min-width: 994px) {
     #carouselExampleControls .carousel-inner {
-        height: 400px;
+        height: 500px;
     }
     #carouselExampleControls .carousel-inner {
-        height: 400px;
+        height: 500px;
+        top: 10px;
     }
     #carouselExampleControls .carousel-inner img {
-        height: 400px;
+        height: 500px;
+        top: 10px;
     }
 }
 
@@ -23,9 +25,10 @@
 
 /* ############End Media######################## */
 
-* {
+
+/* * {
     box-sizing: border-box;
-}
+} */
 
 html,
 body {

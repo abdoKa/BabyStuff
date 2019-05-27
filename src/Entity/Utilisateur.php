@@ -59,7 +59,7 @@ class Utilisateur implements UserInterface, \Serializable
      * @Assert\NotBlank(groups={"registration"})
      * @Assert\Email(
      *     message = "The email '{{ value }}' is not a valid email.",
-     *     checkMX = true,groups={"registration"}
+     *     checkMX = true
      * )
      */
     private $email;

@@ -11,6 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\User\User;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\Session\Session;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -23,15 +24,15 @@ class OrderController extends AbstractController
      */
     public function order(Request $request)
     {
+        $em = $this->getDoctrine()->getManager();
+        $repoP = $em->getRepository(Produit::class);
 
         $order = new Commande();
 
         // createOrderDBRecord
-        $session = $request->getSession();
+        $session = new Session();
         $cart = [];
-
-        $em = $this->getDoctrine()->getManager();
-        $repoP = $em->getRepository(Produit::class);
+        $totalSum = 0;
 
         if ($session->get('my_cart') == null) {
             $session->set('my_cart', $cart);
@@ -39,9 +40,39 @@ class OrderController extends AbstractController
             $cart = $session->get('my_cart');
         }
 
-        $sum = 0; //total control sum of the order
+        if ($request->isMethod('post')) {
+            $productQuantity = $request->request->get('qte');
+            $productId = $request->request->get('product_id');
+
+            $item[$productId] = (int)$productQuantity;
+
+            if (array_key_exists($productId, $cart)) {
+                $cart[$productId] += $productQuantity;
+            } else {
+                $cart += $item;
+            }
+            $session->set('my_cart', $cart);
+        }
+
         foreach ($cart as $productId => $productQuantity) {
-            $product = $repoP->find((int)$productId);
+            $product = $repoP->findOneBy([
+                'id' => $productId,
+            ]);
+            if (is_object($product)) {
+                $productPosition = [];
+                $quantity = abs((int)$productQuantity);
+                $price = $product->getPrix();
+                $sum = $price * $quantity;
+                $productPosition['product'] = $product;
+                $productPosition['quantity'] = $quantity;
+                $productPosition['price'] = $price;
+                $productPosition['sum'] = $sum;
+                $totalSum += $sum;
+                $productsArray[] = $productPosition;
+            }
+            $cartDetails = ['products' => $productsArray, 'totalsum' => $totalSum];
+
+
             if (is_object($product)) {
                 $quantity = abs((int)$productQuantity);
                 $sum += ($quantity * $product->getPrix());
@@ -54,23 +85,24 @@ class OrderController extends AbstractController
                 $orderProduct->setQuantity($quantity);
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($orderProduct);
-
                 $order->addCommandeProduit($orderProduct);
-                dump($orderProduct);
             }
         }
-        $cartDetails = ['products' => $product, 'totalsum' => $sum];
+
+
 
         $user = $this->getUser();
         $order->setUtilisateur($user);
 
         $order->setPrixTotale($sum);
 
+        dump($cartDetails);
         //Form Order
         $form = $this->createForm(OrdersFormType::class, $order);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
             $em = $this->getDoctrine()->getManager();
             $em->persist($order);
             $em->flush();
@@ -78,13 +110,14 @@ class OrderController extends AbstractController
 
             return $this->redirectToRoute('user_account');
         }
-        dump($cartDetails);
         return $this->render('order/oders.html.twig', [
             'form' => $form->createView(),
             'order' => $order,
-            'cartDetails' => $cartDetails
+            'cartDetails' => $cartDetails,
+            'orderProduct' => $orderProduct
         ]);
     }
+
     public function clearCart()
     {
         $response = new Response();

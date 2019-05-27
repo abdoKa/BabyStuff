@@ -26,10 +26,10 @@ $(document).ready(function() {
         ]
     });
 
-    $('.add-to-favourite').click(function(e) {
-        e.preventDefault();
-        $(this).find('.icon-change').toggleClass('fas');
-    });
+    // $('.add-to-favourite').click(function(e) {
+    //     e.preventDefault();
+    //     $(this).find('.icon-change').toggleClass('fas');
+    // });
 
     $('.add-features').click(function(e) {
         e.preventDefault();
