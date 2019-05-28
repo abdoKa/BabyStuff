@@ -47,7 +47,7 @@
        display: inline-block;
        width: 34px;
        height: 34px;
-       margin:0 0 0 60px;       
+       margin: 0 0 0 60px;
        border-radius: 100%;
        background: #FFFFFF;
        border: 1px solid transparent;
@@ -98,10 +98,11 @@
        background-position: center;
     }
 
-    
+
     .avatar-upload .invalid-feedback {
        display: none !important;
     }
+
  </style>
  {% endblock %}
 
@@ -113,30 +114,31 @@
     {{ form_start(form) }}
     <div class="row">
 
-    {{ form_row(form.nom) }}
+       {{ form_row(form.nom) }}
     </div>
 
 
     <div class="row">
        {{ form_row(form.description) }}
     </div>
-       <div class="row ">
-          <div col="col-12">
-             <div class="avatar-upload">
-                <div class="avatar-edit">
-                
-                  {{ form_row(form.image) }}
-                   <label for="imageUpload"></label>
+    <div class="row ">
+       <div col="col-12">
+          <div class="avatar-upload">
+             <div class="avatar-edit">
+
+                {{ form_row(form.image) }}
+                <label for="imageUpload"></label>
+             </div>
+             <div class="avatar-preview">
+                <div id="imagePreview"
+                   style="background-image: url({{ asset('/brows_file/' ~ categorie.image.filename) }});">
                 </div>
-                <div class="avatar-preview">
-                   <div id="imagePreview" style="background-image: url({{ asset('/brows_file/' ~ categorie.image.filename) }});">
-                   </div>
-                </div>
+             </div>
           </div>
        </div>
     </div>
 
-     <div class="form-error row" style="margin:0 0 50px 0;">
+    <div class="form-error row" style="margin:0 0 50px 0;">
        {{ form_errors(form.image) }}
     </div>
 
@@ -146,6 +148,7 @@
 
 
  {% block javascripts %}
+ 
  <script>
     function readURL(input) {
        if (input.files && input.files[0]) {
@@ -161,7 +164,10 @@
     $("#edit_categorie_image").change(function () {
        readURL(this);
     });
+
  </script>
+ <script src="{{ asset('js/backend_admin.js') }}"></script>
+
 
 
  {% endblock %}

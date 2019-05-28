@@ -80,8 +80,15 @@
                                   class="fas fa-eye btn-light btn-sm"></i></a>
                           <a href="{{ path('product_edit', {'slug': product.slug }) }}"><i
                                   class="fas fa-pencil-alt btn-light btn-sm"></i></a>
-                          <a href="" class="btn-light btn-sm is-featured" data-url="{{ path('is_featured_product', {'id': product.id }) }}"><i
-                                  class="icon-change far fa-bookmark " ></i></a>
+                          <a href="" method="post" class="btn-light btn-sm is-featured"
+                              data-url="{{ path('is_featured_product', {'id': product.id }) }}">
+                              {% if product.features == 0 %}
+
+                              <i class="icon-change far fa-bookmark "></i>
+                              {% else  %}
+                              <i class="icon-change far fa-bookmark fas"></i>
+                              {% endif %}
+                          </a>
                       </td>
                   </tr>
                   {% endfor %}
@@ -94,5 +101,6 @@
   </div>
   {% endblock %}
   {% block javascripts %}
-<script src="{{ asset('js/featured_product.js') }}"></script>
-{% endblock %}
+  <script src="{{ asset('js/featured_product.js') }}"></script>
+  <script src="{{ asset('js/backend_admin.js') }}"></script>
+  {% endblock %}

@@ -32,14 +32,16 @@ class ProductManageController extends AbstractController
         $repoP = $em->getRepository(Produit::class);
         
 
-        $produit = $repoP->findAll();
+        $product = $repoP->findAll();
+        // $featured =$product->getFeautred();
         $pagination = $paginator->paginate(
-            $produit,
+            $product,
             $request->query->getInt('page', 1),
             6
         );
         return $this->render('Admin/Admine_ProductsTwigs/product.html.twig', [
             'pagination' => $pagination,
+            // 'product'=>$product
         ]);
     }
 
@@ -80,7 +82,7 @@ class ProductManageController extends AbstractController
             
             $em->persist($product);
             $em->flush();
-            $this->addFlash('info', 'ce produit est modifer avec succée !');
+            $this->addFlash('info', $product->getNom() . ' est modifer avec succée !');
             return $this->redirectToRoute('admin_product');
         }
         
@@ -120,7 +122,7 @@ class ProductManageController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($product);
             $entityManager->flush();
-            $this->addFlash('success', 'ce produit est ajouté avec succée !');
+            $this->addFlash('success', $product->getNom() . ' est ajouté avec succée !');
             return $this->redirectToRoute('admin_product');
         }
         return $this->render('Admin/Admine_ProductsTwigs/newProduct.html.twig', array(
@@ -139,7 +141,7 @@ class ProductManageController extends AbstractController
 
         $em->remove($product);
         $em->flush();
-        $this->addFlash('info_delete', 'ce produit est supprimer avec succée !');
+        $this->addFlash('info_delete', $product->getNom() . ' est supprimer avec succée !');
 
         return $this->redirectToRoute('admin_product');
     }
