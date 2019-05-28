@@ -52,7 +52,7 @@ class AppFixtures extends Fixture
 
 
             $fournisseur = new Fourniseur();
-            $fournisseur->setNom('Fourniseur ' . $i);
+            $fournisseur->setNom('Marque ' . $i);
             $fournisseur->setDescription('Lorem, ipsum dolor sit amet consectetur adipisicing elit. Delectus consectetur, laudantium maxime eaque a repellendus?');
             $fournisseur->setImage('HM-Share-Image.jpg');
             $slug = $slugify->slugify($fournisseur->getNom());

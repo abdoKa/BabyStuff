@@ -23,11 +23,12 @@
                           window.location.replace("/cart");
                       }
                       if (data.status == 'ok') {
-                          swal("Deleted!", "Your imaginary file has been deleted.", "success");
 
+                          swal("Deleted!", "Your imaginary file has been deleted.", "success");
                           $(item).parent().parent('.item').remove();
-                          $('.totamSum').text(data.totalSum);
                           $('#totalSum').text(data.totalSum);
+                          $('.sum-total').text(data.totalSum);
+                          console.log(data);
                       } else {
                           swal("Error", "Problem ajax", "error");
                       }
@@ -81,11 +82,9 @@
 
           if (data.status == 'ok') {
               $('#totalSum').text(data.totalSum);
-              $('.quantity-cart').text(data.quantity);
+              $('.sum-total').text(data.totalSum);
               $(input).parents('.item').find('.sum-product').text(data.productSum);
 
-              console.log(data);
-              console.log(url);
           }
       });
 

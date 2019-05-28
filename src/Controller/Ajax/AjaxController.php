@@ -41,6 +41,7 @@ class AjaxController extends AbstractController
 
                 if (array_key_exists($productId, $cart)) {
                     $cart[$productId] += $productQuantity;
+                    // die();
                 } else {
                     $cart += $item;
                 }
@@ -83,15 +84,16 @@ class AjaxController extends AbstractController
 
     public function removeAction(Request $request, $id)
     {
+        $em = $this->getDoctrine()->getManager();
+        $repoP = $em->getRepository(Produit::class);
+        $checkProduct = $repoP->ifProductExist($id);
+        $session = new Session();
+
         $cart = [];
         $totalSum = 0;
         $productsArray = [];
 
-        $session = new Session();
 
-        $em = $this->getDoctrine()->getManager();
-        $repoP = $em->getRepository(Produit::class);
-        $checkProduct = $repoP->ifProductExist($id);
 
 
 
@@ -103,14 +105,15 @@ class AjaxController extends AbstractController
             }
 
 
+            if ($request->isMethod('post')) {
+                unset($cart[$id]);
+                $session->set('my_cart', $cart);
+            }
 
             foreach ($cart as $productId => $productQuantity) {
                 $product = $repoP->findOneBy([
                     'id' => $productId,
                 ]);
-
-                unset($cart[$id]);
-                $session->set('my_cart', $cart);
 
                 if (is_object($product)) {
                     $productPosition = [];
@@ -125,14 +128,12 @@ class AjaxController extends AbstractController
                     $productsArray[] = $productPosition;
                 }
             }
-
             $cartDetails = ['products' => $productsArray, 'totalsum' => $totalSum];
-
 
             $data = array(
                 'status' => 'ok',
                 'cart' => count($cart),
-                'totalSum' => $totalSum,
+                'totalSum' => $totalSum
 
             );
 
@@ -179,7 +180,6 @@ class AjaxController extends AbstractController
 
         $cart = [];
         $totalSum = 0;
-        $productSum = 0;
         $productsArray = [];
         $singleProductQte = (int)$quantity;
 

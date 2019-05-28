@@ -2,6 +2,10 @@
   {% block stylesheets %}
 
   <style>
+  .Welcom-title{
+     margin-top:80px;
+     text-align:center;
+  }
        .image_B {
           height: 100px;
           width: 150px;
@@ -54,8 +58,7 @@
                       <td>{{ product_fea.prix }}MAD</td>
                       <td>{{ product_fea.stock }}</td>
                       <td><img src="{{ asset('/brows_file/' ~ product_fea.image) }}" class="image_B" </td> <td><a
-                              href="#"><i class="fas fa-eye btn-light btn-sm"></i></a>
-
+                              href="{{ path('show_product_featured', {'slug':product_fea.slug}) }}"><i class="fas fa-eye btn-light btn-sm"></i></a>
                           </a></td>
                   </tr>
                   {% endfor %}

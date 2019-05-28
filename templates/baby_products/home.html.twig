@@ -1,6 +1,10 @@
 {% extends 'base.html.twig' %}
 {% block stylesheets %}
 <style>
+    body {
+        width: 100%;
+    }
+
     .title-home {
         font-family: 'Josefin Sans Regular', sans-serif;
     }
@@ -12,8 +16,16 @@
     }
 
     .slide-img {
-        object-fit: cover;
-        position:center;
+        width: 100%;
+        height: 50px;
+    }
+  .slide-title{
+        font-family: 'Ramabhadra bold', sans-serif;
+        color:black;
+        float: left;
+    }
+    h1{
+        color:black;
     }
 
 </style>
@@ -25,14 +37,16 @@
     <div class="carousel-inner">
 
         <div class="carousel-item active">
-            <img src="{{ asset('baby-clothes-baby-shoes-booties-47220.jpg') }} " class="d-block w-100  slide-img"
-                alt="...">
+            <img src="{{ asset('accessories-adorable-baby-325867.jpg') }} " class="d-block  slide-img" alt="...">
+            <div class="carousel-caption d-none d-md-block">
+
+            </div>
         </div>
         <div class="carousel-item">
-            <img src="{{ asset('adorable-baby-child-356192.jpg') }} " class="d-block w-100  slide-img" alt="...">
+            <img src="{{ asset('adorable-baby-blur-590471.jpg') }} " class="d-block  slide-img" alt="...">
         </div>
         <div class="carousel-item">
-            <img src="{{ asset('adorable-boy-child-1705234.jpg') }}" class="d-block w-100  slide-img" alt="...">
+            <img src="{{ asset('adorable-boy-child-1705234.jpg') }}" class="d-block   slide-img" alt="...">
         </div>
     </div>
     <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">

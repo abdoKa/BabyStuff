@@ -80,7 +80,7 @@
                     <td style="margin-top:10px">
                         <span><img src="{{ asset('/brows_file/' ~ product.product.image) }}" class="image_B w-100"
                                 alt="">
-                            <spane>
+                            <span>
                                 <div class="row"> <a
                                         href="{{ path('single_product', {'slug': product.product.slug }) }}">
                                         <strong>{{ product.product.nom }}</strong>
@@ -101,16 +101,18 @@
                         </div>
                     </td>
                     <td>
-                        <span>{{ product.product.prix }}</span> 
+                        <h6>{{ product.product.prix }}</h6>
                         <small>MAD</small>
                     </td>
-                    <td style="text-align: right" class="sum-product"> {{ product.sum }} <small>MAD</small>
+                    <td style="text-align: right" >
+                        <h6 class="sum-product">{{ product.sum }}</h6>
+                        <small>MAD</small>
                     </td>
                     <td>
                         <a href="#" class="btn btn-danger glyphicon glyphicon-remove product-remove"
                             data-toggle="confirmation" data-popout="true" data-placement="left"
                             data-url="{{ path('remove_one_product',{'id':product.product.id}) }}">
-                            <spane><small><i class="fas fa-times"></i></small></spane>
+                            <span><small><i class="fas fa-times"></i></small></span>
                         </a>
                     </td>
                 </tr>
@@ -123,14 +125,13 @@
 
         <div class="col-sm-4 card " style="position: absolute;right: 150px; color:black;">
             <i class="fas fa-shopping-bag"></i>
-            <div class="totamSum">
+            <div style="color:green">
                 <strong style="color:black;">TTC:</strong>
-                {{ cartDetails.totalsum }} <small>MAD</small>
+                <h6 class="sum-total">
+                    {{ cartDetails.totalsum }}
+                </h6> <small>MAD</small>
             </div>
-            <div>
-                <strong style="color:black;" >Quantité :</strong>
-           <spane class="quantity-cart">{{ cartDetails.products[0].quantity }}</span>
-            </div>
+
 
         </div>
 
@@ -151,8 +152,8 @@
             </div>
         </div>
         <div class="row">
-            <p><a href="{{ path('show-all-categories') }}" class="btn btn-warning"><i class="fas fa-chevron-left"></i>
-                    <spane>Continuer vos achats</spane>
+            <p><a href="{{ path('home') }}" class="btn btn-warning"><i class="fas fa-chevron-left"></i>
+                    <span>Continuer vos achats</span>
                 </a></p>
         </div>
 

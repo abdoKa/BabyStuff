@@ -1,0 +1,101 @@
+  {% extends "admin/base-admin.html.twig" %}
+  {% block stylesheets %}
+
+  <style>
+      .Welcom-title {
+          margin-top: 80px;
+          text-align: center;
+      }
+
+      .image_B {
+          height: 150px;
+          max-width: 200px;
+          object-fit: cover;
+      }
+
+      td,
+      th {
+          text-align: center;
+      }
+
+  </style>
+  {% endblock %}
+
+  {% block head %}
+  <div class="container">
+      <div class="row ">
+          <div class="col-lg-12">
+              <h1 class="Welcom-title"> Catégorie en détail </h1>
+          </div>
+          {# / part backend client settings #}
+      </div>
+      {# / part backend client settings #}
+  </div>
+  <div class="row w-100" style="margin-left:150px">
+      <div class="col-sm-9">
+
+
+          <table class="table w-100">
+
+              <tr>
+                  <th bgcolor="#f3f9fb">Referance</th>
+                  <td>{{ single_Product.referance }}</td>
+              </tr>
+              <tr>
+                  <th bgcolor="#f3f9fb">Nom du produit</th>
+                  <td>{{ single_Product.nom }}</td>
+              </tr>
+
+              <tr>
+                  <th bgcolor="#f3f9fb">Description</th>
+                  <td>{{ single_Product.description|raw }}</td>
+              </tr>
+              <tr>
+                  <th bgcolor="#f3f9fb">Prix</th>
+                  <td>{{ single_Product.prix }}</td>
+              </tr>
+              <tr>
+                  <th bgcolor="#f3f9fb">Image</th>
+                  <td><img src="{{ asset('/brows_file/' ~ single_Product.image) }}" class="image_B"></td>
+              </tr>
+              <tr>
+                  <th bgcolor="#f3f9fb">Quantité</th>
+                  <td>{{ single_Product.stock }}</td>
+              </tr>
+              <tr>
+                  <th bgcolor="#f3f9fb">Categories</th>
+                  <td>{{ single_Product.categorie.nom }}</td>
+              </tr>
+              <tr>
+                  <th bgcolor="#f3f9fb">Fournisseur</th>
+                  <td>{{ single_Product.fourniseur.nom }}</td>
+              </tr>
+
+          </table>
+          <hr>
+          <div class="row">
+              <div class="col-3" style="margin-left:-65px">
+                  <ul class="list-group-sm" style="text-align:center;">
+                      <li class="list-group-item"><a href="{{ path('admin_featured') }}"
+                              class="btn btn-warning btn-sm"><i class="fas fa-arrow-circle-left"></i>
+                              <spane>retoure</spane>
+                          </a></li>
+                      <li class="list-group-item"> <a href="{{ path('product_edit',{'slug': single_Product.slug }) }}"
+                              class="btn btn-primary btn-sm"> <i class="far fa-edit"></i>
+                              <spane>Modifer</spane>
+                          </a></li>
+                      <li class="list-group-item"> <a href="{{ path('product_delete', {'slug': single_Product.slug}) }}"
+                              class="btn btn-danger btn-sm" id="alert"><i class="fas fa-trash-alt"> </i>
+                              <spane>supprimer</spane>
+                          </a></li>
+                  </ul>
+              </div>
+          </div>
+      </div>
+  </div>
+
+  {% endblock %}
+
+  {% block javascripts %}
+
+  {% endblock %}
