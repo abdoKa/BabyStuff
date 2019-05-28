@@ -29,6 +29,10 @@ $(document).ready(function() {
     $('.add-to-favourite').click(function(e) {
         e.preventDefault();
         $(this).find('.icon-change').toggleClass('fas');
-    });
+        var url = $(this).data("url");
+        $.post(url, function(data) {
+            console.log(data);
+        });
 
+    });
 });

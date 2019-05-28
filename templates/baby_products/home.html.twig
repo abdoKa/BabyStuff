@@ -19,13 +19,15 @@
         width: 100%;
         height: 50px;
     }
-  .slide-title{
+
+    .slide-title {
         font-family: 'Ramabhadra bold', sans-serif;
-        color:black;
+        color: black;
         float: left;
     }
-    h1{
-        color:black;
+
+    h1 {
+        color: black;
     }
 
 </style>
@@ -77,7 +79,15 @@
                         <div class="product-image ">
                             <img src="{{ asset('/brows_file/' ~ produit.image) }}" alt="" class="card-img-top"><a />
 
-                            <a href="" class="add-to-favourite"><i class="far fa-heart icon-change"></i></a>
+                            <a href="" mthode="post"
+                                class="add-to-favourite js-like" data-url="{{path('add_to_favorite',{'id':produit.id})}}">
+                                {# {% if app.user and produit.isLikedByUser(app.user)%} #}
+                                
+                                {# <i class="far fa-heart icon-change fas"></i> #}
+                                {# {% else %}  #}
+                                  <i class="far fa-heart icon-change "></i> #}
+                                 {# {% endif %}  #}
+                                </a>
                         </div>
                         <div class="card-title product-title"> {{ produit.nom }} </div>
                         <div class="product-price"> {{ produit.prix }} MAD </div>

@@ -9,6 +9,9 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Security\Core\User\UserInterface;
+use Proxies\__CG__\App\Entity\Utilisateur;
+use App\Entity\Utilisateur as AppUtilisateur;
 
 class AjaxController extends AbstractController
 {
@@ -272,6 +275,37 @@ class AjaxController extends AbstractController
                 'bookmark' => $bookmark,
             );
             return  new JsonResponse($data);
+        }
+        return $this->json('Error');
+    }
+
+    /**
+     * @Route("add/favorite/{id}", name="add_to_favorite",methods={"POST"})
+     */
+    public function AddFavorite(Request $request, $id, UserInterface $currentUser)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $repoP = $em->getRepository(Produit::class);
+        $product = new Produit();
+        $repoU = $em->getRepository(Utilisateur::class);
+        $getUser = $repoU->findOneBy([
+            'id' => $id,
+            ]);
+
+            $product = $repoU->findOneBy([
+                'id' => $id,
+            ]);
+        $user = $currentUser->getId();
+        if ($request->isMethod('post')) {
+
+            // if($user == $getUser){
+
+            $data = array(
+                'status' => 'ok',
+                'user' => $getUser
+            );
+            return  new JsonResponse($data);
+            // }
         }
         return $this->json('Error');
     }

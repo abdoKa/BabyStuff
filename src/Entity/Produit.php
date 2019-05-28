@@ -367,7 +367,7 @@ class Produit
      public function isLikedByUser(Utilisateur $User):bool
     {
        foreach($this->productLikes as $like){
-           if($like->getUtilisateur() == $User) return true;
+           if($like->getUtilisateur() === $User) return true;
        }
        return false;
     }
