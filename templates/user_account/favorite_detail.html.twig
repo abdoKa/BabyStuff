@@ -9,12 +9,11 @@
         width: 100%;
     }
 
-
-
-
-    .col-sm-9 {
-        margin: 25px 0 150px;
+    .card-body {
+        padding: 50px;
     }
+
+
 
     .image_B {
         height: 100px;
@@ -22,11 +21,14 @@
         object-fit: cover;
     }
 
+    h5 {
+        padding: 10px;
+    }
+
 </style>
 {% endblock %}
 
 {% block body %}
-<div class="container">
     <div class="row">
         <div class="col-lg-12">
             <h1 class="Welcom-title"> {{ (app.user.nom) }} | <small>List des commandes</small>
@@ -37,34 +39,34 @@
         <div class="col-sm-3">
             {% include 'user_account/menu.html.twig' %}
         </div>
-        <div class="col-sm-9">
-            <table class="table w-100" style="color:black">
-                <thead>
-                    <th bgcolor="#f3f9fb"> Produit</th>
-                    <th bgcolor="#f3f9fb">Description</th>
-                    <th bgcolor="#f3f9fb">Image</th>
-                    <th bgcolor="#f3f9fb">Prix</th>
-                    <th bgcolor="#f3f9fb">Date</th>
+        <div class="col-sm-9  ">
+            <div class="col-md-12 card ">
+                <table class="table " style="color:black">
+                    <thead>
+                        <th bgcolor="#f3f9fb"> Produit</th>
+                        <th bgcolor="#f3f9fb">Description</th>
+                        <th bgcolor="#f3f9fb">Image</th>
+                        <th bgcolor="#f3f9fb">Prix</th>
+                        <th bgcolor="#f3f9fb">Date</th>
 
-                </thead>
-                <tbody>
-                    <tr>
-                        <td> {{likes.product.nom}}</td>
-                        <td> {{ likes.product.description|raw }} </td>
-                        <td><img src="{{ asset('/brows_file/' ~ likes.product.image) }}" class="image_B"></td>
-                        <td> {{likes.product.prix}}
-                            <span><small>MAD</small><span>  
-                        </td>
-                        <td>
-                            {{ likes.createdAt|date("m/d/Y H:i", "Europe/Paris")}}
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td> {{likes.product.nom}}</td>
+                            <td> {{ likes.product.description|raw }} </td>
+                            <td><img src="{{ asset('/brows_file/' ~ likes.product.image) }}" class="image_B"></td>
+                            <td> {{likes.product.prix}}
+                                <span><small>MAD</small><span>
+                            </td>
+                            <td>
+                                {{ likes.createdAt|date("m/d/Y H:i", "Europe/Paris")}}
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
-</div>
 
 
 

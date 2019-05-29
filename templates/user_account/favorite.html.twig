@@ -9,9 +9,7 @@
         width: 100%;
     }
 
-    .container-list {
-        margin: 10px 0 10px 10px;
-    }
+    
 
 
 
@@ -37,8 +35,8 @@
     <div class="col-md-3">
         {% include 'user_account/menu.html.twig' %}
     </div>
- <div class="col-sm-9">
-            <div class="col-md-12 card "> 
+    <div class="col-sm-9">
+        <div class="col-md-12 card ">
             <table class="table ">
                 <thead>
                     <tr bgcolor="d7f7f5">
@@ -49,7 +47,7 @@
                 <tbody>
                     {% for userFav in pagination %}
                     <tr>
-                        
+
                         <td>{{ userFav.createdAt|date("m/d/Y H:i", "Europe/Paris") }}</td>
                         <td><a href="{{ path('user_favorite_detail',{'id':userFav.id}) }}"><i
                                     class="fas fa-eye btn-light btn-sm"></i></a></td>
@@ -64,5 +62,4 @@
     </div>
 </div>
 
-</div>
 {% endblock %}

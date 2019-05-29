@@ -35,4 +35,27 @@ $(document).ready(function() {
         });
 
     });
+
+    var htmlBody = document.querySelector('body');
+    var search = document.querySelector('.search-bar');
+    var searchContainer = document.querySelector('.search-bar');
+    var searchSubmit = document.querySelector('.search-submit');
+
+    searchContainer.addEventListener('click', activeSearch);
+    searchContainer.addEventListener('blur', unactiveSearch, true);
+    searchSubmit.addEventListener.click(function(e) {
+        e.preventDefault();
+        search.blur();
+    });
+
+
+
+    function activeSearch(event) {
+        search.focus();
+        htmlBody.classList.add('active');
+    }
+
+    function unactiveSearch(event) {
+        htmlBody.classList.remove('active');
+    }
 });

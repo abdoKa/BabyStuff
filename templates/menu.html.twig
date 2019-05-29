@@ -51,6 +51,270 @@
     right: -120px;
   }
 
+ body {
+  background: #d4d4d4;
+  font-family: "Lato", sans-serif;
+  transition: background 0.5s ease;
+}
+body.active {
+  background: #ff5252;
+}
+
+.search-container {
+  position: absolute;
+  width: 200px;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.2);
+  transition: width 1s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+.active .search-container {
+  width: 80%;
+  box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.5);
+}
+
+.search-inner-container {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  border-radius: 5px;
+}
+
+.search-bar {
+  width: 100%;
+  padding: 1em 4em 1em 4.5em;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  font-weight: 600;
+  outline: none;
+  box-sizing: border-box;
+  color: transparent;
+  transition: color 0.5s ease;
+}
+.active .search-bar {
+  color: #000;
+}
+
+.search-submit {
+  position: absolute;
+  z-index: 2;
+  right: 7px;
+  top: 5px;
+  text-align: center;
+  line-height: 40px;
+  font-size: 2em;
+  width: 40px;
+  height: 40px;
+  color: white;
+  background: #d4d4d4;
+  border-radius: 5px;
+  -webkit-transform: translate(120%, 0);
+          transform: translate(120%, 0);
+  transition: background 0.5s ease, -webkit-transform 1s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  transition: transform 1s cubic-bezier(0.68, -0.55, 0.265, 1.55), background 0.5s ease;
+  transition: transform 1s cubic-bezier(0.68, -0.55, 0.265, 1.55), background 0.5s ease, -webkit-transform 1s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+.active .search-submit {
+  background: #ff5252;
+  -webkit-transform: translate(0%, 0);
+          transform: translate(0%, 0);
+}
+.search-submit:hover {
+  background: #000;
+}
+
+.search-icon {
+  position: absolute;
+  top: 0;
+  left: 0;
+  font-size: 2em;
+  text-align: center;
+  width: 100%;
+  line-height: 50px;
+  color: #aaa;
+}
+
+.search-text-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  -webkit-transform-origin: center;
+          transform-origin: center;
+  height: 50px;
+  width: 75px;
+  transition: 0.3s -webkit-transform ease;
+  transition: 0.3s transform ease;
+  transition: 0.3s transform ease, 0.3s -webkit-transform ease;
+  -webkit-animation: rotate 5s infinite forwards;
+          animation: rotate 5s infinite forwards;
+}
+.active .search-text-container {
+  -webkit-animation: none;
+          animation: none;
+}
+
+.search-text-list {
+  position: absolute;
+  top: 0;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  pointer-events: none;
+  font-size: 16px;
+  font-weight: 600;
+  list-style-type: none;
+  height: 50px;
+  width: 75px;
+  -webkit-transform-origin: center;
+          transform-origin: center;
+  -webkit-animation: fade 5s infinite forwards;
+          animation: fade 5s infinite forwards;
+}
+.active .search-text-list {
+  -webkit-animation: none;
+          animation: none;
+  display: none;
+}
+.search-text-list div {
+  position: absolute;
+  color: #aaa;
+}
+.search-text-list div:nth-child(1) {
+  top: -40px;
+  left: 50%;
+  right: 50%;
+  -webkit-transform: rotate(-90deg);
+          transform: rotate(-90deg);
+}
+.search-text-list div:nth-child(2) {
+  top: 0;
+  left: 75px;
+  margin: auto;
+}
+.search-text-list div:nth-child(3) {
+  bottom: -40px;
+  left: 50%;
+  right: 50%;
+  -webkit-transform: rotate(90deg);
+          transform: rotate(90deg);
+}
+.search-text-list div:nth-child(4) {
+  top: 0;
+  right: 75px;
+  margin: auto;
+  -webkit-transform: rotate(180deg);
+          transform: rotate(180deg);
+}
+
+@-webkit-keyframes rotate {
+  0% {
+    -webkit-transform: rotate(0);
+            transform: rotate(0);
+  }
+  20%, 25% {
+    -webkit-transform: rotate(90deg);
+            transform: rotate(90deg);
+  }
+  45%, 50% {
+    -webkit-transform: rotate(180deg);
+            transform: rotate(180deg);
+  }
+  70%, 75% {
+    -webkit-transform: rotate(270deg);
+            transform: rotate(270deg);
+  }
+  95%, 100% {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+  }
+}
+
+@keyframes rotate {
+  0% {
+    -webkit-transform: rotate(0);
+            transform: rotate(0);
+  }
+  20%, 25% {
+    -webkit-transform: rotate(90deg);
+            transform: rotate(90deg);
+  }
+  45%, 50% {
+    -webkit-transform: rotate(180deg);
+            transform: rotate(180deg);
+  }
+  70%, 75% {
+    -webkit-transform: rotate(270deg);
+            transform: rotate(270deg);
+  }
+  95%, 100% {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+  }
+}
+@-webkit-keyframes fade {
+  0% {
+    opacity: 1;
+  }
+  10% {
+    opacity: 0;
+  }
+  25% {
+    opacity: 1;
+  }
+  35% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  60% {
+    opacity: 0;
+  }
+  75% {
+    opacity: 1;
+  }
+  85% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes fade {
+  0% {
+    opacity: 1;
+  }
+  10% {
+    opacity: 0;
+  }
+  25% {
+    opacity: 1;
+  }
+  35% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  60% {
+    opacity: 0;
+  }
+  75% {
+    opacity: 1;
+  }
+  85% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+
 </style>
 
 <div class="container">
@@ -95,34 +359,56 @@
       </ul>
 
 
-      <ul class="navbar-nav ml-auto">
-        <li "class=" dropdown"">
-
+      <ul class="navbar-nav m-auto">
+        <li class=" dropdown">
           <a class="nav-link" href="{{ path('shopping') }}"> Panier
-            <i class="fas fa-shopping-basket">
-              {% if cartDetails is defined and cartDetails is not null %}
-              <span id="totalSum">{{cartDetails.totalsum}}</span> <small>MAD</small>
-              {% else %}
-              <span><small>0 MAD</small></span>
-              {% endif %}
+            <i class="fas fa-shopping-basket"></i>
+            {% if cartDetails is defined and cartDetails is not null %}
+            <span id="totalSum">{{cartDetails.totalsum}}</span> <small>MAD</small>
+            {% else %}
+            <span><small>0 MAD</small></span>
+            {% endif %}
 
-            </i>
           </a>
       </ul>
-      <li class="navbar-nav " style="margin:0 -20px 0 30px;">
 
-        <small><a class="nav-link m-auto" href="{{ path('user_favorite') }}">
-        <span class="fa-stack">
-             <span class="far fa-heart fa-stack-2x " style="font-size:30px;"></span>
-              <span class="fa-stack-1x "style="margin-left:1px;" >
-               <small> {{ app.user.likes|length }}</small>
+
+      {% if is_granted("ROLE_USER") %}
+      <li class="navbar-nav mr-auto">
+        <small><a class="nav-link " href="{{ path('user_favorite') }}">
+            <span class="fa-stack">
+
+              <i class="far fa-heart fa-stack-2x " style="font-size:30px;"></i>
+              <span class="fa-stack-1x " style="margin-left:1px;">
+                <small> {{ app.user.likes|length }}</small>
               </span>
+
             </span>
           </a></small>
       </li>
-      {% if is_granted("ROLE_USER") %}
+      <li class="navbar-nav ml-auto">
+        <div class="search-container">
 
-      <ul class="navbar-nav m-auto" id="profile-right">
+          <div class="search-inner-container">
+            <input type="input" id="search" class="search-bar">
+            <a href="#" class="search-submit">
+              <i class="ion ion-ios-arrow-round-forward"></i>
+            </a>
+            <div class="search-text-container">
+              <div class="search-icon">
+                <i class="ion ion-ios-search"></i>
+                <div class="search-text-list">
+                  <div>All</div>
+                  <div>Videos</div>
+                  <div>Images</div>
+                  <div>News</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </li>
+      <ul class="navbar-nav " style="margin-right:120px; margin-left:-100px;">
         <div class="btn-group">
           <li class="nav-item dropdown" id="navbarSupportedContent">
             <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
@@ -149,14 +435,17 @@
                 <spane> Deconnexion </spane>
               </a>
             </div>
-
       </ul>
-
-
       {% else %}
 
+      <li class="navbar-nav">
+        <i class="far fa-heart nav-link"></i>
+      </li>
       <ul class="navbar-nav ml-auto">
-        <li class="navbar-nav ml-auto">
+        <i class="fas fa-search  nav-link"></i>
+      </ul>
+      <ul class="navbar-nav ">
+        <li class="navbar-nav ">
           <a class="nav-link" href="{{ path('security_login') }}"><i class="fas fa-sign-in-alt"></i>
             <spane> <small>Se connecter</small> </spane>
           </a>

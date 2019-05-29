@@ -14,11 +14,12 @@
     }
 
     .card-body {
-        padding: 50px;
+        margin-top: 80px;
+      
     }
 
-    h5 {
-        padding: 10px;
+    .profile-info {
+        margin: 60px;
     }
 
 </style>
@@ -43,10 +44,14 @@
     <div class="col-md-6 card ">
         <a href="{{ path('user_profile_edit') }}"><i class="fas fa-pencil-alt btn-light btn-sm"></i></a>
         <div class="card-body">
-            <h5>Utilisateur: <small style="color:black;">{{ app.user.nom }} {{ app.user.prenom }}</small></h5>
-            <h5>E-mail: <small style="color:black;">{{ app.user.email }}</small></h5>
-            <h5>Téléphone: <small style="color:black;">{{ app.user.telephone }}</small></h5>
-            <h5>Adresse: <small style="color:black;">{{ app.user.adresse }}</small></h5>
+            <h5 class="profile-info"> <span><i class="far fa-user"></i> <span> Utilisateur: <small style="color:black;">{{ app.user.nom }}
+                            {{ app.user.prenom }}</small></h5>
+            <h5 class="profile-info"> <span><i class="fas fa-at"></i><span>E-mail: <small style="color:black;">{{ app.user.email }}</small>
+            </h5>
+            <h5 class="profile-info"> <span><i class="fas fa-mobile-alt"></i> <span> Téléphone: <small
+                            style="color:black;">{{ app.user.telephone }}</small></h5>
+            <h5 class="profile-info"> <span><i class="fas fa-map-marker-alt"></i> <span> Adresse: <small
+                            style="color:black;">{{ app.user.adresse }}</small></h5>
         </div>
     </div>
 </div>

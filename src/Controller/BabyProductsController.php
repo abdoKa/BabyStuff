@@ -5,11 +5,12 @@ namespace App\Controller;
 use App\Entity\Produit;
 use App\Entity\Categorie;
 use App\Entity\Fourniseur;
+use App\Entity\ProductLike;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Cookie;
+
+
 use Symfony\Component\HttpFoundation\Request;
-
-
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Session\Session;
@@ -55,6 +56,10 @@ class BabyProductsController extends AbstractController
 
         $categoriesMenu = $repoC->getCategories();
 
+        $em = $this->getDoctrine()->getManager();
+        $repoLike = $em->getRepository(ProductLike::class);
+        $likes = $repoLike->find('id');
+
         $session = new Session();
         $productsArray = [];
         $cart = [];
@@ -95,7 +100,8 @@ class BabyProductsController extends AbstractController
             'menu.html.twig',
             [
                 'categoriesMenu' => $categoriesMenu,
-                'cartDetails' => $cartDetails
+                'cartDetails' => $cartDetails,
+                'likes'=>$likes
             ]
         );
     }
