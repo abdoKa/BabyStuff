@@ -3,23 +3,17 @@
 namespace App\Controller\Users;
 
 use App\Entity\Commande;
+use App\Entity\ProductLike;
 
 use App\Form\EditUserType;
-use App\Entity\Utilisateur;
-use PhpParser\Builder\Method;
 use App\Form\EditPasswordType;
-use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Security\Core\Security;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\CssSelector\Parser\Token;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Security\Core\User\UserInterface;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use App\Entity\Produit;
 
 class UserAccountController extends AbstractController
 {
@@ -31,7 +25,6 @@ class UserAccountController extends AbstractController
 
         return $this->render('user_account/user_space.html.twig', []);
     }
-
 
 
     /**
@@ -65,7 +58,7 @@ class UserAccountController extends AbstractController
                 $em->flush();
                 return $this->redirectToRoute('user_profile');
             } else {
-            $this->addFlash('info', $currentUser->getNom() .  $currentUser->getPrenom() . ', votre information est modifer avec succée !');
+                $this->addFlash('info', $currentUser->getNom() .  $currentUser->getPrenom() . ', votre information est modifer avec succée !');
             }
         }
 
@@ -104,7 +97,7 @@ class UserAccountController extends AbstractController
 
     /**
      * @Route("user/order/list", name="user_orders_list")
-     * 
+     *
      */
     public function UserOrderList(PaginatorInterface $paginator, Request $request, UserInterface $userOrderList)
     {
@@ -159,12 +152,46 @@ class UserAccountController extends AbstractController
     }
 
     /**
+     * @Route("/user/favorite/detail/{id}", name="user_favorite_detail")
+     */
+    public function userFav(PaginatorInterface $paginator, Request $request, $id, UserInterface $user)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $repoLike = $em->getRepository(ProductLike::class);
+        $likes = $repoLike->findOneBy(array('id' => $id));
+
+        (int)$userId = $user->getId();
+        $belongTo = $repoLike->BelongsToUser($id, $userId);
+        dump($likes);
+
+        if ($belongTo) {
+            return $this->render('user_account/favorite_detail.html.twig', [
+                'likes' => $likes,
+                // 'pagination' => $pagination,
+            ]);
+        } else {
+            return $this->render('bundles/TwigBundle/Exception/error404.html.twig');
+        }
+    }
+
+    /**
      * @Route("/user/favorite/" , name="user_favorite")
      */
 
-    public function favorite()
+    public function favorite(PaginatorInterface $paginator, Request $request, UserInterface $currentUser)
     {
+        $currentUser = $this->getUser()->getLikes();
 
-        return $this->render('user_account/favorite.html.twig', []);
+        dump($currentUser);
+
+        $pagination = $paginator->paginate(
+            $currentUser,
+            $request->query->getInt('page', 1),
+            6
+        );
+
+        return $this->render('user_account/favorite.html.twig', [
+            'pagination' => $pagination
+        ]);
     }
 }

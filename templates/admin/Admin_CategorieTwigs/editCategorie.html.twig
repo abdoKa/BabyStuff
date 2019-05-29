@@ -114,13 +114,15 @@
     {{ form_start(form) }}
     <div class="row">
 
-       {{ form_row(form.nom) }}
+   
+       <div class="col-md-6">{{ form_row(form.nom) }} </div>
     </div>
 
 
     <div class="row">
-       {{ form_row(form.description) }}
+       {{ form_row(form.description|raw) }}
     </div>
+
     <div class="row ">
        <div col="col-12">
           <div class="avatar-upload">

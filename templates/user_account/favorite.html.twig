@@ -37,6 +37,32 @@
     <div class="col-md-3">
         {% include 'user_account/menu.html.twig' %}
     </div>
+ <div class="col-sm-9">
+            <div class="col-md-12 card "> 
+            <table class="table ">
+                <thead>
+                    <tr bgcolor="d7f7f5">
+                        <th scope="col">Mes favorites</th>
+                        <th scope="col-md-2">actes</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for userFav in pagination %}
+                    <tr>
+                        
+                        <td>{{ userFav.createdAt|date("m/d/Y H:i", "Europe/Paris") }}</td>
+                        <td><a href="{{ path('user_favorite_detail',{'id':userFav.id}) }}"><i
+                                    class="fas fa-eye btn-light btn-sm"></i></a></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <div class="navigation pagination-sm">
+                {{ knp_pagination_render(pagination) }}
+            </div>
+        </div>
+    </div>
+</div>
 
 </div>
 {% endblock %}

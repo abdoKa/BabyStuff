@@ -110,8 +110,14 @@
           </a>
       </ul>
       <li class="navbar-nav " style="margin:0 -20px 0 30px;">
-        <small><a class="nav-link" href="#"><i class="far fa-heart"></i>
-            <spane>Favorites</spane>
+
+        <small><a class="nav-link m-auto" href="{{ path('user_favorite') }}">
+        <span class="fa-stack">
+             <span class="far fa-heart fa-stack-2x " style="font-size:30px;"></span>
+              <span class="fa-stack-1x "style="margin-left:1px;" >
+               <small> {{ app.user.likes|length }}</small>
+              </span>
+            </span>
           </a></small>
       </li>
       {% if is_granted("ROLE_USER") %}
@@ -121,7 +127,7 @@
           <li class="nav-item dropdown" id="navbarSupportedContent">
             <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
               aria-expanded="true">
-              <span>Slaut!</span> <small>{{ app.user.nom }}  {{ app.user.prenom }}</small>
+              <span>Slaut!</span> <small>{{ app.user.nom }} {{ app.user.prenom }}</small>
             </a>
             <div class="dropdown-menu  animate slideIn" aria-labelledby="navbarDropdown">
               <a class="dropdown-item" href="{{ path('user_account') }}">

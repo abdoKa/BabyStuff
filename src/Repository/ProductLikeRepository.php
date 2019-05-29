@@ -19,6 +19,28 @@ class ProductLikeRepository extends ServiceEntityRepository
         parent::__construct($registry, ProductLike::class);
     }
 
+    public function BelongsToUser($id, $userId)
+    {
+        $sql = "
+            SELECT 
+            c FROM 
+            App:ProductLike c
+            WHERE
+            c.id =:id AND 
+            c.User =:userId
+        ";
+
+        $result = $this->getEntityManager()->createQuery($sql)
+            ->setParameter('id', $id)
+            ->setParameter('userId', $userId)
+            ->getOneOrNullResult();
+        if (null == $result) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
     // /**
     //  * @return ProductLike[] Returns an array of ProductLike objects
     //  */
