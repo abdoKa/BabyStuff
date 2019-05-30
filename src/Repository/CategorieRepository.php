@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\Categorie;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
+use App\Entity\CategorySearch;
 
 /**
  * @method Categorie|null find($id, $lockMode = null, $lockVersion = null)
@@ -36,7 +37,7 @@ class CategorieRepository extends ServiceEntityRepository
     }
 
 
-    public function getAllCategories(): array
+    public function getAllCategories(CategorySearch $search): array
     {
         $conn = $this->getEntityManager()->getConnection();
         $sql = '

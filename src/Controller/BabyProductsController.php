@@ -15,11 +15,14 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Form\PrppertySearchType;
+use App\Entity\CategorySearch;
+use App\Form\CategorySearchType;
 
 class BabyProductsController extends AbstractController
 {
 
-   
+
     /**
      * @Route("/", name="home")
      */
@@ -101,7 +104,7 @@ class BabyProductsController extends AbstractController
             [
                 'categoriesMenu' => $categoriesMenu,
                 'cartDetails' => $cartDetails,
-                'likes'=>$likes
+                'likes' => $likes
             ]
         );
     }
@@ -172,15 +175,18 @@ class BabyProductsController extends AbstractController
 
     /**
      * @Route("/all-categories", name="show-all-categories")
+     * 
      */
     public function show_all_cat(PaginatorInterface $paginator, Request $request)
     {
+        
+
         $em = $this->getDoctrine()->getManager();
         $repoC = $em->getRepository(Categorie::class);
 
 
         $pagination = $paginator->paginate(
-            $repoC->getAllCategories(),
+            $repoC->findAll(),
             $request->query->getInt('page', 1),
             9
         );
@@ -194,9 +200,14 @@ class BabyProductsController extends AbstractController
 
     /**
      * @Route("/categorie/{slug}", name="show_categorie")
+     * @return Response
      */
     public function show_cat($slug, PaginatorInterface $paginator, Request $request)
     {
+        $search = new CategorySearch();
+        $form = $this->createForm(CategorySearchType::class, $search);
+        $form->handleRequest($request);
+
         $em = $this->getDoctrine()->getManager();
         $repoC = $em->getRepository(Categorie::class);
         $categorie = $repoC->findOneBy(array('slug' => $slug));
@@ -211,6 +222,8 @@ class BabyProductsController extends AbstractController
             'categorie' => $categorie,
             'produits' => $produits,
             'pagination' => $pagination,
+            'form'=>$form->createView()
+            
 
 
 
@@ -220,7 +233,7 @@ class BabyProductsController extends AbstractController
     /**
      * @Route("/product/{slug}", name="single_product")
      */
-    public function show_product($slug)
+    public function show_product($slug): Response
     {
 
         $em = $this->getDoctrine()->getManager();

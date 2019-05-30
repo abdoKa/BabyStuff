@@ -15,7 +15,25 @@
 {% block body %}
 
 <h1 class="marque-title">{{ categorie.nom }} </h1>
+{# <div class="jumbotron">
+    <div class="container">
+        {{ form_start(form) }}
+        <div class="form-row">
+            <div class="col">
+                {{ form_row(form.price) }}
+            </div>
 
+            <div class="col">
+                {{ form_row(form.name) }}
+            </div>
+
+            <div class="col">
+                <button class="btn btn-primary">Rechercher</button>
+            </div>
+        </div>
+        {{ form_end(form) }}
+    </div>
+</div> #}
 <section class="marques">
     <div class="containner">
         <div class="row">
