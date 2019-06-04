@@ -43,7 +43,6 @@ class CartController extends AbstractController
             
             if (array_key_exists($productId, $cart)) {
                 $cart[$productId] += $productQuantity;
-                die();
 
             } else {
                 $cart += $item;

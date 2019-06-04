@@ -31,6 +31,10 @@
         display: none;
     }
 
+    .alert {
+        width: 40%;
+    }
+
 </style>
 {% endblock %}
 
@@ -58,6 +62,11 @@
 
     <div class="col-sm-6">
         {{ form_start(form) }}
+        {% for message in app.flashes('error') %}
+        <div class="alert p-2 m-auto sm-danger alert-danger" role="alert">
+            {{ message }}
+        </div>
+        {% endfor %}
         <div class="row">
             <div class="col-md-5">{{ form_row(form.nom) }}</div>
             <div class="col-md-5">{{ form_row(form.prenom) }}</div>
@@ -76,6 +85,7 @@
         </div>
         {{ form_end(form) }}
 
+
     </div>
 </div>
 
@@ -84,12 +94,16 @@
 {% block javascripts %}
 <script>
     $(document).ready(function () {
-        swal("Validation", "Pour une raison de sécurity entrer votre mot de passe pour sauvgarder vos modifications");
-       
+        swal("Validation",
+            "Pour une raison de sécurity entrer votre mot de passe pour sauvgarder vos modifications");
+
         $('#edit_user_save').click(function (e) {
             $("#edit_user_confirm_password").show();
         });
     });
+    setTimeout(function () {
+        $("div.alert").delay(4000).slideUp(300);
+    }, 2000); // 5 secs
 
 </script>
 {% endblock %}

@@ -3,69 +3,71 @@
 <style>
     body {
         padding-top: 80px;
-
+        height: 100%;
+        width: 100%;
     }
-   .rounded{
-       height:90%;
-       padding: 5px 0 20px 0;
-        -webkit-box-shadow: 0 30px 60px 0 rgba(0, 0, 0, 0.3);
-    box-shadow: 0 30px 60px 0 rgba(0, 0, 0, 0.4);
-   }
-   .col-lg{
-       margin:10px;
-   }
-   
-       
+
+    .card-img-top {
+        width: 100%;
+        height: 60vh;
+        object-fit: cover;
+    }
+
+    .col-lg {
+        margin: 10px;
+    }
+
 </style>
 
 {% endblock %}
 
+{% block title %}babyStuff | détail du {{single_p.slug}}{% endblock %}
 
 {% block body %}
 <div class="container">
-            <a href="{{ path('show_marque', {'slug': fournisseur.slug }) }}" class="btn btn-link">{{ fournisseur.nom }}<a>
-    <div class="row">
-        <div class="col-lg">
-            <img src="{{ asset('/brows_file/' ~ single_p.image) }}" class="rounded float-left w-100" alt="image du produit">
-        </div>
-
-        <div class="col-lg-6 product-pre">
-            <div>
-                <h4 class="text-left title-css">{{ single_p.nom|upper }}</h4>
-                <h6>Referance: {{ single_p.referance }}</h6>
-            </div>
-            <div>
-                <h1 class="text-left price-css">{{ single_p.prix }} MAD</h1>
-            </div>
-            <div>
-                <p class="text-left lead" style="font-weight:80" ;>{{ single_p.description|raw }}</p>
-            </div>
-
-            {% if single_p.stock > 0 %}
-            <form action="{{ path('shopping') }}" method="post">
-                <div class="col-lg-3">
-                    <label for="qte" class=" text-left">Quantité</label>
-                    <input type="number" class="form-control" name="qte" value="1" min="1">
-                    <input type="hidden" name="product_id" value="{{ single_p.id }}">
+    <a href="{{ path('show_marque', {'slug': fournisseur.slug }) }}" class="btn btn-link">{{ fournisseur.nom }}<a>
+            <div class="row">
+                <div class="col-lg-6 card">
+                    <img src="{{ asset('/brows_file/' ~ single_p.image) }}" class="card-img-top" alt="image du produit">
                 </div>
-                <div class="col-lg-3">
-                    <button type="submit" name="submit" class="btn btn-primary btn-sm" style="margin-top:40px;">
-                        <i class="fas fa-cart-plus"></i>
-                        <spane>ACHETER</spane>
-                    </button>
-                    <div><i class="fas fa-check"></i> en stock </div>
-            </form>
-            {% else %}
-            <div class="alert alert-info" role="alert">
-            <spane><i class="fas fa-times"></i> ce produit n'est pas disponile pour le moment !!
+
+                <div class="col-md-5 product-pre">
+                    <div>
+                        <h4 class="text-left title-css">{{ single_p.nom|upper }}</h4>
+                        <h6>Referance: {{ single_p.referance }}</h6>
+                    </div>
+                    <div>
+                        <h1 class="text-left price-css">{{ single_p.prix }} MAD</h1>
+                    </div>
+                    <div>
+                        <p class="text-left lead" style="font-weight:80" ;>{{ single_p.description|raw }}</p>
+                    </div>
+
+                    {% if single_p.stock > 0 %}
+                    <form action="{{ path('shopping') }}" method="post">
+                        <div class="col-lg-3">
+                            <label for="qte" class=" text-left">Quantité</label>
+                            <input type="number" class="form-control" name="qte" value="1" min="1">
+                            <input type="hidden" name="product_id" value="{{ single_p.id }}">
+                        </div>
+                        <div class="col-lg-4">
+                            <button type="submit" name="submit" class="btn btn-primary btn-sm" style="margin-top:40px;">
+                                <i class="fas fa-cart-plus"></i>
+                                <spane>ACHETER</spane>
+                            </button>
+                            <div><i class="fas fa-check"></i> en stock </div>
+                    </form>
+                    {% else %}
+                    <div class="alert alert-info" role="alert">
+                        <spane><i class="fas fa-times"></i> ce produit n'est pas disponile pour le moment !!
+                    </div>
+
+
+                    </spane>
+
+                    {% endif %}
+                </div>
             </div>
-
-
-            </spane>
-
-            {% endif %}
-        </div>
-    </div>
 </div>
 </div>
 

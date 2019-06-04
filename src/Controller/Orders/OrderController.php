@@ -19,8 +19,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class OrderController extends AbstractController
 {
     /**
-     * @Route("/user/order", name="user_giorder", methods={"GET","POST"})
-     * @IsGranted("ROLE_USER")
+     * @Route("/user/order", name="user_order", methods={"GET","POST"})
      */
     public function order(Request $request)
     {
@@ -89,8 +88,6 @@ class OrderController extends AbstractController
             }
         }
 
-
-
         $user = $this->getUser();
         $order->setUtilisateur($user);
 
@@ -107,7 +104,8 @@ class OrderController extends AbstractController
             $em->persist($order);
             $em->flush();
             $session->clear();
-
+            
+            $this->addFlash('success',  'Je vous remercie! Nous nous occupons de votre commande dès que possible!');
             return $this->redirectToRoute('user_account');
         }
         return $this->render('order/oders.html.twig', [

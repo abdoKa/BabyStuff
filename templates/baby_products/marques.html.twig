@@ -1,9 +1,17 @@
 {% extends 'base.html.twig' %}
 {% block stylesheets %}
 <link rel="stylesheet" href="{{ asset('bower_components/font-awesome/css/all.css') }}">
+<style>
+ .card-img-top {
+        width: 100%;
+        height: 30vh;
+        object-fit: cover;
+    }
 
+
+</style>
 {% endblock %}
-
+{% block title %}babyStuff | Marques{% endblock %}
 {% block body %}
 
 <h1 class="marque-title">Nos partenaires</h1>
@@ -16,7 +24,7 @@
                 <div class="card-body">
                     <div>
                         <a href="{{ path('show_marque', {'slug': fournisseur.slug }) }}"> 
-                        <img src="{{ asset('/brows_file/' ~ fournisseur.image) }}" class=" w-100" alt="">
+                        <img src="{{ asset('/brows_file/' ~ fournisseur.image) }}" class=" card-img-top" alt="">
                         </a>
                         <a href="{{ path('show_marque', {'slug': fournisseur.slug }) }}"> 
                        <div class="card-title product-title"><a href="{{ path('show_marque', {'slug': fournisseur.slug }) }}">  {{ fournisseur.nom }}</a></div>

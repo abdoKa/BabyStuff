@@ -14,6 +14,12 @@
         margin-bottom: 40px;
     }
 
+    .alert {
+        text-align: center;
+        float: center;
+        width: 40%;
+    }
+
 </style>
 {% endblock %}
 
@@ -24,10 +30,24 @@
 
     </div>
 </div>
-
-<div class="container">
-        {% include 'user_account/menu.html.twig' %}
+{% for message in app.flashes('success') %}
+<div class="alert  sm-success alert-success" role="alert">
+    {{ message }}
+    {% endfor %}
 </div>
 
 
+
+<div class="container">
+    {% include 'user_account/menu.html.twig' %}
+</div>
+{% endblock %}
+
+{% block javascripts %}
+<script>
+    setTimeout(function () {
+        $('div.alert').delay(6000).slideUp(300);
+    }, 5000); // 5 secs
+
+</script>
 {% endblock %}

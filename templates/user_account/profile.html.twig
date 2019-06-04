@@ -15,11 +15,19 @@
 
     .card-body {
         margin-top: 80px;
-      
+
     }
 
     .profile-info {
         margin: 60px;
+    }
+
+    .card {
+        margin-left: 50px;
+    }
+
+    .alert {
+        width: 40%;
     }
 
 </style>
@@ -29,24 +37,28 @@
 <div class="row">
     <div class="col-lg-12">
         <h1 class="Welcom-title"> Mon Profile | <small>{{ (app.user.nom) }}</small>
-            <h1>
+        </h1>
+        {% for message in app.flashes('info') %}
+        <div class="alert p-2 m-auto sm-info alert-info" role="alert">
+            {{ message }}
+        </div>
+        {% endfor %}
     </div>
-    {% for message in app.flashes('info') %}
-    <div class="alert p-2 m-auto sm-info alert-info" role="alert">
-        {{ message }}
-    </div>
-    {% endfor %}
+
 </div>
 <div class="row">
     <div class="col-md-3">
         {% include 'user_account/menu.html.twig' %}
     </div>
+
     <div class="col-md-6 card ">
         <a href="{{ path('user_profile_edit') }}"><i class="fas fa-pencil-alt btn-light btn-sm"></i></a>
         <div class="card-body">
-            <h5 class="profile-info"> <span><i class="far fa-user"></i> <span> Utilisateur: <small style="color:black;">{{ app.user.nom }}
+            <h5 class="profile-info"> <span><i class="far fa-user"></i> <span> Utilisateur: <small
+                            style="color:black;">{{ app.user.nom }}
                             {{ app.user.prenom }}</small></h5>
-            <h5 class="profile-info"> <span><i class="fas fa-at"></i><span>E-mail: <small style="color:black;">{{ app.user.email }}</small>
+            <h5 class="profile-info"> <span><i class="fas fa-at"></i><span>E-mail: <small
+                            style="color:black;">{{ app.user.email }}</small>
             </h5>
             <h5 class="profile-info"> <span><i class="fas fa-mobile-alt"></i> <span> Téléphone: <small
                             style="color:black;">{{ app.user.telephone }}</small></h5>
@@ -56,11 +68,11 @@
     </div>
 </div>
 {% endblock %}
-{# {% block javascripts %}
+{% block javascripts %}
 <script>
     setTimeout(function () {
         $("div.alert").delay(6000).slideUp(300);
-    }, 5000); // 5 secs
+    }, 4000); // 5 secs
 
 </script>
-{% endblock %} #}
+{% endblock %}

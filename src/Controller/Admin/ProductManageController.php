@@ -82,8 +82,8 @@ class ProductManageController extends AbstractController
             
             $em->persist($product);
             $em->flush();
-            $this->addFlash('info', $product->getNom() . ' est modifer avec succée !');
             return $this->redirectToRoute('admin_product');
+            $this->addFlash('info', $product->getNom() . ' est modifer avec succée !');
         }
         
 
@@ -122,8 +122,8 @@ class ProductManageController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($product);
             $entityManager->flush();
-            $this->addFlash('success', $product->getNom() . ' est ajouté avec succée !');
             return $this->redirectToRoute('admin_product');
+            $this->addFlash('success', $product->getNom() . ' est ajouté avec succée !');
         }
         return $this->render('Admin/Admine_ProductsTwigs/newProduct.html.twig', array(
             'form' => $form->createView(),
@@ -141,9 +141,8 @@ class ProductManageController extends AbstractController
 
         $em->remove($product);
         $em->flush();
-        $this->addFlash('info_delete', $product->getNom() . ' est supprimer avec succée !');
-
         return $this->redirectToRoute('admin_product');
+        $this->addFlash('info_delete', $product->getNom() . ' est supprimer avec succée !');
     }
 
     /**

@@ -104,7 +104,7 @@
                         <h6>{{ product.product.prix }}</h6>
                         <small>MAD</small>
                     </td>
-                    <td style="text-align: right" >
+                    <td style="text-align: right">
                         <h6 class="sum-product">{{ product.sum }}</h6>
                         <small>MAD</small>
                     </td>
@@ -141,7 +141,7 @@
 
             <div>
                 <div>
-                    <a href="{{ path('user_giorder') }}" class="btn btn-success" id="">
+                    <a href="{{ path('user_order') }}" class="btn btn-success" id="">
                         Commandez maintenant !
                     </a>
                     <a href="#" class="btn btn-danger glyphicon glyphicon-trash clear-cart" data-toggle="confirmation"
@@ -166,6 +166,11 @@
             <div>
                 <h2>votre cart est vide !!</h2>
             </div>
+        </div>
+        <div class="row">
+            <p><a href="{{ path('home') }}" class="btn btn-warning"><i class="fas fa-chevron-left"></i>
+                    <span>Continuer vos achats</span>
+                </a></p>
         </div>
         {% endif %}
     </div>

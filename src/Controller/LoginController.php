@@ -20,10 +20,9 @@ class LoginController extends AbstractController
      */
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
-        // get the login error if there is one
         $error = $authenticationUtils->getLastAuthenticationError();
-        // last username entered by the user
         $lastUsername = $authenticationUtils->getLastUsername();
+
         $form = $this->createForm(LoginFormType::class, [
             '_username' => $lastUsername,
         ]);
@@ -47,10 +46,12 @@ class LoginController extends AbstractController
      */
     public function registration(Request $request, UserPasswordEncoderInterface $encoder, \Swift_Mailer $mailer)
     {
-        $utilisateur = new Utilisateur();   
-        
+        $utilisateur = new Utilisateur();
 
-        $form = $this->createForm(RegistraionType::class, $utilisateur
+
+        $form = $this->createForm(
+            RegistraionType::class,
+            $utilisateur
         );
 
         $form->handleRequest($request);
@@ -79,21 +80,18 @@ class LoginController extends AbstractController
             return $this->redirectToRoute('home');
 
             $message = (new \Swift_Message('Hello Email'))
-            ->setFrom('abdellalikabou39@gmail.com')
-            ->setTo('alirjun16@gmail.com')
-            ->setBody(
-                $this->renderView(
-                    'send_email/igetEmailAfterRegistration.html.twig'
-                ),
-                'text/html'
-            );
-        $mailer->send($message);
+                ->setFrom('abdellalikabou39@gmail.com')
+                ->setTo('alirjun16@gmail.com')
+                ->setBody(
+                    $this->renderView(
+                        'send_email/igetEmailAfterRegistration.html.twig'
+                    ),
+                    'text/html'
+                );
+            $mailer->send($message);
         }
         return $this->render('login/register.html.twig', [
             'form' => $form->createView()
         ]);
     }
-
-   
-
 }

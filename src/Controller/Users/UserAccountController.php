@@ -53,12 +53,13 @@ class UserAccountController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             if (password_verify($getPasswordFromInput, $hash)) {
-
                 $em->persist($currentUser);
                 $em->flush();
+                $this->addFlash('info', $currentUser->getNom() . ' ' .  $currentUser->getPrenom() . ' , votre information est modifer avec succée !');
                 return $this->redirectToRoute('user_profile');
-            } else {
-                $this->addFlash('info', $currentUser->getNom() .  $currentUser->getPrenom() . ', votre information est modifer avec succée !');
+            } else{
+                $this->addFlash('error','mot de passe incorrect ,réessayer !');
+
             }
         }
 
