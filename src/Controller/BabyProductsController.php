@@ -32,7 +32,7 @@ class BabyProductsController extends AbstractController
 
         $em = $this->getDoctrine()->getManager();
         $repoP = $em->getRepository(Produit::class);
-      
+
 
         $produits = $repoP->getLastProducts();
 
@@ -50,7 +50,7 @@ class BabyProductsController extends AbstractController
             'features' => $features,
         ]);
     }
-
+   
 
     public function menuNav()
     {
@@ -233,7 +233,7 @@ class BabyProductsController extends AbstractController
 
         $em = $this->getDoctrine()->getManager();
         $repoF = $em->getRepository(Produit::class);
-        
+
         $single_p = $repoF->findOneBy(array('slug' => $slug));
         $fournisseur = $single_p->getFourniseur();
 

@@ -24,8 +24,9 @@
     h5 {
         padding: 10px;
     }
-    .card{
-       margin-left:50px;
+
+    .card {
+        margin-left: 50px;
     }
 
 </style>
@@ -37,45 +38,42 @@
         <h1 class="Welcom-title"> {{ (app.user.nom) }} | <small>List des commandes</small>
         </h1>
     </div>
-    <div class="row">
-        <div class="col-sm-3">
-            {% include 'user_account/menu.html.twig' %}
-        </div>
-
-        <div class="col-sm-9 ">
-            <div class="col-lg-11 card ">
-                <table class="table " style="color:black">
-                    <thead>
-                        <th bgcolor="#f3f9fb"> Produit</th>
-                        <th bgcolor="#f3f9fb">Quantité</th>
-                        <th bgcolor="#f3f9fb">Prix</th>
-                        <th bgcolor="#f3f9fb">Total</th>
-
-                    </thead>
-                    <tbody>
-
-                        {% for orderProduct in pagination  %}
-                        <tr>
-                            <td>{{ orderProduct.produit.nom }} {{ orderProduct.produit.description|raw }} <img
-                                    src="{{ asset('/brows_file/' ~ orderProduct.produit.image) }}" class="image_B"></td>
-                            <td>{{ orderProduct.quantity }}</td>
-                            <td>{{ orderProduct.prix }} <small>MAD</small></td>
-                            <td>{{ orderProduct.prix * orderProduct.quantity }}<small>MAD</small></td>
-                        </tr>
-                        {% endfor %}
-
-                        <td class="table-info"> TTC {{ order.prixTotale}} <strong>MAD</strong></td>
-                    </tbody>
-                </table>
-                <div class="navigation pagination-sm">
-                    {{ knp_pagination_render(pagination) }}
-                </div>
-            </div>
-        </div>
-
-    </div>
 </div>
 
+<div class="row">
+    <div class="col-sm-3">
+        {% include 'user_account/menu.html.twig' %}
+    </div>
 
+    <div class="col-sm-9 ">
+        <div class="col-sm-10 card ">
+            <table class="table " style="color:black">
+                <thead>
+                    <th bgcolor="#f3f9fb"> Produit</th>
+                    <th bgcolor="#f3f9fb">Quantité</th>
+                    <th bgcolor="#f3f9fb">Prix</th>
+                    <th bgcolor="#f3f9fb">Total</th>
 
+                </thead>
+                <tbody>
+
+                    {% for orderProduct in pagination  %}
+                    <tr>
+                        <td>{{ orderProduct.produit.nom }} {{ orderProduct.produit.description|raw }} <img
+                                src="{{ asset('/brows_file/' ~ orderProduct.produit.image) }}" class="image_B"></td>
+                        <td>{{ orderProduct.quantity }}</td>
+                        <td>{{ orderProduct.prix }} <small>MAD</small></td>
+                        <td>{{ orderProduct.prix * orderProduct.quantity }}<small>MAD</small></td>
+                    </tr>
+                    {% endfor %}
+
+                    <td class="table-info"> TTC {{ order.prixTotale}} <strong>MAD</strong></td>
+                </tbody>
+            </table>
+            <div class="navigation pagination-sm">
+                {{ knp_pagination_render(pagination) }}
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}

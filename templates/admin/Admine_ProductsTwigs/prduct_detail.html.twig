@@ -12,6 +12,8 @@
     th {
       text-align: center;
     }
+
+
   </style>
   {% endblock %}
 
@@ -19,16 +21,13 @@
   <div class="container">
     <div class="row ">
       <div class="col-lg-12">
-        <h1 class="Welcom-title"> Produit en détail </h1>
+        <h1 class="Welcom-title" style="margin:5%;"> Produit en détail </h1>
       </div>
-      {# / part backend client settings #}
     </div>
-    {# / part backend client settings #}
   </div>
+
   <div class="row w-100" style="margin-left:150px">
     <div class="col-sm-9">
-
-
       <table class="table w-100">
         <tr>
           <th bgcolor="#f3f9fb">Referance</th>
@@ -71,7 +70,8 @@
                   class="fas fa-arrow-circle-left"></i>
                 <spane>retour</spane>
               </a></li>
-            <li class="list-group-item"> <a href="#" class="btn btn-primary btn-sm"> <i class="far fa-edit"></i>
+            <li class="list-group-item"> <a href="{{ path('product_edit',{'slug':single_p.slug}) }}"
+                class="btn btn-primary btn-sm"> <i class="far fa-edit"></i>
                 <spane>Modifer</spane>
               </a></li>
             <li class="list-group-item"> <a href="{{ path('product_delete', {'slug': single_p.slug}) }}"
