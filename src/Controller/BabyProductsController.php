@@ -18,6 +18,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use App\Form\PrppertySearchType;
 use App\Entity\CategorySearch;
 use App\Form\CategorySearchType;
+use Proxies\__CG__\App\Entity\Produit as ProxiesProduit;
 
 class BabyProductsController extends AbstractController
 {
@@ -28,13 +29,14 @@ class BabyProductsController extends AbstractController
      */
     public function home(Request $request)
     {
-        $session = $request->getSession();
+
         $em = $this->getDoctrine()->getManager();
-
-
         $repoP = $em->getRepository(Produit::class);
+      
+
         $produits = $repoP->getLastProducts();
 
+        dump($produits);
 
         $repoF = $em->getRepository(Fourniseur::class);
         $fournisseurs = $repoF->getMarques();
@@ -42,14 +44,12 @@ class BabyProductsController extends AbstractController
         $repoFea = $em->getRepository(Produit::class);
         $features = $repoFea->getFeatures();
 
-        dump($session);
         return $this->render('baby_products/home.html.twig', [
             'produits' => $produits,
             'fournissueurs' => $fournisseurs,
             'features' => $features,
         ]);
     }
-
 
 
     public function menuNav()
@@ -96,10 +96,6 @@ class BabyProductsController extends AbstractController
         }
 
         $cartDetails = ['products' => $productsArray, 'totalsum' => $totalSum];
-
-
-
-
 
         return $this->render(
             'menu.html.twig',
@@ -181,7 +177,7 @@ class BabyProductsController extends AbstractController
      */
     public function show_all_cat(PaginatorInterface $paginator, Request $request)
     {
-        
+
 
         $em = $this->getDoctrine()->getManager();
         $repoC = $em->getRepository(Categorie::class);
@@ -206,7 +202,7 @@ class BabyProductsController extends AbstractController
      */
     public function show_cat($slug, PaginatorInterface $paginator, Request $request)
     {
-        
+
 
         $em = $this->getDoctrine()->getManager();
         $repoC = $em->getRepository(Categorie::class);
@@ -222,7 +218,7 @@ class BabyProductsController extends AbstractController
             'categorie' => $categorie,
             'produits' => $produits,
             'pagination' => $pagination,
-            
+
 
 
 
@@ -237,6 +233,7 @@ class BabyProductsController extends AbstractController
 
         $em = $this->getDoctrine()->getManager();
         $repoF = $em->getRepository(Produit::class);
+        
         $single_p = $repoF->findOneBy(array('slug' => $slug));
         $fournisseur = $single_p->getFourniseur();
 

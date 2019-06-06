@@ -30,12 +30,11 @@ class ProductManageController extends AbstractController
     {
         $em = $this->getDoctrine()->getManager();
         $repoP = $em->getRepository(Produit::class);
+        $q = $request->query->get('q');
+        $queryBuilder = $repoP->getWithSearch(trim($q));
 
-
-        $product = $repoP->findAll();
-        // $featured =$product->getFeautred();
         $pagination = $paginator->paginate(
-            $product,
+            $queryBuilder,
             $request->query->getInt('page', 1),
             6
         );
@@ -165,5 +164,4 @@ class ProductManageController extends AbstractController
             'fournisseur' => $fournisseur
         ]);
     }
-
 }

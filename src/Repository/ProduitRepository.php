@@ -6,6 +6,8 @@ use App\Entity\Produit;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 use Symfony\Component\HttpFoundation\Request;
+use EasyCorp\Bundle\EasyAdminBundle\Search\QueryBuilder;
+use Doctrine\ORM\QueryBuilder as DoctrineQueryBuilder;
 
 /**
  * @method Produit|null find($id, $lockMode = null, $lockVersion = null)
@@ -103,32 +105,51 @@ class ProduitRepository extends ServiceEntityRepository
             return true;
         }
     }
-    public function findAllProducts()
+    /**
+     * Undocumented function
+     *
+     * @param string|null $term
+     */
+    public function getWithSearch(?string $term): DoctrineQueryBuilder
     {
-        return $this->_em->createQuery(
-            "
-                SELECT bp 
-                FROM App:Produit bp
-            "
-        );
-        return $this->_em->getRepository(Produit::class)->createQueryBuilder('bp');
-    }
-    public function getAction(Request $request)
-    {
-        return $this->_em->getRepository(Produit::class)->findAllProducts()->getQuery()->getResult();
+        $qb = $this->createQueryBuilder('c');
 
-        $queryBuilder = $this->_em->getRepository(Produit::class)->findAllProducts();
-        if ($request->query->getAlnum('filter')) {
-
-            $queryBuilder
-                ->where('bp.nom LIKE :nom')
-                ->setParameter('nom', '%' . $request->query->getAlnum('filter') . '%');
+        if ($term) {
+            $qb->andWhere('c.nom LIKE :term OR c.referance LIKE :term')
+                ->setParameter('term', '%' . $term . '%');
         }
 
-        return $this->get('knp_paginator')->paginate(
-            $queryBuilder->getQuery(),
-            $request->query->getInt('page',1),
-            $request->query->getInt('limit',1)
-        );
+        return $qb
+            ->orderBy('c.dateAjout', 'DESC');
+           
     }
+
+    // public function findAllProducts()
+    // {
+    //     return $this->_em->createQuery(
+    //         "
+    //             SELECT bp 
+    //             FROM App:Produit bp
+    //         "
+    //     );
+    //     return $this->_em->getRepository(Produit::class)->createQueryBuilder('bp');
+    // }
+    // public function getAction(Request $request)
+    // {
+    //     return $this->_em->getRepository(Produit::class)->findAllProducts()->getQuery()->getResult();
+
+    //     $queryBuilder = $this->_em->getRepository(Produit::class)->findAllProducts();
+    //     if ($request->query->getAlnum('filter')) {
+
+    //         $queryBuilder
+    //             ->where('bp.nom LIKE :nom')
+    //             ->setParameter('nom', '%' . $request->query->getAlnum('filter') . '%');
+    //     }
+
+    //     return $this->get('knp_paginator')->paginate(
+    //         $queryBuilder->getQuery(),
+    //         $request->query->getInt('page',1),
+    //         $request->query->getInt('limit',1)
+    //     );
+    // }
 }
