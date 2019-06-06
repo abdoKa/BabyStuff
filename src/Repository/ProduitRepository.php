@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\Produit;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * @method Produit|null find($id, $lockMode = null, $lockVersion = null)
@@ -34,7 +35,7 @@ class ProduitRepository extends ServiceEntityRepository
         return $stmt->fetchAll();
     }
 
-    
+
     public function getFeatures(): array
     {
         $conn = $this->getEntityManager()->getConnection();
@@ -102,33 +103,32 @@ class ProduitRepository extends ServiceEntityRepository
             return true;
         }
     }
-
-    // /**
-    //  * @return Produit[] Returns an array of Produit objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    public function findAllProducts()
     {
-        return $this->createQueryBuilder('p')
-            ->andWhere('p.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('p.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
+        return $this->_em->createQuery(
+            "
+                SELECT bp 
+                FROM App:Produit bp
+            "
+        );
+        return $this->_em->getRepository(Produit::class)->createQueryBuilder('bp');
     }
-    */
-
-    /*
-    public function findOneBySomeField($value): ?Produit
+    public function getAction(Request $request)
     {
-        return $this->createQueryBuilder('p')
-            ->andWhere('p.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
+        return $this->_em->getRepository(Produit::class)->findAllProducts()->getQuery()->getResult();
+
+        $queryBuilder = $this->_em->getRepository(Produit::class)->findAllProducts();
+        if ($request->query->getAlnum('filter')) {
+
+            $queryBuilder
+                ->where('bp.nom LIKE :nom')
+                ->setParameter('nom', '%' . $request->query->getAlnum('filter') . '%');
+        }
+
+        return $this->get('knp_paginator')->paginate(
+            $queryBuilder->getQuery(),
+            $request->query->getInt('page',1),
+            $request->query->getInt('limit',1)
+        );
     }
-    */
 }

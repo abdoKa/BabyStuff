@@ -30,6 +30,8 @@ class BabyProductsController extends AbstractController
     {
         $session = $request->getSession();
         $em = $this->getDoctrine()->getManager();
+
+
         $repoP = $em->getRepository(Produit::class);
         $produits = $repoP->getLastProducts();
 
@@ -204,9 +206,7 @@ class BabyProductsController extends AbstractController
      */
     public function show_cat($slug, PaginatorInterface $paginator, Request $request)
     {
-        $search = new CategorySearch();
-        $form = $this->createForm(CategorySearchType::class, $search);
-        $form->handleRequest($request);
+        
 
         $em = $this->getDoctrine()->getManager();
         $repoC = $em->getRepository(Categorie::class);
@@ -222,7 +222,6 @@ class BabyProductsController extends AbstractController
             'categorie' => $categorie,
             'produits' => $produits,
             'pagination' => $pagination,
-            'form'=>$form->createView()
             
 
 

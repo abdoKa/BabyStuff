@@ -12,6 +12,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Proxies\__CG__\App\Entity\Utilisateur;
 use App\Entity\Utilisateur as AppUtilisateur;
+use App\Entity\ProductLike;
 
 class AjaxController extends AbstractController
 {
@@ -280,33 +281,37 @@ class AjaxController extends AbstractController
     }
 
     /**
-     * @Route("add/favorite/{id}", name="add_to_favorite",methods={"POST"})
+     * @Route("add/favorite/{slug}", name="add_to_favorite",methods={"POST"})
      */
-    public function AddFavorite(Request $request, $id, UserInterface $currentUser)
+    public function AddFavorite(Request $request,$id, UserInterface $currentUser)
     {
         $em = $this->getDoctrine()->getManager();
         $repoP = $em->getRepository(Produit::class);
-        $product = new Produit();
-        $repoU = $em->getRepository(Utilisateur::class);
-        $getUser = $repoU->findOneBy([
+        $product = new ProductLike();
+        $product = $repoP->findOneBy([
             'id' => $id,
-            ]);
-
-            $product = $repoU->findOneBy([
-                'id' => $id,
-            ]);
+        ]);
         $user = $currentUser->getId();
-        if ($request->isMethod('post')) {
+        // if ($request->isMethod('post')) {
 
-            // if($user == $getUser){
+        //     $product->setProduct($product);
+        //     $product->setUser($user);
+        //     $em->persist($product);
+        // }
+        // $em->flush();
 
-            $data = array(
-                'status' => 'ok',
-                'user' => $getUser
-            );
-            return  new JsonResponse($data);
-            // }
-        }
-        return $this->json('Error');
+        // return new JsonResponse(['hearts' => $product->getProduct()]);
+    }
+
+
+    /**
+     * @Route("product/{slug}", name="Prod_rem", methods={"DELETE"})
+     */
+    public function removeProduct(Produit $product)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($product);
+        $em->flush();
+        return  new Response(null, 204);
     }
 }

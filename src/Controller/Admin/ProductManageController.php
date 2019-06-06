@@ -30,7 +30,7 @@ class ProductManageController extends AbstractController
     {
         $em = $this->getDoctrine()->getManager();
         $repoP = $em->getRepository(Produit::class);
-        
+
 
         $product = $repoP->findAll();
         // $featured =$product->getFeautred();
@@ -54,18 +54,18 @@ class ProductManageController extends AbstractController
         $em = $this->getDoctrine()->getManager();
         $product = $em->getRepository(Produit::class)->findOneBy(array('slug' => $slug));
 
-            $product->setImage(
-                new File($this->getParameter('uploads_directory') . '/' . $product->getImage())
-            );
+        $product->setImage(
+            new File($this->getParameter('uploads_directory') . '/' . $product->getImage())
+        );
 
         // $product->setImage(basename($product->getImage()));
-        
-        
+
+
         $form = $this->createForm(EditProductType::class, $product);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            
+
             $product = $form->getData();
             $file = $product->getImage();
             if ($file instanceof UploadedFile) {
@@ -74,20 +74,20 @@ class ProductManageController extends AbstractController
                     $this->getParameter('uploads_directory'),
                     $fileName
                 );
-                
+
                 $product->setImage($fileName);
                 // $product->setImage(basename($product->getImage()));
             }
             $product->setImage(basename($product->getImage()));
-            
+
             $em->persist($product);
             $em->flush();
             return $this->redirectToRoute('admin_product');
             $this->addFlash('info', $product->getNom() . ' est modifer avec succée !');
         }
-        
 
-        
+
+
         return $this->render('Admin/Admine_ProductsTwigs/edit_product.html.twig', [
             'product' => $product,
             'form' => $form->createView()
@@ -109,10 +109,10 @@ class ProductManageController extends AbstractController
             $file = $product->getImage();
             $fileName = md5(uniqid()) . '.' . $file->guessExtension();
             try {
-            $file->move(
-                $this->getParameter('uploads_directory'),
-                $fileName
-            );
+                $file->move(
+                    $this->getParameter('uploads_directory'),
+                    $fileName
+                );
             } catch (FileException $e) {
                 // ... handle exception if something happens during file upload
             }
@@ -142,7 +142,7 @@ class ProductManageController extends AbstractController
         $em->remove($product);
         $em->flush();
         return $this->redirectToRoute('admin_product');
-        $this->addFlash('info_delete', $product->getNom() . ' est supprimer avec succée !');
+        $this->addFlash('delete', $product->getNom() . ' est supprimer avec succée !');
     }
 
     /**
@@ -165,4 +165,5 @@ class ProductManageController extends AbstractController
             'fournisseur' => $fournisseur
         ]);
     }
+
 }

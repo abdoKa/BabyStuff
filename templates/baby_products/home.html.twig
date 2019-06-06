@@ -79,8 +79,8 @@
                         <div class="product-image ">
                             <img src="{{ asset('/brows_file/' ~ produit.image) }}" alt="" class="card-img-top"><a />
 
-                            <a href="" mthode="post"
-                                class="add-to-favourite js-like" data-url="{{path('add_to_favorite',{'id':produit.id})}}">
+                            <a href="" mthode="POST"
+                                class="add-to-favourite js-like" data-url="{{path('add_to_favorite',{'slug':produit.slug})}}">
                                 {# {% if app.user and produit.isLikedByUser(app.user)%} #}
                                 
                                 {# <i class="far fa-heart icon-change fas"></i> #}
