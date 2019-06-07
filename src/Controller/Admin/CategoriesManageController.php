@@ -33,7 +33,6 @@ class CategoriesManageController extends AbstractController
             $request->query->getInt('page', 1),
             9
         );
-        dump($pagination);
 
         return $this->render('admin/Admin_CategorieTwigs/B_categories.html.twig', [
             'pagination' => $pagination
@@ -126,7 +125,6 @@ class CategoriesManageController extends AbstractController
         $repoF = $em->getRepository(Categorie::class);
 
         $single_C = $repoF->findOneBy(array('slug' => $slug));
-        dump($single_C);
         return $this->render('Admin/Admin_CategorieTwigs/categorie_detail.html.twig', [
             'single_C' => $single_C,
         ]);

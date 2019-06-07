@@ -8,15 +8,15 @@ $('.is-featured').click(function(e) {
             if (data.bookmark == false) {
                 console.log(data.bookmark);
                 swal({
-                    title: "Bookmark",
-                    text: "Permissions assigned Successfully",
+                    title: "📌",
+                    text: "ce produit est ajouté dans la list des produits en-vedette",
                     icon: "info",
                     closeOnClickOutside: false,
                 });
             } else {
                 swal({
-                    title: "No-Bookmark",
-                    text: "Permissions assigned Successfully",
+                    title: "🗑",
+                    text: "ce produit est supprimé dans la list des produits en-vedette",
                     icon: "info",
                     closeOnClickOutside: false,
                 });

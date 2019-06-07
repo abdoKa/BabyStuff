@@ -36,6 +36,7 @@ $(document).ready(function() {
 
     });
 
+
     var htmlBody = document.querySelector('.navbar');
     var search = document.querySelector('.search-bar');
     var searchContainer = document.querySelector('.search-bar');

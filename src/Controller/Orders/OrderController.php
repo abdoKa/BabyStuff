@@ -52,7 +52,6 @@ class OrderController extends AbstractController
             }
             $session->set('my_cart', $cart);
         }
-
         foreach ($cart as $productId => $productQuantity) {
             $product = $repoP->findOneBy([
                 'id' => $productId,
@@ -90,10 +89,12 @@ class OrderController extends AbstractController
 
         $user = $this->getUser();
         $order->setUtilisateur($user);
-
         $order->setPrixTotale($sum);
 
-        dump($cartDetails);
+
+
+            // dump($product->getstock() - $quantity);
+
         //Form Order
         $form = $this->createForm(OrdersFormType::class, $order);
         $form->handleRequest($request);
@@ -104,7 +105,7 @@ class OrderController extends AbstractController
             $em->persist($order);
             $em->flush();
             $session->clear();
-            
+
             $this->addFlash('success',  'Je vous remercie! Nous nous occupons de votre commande dès que possible!');
             return $this->redirectToRoute('user_account');
         }

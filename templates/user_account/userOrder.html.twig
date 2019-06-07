@@ -13,15 +13,17 @@
         padding: 50px;
     }
 
-    h1{
-        margin-top:50px;
-        padding:30px;
+    h1 {
+        margin-top: 50px;
+        padding: 30px;
     }
+
     h5 {
         padding: 10px;
     }
-    .card{
-       margin-left:50px;
+
+    .card {
+        margin-left: 50px;
     }
 
 </style>
@@ -34,10 +36,14 @@
         </h1>
     </div>
 </div>
+
 <div class="row">
     <div class="col-sm-3">
         {% include 'user_account/menu.html.twig' %}
     </div>
+    {% if pagination|length == 0%}
+    <h1>la liste des commandes est vide !!🛒</h1>
+    {% else %}
     <div class="col-sm-9">
         <div class="col-sm-10 card ">
             <table class="table ">
@@ -50,8 +56,6 @@
                 <tbody>
                     {% for userOrders in pagination %}
                     <tr>
-
-
                         <td>{{ userOrders.createdAt|date("m/d/Y H:i", "Europe/Paris") }}</td>
                         <td><a href="{{ path('user_detail',{'id':userOrders.id}) }}"><i
                                     class="fas fa-eye btn-light btn-sm"></i></a></td>
@@ -64,6 +68,7 @@
             </div>
         </div>
     </div>
+    {% endif %}
 </div>
 
 {% endblock %}

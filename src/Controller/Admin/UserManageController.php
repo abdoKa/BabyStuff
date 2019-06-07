@@ -49,7 +49,6 @@ class UserManageController extends AbstractController
 
 
         $user_detail = $repoU->findOneBy(array('id' => $id));
-        dump($user_detail);
         return $this->render('admin/Admin_UsersTwigs/user_detail.html.twig', [
             'user_detail' => $user_detail,
         ]);
@@ -68,7 +67,6 @@ class UserManageController extends AbstractController
         $order = $users->getCommandes();
 
 
-        dump($order);
         return $this->render('admin/Admin_UsersTwigs/userOrderDetail.html.twig', [
             'users' => $users,
             'order' => $order

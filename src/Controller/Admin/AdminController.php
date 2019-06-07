@@ -26,7 +26,6 @@ class AdminController extends AbstractController
             $order,
             $request->query->getInt('page', 1),9
         );
-        dump($order);
       
 
         return $this->render('admin/base-admin.html.twig', [

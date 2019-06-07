@@ -48,8 +48,6 @@ class UserAccountController extends AbstractController
         $getPasswordFromInput = $form->get("confirm_password")->getData();
 
         $hash = $currentUser->getpassword();
-        dump($getPasswordFromInput);
-        dump($currentUser);
 
         if ($form->isSubmitted() && $form->isValid()) {
             if (password_verify($getPasswordFromInput, $hash)) {
@@ -79,7 +77,6 @@ class UserAccountController extends AbstractController
         $form = $this->createForm(EditPasswordType::class, $currentUser, []);
         $form->handleRequest($request);
 
-        dump($hash);
         if ($form->isSubmitted() && $form->isValid()) {
 
             $hash = $encoder->encodePassword($currentUser, $currentUser->getPassword());
@@ -104,14 +101,12 @@ class UserAccountController extends AbstractController
     {
 
         $userOrderList = $this->getUser()->getCommandes();
-        dump($userOrderList);
 
         $pagination = $paginator->paginate(
             $userOrderList,
             $request->query->getInt('page', 1),
             6
         );
-
 
         return $this->render('user_account/userOrder.html.twig', [
             'userOrderList' => $userOrderList,
@@ -163,7 +158,6 @@ class UserAccountController extends AbstractController
 
         (int)$userId = $user->getId();
         $belongTo = $repoLike->BelongsToUser($id, $userId);
-        dump($likes);
 
         if ($belongTo) {
             return $this->render('user_account/favorite_detail.html.twig', [
@@ -183,7 +177,6 @@ class UserAccountController extends AbstractController
     {
         $currentUser = $this->getUser()->getLikes();
 
-        dump($currentUser);
 
         $pagination = $paginator->paginate(
             $currentUser,

@@ -26,7 +26,7 @@ class OrdersManageController extends AbstractController
             $request->query->getInt('page', 1),
             9
         );
-        // // dump($order);
+       
         return $this->render('admin/order.html.twig', [
             'order' => $order,
             'pagination' => $pagination
@@ -46,8 +46,7 @@ class OrdersManageController extends AbstractController
 
         $detailOrder =$order->getCommandeProduits();
 
-        dump($order);
-        dump($detailOrder);
+        
         return $this->render('admin/order_detail.html.twig', [
             'order' => $order,
             'detailOrder' => $detailOrder,

@@ -15,25 +15,23 @@ class EditPasswordType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-
-
             ->add('password', RepeatedType::class, [
                 'type' => PasswordType::class,
-                'invalid_message' => 'The password fields must match.',
+                'invalid_message' => 'Les champs de mot de passe doivent correspondre.',
                 'options' => ['attr' => ['class' => 'password-field']],
                 'required' => true,
                 'first_options'  => [
                     'label' => 'Nouveau mot de passe',
                     'attr' => array(
                         'placeholder' => 'Enter un nouveau mot de passe',
-                        'minlength'=>'4'
+                        'minlength' => '4'
                     )
                 ],
                 'second_options' => [
                     'label' => 'Confirmer votre mot de passe',
                     'attr' => array(
                         'placeholder' => 'Confirmer ce mot de passe',
-                        'minlength'=>'4'
+                        'minlength' => '4'
                     )
                 ],
             ])

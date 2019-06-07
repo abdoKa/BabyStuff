@@ -74,7 +74,6 @@ class CartController extends AbstractController
         $cartDetails = ['products' => $productsArray, 'totalsum' => $totalSum];
 
         // $session->invalidate();
-        dump($cartDetails);
         
         return $this->render('shopping/bag-shoping.html.twig', [
             'cartDetails' => $cartDetails

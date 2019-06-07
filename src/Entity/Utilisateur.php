@@ -40,6 +40,7 @@ class Utilisateur implements UserInterface, \Serializable
      *      minMessage = "Ce Nom doit être au moins 2 caractères.",
      *      maxMessage = "Ce Nom ne peut pas contenir plus de 255 caractères"
      * )
+     * @Assert\NotBlank(groups={"registration"})
      */
     private $nom;
 
@@ -51,6 +52,7 @@ class Utilisateur implements UserInterface, \Serializable
      *      minMessage = "Ce Prénom doit être au moins 2 caractères.",
      *      maxMessage = "Ce Prénomom ne peut pas contenir plus de 255 caractères."
      * )
+      * @Assert\NotBlank(groups={"registration"})
      */
     private $prenom;
 
@@ -81,12 +83,20 @@ class Utilisateur implements UserInterface, \Serializable
 
     /**
      * @ORM\Column(type="integer")
+      * @Assert\NotBlank(groups={"registration"})
+      * @Assert\Length(
+     *      min = 9,
+     *      max = 9,
+     *      minMessage = "entré le format correct pour le numéro de téléphone",
+     *      maxMessage = "entré le format correct pour le numéro de téléphone."
+     *)
      */
+
     private $telephone;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank
+     * @Assert\NotBlank(groups={"registration"})
      */
     private $adresse;
 

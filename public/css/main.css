@@ -1,14 +1,14 @@
-@media only screen and (min-width: 994px) {
+@media only screen and (min-width: 1080px) {
     #carouselExampleControls .carousel-inner {
-        height: 400px;
+        height: 500px;
         top: 40px;
     }
     #carouselExampleControls .carousel-inner {
-        height: 400px;
+        height: 500px;
         top: 40px;
     }
     #carouselExampleControls .carousel-inner img {
-        height: 400px;
+        height: 500px;
         top: 40px;
     }
 }
@@ -394,5 +394,5 @@ h5 {
 }
 
 .pull-left {
-    float: left!important;
+    float: left !important;
 }

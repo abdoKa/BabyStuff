@@ -4,13 +4,13 @@
       var item = $(this);
       var url = $(this).data("url");
       swal({
-              title: "Are you sure?",
-              text: "You will not be able to recover this imaginary file!",
+              title: "Êtes-vous sûr?",
+              text: "Ce Produit va supprimer complètement sur votre panier 😨",
               type: "warning",
               showCancelButton: true,
               confirmButtonClass: "btn-danger",
-              confirmButtonText: "Yes, delete it!",
-              cancelButtonText: "No, cancel plx!",
+              confirmButtonText: "Oui, supprime-le!",
+              cancelButtonText: "Non, annuler s'il vous plaît!",
               closeOnConfirm: false,
               closeOnCancel: false
           },
@@ -24,7 +24,7 @@
                       }
                       if (data.status == 'ok') {
 
-                          swal("Deleted!", "Your imaginary file has been deleted.", "success");
+                          swal("Dommage!!", "ce produit était supprimer sur votre panier ", "success");
                           $(item).parent().parent('.item').remove();
                           $('#totalSum').text(data.totalSum);
                           $('.sum-total').text(data.totalSum);
@@ -34,7 +34,7 @@
                       }
                   });
               } else {
-                  swal("Cancelled", "Your imaginary file is safe :)", "error");
+                  swal("Annulé", "vous méritez ce produit 😉", "error");
               }
           });
   });
@@ -43,8 +43,8 @@
       e.preventDefault();
       var url = $(this).data("url");
       swal({
-              title: "Are you sure?",
-              text: "You will not be able to recover this imaginary file!",
+              title: "Êtes-vous sûr?",
+              text: "êtes-vous sûr de vouloir vider le panier 😨",
               type: "warning",
               showCancelButton: true,
               confirmButtonClass: "btn-danger",
@@ -61,13 +61,13 @@
                       if (data.status == 'ok') {
                           window.location.replace("/cart");
 
-                          swal("Deleted!", "Your imaginary file has been deleted.", "success");
+                          swal("Dommage!", "votre panier est vide 🤦‍♀️", "success");
                       } else {
                           swal("Error", "Problem ajax", "error");
                       }
                   });
               } else {
-                  swal("Cancelled", "Your imaginary file is safe :)", "error");
+                  swal("Annulé", "tu a gardé votre panier 👍 ", "error");
               }
           });
   });

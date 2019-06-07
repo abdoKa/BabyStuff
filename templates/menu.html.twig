@@ -371,12 +371,9 @@
 
     <div class="collapse navbar-collapse" id="navbarColor01">
       <ul class="navbar-nav sm-auto">
-
-
         <li class="nav-item">
           <a class=" nav-link scroll" href="{{ path('marques') }}"> Marques </a>
         </li>
-
         <li class="nav-item dropdown" id="navbarSupportedContent">
           <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
             aria-expanded="false">Nos Produits</a>
@@ -419,8 +416,6 @@
         </div>
       </ul>
 
-
-
       <ul class="navbar-nav ml-auto">
         <a class="nav-link" href="{{ path('shopping') }}" style="margin-right: 80px;"> Panier
           <i class="fas fa-shopping-basket"></i>
@@ -430,8 +425,6 @@
           <span><small>0 MAD</small></span>
           {% endif %}
         </a>
-
-
 
         {% if is_granted("ROLE_USER") %}
         <li class="navbar-nav mr-auto">
@@ -447,12 +440,12 @@
             </a></small>
         </li>
 
-        <ul class="navbar-nav " style="margin-right:120px; margin-left:-100px;">
+        <ul class="navbar-nav" style="margin-right:150px; margin-left:-100px;">
           <div class="btn-group">
             <li class="nav-item dropdown" id="navbarSupportedContent">
               <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
                 aria-expanded="true">
-                <small> <span>Slaut!</span> {{ app.user.nom }} {{ app.user.prenom }} </small>
+                <span>Slaut!</span>  <small>{{ app.user.nom }} {{ app.user.prenom }} </small>
               </a>
               <div class="dropdown-menu  animate slideIn" aria-labelledby="navbarDropdown">
                 <a class="dropdown-item" href="{{ path('user_account') }}">

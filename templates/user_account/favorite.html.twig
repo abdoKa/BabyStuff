@@ -35,6 +35,9 @@
     <div class="col-md-3">
         {% include 'user_account/menu.html.twig' %}
     </div>
+    {% if pagination|length == 0%}
+    <h1>la liste de produits favoris est vide!!💔 </h1>
+    {% else %}
     <div class="col-sm-9">
         <div class="col-md-10 card ">
             <table class="table ">
@@ -60,6 +63,7 @@
             </div>
         </div>
     </div>
+    {% endif %}
 </div>
 
 {% endblock %}
